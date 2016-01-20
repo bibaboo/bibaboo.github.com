@@ -1,0 +1,71 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.start(title)</span>
+    		<span class="return">실행시간 기록</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">title</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">타이틀</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								stopWatch.start("test");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [4]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.stop(mode)</span>
+    		<span class="return">실행시간 출력</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">mode</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">default(log) log, alert, return</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script type="text/javascript">
+							function demo2_1(){
+								stopWatch.stop("alert");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [4]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

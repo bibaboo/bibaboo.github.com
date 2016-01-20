@@ -1,0 +1,63 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.hasValue(value)</span>
+    		<span class="return">→ Boolean</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String..</td>
+			  			<td class="desc">대상</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.hasValue.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id">demo1</div>
+						<input type="button" onclick="demo1_1();" value="demo1" />
+						<input type="button" onclick="demo1_2();" value="demo2" />
+						<input type="button" onclick="demo1_3();" value="demo3" />
+						<input type="button" onclick="demo1_4();" value="demo4" />
+						<script type="text/javascript">
+							function demo1_1(a){
+								$("#demo1-id").text($.hasValue(a));
+						  	}
+							
+							function demo1_2(){
+								var a;
+								$("#demo1-id").text($.hasValue(a));
+						  	}
+							
+							function demo1_3(){
+								var a="";
+								$("#demo1-id").text($.hasValue(a));
+						  	}
+							
+							function demo1_4(){
+								var a="123";
+								$("#demo1-id").text($.hasValue(a));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [8, 13, 18, 23]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

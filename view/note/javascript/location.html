@@ -1,0 +1,95 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">location 속성</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="plain">hash</td>
+			  			<td>표식 이름을 설정하거나 알아냄 (Anchor의 #이하 부분)</td>
+					</tr>
+					<tr>
+			  			<td class="plain">host</td>
+			  			<td>URL 주소의 호스트 이름과 포트를 설정하거나 알아냄</td>
+					</tr>
+					<tr>
+			  			<td class="plain">hostname</td>
+			  			<td>URL 주소의 호스트 이름, IP주소를 설정하거나 알아냄 </td>
+					</tr>
+					<tr>
+			  			<td class="plain">href</td>
+			  			<td>문서의 URL주소를 설정하거나 알아냄 </td>
+					</tr>
+					<tr>
+			  			<td class="plain">pathname</td>
+			  			<td>문서의 디렉토리 위치를 설정하거나 알아냄 </td>
+					</tr>
+					<tr>
+			  			<td class="plain">port</td>
+			  			<td>포트 번호를 설정하거나 알아냄 </td>
+					</tr>
+					<tr>
+			  			<td class="plain">protocol</td>
+			  			<td>프로토콜 종류를 설정하거나 알아냄 ; ':"를 포함하는 ex) 'http:' </td>
+					</tr>
+					<tr>
+			  			<td class="plain">search</td>
+			  			<td>URL에서 쿼리스트링 추출. URL에서 물음표(?)문자를 포함한 질의 부분을 알아내거나 설정함</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" class="demo1-class1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								var str =	 "URL:" + location.href + "<br/>"+
+											"해시:" + location.hash + "<br/>"+
+						        			"프로토콜:" + location.protocol + "<br/>"+
+						        			"경로이름:" + location.pathname + "<br/>"+
+						        			"커뮤니케이션포트번호:" + location.port + "<br/>"+
+						        			"호스트이름,포트번호:" + location.host
+		
+		
+								$("#demo1-id1").html(str);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">location 메소드</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="plain">assign()</td>
+			  			<td>새로운 문서를 오픈함</td>
+					</tr>
+					<tr>
+			  			<td class="plain"> reload(force)</td>
+			  			<td>현재문서를 다시 읽어들임(Reload) 브라우저의 "새로고침"을 누른것과 동일한 효과 [전달인자] force 전달인자를 생략하거나 false로 지정하면, 문서가 마지막으로 불려온 이후로 변경된 경우에만 전체페이지를 다시 불러옴. 반대로 true이면 항상 서버에서 문서를 다시 불러옴 </td>
+					</tr>
+					<tr>
+			  			<td class="plain">replace()</td>
+			  			<td>현재 URL을 지정한 URL로 바꿔줌. 더 자세하게 말하면 브라우저의 세션 히스토리 상에서 새 항목을 생성하지 않고 현재의 문서를 새 문서로 교체.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</li>
+</ul>

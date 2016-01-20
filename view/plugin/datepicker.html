@@ -1,0 +1,121 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">기본설정</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<div class="entry-demo-content" style="padding-top:0;">
+						<script type="text/javascript">
+						    $.datepicker.regional['ko'] = {
+						        closeText: '닫기',
+						        prevText: '이전달',
+						        nextText: '다음달',
+						        currentText: '오늘',
+						        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+						        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+						        dayNames: ['일','월','화','수','목','금','토'],
+						        dayNamesShort: ['일','월','화','수','목','금','토'],
+						        dayNamesMin: ['일','월','화','수','목','금','토'],
+						        weekHeader: 'Wk',
+						        dateFormat: 'yy-mm-dd (D)',
+						        firstDay: 0,
+						        isRTL: false,
+						        showMonthAfterYear: true,
+						        yearSuffix: ''
+						    };
+						    
+						    $.datepicker.setDefaults($.datepicker.regional['ko']);
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">sample1</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="text" id="demo1-1" />
+						<script type="text/javascript">
+							$('#demo1-1').datepicker({ 
+						        showOn: 'button',
+						        buttonImage: 'http://jqueryui.com/resources/demos/datepicker/images/calendar.gif', //이미지 url
+						        //buttonImageOnly: true,
+						        buttonText: "달력",
+						        minDate: -10,
+						        maxDate: new Date(),
+						        changeMonth: true,
+						        changeYear: true,
+						        showButtonPanel: true
+						    }).datepicker("setDate", new Date());
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">sample2</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="text" id="demo2-1" style="width:100px;" readonly="readonly"/>
+						<input type="button" value="달력" /> ~
+						<input type="text" id="demo2-2" style="width:100px;" readonly="readonly"/>
+						<input type="button" value="달력" />
+						<script type="text/javascript">
+							$("#demo2-1, #demo2-2").datepicker({
+						        onSelect : function(date){
+						        	var _t, _s, _e;
+						        	if($(this).attr("id")=="demo2-1"){
+						        		_t = $("#demo2-2");
+						        		_s = moment(date, "YYYY-MM-DD");
+				        				_e = moment(_t.val(), "YYYY-MM-DD");
+									}else{
+										_t = $("#demo2-1");
+										_s = moment(_t.val(), "YYYY-MM-DD");
+						        		_e = moment(date, "YYYY-MM-DD");
+									} 
+						        	
+						        	if(_e.isBefore(_s)){
+						        		_t.val(date);
+						        	}
+						        }
+							}).map(function(i, v){
+								if($(this).attr("id")=="demo2-1"){
+									$(this).datepicker("setDate", -7);
+								}else{
+									$(this).datepicker("setDate", new Date());
+								}
+							}).end().next().click(function(){ $(this).prev().datepicker("show"); });
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

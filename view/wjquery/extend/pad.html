@@ -1,0 +1,79 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.pad(value, len [,addStr] [,isLeft])</span>
+    		<span class="return">→ String</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">대상</td>
+					</tr>
+					<tr>
+			  			<td class="name">len</td>
+			  			<td class="type">Integer</td>
+			  			<td class="desc">길이</td>
+					</tr>
+					<tr>
+			  			<td class="name">addStr (default:0);</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">추가문자</td>
+					</tr>
+					<tr>
+			  			<td class="name">isLeft (default:true);</td>
+			  			<td class="type">Boolean</td>
+			  			<td class="desc">왼쪽 채우기여부</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.pad.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<div id="demo1-id2">demo1_2</div>
+						<div id="demo1-id3">demo1_3</div>
+						<div id="demo1-id4">demo1_4</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<input type="button" onclick="demo1_3();" value="demo1_3" />
+						<input type="button" onclick="demo1_4();" value="demo1_4" />
+						<script type="text/javascript">
+							var demo1 = "abc";
+							function demo1_1(){
+								$("#demo1-id1").html($.pad(demo1, 5));
+						  	}
+		
+							function demo1_2(){
+								$("#demo1-id2").html($.pad(demo1, 5, "@"));
+						  	}
+							
+							function demo1_3(){
+								$("#demo1-id3").html($.pad(demo1, 5, "@", false));
+						  	}
+							
+							function demo1_4(){
+								$("#demo1-id4").html($.pad(demo1, 5, false));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [12, 16, 20, 24]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

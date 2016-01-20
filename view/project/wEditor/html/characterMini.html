@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="../../jquery/jquery-1.6.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/html.css" />
+<style type="text/css">
+	button {
+	    border:0;
+		width: 18px;
+		height: 18px;
+		background: none;
+	}
+	
+</style>
+<script type="text/javascript">
+    
+	var charset = new Array(5);
+	charset[0] = unescape('%uFF5B %uFF5D %u3014 %u3015 %u3008 %u3009 %u300A %u300B %u300C %u300D %u300E %u300F %u3010 %u3011 %u2018 %u2019 %u201C %u201D %u3001 %u3002 %B7 %u2025 %u2026 %A7 %u203B %u2606 %u2605 %u25CB %u25CF %u25CE %u25C7 %u25C6 %u25A1 %u25A0 %u25B3 %u25B2 %u25BD %u25BC %u25C1 %u25C0 %u25B7 %u25B6 %u2664 %u2660 %u2661 %u2665 %u2667 %u2663 %u2299 %u25C8 %u25A3 %u25D0 %u25D1 %u2592 %u25A4 %u25A5 %u25A8 %u25A7 %u25A6 %u25A9').split(' ');
+	charset[1] = unescape('%B1 %D7 %F7 %u2260 %u2264 %u2265 %u221E %u2234 %B0 %u2032 %u2033 %u2220 %u22A5 %u2312 %u2202 %u2261 %u2252 %u226A %u226B %u221A %u223D %u221D %u2235 %u222B %u222C %u2208 %u220B %u2286 %u2287 %u2282 %u2283 %u222A %u2229 %u2227 %u2228 %uFFE2 %u21D2 %u21D4 %u2200 %u2203 %B4 %uFF5E %u02C7 %u02D8 %u02DD %u02DA %u02D9 %B8 %u02DB').split(' '); 
+	charset[2] = unescape('%A1 %BF %u02D0 %u222E %u2211 %u220F %u266D %u2669 %u266A %u266C %u327F %u2192 %u2190 %u2191 %u2193 %u2194 %u2195 %u2197 %u2199 %u2196 %u2198 %u321C %u2116 %u33C7 %u2122 %u33C2 %u33D8 %u2121 %u2668 %u260F %u260E %u261C %u261E %B6 %u2020 %u2021 %AE %AA %BA %u2642 %u2640').split(' ');
+	charset[3] = unescape('%u3260 %u3261 %u3262 %u3263 %u3264 %u3265 %u3266 %u3267 %u3268 %u3269 %u326A %u326B %u326C %u326D %u326E %u326F %u3270 %u3271 %u3272 %u3273 %u3274 %u3275 %u3276 %u3277 %u3278 %u3279 %u327A %u327B %u24D0 %u24D1 %u24D2 %u24D3 %u24D4 %u24D5 %u24D6 %u24D7 %u24D8 %u24D9 %u24DA %u24DB %u24DC %u24DD %u24DE %u24DF %u24E0 %u24E1 %u24E2 %u24E3 %u24E4 %u24E5 %u24E6 %u24E7 %u24E8 %u24E9 %u2460 %u2461 %u2462 %u2463 %u2464 %u2465 %u2466 %u2467 %u2468 %u2469 %u246A %u246B %u246C %u246D %u246E').split(' ');
+	charset[4] = unescape('%u3200 %u3201 %u3202 %u3203 %u3204 %u3205 %u3206 %u3207 %u3208 %u3209 %u320A %u320B %u320C %u320D %u320E %u320F %u3210 %u3211 %u3212 %u3213 %u3214 %u3215 %u3216 %u3217 %u3218 %u3219 %u321A %u321B %u249C %u249D %u249E %u249F %u24A0 %u24A1 %u24A2 %u24A3 %u24A4 %u24A5 %u24A6 %u24A7 %u24A8 %u24A9 %u24AA %u24AB %u24AC %u24AD %u24AE %u24AF %u24B0 %u24B1 %u24B2 %u24B3 %u24B4 %u24B5 %u2474 %u2475 %u2476 %u2477 %u2478 %u2479 %u247A %u247B %u247C %u247D %u247E %u247F %u2480 %u2481 %u2482').split(' ');
+	
+	function ButtonUp(t, str) {
+		$(t).css("background-color", "#dddddd");
+		$("#preivewtext").val(str);
+	}
+	
+	function ButtonOut(t) {
+		$(t).css("background-color", "");
+	}
+	
+	function sendIcon(text) {
+		parent.WCEditor.setHtml(text);
+	}
+	
+	function showCharDiv(n){
+		var _height = new Array("128px", "110px", "95px", "128px", "128px");
+		if(typeof(n)=='undefined') n = "0";
+		for (var i=0; i<charset.length; i++){
+			if(i==parseInt(n)) {
+				$("#char" + i + "Div").show();
+				$("#char" + i + "Span").css("font-weight", "bold");
+				parent.document.getElementById("characterFrame").style.height=_height[i];
+			}else {
+			    $("#char" + i + "Div").hide();
+			    $("#char" + i + "Span").css("font-weight", "normal");
+			}
+		}
+	}
+	
+	$(document).ready(function(){
+	    $.each(parent.WCEditorLang.charcter.mini.apply, function(key){
+            $("#charNaviDiv").append("<span id=\"char" + this + "Span\" onmouseover=\"showCharDiv('" + this + "');\">" + parent.WCEditorLang.charcter.mini.char[this] + "</span>");
+            if(key+1!=parent.WCEditorLang.charcter.mini.apply.length) $("#charNaviDiv").append(" | "); 
+        });
+	    
+		showCharDiv();
+	});
+	
+</script>
+</head>
+<body>
+<div id="ifrmMainDiv">
+	<div id="ifrmLayoutDiv" style="padding-top:5px;">
+		<div id="charNaviDiv">
+			&nbsp;<input type="text" id="preivewtext" name="preivewtext" class="txt-default" style="font-size:18px;font-weight:bold;height:25px;width:25px;text-align:center" readonly />
+			<img src="../img/blank.gif" width="10" height="1">
+		</div>
+		<script type="text/javascript">
+		for (var i=0; i<charset.length; i++){
+			document.writeln("<div id='char" + i + "Div' style='display:none'>");
+			for(var j=0; j<charset[i].length;j++) document.write("<button onclick=\"sendIcon('" + charset[i][j] + "')\" onmouseover=\"ButtonUp(this, '" + charset[i][j] + "')\" onmouseout=\"ButtonOut(this)\">" + charset[i][j] + "</button>");
+			document.writeln("</div>");
+		}
+		</script>
+   	</div>
+</div>	
+</body>
+</html>
+ 

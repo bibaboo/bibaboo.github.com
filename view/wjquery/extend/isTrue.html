@@ -1,0 +1,49 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.isTrue(value)</span>
+    		<span class="return">→ Boolean</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">Boolean</td>
+			  			<td class="desc">인자값이 true여부</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.isTrue.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2(true);" value="demo1_2" />
+						<script type="text/javascript">
+							function demo1_1(value){
+						  		$.alert($.isTrue(value));
+						  	}
+							
+							function demo1_2(value){
+						  		$.alert($.isTrue(value));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5, 9]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,20 @@
+﻿<ul class="entry-api">
+	<li class="entry-api-item">
+		<div>
+			<h2>
+	    		<span class="title">wjquery source</span>
+			</h2>
+			<div class="example">
+				<script type="text/javascript">
+					$.get("../../js/lib/wjquery/wjquery.js", function(html) {
+						$("#pre-wjquery").html(replaceString("htmlEscape", html));
+						SyntaxHighlighter.highlight();
+					});
+				</script>
+				<div class="entry-demo-source-content">
+					<pre id="pre-wjquery" class="brush: js;"></pre>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

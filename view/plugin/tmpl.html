@@ -1,0 +1,204 @@
+﻿<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="http://borismoore.github.io/jquery-tmpl/demos/step-by-step.html" target="_blank">borismoore.github.io</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<div id="demo1-id2">demo1_2</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo2_1" />
+						<script type="text/javascript">	
+							var demo1 = "<div><b>${name} ${jobTitle}</b></div>";
+							function demo1_1(){
+								$("#demo1-id1").empty().append($.tmpl(demo1, {name:"개발자1-1", jobTitle:"팀장"}));
+						  	}
+							
+							function demo1_2(){
+								$("#demo1-id2").empty().append($.tmpl(demo1, [{name:"개발자1-2", jobTitle:"팀장"}, {name:"개발자1-3", jobTitle:"팀장"}]));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">script</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id">demo2</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script id="demo2_1Template" type="text/x-jquery-tmpl">
+					<div><b>${name}</b> ${jobTitle}</div>
+				</script>
+						
+						<script type="text/javascript">	
+							function demo2_1(){
+								$("#demo2-id").empty().append($.tmpl($("#demo2_1Template" ), {name:"개발자2", jobTitle:"팀장"}));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">if</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo3-id">demo3</div>
+						<input type="button" onclick="demo3_1('E');" value="demo3_E" />
+						<input type="button" onclick="demo3_1('R');" value="demo3_R" />
+						<script id="demo3_1Template" type="text/x-jquery-tmpl">
+					{{if type=="E"}}
+					<div>${name} ${jobTitle}</div>
+					{{else}}
+					<div><b>${name}</b> ${jobTitle}</div>
+					{{/if}}
+				</script>
+						
+						<script type="text/javascript">	
+							function demo3_1(v){
+								$("#demo3-id").empty().append($.tmpl($("#demo3_1Template" ), {type:v, name:"개발자3", jobTitle:"팀장"}));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">each</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo4-id1">demo4_1</div>
+						<div id="demo4-id2">demo4_2</div>
+						<input type="button" onclick="demo4_1();" value="demo4_1" />
+						<input type="button" onclick="demo4_2();" value="demo4_2" />
+						<script id="demo4_1Template" type="text/x-jquery-tmpl">
+					{{each data}}
+					<div>${name} ${jobTitle}</div>
+					{{/each}}
+				</script>
+						
+						<script id="demo4_2Template" type="text/x-jquery-tmpl">
+					{{each(i, value) data}}
+					<div>${i} ${value.name} ${value.jobTitle}</div>
+					{{/each}}
+				</script>
+						
+						<script type="text/javascript">	
+							function demo4_1(){
+								$("#demo4-id1").empty().append($.tmpl($("#demo4_1Template" ), {data : [{name:"개발자4-1-1", jobTitle:"팀장"},{name:"개발자4-1-2", jobTitle:"팀장"}]}));
+						  	}
+							
+							function demo4_2(){
+								$("#demo4-id2").empty().append($.tmpl($("#demo4_2Template" ), {data : [{name:"개발자4-2-1", jobTitle:"팀장"},{name:"개발자4-2-2", jobTitle:"팀장"}]}));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">html</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo5-id1">demo5_1</div>
+						<input type="button" onclick="demo5_1();" value="demo5_1" />
+						<script id="demo5_1Template" type="text/x-jquery-tmpl">
+					<div>${name} ${jobTitle} {{html desc}}</div>
+				</script>
+		
+						<script type="text/javascript">	
+							function demo5_1(){
+								$("#demo5-id1").empty().append($.tmpl($("#demo5_1Template" ), {name:"개발자5-1", jobTitle:"팀장", desc:"<span style=\"color:blue;\">딴따라~</span>"}));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">tmpl</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo6-id1">demo6_1</div>
+						<input type="button" onclick="demo6_1();" value="demo6_1" />
+						<script id="demo6_1_1Template" type="text/x-jquery-tmpl">
+					<div><b>---${type}--</b></div>
+					<div>{{tmpl(data) "#demo6_1_2Template"}}</dov>
+				</script>
+						
+						<script id="demo6_1_2Template" type="text/x-jquery-tmpl">
+					<div>${name}</div>
+				</script>
+		
+						<script type="text/javascript">	
+							function demo6_1(){
+								$("#demo6-id1").empty().append($.tmpl($("#demo6_1_1Template" ), {type:"이름", data:[{name:"개발자6-1-1"},{name:"개발자6-1-2"},{name:"개발자6-1-3"}]}));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../css/html.css">
+<script type="text/javascript" src="../../jquery/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $.each(parent.WCEditorLang.font.color.value, function(){
+            $("#forecolorDiv").append("<div style=\"color:" + this + "\" title=\"" + this + "\">" + parent.WCEditorLang.font.color.text + "</div>");
+        });
+        
+		$("#forecolorDiv > div")
+		.bind("mouseover", function() {
+			$(this).addClass("over");
+			$("#color").val(this.title);
+		})
+		.bind("mouseout", function() {
+			$(this).removeClass("over");
+		})
+		.bind("click", function() {
+			parent.WCEditor.setFont("forecolor", this.title);
+		});
+		
+		if(parent.WCEditor.config.miniMode){
+		    $("#forecolorDiv").hide();
+		    $("#forcolorInputDiv").hide();
+		}
+		
+		$("#applyButton").val(parent.WCEditorLib.getMessage("applyButton"));
+	});
+	
+	function setColor(){
+	    if($("color").val()!="") parent.WCEditor.setFont("forecolor", this.title);
+	}
+	
+	function checkColor(s){
+	    if(parent.WCEditor.config.miniMode) return;
+	    $("#color").val(s);
+	}
+</script>
+</head>
+<body>
+<div id="ifrmMainDiv">
+	<div id="ifrmLayoutDiv" style="padding:2px;">
+	    <div id="forecolorDiv"></div>
+		<div class="clear"></div>
+		<script type="text/javascript">
+			document.write(parent.WCEditor.printColorPlate('forecolor', parent.WCEditor.config.miniMode));
+		</script>
+		<div id="forcolorInputDiv" style="padding:2px;">
+		    <input type="text" id="color" name="color" class="txt-default" size="21" />
+    		<input type="button" id="applyButton" class="btn-default" value="" onclick="setColor();" />
+	    </div>
+    </div>
+</div>	
+</body>
+</html>

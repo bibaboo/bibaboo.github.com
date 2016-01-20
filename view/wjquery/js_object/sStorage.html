@@ -1,0 +1,239 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.surport()</span>
+    		<span class="return">sessionStorage 지원여부</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$("#demo1-id1").text(sStorage.surport());
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.exist(key)</span>
+    		<span class="return">key 존재여부</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">key</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">demo2_1</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script type="text/javascript">
+							function demo2_1(){
+								$("#demo2-id1").text(sStorage.exist("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.set(key, value)</span>
+    		<span class="return">키값 저장</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">key</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo3-id1">demo3_1</div>
+						<input type="button" onclick="demo3_1();" value="demo3_1" />
+						<script type="text/javascript">
+							function demo3_1(){
+								sStorage.set("test", "test value");
+								$.alert(sStorage.get("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.get(key)</span>
+    		<span class="return">키값 읽기</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">key</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo4-id1">demo4_1</div>
+						<input type="button" onclick="demo4_1();" value="demo4_1" />
+						<script type="text/javascript">
+							function demo4_1(){
+								$("#demo4-id1").text(sStorage.get("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.remove(key)</span>
+    		<span class="return">키값 제거</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">key</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo5-id1">demo5_1</div>
+						<input type="button" onclick="demo5_1();" value="demo5_1" />
+						<script type="text/javascript">
+							function demo5_1(){
+								sStorage.remove("test");
+								$.alert(sStorage.exist("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.removeList(keys)</span>
+    		<span class="return">키값 제거</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">keys</td>
+			  			<td class="type">Array</td>
+			  			<td class="desc">배열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo6-id1">demo6_1</div>
+						<input type="button" onclick="demo6_1();" value="demo6_1" />
+						<script type="text/javascript">
+							function demo6_1(){
+								sStorage.removeList(["test"]);
+								$.alert(sStorage.exist("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.clear()</span>
+    		<span class="return">sessionStorage 제거</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo7-id1">demo7_1</div>
+						<input type="button" onclick="demo7_1();" value="demo7_1" />
+						<script type="text/javascript">
+							function demo7_1(){
+								sStorage.clear();
+								$.alert(sStorage.exist("test"));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

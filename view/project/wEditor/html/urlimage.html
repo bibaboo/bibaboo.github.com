@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../css/html.css">
+<script type="text/javascript" src="../../jquery/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+	function checkValue(){		
+		if($.trim($("#urlImage").val())===""){
+			alert(parent.WCEditorLib.getMessage("selectImage"));
+			$("#urlImage")[0].focus();
+			return;
+		}
+		
+		parent.WCEditor.setHtml("<img src=\"" + $("#urlImage").val() + "\" border=\"0\"/>", "urlimage");
+	}
+	
+	$(document).ready(function(){
+	    $("#applyButton").val(parent.WCEditorLib.getMessage("applyButton"));
+	});
+</script>
+</head>
+<body>
+<div id="ifrmMainDiv">
+	<div id="ifrmLayoutDiv" style="padding:5px;">
+		<div style="margin-bottom:10px;"><input class="txt-default" type="text" id="urlImage" name="urlImage" size="30" />
+			 <input type="button" id="applyButton" class="btn-default" value="" onclick="checkValue();" />
+		</div>
+    </div>
+</div>	
+</body>
+</html>

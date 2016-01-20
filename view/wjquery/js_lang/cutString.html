@@ -1,0 +1,61 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">cutString(value, length [,delimiter])</span>
+    		<span class="return">→ String</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+					<tr>
+			  			<td class="name">length</td>
+			  			<td class="type">Integer</td>
+			  			<td class="desc">길이</td>
+					</tr>
+					<tr>
+			  			<td class="name">delimiter (default:"..")</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">구분자</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html(cutString.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id">demo1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							var demo1 = "abcdefghijk";
+							function demo1_1(){
+						  		$("#demo1-id").html(cutString(demo1, 5));
+						  		
+						  	}
+						  	function demo1_2(){
+						  		$("#demo1-id").html(cutString(demo1, 5, "@@"));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [7, 11]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

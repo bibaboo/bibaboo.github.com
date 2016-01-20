@@ -1,0 +1,68 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.init(json [,isClone])</span>
+    		<span class="return">JSON데이터를 초기화</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">json</td>
+			  			<td class="type">Object</td>
+			  			<td class="desc">json</td>
+					</tr>
+					<tr>
+			  			<td class="name">isClone</td>
+			  			<td class="type">Boolean</td>
+			  			<td class="desc">복사본으로 만들지 여부</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" class="demo1-class1">demo1_1</div>
+						<div id="demo1-id2" class="demo1-class2">demo1_2</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							var json = {
+								a : "a",
+								b : 1,
+								c : ["a", "b","c"],
+								d : {f:"f", g:"g"}
+							}
+							
+							var json2 = {
+								a : "a",
+								b : 2,
+								c : ["a", "b","c"],
+								d : {f:"f", g:"g"}
+							}
+							
+							$("#demo1-id1").text(JSON.stringify(json));
+							$("#demo1-id2").text(JSON.stringify(json2));
+							
+							function demo1_1(){
+								$("#demo1-id1").text(JSON.stringify(wJson.init(json)));
+								$.alert(JSON.stringify(json));
+							}
+							
+							function demo1_2(){
+								$("#demo1-id2").text(JSON.stringify(wJson.init(json2, true)));
+								$.alert(JSON.stringify(json2));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

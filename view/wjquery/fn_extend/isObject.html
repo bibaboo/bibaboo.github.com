@@ -1,0 +1,50 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.isObject([switch])</span>
+    		<span class="return">→ Boolean</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">switch (default:true)</td>
+			  			<td class="type">Boolean</td>
+			  			<td class="desc">개체의 길이가 N개이상일 경우 true, 한개일 경우 false</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.fn.isObject.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" class="demo1-class1">demo1_1</div>
+						<div id="demo1-id2" class="demo1-class1">demo1_2</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$("#demo1-id1").text($("div.demo1-class1").isObject());
+						  	}
+						  	function demo1_2(){
+						  		$("#demo1-id2").text($("div.demo1-class1").isObject(false));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [7, 10]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,144 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">source</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">&nbsp; <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<script type="text/javascript">
+						$.get("../../js/lib/wjquery/wjquery-form.js", function(html) {
+							$("#pre-wjquery-form").html(replaceString("htmlEscape", html)).addClass("brush: js;");
+							SyntaxHighlighter.highlight();
+						});
+					</script>
+					<div class="entry-source-content">
+						<pre id="pre-wjquery-form"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">select</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1 <select id="demo1-select1"></select></div>
+						<div id="demo1-id2">demo1_2</div>
+						<div id="demo1-id3">demo1_3</div>
+						<div id="demo1-id4">demo1_4</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<input type="button" onclick="demo1_3();" value="demo1_3" />
+						<input type="button" onclick="demo1_4();" value="demo1_4" />
+						<script type="text/javascript">
+						function demo1_1(){
+							$("#demo1-select1").wform("makeSelectOption", {list:[{value:"a", text:"aaa"}, {value:"b", text:"bbb"}, {value:"c", text:"ccc"}], firstOption:{value:"", text:"선택"}, selected:"b"});
+					  	}
+						
+						function demo1_2(){
+							$("#demo1-id2").wform("make", "select", {list:[{value:"a", text:"aaa"}, {value:"b", text:"bbb"}, {value:"c", text:"ccc"}], firstOption:{value:"", text:"선택"}, selected:"b", id:"demo1-select2"});
+					  	}
+						
+						function demo1_3(){
+							$("#demo1-id3").text($("#demo1-select1").wform("get"));
+					  	}
+						
+						function demo1_4(){
+							$("#demo1-select1").wform("set", "c");
+							$("#demo1-id4").text($("#demo1-select1").wform("get"));
+					  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">radio</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">demo2_1</div>
+						<div id="demo2-id2">demo2_2</div>
+						<div id="demo2-id3">demo2_3</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<input type="button" onclick="demo2_2();" value="demo2_2" />
+						<input type="button" onclick="demo2_3();" value="demo2_3" />
+						<script type="text/javascript">
+						function demo2_1(){
+							$("#demo2-id1").wform("make", "radio", {list:[{value:"a", text:"aaa"}, {value:"b", text:"bbb"}, {value:"c", text:"ccc"}], name:"demo2-radio1", checked:"b"});
+					  	}
+						
+						function demo2_2(){
+							$("#demo2-id2").text($("input[name='demo2-radio1']").wform("get"));
+					  	}
+						
+						function demo2_3(){
+							$("input[name='demo2-radio1']").wform("set", "c");
+							$("#demo2-id3").text($("input[name='demo2-radio1']").wform("get"));
+					  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">checkbox</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo3-id1">demo3_1</div>
+						<div id="demo3-id2">demo3_2</div>
+						<div id="demo3-id3">demo3_3</div>
+						<input type="button" onclick="demo3_1();" value="demo3_1" />
+						<input type="button" onclick="demo3_2();" value="demo3_2" />
+						<input type="button" onclick="demo3_3();" value="demo3_3" />
+						<script type="text/javascript">
+						function demo3_1(){
+							$("#demo3-id1").wform("make", "checkbox", {list:[{value:"a", text:"aaa"}, {value:"b", text:"bbb"}, {value:"c", text:"ccc"}], checked:"b,c", name:"demo3-checkbox1"});
+					  	}
+						
+						function demo3_2(){
+							$("#demo3-id2").text($("input[name='demo3-checkbox1']").wform("get"));
+					  	}
+						
+						function demo3_3(){
+							$("input[name='demo3-checkbox1']").wform("set", "a", true);
+							$("#demo3-id3").text($("input[name='demo3-checkbox1']").wform("get"));
+					  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

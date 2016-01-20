@@ -1,0 +1,50 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">pattern1</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+						var Patten1 = {
+						    value : "",
+						    get : function(){
+						    	return this.value;
+						    },
+						    set : function(value){
+						    	this.value = value;
+						    },
+						    exec : {
+						    	clear : function(){
+						    		Patten1.set("")
+						    	}
+						    }
+						};
+		
+						function demo1_1(){
+							Patten1.set("test");
+							$.alert(Patten1.get());
+						}
+						
+						function demo1_2(){
+							$.alert(Patten1.value);
+							Patten1.exec.clear();
+							$.alert(Patten1.value);
+						}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

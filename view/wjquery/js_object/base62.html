@@ -1,0 +1,73 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.encode(value)</span>
+    		<span class="return">base62로 변환</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">2548458512648</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$("#demo1-id1").text(base62.encode($("#demo1-id1").text()));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.decode(value)</span>
+    		<span class="return">base62를 복호화</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열(base62)</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">IRKUcKQ</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script type="text/javascript">
+							function demo2_1(){
+								$("#demo2-id1").text(base62.decode($("#demo2-id1").text()));
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

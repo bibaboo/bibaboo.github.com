@@ -1,0 +1,56 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.hasString(value, findString)</span>
+    		<span class="return">→ Boolean</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">문자열</td>
+					</tr>
+					<tr>
+			  			<td class="name">findString</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">찾는 문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.hasString.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id">demo1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							var demo1 = "가나다라마바사";
+							function demo1_1(){
+								$("#demo1-id").text($.hasString(demo1, "가나다라"));
+						  	}
+							
+							function demo1_2(){
+								$("#demo1-id").text($.hasString(demo1, "가나다사"));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [7,11]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

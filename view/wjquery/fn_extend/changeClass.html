@@ -1,0 +1,59 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.changeClass()</span>
+    		<span class="return">→ jQuery</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">className1</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">클래스명</td>
+					</tr>
+					<tr>
+			  			<td class="name">className2</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">클래스명</td>
+					</tr>
+					<tr>
+			  			<td class="name">switch default(true)</td>
+			  			<td class="type">Boolean</td>
+			  			<td class="desc">className1 삭제/추가 , className2 추가/삭제 클래스가 될지 여부</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.fn.changeClass.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style>
+							.demo1-class1 {background-color:red;}
+							.demo1-class2 {background-color:blue;}
+						</style>
+						<div id="demo1-id1" class="demo1-class1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$("#demo1-id1").changeClass("demo1-class1", "demo1-class2", $("#demo1-id1").hasClass("demo1-class1"));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [9]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

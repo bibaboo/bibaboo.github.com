@@ -1,0 +1,64 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.isPattern(patternName, value)</span>
+    		<span class="return">→ Boolean</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">patternName</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">패턴 : number, alphabat, alphaNum, hangul, url, email, phone</td>
+					</tr>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">대상 문자열</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html(isPattern.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="숫자" />
+						<input type="button" onclick="demo1_2();" value="영어" />
+						<input type="button" onclick="demo1_3();" value="영어+숫자" />
+						<input type="button" onclick="demo1_4();" value="한글" />
+						<script type="text/javascript">
+							function demo1_1(){
+						  		$.alert(isPattern("number", "12345"));
+						  	}
+							
+							function demo1_2(){
+						  		$.alert(isPattern("alphabat", "abc1d"));
+						  	}
+							
+							function demo1_3(){
+						  		$.alert(isPattern("alphaNum", "abc1d2e"));
+						  	}
+							
+							function demo1_4(){
+						  		$.alert(isPattern("hangul", "가나다라"));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [7, 11, 15, 19]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

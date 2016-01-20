@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../css/html.css">
+<script type="text/javascript" src="../../jquery/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.each(parent.WCEditorLang.font.color.value, function(){
+            $("#hrDiv").append("<div title=\""+ this +"\"><hr color=\"" + this + "\" size=\"1\" width=\"90%\" /></div>");
+        });
+        
+        $("#heightSpan").text(parent.WCEditorLib.getMessage("height"));
+        $("#alignSpan").text(parent.WCEditorLib.getMessage("align"));
+        $("#align")
+        .append("<option value=\"left\">" + parent.WCEditorLib.getMessage("left") + "</option>")
+        .append("<option value=\"center\">" + parent.WCEditorLib.getMessage("center") + "</option>")
+        .append("<option value=\"right\">" + parent.WCEditorLib.getMessage("right") + "</option>");
+        
+        $("#hrDiv > div")
+		.bind("mouseover", function() {
+			$(this).addClass("over");
+			$("#color").val(this.title);
+		})
+		.bind("mouseout", function() {
+			$(this).removeClass("over");
+		})
+		.bind("click", function() {
+			setHr(this.title);
+		});
+		
+		if(parent.WCEditor.config.miniMode){
+		    $("#hrDiv").hide();
+		    $("#hrDiv2").hide();
+		    $("#forcolorInputDiv").hide();
+		}
+		
+		$("#applyButton").val(parent.WCEditorLib.getMessage("applyButton"));
+	});
+	
+	function updown(o, p){
+        $("#"+o).val(parent.WCEditorLib.updown(o, p, $("#"+o).val()));
+    }
+    
+	function setHr(c){
+		parent.WCEditor.setHtml("<hr align=\"" + $("#align").val() + "\" color=\""+c+"\" size=\"" + $("#hrheight").val() + "\" width=\"90%\" /><p></p>", "hr");
+		$("#hrheight").val(1);
+	}
+	
+	function setColor(){
+	    if($("color").val()!="") parent.WCEditor.setFont("forecolor", this.title);
+	}
+	
+	function checkColor(s){
+	    if(parent.WCEditor.config.miniMode) return;
+	    $("#color").val(s);
+	}
+</script>
+</head>
+<body>
+<div id="ifrmMainDiv">
+	<div id="ifrmLayoutDiv"  style="padding:2px;">
+	    <div style="width:100%;font-weight:bold;padding:5px;" id="hrDiv2">
+	        <span id="heightSpan"></span> <input type="text" id="hrheight" class="txtUpdown" name="hrheight" size="3" value="1" maxlength="2" readonly><span class="updown"><img src="../img/btn_updown.gif" alt="" usemap="#heightMap"></span>
+	        &nbsp;&nbsp;<span id="alignSpan"></span> <select name="align" id="align"></select>
+	    </div>
+	    <div id="hrDiv"></div>
+		<div class="clear"></div>
+		<script type="text/javascript">
+			document.write(parent.WCEditor.printColorPlate('hr', parent.WCEditor.config.miniMode));
+		</script>
+        <div id="forcolorInputDiv" style="padding:2px;">
+		    <input type="text" id="color" name="color" class="txt-default" size="21" />
+    		<input type="button" id="applyButton" class="btn-default" value="" onclick="setColor();" />
+	    </div>
+    </div>
+    <map name="heightMap">
+	    <area alt="" coords="0,0,16,8"  href="#" onClick="updown('hrheight', '+')">
+	    <area alt="" coords="0,9,16,16" href="#" onClick="updown('hrheight', '-')">
+	</map>
+</div>	
+</body>
+</html> 

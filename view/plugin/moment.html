@@ -1,0 +1,41 @@
+﻿<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="http://momentjs.com/docs/" target="_blank">momentjs.com</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<div id="demo1-id2">demo1_2</div>
+						<div id="demo1-id3">demo1_3</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo2_1" />
+						<input type="button" onclick="demo1_3();" value="demo3_1" />
+						<script type="text/javascript">	
+							moment.locale("ko");
+							function demo1_1(){
+								$("#demo1-id1").html((JSON.stringify(moment.months())));	
+							}
+							
+							function demo1_2(){
+								$("#demo1-id2").html(moment().format("YYYY-MM-DD(dd)"));	
+							}
+							
+							function demo1_3(){
+								$("#demo1-id3").html(moment().format("LL"));	
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

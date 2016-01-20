@@ -1,0 +1,172 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">single pattern</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+						(function($){
+							$.fn.wPatten1 = function(method){
+								var result,
+								 	$element = $(this);
+								if (typeof method === 'string') {
+									if (wPatten1[method]) {
+										result = wPatten1[method].apply(this, Array.prototype.slice.call(arguments, 1));
+									} else {
+										$.alert('Method ' + method + ' does not exist on jQuery.wPatten1');
+									}
+								} else if (typeof method === 'object' || !method) {
+							    	wPatten1.init($element, $.extend({}, $.fn.wPatten1.defaultSettings, method || {}));
+								}
+								
+								return result?result:$(this);
+							};
+		
+							$.fn.wPatten1.defaultSettings = {
+								value : "pattern1_12345"
+							};
+		
+							var wPatten1 = new(function() {
+								var $element, 
+									options;
+								
+								function init (_element, _options){
+									$element = _element; 
+									options = _options;
+									$element.html(options.value);
+									$element.on("click", wPatten1.check);
+								}
+								
+								function set(value){
+									options.value = value;
+									$element.html(options.value);
+								}
+								
+								function get(){
+									return options.value;
+								}
+								
+								function check(){
+									$.alert("check..");
+								}
+								
+								return {
+									init:init,
+									check:check,
+									set:set,
+									get:get
+								}
+								
+							})();
+							
+							$(document).ready(function () {
+								 $("#demo1-id1").wPatten1();
+						    });
+						})(jQuery);
+						
+						function demo1_1(){
+							$("#demo1-id1").wPatten1("set", "pattern1_abcde");
+							$.alert($("#demo1-id1").wPatten1("get"));
+						}
+						</script>
+					</div>
+					<div class="entry-source-title">source</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">multiple pattern</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div class="demo2_class1"></div><br/>
+						<div class="demo2_class1"></div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script type="text/javascript">
+						(function($){
+		
+							var DATA_NS = "wPatten2";
+								
+							$.fn.wPatten2 = function(method){
+								var result,
+									_arguments = arguments;
+								this.each(function(i, element) {
+									var $element = $(element),
+										plugin = $element.data(DATA_NS);
+									if (plugin && typeof method === 'string') {
+										if (plugin[method]) {
+											result = plugin[method].apply(this, Array.prototype.slice.call(_arguments, 1));
+										} else {
+											$.alert('Method ' + method + ' does not exist on jQuery.wPatten2');
+										}
+									} else if (!plugin && (typeof method === 'object' || !method)) {
+								    	$element.data(DATA_NS, new wPatten2($element, $.extend({}, $.fn.wPatten2.defaultSettings, method || {})));
+									}
+								});
+								return result?result:$(this);
+							};
+		
+							$.fn.wPatten2.defaultSettings = {
+								value : "pattern2_12345"
+							};
+		
+							function wPatten2(_element, _options) {
+								var $element = _element; 
+								var options = _options;
+								$element.html(options.value);
+								
+								$element.on("click", check);
+								
+								function set(value){	
+									options.value = value;
+									$element.html(options.value);
+								}
+								
+								function get(){
+									return options.value;
+								}
+								
+								function check(){
+									$.alert("check..");
+								}
+								
+								return {
+									set:set, 
+									get:get
+								};
+							}
+							
+							$(document).ready(function () {
+								$("div.demo2_class1").wPatten2();
+						    });
+						})(jQuery);
+						
+						function demo2_1(){
+							$("div.demo2_class1").wPatten2("set", "pattern2_abcde");
+						}
+						</script>
+					</div>
+					<div class="entry-source-title">source</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
