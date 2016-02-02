@@ -2,6 +2,20 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
+    		<span class="title">source</span>
+		</h2>
+		<div class="example">	
+			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div class="entry-source-content">
+				<pre class="brush: js: true;"></pre>
+			</div>
+			<script type="text/javascript">
+				$("div.entry-source-content").find("pre").html(stopWatch.toString());
+			</script>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
     		<span class="title">.start(title)</span>
     		<span class="return">실행시간 기록</span>
 		</h2>
@@ -21,8 +35,9 @@
 					<div class="entry-demo-content">
 						<input type="button" onclick="demo1_1();" value="demo1_1" />
 						<script type="text/javascript">
+							var stopWatch1 = new stopWatch("test");
 							function demo1_1(){
-								stopWatch.start("test");
+								stopWatch1.start("test");
 							}
 						</script>
 					</div>
@@ -56,7 +71,7 @@
 						<input type="button" onclick="demo2_1();" value="demo2_1" />
 						<script type="text/javascript">
 							function demo2_1(){
-								stopWatch.stop("alert");
+								stopWatch1.stop("alert");
 							}
 						</script>
 					</div>

@@ -2,6 +2,84 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
+    		<span class="title">source</span>
+		</h2>
+		<div class="example">	
+			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div class="entry-source-content">
+				<pre class="brush: js: true;">
+				var sStorage = {
+					surport : function(){
+						return typeof(window.sessionStorage)=="object";
+					},
+					exist : function(key){
+						var b = window.sessionStorage && window.sessionStorage[key]?true:false;
+						$.wLog("sStorage.exist", key + " : " + b);
+						return b;
+					},
+					get : function(key, toJson, isDel){
+						var result;
+						try{
+							if(!$.hasValue(toJson)) toJson = true;
+							if(!$.hasValue(isDel)) isDel = false;
+				
+							if(window.sessionStorage[key]){
+								result = toJson?$.parseJSON(window.sessionStorage.getItem(key)):window.sessionStorage.getItem(key);
+							}else{
+								result = toJson?{}:"";
+							}
+				
+							if(isDel){
+								window.sessionStorage.removeItem(key);
+							}
+				
+							$.wLog("sStorage.get", key);
+						}catch(e){
+							$.wLog("sStorage.get", "error : " + e.message);
+						}
+						return result;
+					},
+					set : function(key, value, toString){
+						try{
+							if(!$.hasValue(toString)) toString = true;
+							window.sessionStorage[key] = toString?JSON.stringify(value):value;
+							$.wLog(key, "sStorage.set");
+						}catch(e){
+							$.wLog("sStorage.set", "error : " + e.message);
+						}
+					},
+					remove : function(key){
+						try{
+							if(window.sessionStorage[key]){
+							    window.sessionStorage.removeItem(key);
+							    $.wLog(key, "sStorage.remove");
+							}
+						}catch(e){
+							$.wLog("sStorage.remove" ,"error : " + e.message);
+						}
+					},
+					removeList : function(keys){
+						try{
+							$.each(keys, function(){
+								if(window.sessionStorage[this]){
+								    window.sessionStorage.removeItem(this);
+								    $.wLog(this, "sStorage.remove");
+								}
+							});
+						}catch(e){
+							$.wLog("sStorage.remove", "error : " + e.message);
+						}
+					},
+					clear : function(){
+						window.sessionStorage.clear();
+					}
+				};
+				</pre>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
     		<span class="title">.surport()</span>
     		<span class="return">sessionStorage 지원여부</span>
 		</h2>

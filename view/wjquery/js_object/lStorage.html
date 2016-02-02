@@ -2,6 +2,84 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
+    		<span class="title">source</span>
+		</h2>
+		<div class="example">	
+			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div class="entry-source-content">
+				<pre class="brush: js: true;">
+				var lStorage = {
+					surport : function(){
+						return typeof(window.localStorage)=="object";
+					},
+					exist : function(key){
+						var b = window.localStorage && window.localStorage[key]?true:false;
+						$.wLog("lStorage.exist", key + " : " + b);
+						return b;
+					},
+					get : function(key, toJson, isDel){
+						var result;
+						try{
+							if(!$.hasValue(toJson)) toJson = true;
+							if(!$.hasValue(isDel)) isDel = false;
+				
+							if(window.localStorage[key]){
+								result = toJson?$.parseJSON(window.localStorage.getItem(key)):window.localStorage.getItem(key);
+							}else{
+								result = toJson?{}:"";
+							}
+				
+							if(isDel){
+								window.localStorage.removeItem(key);
+							}
+				
+							$.wLog("lStorage.get", key);
+						}catch(e){
+							$.wLog("lStorage.get", "error : " + e.message);
+						}
+						return result;
+					},
+					set : function(key, value, toString){
+						try{
+							if(!$.hasValue(toString)) toString = true;
+							window.localStorage[key] = toString?JSON.stringify(value):value;
+							$.wLog(key, "lStorage.set");
+						}catch(e){
+							$.wLog("lStorage.set", "error : " + e.message);
+						}
+					},
+					remove : function(key){
+						try{
+							if(window.localStorage[key]){
+							    window.localStorage.removeItem(key);
+							    $.wLog(key, "lStorage.remove");
+							}
+						}catch(e){
+							$.wLog("lStorage.remove" ,"error : " + e.message);
+						}
+					},
+					removeList : function(keys){
+						try{
+							$.each(keys, function(){
+								if(window.localStorage[this]){
+								    window.localStorage.removeItem(this);
+								    $.wLog(this, "lStorage.remove");
+								}
+							});
+						}catch(e){
+							$.wLog("sStorage.remove", "error : " + e.message);
+						}
+					},
+					clear : function(){
+						window.localStorage.clear();
+					}
+				};
+				</pre>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
     		<span class="title">.surport()</span>
     		<span class="return">localStorage 지원여부</span>
 		</h2>

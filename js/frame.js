@@ -173,6 +173,7 @@ var resizerLeft,
         		type : pageSetting.moduleDataType.load
     		},
     		nodes : [
+    		    {text : "jquery.ui", id : "jqueryUi", a_attr:{title: "jquery.ui 정리"}},
 				{text : "jquery.ui.datepicker", id : "datepicker", a_attr:{title: "jquery.ui.datepicker 정리"}},
 				{text : "jquery.tmpl", id : "tmpl", a_attr:{title: "jquery.tmpl 정리"}},
 				{text : "moment", a_attr:{title: "momnet 정리"}},
@@ -340,6 +341,8 @@ var resizerLeft,
 			if(!data.node) return;
 			LAYOUT_CONFIG.node = "";
 			
+			$("div.content-body>.setting").addClass("none");
+			
 			var node = data.node,
 				$tree = $("#menuTree").jstree(true);
 			
@@ -353,7 +356,7 @@ var resizerLeft,
 					$("#content-iframe").hide().siblings().show();
 				}
 				
-				$("div.content-body>.setting").addClass("none");
+				
 				if(accordion) $("#accordian1").click();
 				
 				switch (type){
@@ -386,8 +389,7 @@ var resizerLeft,
 							var _n = 0;
 							var $ul = $("#content>div.content-header>ul").empty();
 							$("ul.entry-api>li>h2>span.title").each(function(){
-								var _text = $(this).text();
-								$ul.append("<li><a href=\"#\"><span>" + _text + "</span></a></li>");
+								$ul.append($.tmpl(COMMON_TMPL.headerLi, {text:$(this).text()}));
 								_n++;
 							});
 							
@@ -464,13 +466,14 @@ function setHash(hash, b){
 
 function drawLeafNode(node){
 	$("#entry").html(COMMON_TMPL.entryApi).prev().html(node.text);
+	var $ul = $("#content>div.content-header>ul").empty();
 	$.each($("#menuTree").jstree(true).get_children_dom(node), function(){
 		var _node = $("#menuTree").jstree(true).get_node(this);
 		$(".entry-api", "#entry").append($.tmpl(COMMON_TMPL.entryApiItem, {id:_node.id, text:_node.text, title:_node.a_attr.title||_node.text}));
+		$ul.append($.tmpl(COMMON_TMPL.headerLi, {text:_node.text}));
 		//console.log($("#menuTree").jstree(true).get_node(this));
 	});
 	
-	$("#content>div.content-header>ul").empty().append("<li><a href=\"#\"><span>" + node.text + "</span></a></li>");
 	LAYOUT_CONFIG.node = node.id;
 }
 
@@ -489,7 +492,7 @@ function toggleAccordian($t){
 	if($t.attr("id")=="accordian1"){
 		if($c.accordion( "instance")){
 			$c.accordion("destroy");
-		};
+		}
 	}else if($t.attr("id")=="accordian2"){
 		$c.accordion({heightStyle: "content"});
 	}

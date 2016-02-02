@@ -2,6 +2,41 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
+    		<span class="title">source</span>
+		</h2>
+		<div class="example">	
+			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div class="entry-source-content">
+				<pre class="brush: js: true;">
+				var wJson = new(function() {
+					function init(json, isClone){
+						var result = isClone?$.extend({}, json):json;
+						$.each(result, function(key){
+							if($.hasValue(result[key])){
+								if($.isArray(result[key])){
+									result[key] = [];
+								}else if(typeof(result[key])=="object"){
+									result[key] = {};
+								}else if($.isNumeric(result[key])){
+									result[key] = 0;
+								}else{
+									result[key] = "";
+								}
+							}
+						});
+						return result;
+					}
+					
+					return {
+						init : init
+					};
+				});
+				</pre>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
     		<span class="title">.init(json [,isClone])</span>
     		<span class="return">JSON데이터를 초기화</span>
 		</h2>

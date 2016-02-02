@@ -592,32 +592,27 @@ var base62 = new(function() {
  * 실행시간 구하기
  * @param mode
  */
-var stopWatch = new(function() {
-	var title = null,
-		startTime = null;
-	
-	function start(_title){
-	    title = _title||"stopWatch";
-	    startTime = (new Date()).getTime();
-	}
-	
-	function stop(mode){
-	    var endTime = (new Date()).getTime();
-	    var duration = (endTime - startTime) /1000;
-	    if(mode=="alert"){
-	    	alert(title + "\nduaration : " + duration + " seconds");
-	    }else if(mode=="return"){
-	    	return endTime - startTime;
-	    }else{
-	    	$.wLog(title, " duaration : " + duration + " seconds");
-	    }
-	}
-	
-	return {
-		start : start,
-		stop : stop
+function stopWatch(_title) {
+	this.title = null;
+	this.startTime = null;
+	this.start = function(_title){
+		this.title = _title||"stopWatch";
+	    this.startTime = (new Date()).getTime();
 	};
-});
+	this.stop = function(mode){ 
+	    var endTime = (new Date()).getTime();
+	    if(!$.hasValue(this.startTime)) this.startTime = endTime;
+	    
+	    var duration = (endTime - this.startTime) /1000;
+	    if(mode=="alert"){
+	    	$.alert(this.title + "\nduaration : " + duration + " seconds");
+	    }else if(mode=="return"){
+	    	return endTime - this.startTime;
+	    }else{
+	    	$.wLog(this.title, " duaration : " + duration + " seconds");
+	    }
+	};
+}
 
 /***
  * JSON Util
