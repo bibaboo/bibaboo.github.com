@@ -1,0 +1,61 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">Accordion</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<div id="demo1-id1">
+						  <h3>Section 1</h3>
+						  <div>
+						    111111<br/>
+						    111111<br/>
+						    111111<br/>
+						  </div>
+						  <h3>Section 2</h3>
+						  <div>
+						    222222<br/>
+						    222222<br/>
+						    222222<br/>
+						    222222<br/>
+						  </div>
+						  <h3>Section 3</h3>
+						  <div>
+						    333333<br/>
+						    333333<br/>
+						    333333<br/>
+						    333333<br/>
+						  </div>
+						  <h3>Section 4</h3>
+						  <div>
+						    4444444<br/>
+						    4444444<br/>
+						    4444444<br/>
+						    4444444<br/>
+						  </div>
+						</div>
+						<script type="text/javascript">
+							function demo1_1(){
+								var $c = $("#demo1-id1");
+								if($c.accordion( "instance")){
+									$c.accordion("destroy");
+								}else{
+									$c.accordion();	
+								}
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
