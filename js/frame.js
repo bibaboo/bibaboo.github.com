@@ -123,15 +123,6 @@ var resizerLeft,
 					]
 				},
 				{
-					text : "js.data",
-					a_attr:{title: "데이터 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_date/"
-		    		},
-					nodes : [
-					]
-				},
-				{
 					text : "js.form",
 					a_attr:{title: "폼 관련 공통함수"},
 					data : {
@@ -147,6 +138,7 @@ var resizerLeft,
 		    			folder : "/view/wjquery/js_event/"
 		    		},
 					nodes : [
+					    {text : "delayFunction", a_attr:{title: "함수 실행 시간 지연"}},
 					]
 				},
 				{

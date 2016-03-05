@@ -129,7 +129,7 @@ var dropDownTimeout;
         		_buttonText = "닫기";
         		
         	if($("#dialog-message").isObject(true)){
-        		if(typeof(title)=="boolean"){
+        		if(typeof(title)==="boolean"){
         			modal = title;
         			title = _title;
         		}
@@ -142,7 +142,7 @@ var dropDownTimeout;
         			buttonText = _buttonText;
         		}
         		
-        		if(typeof(modal)!="boolean"){
+        		if(typeof(modal)!=="boolean"){
         			modal = true;
         		}
         		
@@ -163,7 +163,6 @@ var dropDownTimeout;
         }
 	});
     
-    
     $.fn.extend({
     	
     	/**
@@ -183,7 +182,7 @@ var dropDownTimeout;
          * @return this
          **/
         changeClass : function(className1, className2, state){
-        	if(typeof(state)=="boolean"){
+        	if(typeof(state)==="boolean"){
 	        	if(state){
 	        		this.removeClass(className1).addClass(className2);
 	        	}else{
@@ -207,7 +206,7 @@ var dropDownTimeout;
          **/
 		scrollIntoView : function(container, duration ){
 			//this.get(0).scrollIntoView(false);
-			if(typeof container == "object"){
+			if(typeof container === "object"){
 				container.animate({scrollTop:container.scrollTop() + this.offset().top - container.offset().top}, duration||500);
 			}else{
 				$("html,body").animate({scrollTop:this.offset().top}, container||500);
@@ -385,7 +384,7 @@ function mappingValue(value, arr) {
 	if(!$.hasValue(arr)){
 		return value;
 	}
-	var _arr = typeof(arr) == "string" ? [arr] : arr;
+	var _arr = typeof(arr) === "string" ? [arr] : arr;
 	while((i = value.indexOf("@", i)) != -1) {
 		if(_arr[n] == null) _arr[n] = "";
 		value = value.substr(0, i) + String(_arr[n]) + value.substring(i + 1);
@@ -400,7 +399,7 @@ function mappingValue(value, arr) {
  * @return String
  */
 function removeHtmlTag(value){
-	var _value = typeof value=="object"?value.html():value;
+	var _value = typeof value === "object" ? value.html() : value;
     return $("<div/>").html(_value).text();
 }
 
@@ -413,7 +412,7 @@ function removeHtmlTag(value){
  * @return boolean or String or PlainObject
  */
 function hasValueInArray(arr, value, key, isBoolean){
-	if(typeof(isBoolean) == "undefined") isBoolean = true;
+	if(typeof(isBoolean) === "undefined") isBoolean = true;
 	for (var i in arr) {
 		if((key?arr[i][key]:arr[i])==value){
             return isBoolean?true:arr[i];
@@ -534,18 +533,17 @@ function dropDown($1, $2, options){
             },
             function(){
                 if($2.is(":visible")){
-                	dropDownTimeout = window.setTimeout(function () {
-                    	$2.hide(_options.hide);
-                    }, _options.delay);
+                	dropDownTimeout = delayFunction(
+                		function () {
+                			$2.hide(_options.hide);
+                		},
+                		_options.delay
+                	);
                 }
             }
         );
 	}catch(e){}
 }
-
-//--------------------------------------------------------------------
-// data
-//--------------------------------------------------------------------
 
 //--------------------------------------------------------------------
 // form
@@ -554,6 +552,22 @@ function dropDown($1, $2, options){
 //--------------------------------------------------------------------
 // event
 //--------------------------------------------------------------------
+/**
+ * 함수 실행 시간 지연
+ * @param functionName 함수명
+ * @param wait 지연MM
+ * @param arguments 인자값들
+ */
+function delayFunction(functionName, wait) {
+	if(typeof functionName == "function"){
+		return setTimeout(functionName, wait);
+	}else{
+		var args = Array.prototype.slice.call(arguments, 2);
+	    return setTimeout(function(){
+	    	return window[functionName].apply(null, args);
+	    }, wait||0);
+	}
+}
 
 //--------------------------------------------------------------------
 // object
@@ -625,7 +639,7 @@ var wJson = new(function() {
 			if($.hasValue(result[key])){
 				if($.isArray(result[key])){
 					result[key] = [];
-				}else if(typeof(result[key])=="object"){
+				}else if(typeof(result[key]) === "object"){
 					result[key] = {};
 				}else if($.isNumeric(result[key])){
 					result[key] = 0;
@@ -637,8 +651,31 @@ var wJson = new(function() {
 		return result;
 	}
 	
+	function keys(json){
+		var result = [];
+		if(typeof(json) === "object"){
+			for (var key in json) result.push(key);
+		}
+		return result;
+	}
+	
+	function values(json){
+		var result = [];
+		if(typeof(json) === "object"){
+			for (var key in json) result.push(json[key]);
+		}
+		return result;
+	}
+	
+	function clone(json1, json2){
+		return $.extend({}, json1, json2||{});
+	}
+	
 	return {
-		init : init
+		init : init,
+		keys : keys,
+		values : values,
+		clone : clone
 	};
 });
 
@@ -647,7 +684,7 @@ var wJson = new(function() {
  */
 var lStorage = {
 	surport : function(){
-		return typeof(window.localStorage)=="object";
+		return typeof(window.localStorage) === "object";
 	},
 	exist : function(key){
 		var b = window.localStorage && window.localStorage[key]?true:false;
@@ -717,7 +754,7 @@ var lStorage = {
  */
 var sStorage = {
 	surport : function(){
-		return typeof(window.sessionStorage)=="object";
+		return typeof(window.sessionStorage) === "object";
 	},
 	exist : function(key){
 		var b = window.sessionStorage && window.sessionStorage[key]?true:false;

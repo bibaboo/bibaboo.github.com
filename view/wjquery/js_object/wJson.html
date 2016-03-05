@@ -38,7 +38,8 @@
 	<li class="entry-api-item">
 		<h2>
     		<span class="title">.init(json [,isClone])</span>
-    		<span class="return">JSON데이터를 초기화</span>
+    		<span class="return"> → JSON</span>
+    		<span class="desc">JSON데이터를 초기화</span>
 		</h2>
 		<div>
 			<table class="arguments">
@@ -64,32 +65,175 @@
 						<input type="button" onclick="demo1_1();" value="demo1_1" />
 						<input type="button" onclick="demo1_2();" value="demo1_2" />
 						<script type="text/javascript">
-							var json = {
+							var json1_1 = {
 								a : "a",
 								b : 1,
 								c : ["a", "b","c"],
 								d : {f:"f", g:"g"}
 							}
 							
-							var json2 = {
+							var json1_2 = {
 								a : "a",
 								b : 2,
 								c : ["a", "b","c"],
 								d : {f:"f", g:"g"}
 							}
 							
-							$("#demo1-id1").text(JSON.stringify(json));
-							$("#demo1-id2").text(JSON.stringify(json2));
+							$("#demo1-id1").text(JSON.stringify(json1_1));
+							$("#demo1-id2").text(JSON.stringify(json1_2));
 							
 							function demo1_1(){
-								$("#demo1-id1").text(JSON.stringify(wJson.init(json)));
-								$.alert(JSON.stringify(json));
+								$("#demo1-id1").text(JSON.stringify(wJson.init(json1_1)));
+								$.alert(JSON.stringify(json1_1));
 							}
 							
 							function demo1_2(){
-								$("#demo1-id2").text(JSON.stringify(wJson.init(json2, true)));
-								$.alert(JSON.stringify(json2));
+								$("#demo1-id2").text(JSON.stringify(wJson.init(json1_2, true)));
+								$.alert(JSON.stringify(json1_2));
 							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.keys(json)</span>
+    		<span class="return"> → Array</span>
+    		<span class="desc">key값 추출</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">json</td>
+			  			<td class="type">Object</td>
+			  			<td class="desc">json</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1" class="demo1-class1">demo2_1</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<script type="text/javascript">
+							var json2_1 = {
+								a : "a",
+								b : 1,
+								c : ["a", "b","c"],
+								d : {f:"f", g:"g"}
+							}
+							
+							$("#demo2-id1").text(JSON.stringify(json2_1));
+							
+							function demo2_1(){
+								$("#demo2-id1").text(JSON.stringify(wJson.keys(json2_1)));
+							}
+							
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.values(json)</span>
+    		<span class="return"> → Array</span>
+    		<span class="desc">value값 추출</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">json</td>
+			  			<td class="type">Object</td>
+			  			<td class="desc">json</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo3-id1" class="demo1-class1">demo3_1</div>
+						<input type="button" onclick="demo3_1();" value="demo3_1" />
+						<script type="text/javascript">
+							var json3_1 = {
+								a : "a",
+								b : 1,
+								c : ["a", "b","c"],
+								d : {f:"f", g:"g"}
+							}
+							
+							$("#demo3-id1").text(JSON.stringify(json3_1));
+							
+							function demo3_1(){
+								$("#demo3-id1").text(JSON.stringify(wJson.values(json3_1)));
+							}
+							
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.clone(json1, json2)</span>
+    		<span class="return"> → JSON</span>
+    		<span class="desc">JSON1 복사</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">json1</td>
+			  			<td class="type">Object</td>
+			  			<td class="desc">json</td>
+					</tr>
+					<tr>
+			  			<td class="name">json2</td>
+			  			<td class="type">Object</td>
+			  			<td class="desc">json</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo4-id1" class="demo4-class1">demo4_1</div>
+						<input type="button" onclick="demo4_1();" value="demo4_1" />
+						<script type="text/javascript">
+							var json4_1 = {
+								a : "a",
+								b : "b"
+							}
+							
+							$("#demo4-id1").text(JSON.stringify(json4_1));
+							
+							function demo4_1(){
+								var _json4_1 = wJson.clone(json4_1, {c:"c"});
+								
+								$.alert("_json4_1 : " + JSON.stringify(_json4_1) + "<br/>json4_1 : " + JSON.stringify(json4_1));
+							}
+							
 						</script>
 					</div>
 					<div class="entry-source-title"></div>
