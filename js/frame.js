@@ -17,10 +17,10 @@ var resizerLeft,
 		},
 		//트리노드 액션 타입
 		moduleDataType :{
-			"load" : "load",
-			"new" : "new",
-			"link" : "link",
-			"iframe" : "iframe"
+			load : "load",
+			blank : "blank",
+			link : "link",
+			iframe : "iframe"
 		}
     };
 	
@@ -171,7 +171,7 @@ var resizerLeft,
 				{text : "moment", a_attr:{title: "momnet 정리"}},
 				{text : "jquery.transit", id : "transit", a_attr:{title: "transit 정리"}},
 				{text : "wjquery.layer", id : "wlayer", a_attr:{title: "wjquery.layer"}},
-				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}},
+				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}}
     		]
     	},
     	
@@ -222,6 +222,7 @@ var resizerLeft,
         		type : pageSetting.moduleDataType.load
     		},
     		nodes : [
+				{text : "wjquery.mpicker", id : "mpicker", a_attr:{title: "wjquery.mpicker"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html"}}
   	    	]
     	}
     ];
@@ -340,7 +341,7 @@ var resizerLeft,
 			
 			if($tree.is_leaf(node) && (node.id=="home" || !node.icon)){
 				var pnode = node.parent=="#"?{data:node.data}:$tree.get_node(node.parent),
-					url = node.data && node.data.page?pnode.data.folder+node.data.page:pnode.data.folder + node.id + ".html";
+					url = node.data && node.data.page?node.data.page:node.id + ".html";
 					type = node.data && node.data.type?node.data.type:pnode.data.type;
 					accordion = node.data && node.data.accordion?node.data.accordion:pnode.data.accordion?pnode.data.accordion:true;
 					
@@ -348,14 +349,17 @@ var resizerLeft,
 					$("#content-iframe").hide().siblings().show();
 				}
 				
+				if(!$.hasString(url, "http")){
+					url = pnode.data.folder + url;
+				}
 				
 				if(accordion) $("#accordian1").click();
 				
 				switch (type){
-					case pageSetting.moduleDataType["new"] :
+					case pageSetting.moduleDataType.blank :
 						window.open(url);
 						break;
-					case pageSetting.moduleDataType.link :
+					case pageSetting.moduleDataType.link :  
 						location.href = url;
 						break;
 					case pageSetting.moduleDataType.iframe :
