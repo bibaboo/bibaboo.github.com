@@ -47,8 +47,18 @@ var COMMON_TMPL = {
 	layout :
 		"<div id=\"wapper\">"+
 		"	<div id=\"sidebar\">"+
-		"	    <div class=\"sidebar-head\"><a href=\"javascript:void(0);\">wjquery</a></div>"+
+		"	    <div class=\"sidebar-head\">" +
+		"			<a href=\"javascript:void(0);\">wjquery</a>" +
+		"			<ul class=\"ui-widget ui-helper-clearfix\">"+
+		"				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-close\"><span class=\"ui-icon ui-icon-seek-first\"></span></li>"+
+		"				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-plus\"><span class=\"ui-icon ui-icon-plusthick\"></span></li>"+
+		"				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-minus\"><span class=\"ui-icon ui-icon-minusthick\"></span></li>"+
+		"			</ul>"+
+		"		</div>"+
 		"	    <div class=\"sidebar-body\"><div id=\"menuTree\"></div></div>"+
+		"	</div>"+
+		"	<div id=\"spacer\">" +
+		"		<span class=\"ui-icon ui-icon-seek-end\"></span>"+
 		"	</div>"+
 		"   <div id=\"content\">"+
 		"       <div class=\"content-header\">"+

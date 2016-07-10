@@ -10,6 +10,11 @@ var resizerLeft,
 (function($){
 	/* 공통 설정 정보 */
 	var pageSetting = {
+		resizeWidth : {
+			sidebar : "15%",
+			content : "85%"
+		},
+			
 		//자식노드 기본정보
 		leafData : {
 			children : false, 
@@ -280,6 +285,29 @@ var resizerLeft,
 				$("#sidebar").transition({rotateY: '180deg'}).transition({rotateY: '360deg'});
 			}
 		);
+    	
+    	$("#spacer").click(
+			function(){
+				$("#spacer").hide();
+				$("#sidebar,#resizer").show();
+				$("#content").width("85%");
+			}
+		).hover(function(){$(this).css("background-color", "#ddd");}, function(){$(this).css("background-color", "#eee");});
+    	
+		$("#sidebar>.sidebar-head>ul>li").click(
+			function(){
+				if($(this).find("span").hasClass("ui-icon-seek-first")){
+					$("#sidebar,#resizer").hide();
+					$("#content").width("100%");
+					$("#spacer").show();
+				}else if($(this).find("span").hasClass("ui-icon-plusthick")){
+					$("#menuTree").jstree('open_all');
+				}else if($(this).find("span").hasClass("ui-icon-minusthick")){
+					$("#menuTree").jstree('close_all');
+				}
+				
+			}
+		).hover(function(){$(this).addClass("ui-state-hover");}, function(){$(this).removeClass("ui-state-hover");});
 
 	    //트리
     	var data = $.map(moduleData, function(module){
@@ -439,10 +467,12 @@ var resizerLeft,
 })(jQuery);
 
 function resizeLayout(){
-	$("#sidebar>div.sidebar-body, #content>div.content-body").height($(window).height()-LAYOUT_CONFIG.contentHeaderHeight);
-	$("#sidebar").width("15%");
-	$("#content").width("85%");
-	setResizer();
+	if($("#sidebar").is(":visible")){
+		$("#sidebar>div.sidebar-body, #content>div.content-body").height($(window).height()-LAYOUT_CONFIG.contentHeaderHeight);
+		$("#sidebar").width("15%");
+		$("#content").width("85%");
+		setResizer();
+	}
 }
 
 function setResizer(){

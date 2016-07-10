@@ -1,8 +1,8 @@
-Ôªø/* HTML Elements
+/* HTML Elements
 ---------------------------------------------------------*/
 * {margin:0; padding:0;}
 
-body {font:80%/1.5em 'Malgun Gothic','ÎßëÏùÄ Í≥†Îîï',dotum,'ÎèãÏõÄ',sans-serif; color:#333333; background:#fff; overflow: hidden;}
+body {font:80%/1.5em 'Malgun Gothic','∏º¿∫ ∞ÌµÒ',dotum,'µ∏øÚ',sans-serif; color:#333333; background:#fff; overflow: hidden;}
 a:link, a:visited {text-decoration: none;color:#333;}
 a:hover, a:active {text-decoration: none;}
 ul {list-style:none;}
@@ -15,9 +15,13 @@ table {border-collapse: collapse; border-spacing: 0;}
 #meunUl {padding-left:10px;}
 #wapper {width:100%; overflow:hidden;}
 #sidebar {float: left; width: 15%; position:relative; overflow-y: scroll; overflow-x: hidden;}
-.sidebar-head {background: #eee; height: 24px; border-bottom: 1px solid #ddd;padding-top:7px;}
+.sidebar-head {position:relative;background: #eee; height: 24px; border-bottom: 1px solid #ddd;padding-top:7px;}
 .sidebar-head a {font-size: 1.3em; color: #333333; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);padding-left:7px;}
+.sidebar-head ul{position:absolute;top:9px;right:5px;}
+.sidebar-head ul li{float:left;margin-left:5px;cursor:pointer;}
 #resizer {position:absolute;background-color:#000;top:0;left:100px;height:100%;cursor: col-resize;opacity:0.1;}
+#spacer{position:absolute;top:30px;width:19px;height:100%;background-color:#eee;display:none;z-index:101;cursor:pointer;}
+#spacer span{margin:450px 1px;}
 
 #content {float: left; width: 85%; position:relative;}
 .content-header div.home {position:absolute;top:0;right:0; height:31px; border-left: 1px solid #ddd}
