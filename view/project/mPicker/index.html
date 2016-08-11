@@ -9,14 +9,61 @@
 <link rel="stylesheet" type="text/css" media="screen" href="css/wjquery-mpicker.css" />
 <script type="text/javascript" src="/js/lib/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="/js/lib/moment-with-locales.2.11.1.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.transit.js"></script>
+<script type="text/javascript" src="/js/lib/wjquery/wjquery.js"></script>
 <script type="text/javascript" src="js/wjquery-mpicker.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-    	$("#demo1").mDatePicker();
+		if(!$.isMobile()){
+			alert("모바일 브라우져(android, iOS)만 지원합니다.");
+			return;
+		}
+		
+    	$("#demo1").mPicker();
+    	
+    	$("#demo2").mPicker({
+    		mode : "DateTime"
+    	});
+    	
+    	$("#demo3").mPicker({
+    		mode : "Time"
+    	});
+    	
+    	$("#demo4").mPicker({
+    		setting : [
+    			{
+	    			title : "지역선택",
+	    			data:[
+	    			    {value:"01", text:"서울"},
+	    			    {value:"02", text:"인천"},
+	    			    {value:"03", text:"경기"},
+	    			    {value:"04", text:"부산"},
+	    			    {value:"05", text:"광주"},
+	    			    {value:"06", text:"대전"},
+	    			    {value:"07", text:"대구"},
+	    			]
+    			},
+    			{
+	    			title : "지역선택2",
+	    			data:[
+	    			    {value:"01", text:"서울"},
+	    			    {value:"02", text:"인천"},
+	    			    {value:"03", text:"경기"},
+	    			    {value:"04", text:"부산"},
+	    			    {value:"05", text:"광주"},
+	    			    {value:"06", text:"대전"},
+	    			    {value:"07", text:"대구"},
+	    			]
+    			}
+    		]
+    	});
 	});
 </script>
 </head>
-<body>
-<input type="text" id="demo1" readonly="readonly" />
+<body style="position:relative">
+년월일 : <input type="text" id="demo1" readonly="readonly" /><br/><br/>
+년월일시분 : <input type="text" id="demo2" readonly="readonly" /><br/><br/>
+시분 : <input type="text" id="demo3" readonly="readonly" /><br/><br/>
+지역 : <input type="text" id="demo4" readonly="readonly" />
 </body>
 </html>

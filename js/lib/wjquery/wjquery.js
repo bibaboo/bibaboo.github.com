@@ -45,6 +45,36 @@ var dropDownTimeout;
          * @param value 비교값
          * @return Boolean
          **/
+        isMobile: function (type) {
+            var agent = navigator.userAgent,
+            	device = {
+            		android : agent.match(/Android/i)!=null,
+            		iOS : agent.match(/iPhone|iPad|iPod/i)!=null
+            	}
+            	
+           if(type){
+        	   if(device[type]){
+        		   return devie[type];
+        	   }else{
+        		   return false;
+        	   }
+           }else{
+        	   var result = false;
+        	   $.each(device, function(key, value){
+        		   if(this==true){
+        			   result = true;
+        			   return false;
+        		   }
+        	   })
+        	   return result;
+           }
+        },
+        
+        /**
+         * true 여부
+         * @param value 비교값
+         * @return Boolean
+         **/
         isTrue: function (value) {
             return typeof(value) !== "undefined" && value === true;
         },
