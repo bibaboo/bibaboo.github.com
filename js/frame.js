@@ -14,7 +14,7 @@ var resizerLeft,
 			sidebar : "15%",
 			content : "85%"
 		},
-			
+		autoData : [],
 		//자식노드 기본정보
 		leafData : {
 			children : false, 
@@ -248,6 +248,13 @@ var resizerLeft,
     		toggleAccordian($(this));
     	});
     	
+    	$("#searchWord").autocomplete({
+    		 source: pageSetting.autoData,
+    		 select: function(event, ui ) {
+    			 openNode("#" + ui.item.id);
+    		 }
+	    });
+    	
     	//리사이즈 이벤트
     	resizeLayout();
     	setResizer();
@@ -265,6 +272,8 @@ var resizerLeft,
     	$("#resizer").draggable({ axis: "x", containment: "#wapper", opacity:0.35,scroll: false, stop : function(){
     		var before = parseInt(resizerLeft, 10),
     			after = parseInt($("#resizer").css("left"), 10);
+    		
+    		$("#searchWord").toggle(after>180);
     		$("#sidebar").width(after);
     		$("#content").width($("#content").width()+(before-after));
     		resizerLeft = $("#resizer").css("left");
@@ -315,6 +324,7 @@ var resizerLeft,
     			module.children = $.map(module.nodes, function(node){
     				if(!node.id) node.id = getPatternString("alphaNum", node.text);
     				if(!node.a_attr) node.a_attr = {title:node.text};
+    				pageSetting.autoData.push({label:node.text, id:node.id});
     				if(node.nodes){
     					if(!node.data && module.data){
     						node.data = module.data;
@@ -324,6 +334,7 @@ var resizerLeft,
     					node.children = $.map(node.nodes, function(_node){
     	    				if(!_node.id) _node.id = getPatternString("alphaNum", _node.text);
     	    				if(!_node.a_attr) _node.a_attr = {title:_node.text};
+    	    				pageSetting.autoData.push({label:_node.text, id:_node.id});
     	    				return $.extend({}, pageSetting.leafData, _node);
     	        		});
     					node.children.sort(function(a, b){
@@ -340,9 +351,10 @@ var resizerLeft,
     		}
     		if(!module.id) module.id = getPatternString("alphaNum", module.text);
     		if(!module.a_attr) module.a_attr = {title: module.text};
+    		pageSetting.autoData.push({label:module.text, id:module.id});
     		return module;
     	});
-
+    	
     	$("#menuTree")
 		.jstree({
 			"core" : {
