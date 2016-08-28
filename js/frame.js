@@ -173,8 +173,9 @@ var resizerLeft,
     		    {text : "jquery.ui", id : "jqueryUi", a_attr:{title: "jquery.ui 정리"}},
 				{text : "jquery.ui.datepicker", id : "datepicker", a_attr:{title: "jquery.ui.datepicker 정리"}},
 				{text : "jquery.tmpl", id : "tmpl", a_attr:{title: "jquery.tmpl 정리"}},
-				{text : "moment", a_attr:{title: "momnet 정리"}},
 				{text : "jquery.transit", id : "transit", a_attr:{title: "transit 정리"}},
+				{text : "moment", a_attr:{title: "momnet 정리"}},
+				{text : "swipe", a_attr:{title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
 				{text : "wjquery.layer", id : "wlayer", a_attr:{title: "wjquery.layer"}},
 				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}}
     		]
@@ -227,7 +228,7 @@ var resizerLeft,
         		type : pageSetting.moduleDataType.load
     		},
     		nodes : [
-				{text : "wjquery.mpicker", id : "mpicker", a_attr:{title: "wjquery.mpicker"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html"}}
+				{text : "wjquery.mpicker", id : "mpicker", a_attr:{title: "모바일용"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html", mobile:true}}
   	    	]
     	}
     ];
@@ -379,12 +380,17 @@ var resizerLeft,
 			var node = data.node,
 				$tree = $("#menuTree").jstree(true);
 			
+			if(!node.data) node.data = {};
 			if($tree.is_leaf(node) && (node.id=="home" || !node.icon)){
 				var pnode = node.parent=="#"?{data:node.data}:$tree.get_node(node.parent),
-					url = node.data && node.data.page?node.data.page:node.id + ".html";
-					type = node.data && node.data.type?node.data.type:pnode.data.type;
-					accordion = node.data && node.data.accordion?node.data.accordion:pnode.data.accordion?pnode.data.accordion:true;
-					
+					url = node.data.page?node.data.page:node.id + ".html",
+					type = node.data.type?node.data.type:pnode.data.type,
+					accordion = node.data.accordion?node.data.accordion:pnode.data.accordion?pnode.data.accordion:true;
+				
+				if($.isTrue(node.data.mobile) && !$.isMobile()){
+					alert("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.");
+				}
+				
 				if(type!="iframe" && $("#content-iframe").is(":visible")){
 					$("#content-iframe").hide().siblings().show();
 				}

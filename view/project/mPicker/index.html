@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta name="format-detection" content="telephone=no, address=no, email=no" />
 <title>wjquery-mpicker</title>
-<link rel="stylesheet" type="text/css" media="screen" href="css/base.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/mobile.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/wjquery-mpicker.css" />
 <script type="text/javascript" src="/js/lib/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="/js/lib/moment-with-locales.2.11.1.min.js"></script>
@@ -14,11 +14,6 @@
 <script type="text/javascript" src="js/wjquery-mpicker.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
-		if(!$.isMobile()){
-			alert("모바일 브라우져(android, iOS)만 지원합니다.");
-			return;
-		}
-		
     	$("#demo1").mPicker();
     	
     	$("#demo2").mPicker({
