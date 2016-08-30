@@ -85,6 +85,11 @@ h1 {
 			// callback: function(index, element) {},
 			// transitionEnd: function(index, element) {}
 		});
+		
+		$("#myTab>span").click(function(){
+			var index = $("#myTab>span").index(this); 
+			mySwipe.slide(index);
+		});
 	});
 </script>
 </head>
