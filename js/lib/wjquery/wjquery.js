@@ -461,6 +461,55 @@ function initCap(value) {
 }
 
 //--------------------------------------------------------------------
+// date
+//--------------------------------------------------------------------
+/**
+ * 날자 포멧팅
+ * @param delim
+ * @return String
+ */
+function getFormatDate(dt, delim){
+	if(typeof(delim)==="undefined") delim = "";
+	return dt.getFullYear() + delim + $.pad(String(dt.getMonth()+1), 2, "0") + delim + $.pad(String(dt.getDate()), 2, "0");
+}
+
+/**
+ * 오늘 일자를 구한다
+ * @param delim
+ * @return String
+ */
+function getToday(delim){
+	return getFormatDate(new Date(), delim);
+}
+
+/**
+ * 원하는 만큼 일자를 증감해서 리턴
+ * @param dt Date or String
+ * @param mode Y or M or D
+ * @param len 길이
+ * @param delim 
+ * @return String
+*/
+function getTargetDate(dt, mode, len, delim){
+	if(typeof(dt)=="string"){
+		var s = getPatternString("number", dt);
+		dt = new Date(parseInt(s.substring(0, 4), 10), parseInt(s.substring(4, 6), 10) - 1, parseInt(s.substring(6, 8), 10));
+	}
+	
+	if(mode=="Y"){
+		dt.setFullYear(dt.getFullYear() + len);
+	}else if(mode=="M"){
+		dt.setMonth(dt.getMonth() + len);
+	}else if(mode=="D"){
+		dt.setDate(dt.getDate() + len);
+	}else{
+		return;
+	}
+	
+	return getFormatDate(dt, delim);
+}
+
+//--------------------------------------------------------------------
 // expr
 //--------------------------------------------------------------------
 /**

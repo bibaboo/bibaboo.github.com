@@ -1,0 +1,65 @@
+<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">getTargetDate(dt, mode, len [,delim])</span>
+    		<span class="return">→ String</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">dt</td>
+			  			<td class="type">Object(Date), String</td>
+			  			<td class="desc">yyyymmdd or Date</td>
+					</tr>
+					<tr>
+			  			<td class="name">mode</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">Y(year), M(Month), D(Day)</td>
+					</tr>
+					<tr>
+			  			<td class="name">len</td>
+			  			<td class="type">Integer</td>
+			  			<td class="desc">증감</td>
+					</tr>
+					<tr>
+			  			<td class="name">delimiter (default:"")</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">구분자</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html(getTargetDate.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							function demo1_1(){
+						  		$("#demo1-id1").html(getTargetDate(new Date(), "D", 10, "-"));
+						  	}
+							
+							function demo1_2(){
+						  		$("#demo1-id1").html(getTargetDate("2016.12.1", "D", 2, "-"));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [6,10]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

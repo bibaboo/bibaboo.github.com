@@ -21,7 +21,7 @@ var wEditorLang = {
 	        ["bold","italic","strikethrough","underline"],
 	        ["character", "link"]
 	   	],
-	    default : [
+	    "default" : [
 	        ["fontname","fontsize"],
 	        ["newpage","previewer", "print"],
 	        ["forecolor","backcolor"],

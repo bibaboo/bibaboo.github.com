@@ -99,9 +99,12 @@ var resizerLeft,
 					text : "js.date",
 					a_attr:{title: "날자 관련 공통함수"},
 					data : {
-		    			folder : "/view/wjquery/js_lang/"
+		    			folder : "/view/wjquery/js_date/"
 		    		},
 					nodes : [
+					    {text : "getFormatDate()", a_attr:{title: "날자 포멧팅"}},
+					    {text : "getToday()", a_attr:{title: "오늘 일자를 구한다"}},
+					    {text : "getTargetDate()", a_attr:{title: "원하는 만큼 일자를 증감해서 리턴"}}
 					]
 				},
 				{
@@ -213,9 +216,18 @@ var resizerLeft,
 				{
 					text : "style & html",
 					data : {
-		    			folder : "/view/jquery/styleNhtml/"
+		    			folder : "/view/note/styleNhtml/"
 		    		},
 					nodes : [
+					]
+				},
+				{
+					text : "server",
+					data : {
+		    			folder : "/view/note/server/"
+		    		},
+					nodes : [
+					    {text : "톰켓설정", id : "tomcatSetting"}
 					]
 				}
     		]
@@ -338,8 +350,11 @@ var resizerLeft,
     	    				pageSetting.autoData.push({label:_node.text, id:_node.id});
     	    				return $.extend({}, pageSetting.leafData, _node);
     	        		});
-    					node.children.sort(function(a, b){
-    						return a.text<b.text?-1:(a.text>b.text)?1:0;});
+    					if(!$.isFalse(node.sort)){
+    						node.children.sort(function(a, b){
+        						return a.text<b.text?-1:(a.text>b.text)?1:0;
+        					});
+    					}
     					return node;
     				}else{
     					return $.extend({}, pageSetting.leafData, node);
@@ -442,6 +457,11 @@ var resizerLeft,
 							_n = 0;
 							$("div.entry-demo-content").each(function(){
 								$(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
+								_n++;
+							});
+							
+							$("textarea.entry-demo-textarea-content").each(function(){
+								$(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).val()));
 								_n++;
 							});
 							
