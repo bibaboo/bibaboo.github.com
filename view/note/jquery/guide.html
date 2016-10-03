@@ -1,0 +1,158 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">variable</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">jquery 객체의 경우에는 변수이름 앞에 $ 를 사용해서 만들어 사용</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							var $myDiv = $("#myDiv");
+        					$myDiv.click(function(){...});
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">selector</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">왼쪽은 덜 세밀하게 오른쪽은 세밀하게</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$(".data td.gonzalez");
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">ID > child 의 구조로 엘레먼트를 접근하는 경우에는 나열하지말고 해당 엘레먼트를 find() 함수를 사용하여 접근</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							var $productIds = $("#products div.id");
+        					var $productIds = $("#products").find("div.id"); //good
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">과도하게 세밀한 접근은 피하기</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$(".data table.attendees td.gonzalez");
+         					$(".data td.gonzalez"); //good
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">Context를 함께 제공</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$('.class');
+        					$('.class', '#class-container'); //good
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">보이지 않는 Universal 한 셀렉팅을 피하기</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$('div.someclass :radio');
+        					$('div.someclass input:radio'); //good
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">DOM manipulation</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">array.join() 사용</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							// BAD
+					        var $myList = $("#list");
+					        for(var i = 0; i < 10000; i++){
+					            $myList.append("<li>"+i+"</li>");
+					        }
+					        
+					        // GOOD
+					        var $myList = $("#list");
+					        var list = "";
+					        for(var i = 0; i < 10000; i++){
+					            list += "<li>"+i+"</li>";
+					        }
+					        $myList.html(list);
+					        
+					        // EVEN FASTER
+					        var array = []; 
+					        for(var i = 0; i < 10000; i++){
+					            array[i] = "<li>"+i+"</li>"; 
+					        }
+					        $myList.html(array.join(''));
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">엘리먼트 확인</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$("#nosuchthing").slideUp();
+        
+					        var $mySelection = $("#nosuchthing");
+					
+					        //good
+					        if ($mySelection.length) {
+					            $mySelection.slideUp();
+					        }
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">HTML 안에 inline javascript는 자제</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							$(".data table.attendees td.gonzalez");
+         					$(".data td.gonzalez"); //good
+						</pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<div class="entry-source-title">Context를 함께 제공</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;">
+							<a id="myLink" href="#" onclick="myEventHandler();">my link</a> 
+        
+        					$("#myLink").on("click", myEventHandler); // GOOD   
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
