@@ -1,1 +1,1 @@
-# bibaboo.github.com
+# bibaboo.github.io

@@ -65,7 +65,7 @@ input[type="search"]::-webkit-search-decoration {
 .entry-demo-title, .entry-source-title {position:relative;font-weight:bold; font-size:1.2em; border-bottom:1px solid #ccc; margin-top:10px;}
 .entry-demo-title a, .entry-source-title a {position:absolute;top:0;right:0;} 
 .entry-demo-content {padding-top:10px;}
-.entry-source-content, .entry-demo-source-content{padding-bottom:5px;}
+.entry-source-content, .entry-demo-source-content, .entry-demo-source-content-manual{padding-bottom:5px;}
 
 /* DEFINE
 ---------------------------------------------------------*/
