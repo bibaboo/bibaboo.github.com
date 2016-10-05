@@ -11,7 +11,7 @@ var WLAYER_DROPDOWN_TIMEOUT;
 	$.fn.wlayer = function(method) {
 		var arg = arguments;
     	this.each(function() {
-    		result = WLAYER[method].apply(this, Array.prototype.slice.call(arg, 1));
+    		WLAYER[method].apply(this, Array.prototype.slice.call(arg, 1));
 		});
     	return this;
     };
@@ -22,13 +22,14 @@ var WLAYER_DROPDOWN_TIMEOUT;
          */
     	function dropDown($2, options){
         	try{
+        		console.log($2);
         		var $1 = $(this);
         		var _options = $.extend({
         			show:"fast", 
         			hide:"fast", 
         			delay:500},options||{}
         		);
-        		$($1,$2).hover(
+        		$('#' + $1.attr("id") + ',' + '#' + $2.attr("id")).hover(
                     function(){
                         window.clearTimeout(WLAYER_DROPDOWN_TIMEOUT);
                         $2.show(_options.show);

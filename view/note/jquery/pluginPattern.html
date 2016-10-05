@@ -2,7 +2,7 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">single pattern</span>
+    		<span class="title">single pattern complex</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -87,7 +87,7 @@
 	</li>
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">multiple pattern</span>
+    		<span class="title">multiple pattern complex</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -158,6 +158,60 @@
 						
 						function demo2_1(){
 							$("div.demo2_class1").wPatten2("set", "pattern2_abcde");
+						}
+						</script>
+					</div>
+					<div class="entry-source-title">source</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">single pattern simple</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo3-id1">demo3_1</div>
+						<input type="button" onclick="demo3_1();" value="demo3_1" />
+						<script type="text/javascript">
+						(function($){
+							$.fn.wPatten3 = function(method) {
+								var arg = arguments;
+								wPatten3[method].apply(this, Array.prototype.slice.call(arg, 1));
+						    	return this;
+						    };
+						    
+						    var wPatten3 = new(function() {
+						    	var _data="";
+						    	function get(){
+						        	try{
+						        		$.alert(_data);
+						        	}catch(e){}
+						        }
+						    	
+						    	function set(data){
+						        	try{
+						        		_data = data;
+						        	}catch(e){}
+						        }
+						    	
+						    	return {
+						    		get:get,
+						    		set:set
+						    	};
+						    });
+						})(jQuery);
+						
+						function demo3_1(){
+							$("#demo3-id1").wPatten3("set", "pattern3_abcde");
+							$("#demo3-id1").wPatten3("get");
 						}
 						</script>
 					</div>
