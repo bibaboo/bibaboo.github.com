@@ -45,7 +45,7 @@ var $sidebar,
     			folder : "/view/",
         		type : pageSetting.moduleDataType.load
     		},
-    		a_attr:{title: "wjquery 0.0.3<br/>by composite (wonchu.net@gmail.com)</br>http://www.wonchu.net</br>This project licensed under a MIT License."}
+    		a_attr:{title: "wonchu~~"}
     	},
     	
     	{
@@ -62,6 +62,8 @@ var $sidebar,
 		    			folder : "/view/wjquery/extend/"
 		    		},
 					nodes : [
+					    {text : "$.alert()", a_attr:{title: "custom alert"}},     
+					    {text : "$.confirm()", a_attr:{title: "custom confirm"}},
 					    {text : "$.hasString()", a_attr:{title: "value에 findStr이 있는지 비교"}},
 					    {text : "$.hasValue()", a_attr:{title: "value에 값이 있는지 여부"}},
 					    {text : "$.isFalse()", a_attr:{title: "false 여부"}},
@@ -186,6 +188,7 @@ var $sidebar,
 				{text : "jquery.tmpl", id : "tmpl", a_attr:{title: "jquery.tmpl 정리"}},
 				{text : "jquery.transit", id : "transit", a_attr:{title: "transit 정리"}},
 				{text : "moment", a_attr:{title: "momnet 정리"}},
+				{text : "fakeLoader", a_attr:{title: "fakeLoader demo"}},
 				{text : "swipe", a_attr:{title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
 				{text : "wjquery.layer", id : "wlayer", a_attr:{title: "wjquery.layer"}},
 				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}}
@@ -424,7 +427,9 @@ var $sidebar,
 					accordion = node.data.accordion?node.data.accordion:pnode.data.accordion?pnode.data.accordion:true;
 				
 				if($.isTrue(node.data.mobile) && !$.isMobile()){
-					alert("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.");
+					if(!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")){
+						return;
+					}
 				}
 				
 				if(type!="iframe" && $("#content-iframe").is(":visible")){

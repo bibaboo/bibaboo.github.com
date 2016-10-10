@@ -82,6 +82,7 @@ var COMMON_TMPL = {
 		"   </div>"+
 		"	<div id=\"resizer\">&nbsp;</div>" +
 		"</div>"+
+		"<div class=\"fakeloader\"></div>" +
 		"<div id=\"dialog-message\" title=\"\"><p></p></div>",
 	entryApi : "<ul class=\"entry-api\"></ul>",
 	entryApiItem :"<li class=\"entry-api-item\">"+

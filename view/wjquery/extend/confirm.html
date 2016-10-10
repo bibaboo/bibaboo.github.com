@@ -1,0 +1,53 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.confirm(value [,option])</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">message</td>
+					</tr>
+					<tr>
+			  			<td class="name">options default({title : "확인", buttonText : ["확인", "취소"], modal : true})</td>
+			  			<td class="type">PlainObject</td>
+			  			<td class="desc">설정 데이터</td>
+					</tr>
+					<tr>
+			  			<td class="name">callback</td>
+			  			<td class="type">Function</td>
+			  			<td class="desc">0:close, 1:left button, 2:right button</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.alert.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$.confirm("demo1_1", {modal:false, callback:function(index){alert(index);}});
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [4]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

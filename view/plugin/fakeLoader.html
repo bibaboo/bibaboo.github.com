@@ -1,0 +1,48 @@
+﻿<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://github.com/joaopereirawd/fakeLoader.js" target="_blank">fakeLoader.js</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1(0);" value="demo1_1" />
+						<input type="button" onclick="demo1_1(1);" value="demo1_2" />
+						<input type="button" onclick="demo1_1(2);" value="demo1_3" />
+						<input type="button" onclick="demo1_1(3);" value="demo1_4" />
+						<input type="button" onclick="demo1_1(4);" value="demo1_5" />
+						<input type="button" onclick="demo1_1(5);" value="demo1_6" />
+						<input type="button" onclick="demo1_1(6);" value="demo1_7" />
+						<script type="text/javascript">	
+							function demo1_1(n){
+								var bgColor = ["#2ecc71","#e74c3c","#3498db","#34495e","#e67e22","#1abc9c","#9b59b6"];
+								$(".fakeloader").fakeLoader({
+				                    timeToHide:1200,
+				                    bgColor:bgColor[n],
+				                    spinner:"spinner"+(n+1)
+				                });
+								
+							}
+							
+							 $(document).ready(function(){
+				                $(".fakeloader").fakeLoader({
+				                    timeToHide:1200,
+				                    bgColor:"#fff",
+				                    imagePath:"http://vectorlogo.biz/wp-content/uploads/2013/01/GOOGLE-VECTORLOGO-BIZ-128x128.png"
+				                });
+				            });
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

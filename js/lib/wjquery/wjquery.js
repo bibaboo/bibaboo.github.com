@@ -151,44 +151,91 @@ var dropDownTimeout;
         /**
          * alert
          * @param message 메시지
-         * @param title 제목
-         * @param modal 모달여부
+         * @param options 옵션
          */
-        alert : function(message, title, modal, buttonText){
-        	var _title = "알림",
-        		_buttonText = "닫기";
-        		
+        alert : function(message, options){
+        	var _option = $.extend({title : "알림", buttonText : "닫기", modal : true}, options||{});
+        	
         	if($("#dialog-message").isObject(true)){
-        		if(typeof(title)==="boolean"){
-        			modal = title;
-        			title = _title;
-        		}
-        		
-        		if(!$.hasValue(title)){
-        			title = _title;
-        		}
-        		
-        		if(!$.hasValue(buttonText)){
-        			buttonText = _buttonText;
-        		}
-        		
-        		if(typeof(modal)!=="boolean"){
-        			modal = true;
-        		}
-        		
         		$("#dialog-message>p").empty().html(String(message));
+        		
+        		if($("#dialog-message").dialog("instance")){
+        			$("#dialog-message").dialog("destroy").removeAttr("button-index");
+        		}
+        		
         		$("#dialog-message").dialog({
-    				modal: modal,
-    				title : title,
+    				modal: _option.modal,
+    				title : _option.title,
+    				close : function( event, ui ) {
+    					if(_option.callback) {
+    						if($("#dialog-message").attr("button-index")){
+    							_option.callback($("#dialog-message").attr("button-index"));
+    						}else{
+    							_option.callback(0);
+    						}
+    						
+    					}
+    				},
     				buttons: [{
-    					text : buttonText,
+    					text : _option.buttonText,
     					click : function() {
-    						$(this).dialog( "close" );
+    						if(_option.callback){
+    							$("#dialog-message").attr("button-index", 1);
+    						}
+    						$("#dialog-message").dialog("close");
     					}
     				}]
         	    });
-        	}else{
-        		alert(message);
+        	}
+        },
+        
+        /**
+         * confirm
+         * @param message 메시지
+         * @param options 옵션
+         */
+        confirm : function(message, options){
+        	var _option = $.extend({title : "확인", buttonText : ["확인", "취소"], modal : true}, options||{});
+        	
+        	if($("#dialog-message").isObject(true)){
+        		$("#dialog-message>p").empty().html(String(message));
+        		
+        		if($("#dialog-message").dialog("instance")){
+        			$("#dialog-message").dialog("destroy").removeAttr("button-index");
+        		}
+        		
+        		$("#dialog-message").dialog({
+    				modal: _option.modal,
+    				title : _option.title,
+    				close : function( event, ui ) {
+    					if(options.callback) {
+    						if($("#dialog-message").attr("button-index")){
+    							options.callback($("#dialog-message").attr("button-index"));
+    						}else{
+    							options.callback(0);
+    						}
+    						
+    					}
+    				},
+    				buttons: [{
+    					text : _option.buttonText[0],
+    					click : function() {
+    						if(_option.callback){
+    							$("#dialog-message").attr("button-index", 1);
+    						}
+    						$("#dialog-message").dialog("close");
+    					}
+    				},
+    				{
+    					text : _option.buttonText[1],
+    					click : function() {
+    						if(_option.callback){
+    							$("#dialog-message").attr("button-index", 2);
+    						}
+    						$("#dialog-message").dialog("close");
+    					}
+    				}]
+        	    });
         	}
         }
 	});
