@@ -190,6 +190,7 @@ var $sidebar,
 				{text : "moment", a_attr:{title: "momnet 정리"}},
 				{text : "fakeLoader", a_attr:{title: "fakeLoader demo"}},
 				{text : "swipe", a_attr:{title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
+				{text : "wjquery.timeline", id : "wtimeline", a_attr:{title: "wjquery.timeline"}, data : {type : pageSetting.moduleDataType.blank}},
 				{text : "wjquery.layer", id : "wlayer", a_attr:{title: "wjquery.layer"}},
 				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}}
     		]
@@ -487,7 +488,7 @@ var $sidebar,
 							});
 							
 							setHash(node.id, true);
-							if($entry.find(".entry-demo-source-content").isObject()){
+							if($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()){
 								SyntaxHighlighter.highlight();
 							}
 							
