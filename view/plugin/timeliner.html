@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>timeliner</title>
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/js/lib/timeliner-master/css/timeliner.css">
+<script type="text/javascript" src="/js/lib/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.tmpl.js"></script>
+<script type="text/javascript" src="/js/lib/timeliner-master/js/timeliner.js"></script>
+<script id="timelineTemplate" type="text/x-jquery-tmpl">
+<div class="timeline-wrapper">
+    <h2 class="timeline-time"><span>${version}</span></h2>
+	<dl class="timeline-series">
+	{{each list}}
+		<dt id="${id}" class="timeline-event ${dtClass}"><a style="font-size: 1em;">{{html title}}</a></dt>
+		<dd class="timeline-event-content" id="${id}EX" style="display: none;">
+			{{each content}}
+			<p>- {{html $value}}</p>
+			{{/each}}
+			<br class="clear">
+		</dd>
+	{{/each}}
+	</dl>
+</div>
+<br class="clear">
+</script>
+<script type="text/javascript">
+	
+	//timeline version list
+	var versionList = [
+		{
+			version : "1.0.1",
+			display : true, //화면 표시 여부
+			list : [
+				{
+					title : "1.0.1 제목 영역..",
+					content : [
+						"1.0.1 내용 영역.."
+					] 
+				}
+			]
+		},
+		{
+			version : "1.0.0",
+			display : true, //화면 표시 여부
+			list : [
+				{
+					title : "1.0.0 제목 영역..",
+					content : [
+						"1.0.0 내용 영역.."
+					] 
+				}
+			]
+		}
+	];
+
+	$(document).ready(function () {
+		var $timeline = $("#timeline"),
+			viewCount = 0;
+		$.each(versionList, function(){
+			if(!this.display) return;
+	
+			viewCount++;
+			var id = "t" + String(viewCount) + "00";
+		
+			this.dtClass = viewCount==1?"start-open":"";
+			
+			for(var i=0;i<this.list.length;i++){
+				this.list[i].id = id + i;
+			}
+			
+			$timeline.append($.tmpl($("#timelineTemplate" ), this));
+		});
+		
+		$.timeliner({oneOpen: true});
+	});
+</script>
+</head>
+<body style="overflow:auto;">
+<div id="timeline" class="timeline-container">
+	<button class="timeline-toggle">+ expand all</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+/* wjquery
+---------------------------------------------------------*/
+
+#wjquery-toast {position:fixed; top:50%; text-align:center; border-radius:10px; padding:12px 20px 12px 20px; z-index:10000; opacity:0; word-break:break-all; margin:0 10px 0 10px;font-size:1.3em;font-weight:bold; background-color:#777; color:#fff;}

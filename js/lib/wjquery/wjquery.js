@@ -5,8 +5,6 @@
  * This project licensed under a MIT License.
 **/
 
-var dropDownTimeout;
-
 ;(function($){
     $.extend({
     	/**
@@ -146,6 +144,33 @@ var dropDownTimeout;
         	}else{
         		alert("=====" + tag + "=====\n" + ($.isPlainObject(value)||$.isArray(value)?JSON.stringify(value):value));	
         	}
+        },
+        
+        /**
+         * toast
+         * @param value 메시지
+         * @param options 옵션
+         */
+        toast : function(value, delay){
+        	if(!value) value = "toast message";
+        	if(!delay) delay = 2000;
+        	if($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
+        	
+        	$("body").append("<div id=\"wjquery-toast\">" + value + "</>");
+        	
+        	var w = parseInt($("#wjquery-toast").width()) + 60,
+    		 	sw = $("body").width(),
+    		 	lp = Math.floor((sw - w) / 2);
+
+    		$("#wjquery-toast").css("left", lp + "px").animate({"opacity": 1}, 800, function() {
+    			var $t = $(this);
+    			var timeout = window.setTimeout(function() {
+    				$t.animate({"opacity":0}, 800, function() {
+    					window.clearTimeout(timeout);
+    					$(this).remove();
+    				});
+    			}, delay);
+    		});
         },
         
         /**
@@ -451,6 +476,22 @@ function addComma(value){
 }
  
 /**
+ * get makeCode_01
+ */ 
+function makeCode_01(){
+ 	var arr = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+ 	var _d = moment();
+ 	return "S" + arr[parseInt(_d.format("YY"))-15] + arr[parseInt(_d.format("M"))] + arr[parseInt(_d.format("D"))] + arr[parseInt(_d.format("H"))] +  _d.format("mm") + _d.format("ss");
+ }
+
+/**
+ * get Time
+ */
+function getTime() {
+	return new Date().getTime();
+}
+
+/**
  * 문자열 매핑
  * @param value 문자열
  * @param arr 매핑 배열
@@ -646,25 +687,25 @@ function replaceString(targetName, value) {
  */
 function dropDown($1, $2, options){
 	try{
-		var _options = $.extend({
-			show:"fast", 
+		var _timeout;
+			_options = $.extend({
+			show:"slow", 
 			hide:"fast", 
 			delay:500},options||{}
 		);
 		
 		$('#' + $1.attr("id") + ',' + '#' + $2.attr("id")).hover(
-            function(){
-                window.clearTimeout(dropDownTimeout);
+			function(){
+            	if(typeof(_timeout)!== "undefined"){
+            		window.clearTimeout(_timeout);
+            	}
                 $2.show(_options.show);
             },
             function(){
                 if($2.is(":visible")){
-                	dropDownTimeout = delayFunction(
-                		function () {
-                			$2.hide(_options.hide);
-                		},
-                		_options.delay
-                	);
+                	_timeout = window.setTimeout(function () {
+                    	$2.hide(_options.hide);
+                    }, _options.delay);
                 }
             }
         );

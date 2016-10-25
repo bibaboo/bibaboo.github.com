@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+  <title>Mobile Range Slider - A Touch Slider for Webkit / Mobile Safari</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="mobile-range-slider.css" />
+</head>
+<body>
+
+  <div style="padding: 30px">
+    <div id="slider1" class="slider">
+      <div class="track"></div>
+      <div class="knob" role="slider"></div>
+    </div>
+  </div>
+
+  <input type="text" id="output1" />
+
+  <div id="slider2" class="slider">
+    <div class="track"></div>
+    <div class="knob" role="slider"></div>
+  </div>
+
+  <input type="text" id="output2" disabled />
+
+  <script type="text/javascript" src="mobile-range-slider.js"></script>
+  
+  <script type="text/javascript">
+    
+    var input1 = document.getElementById('output1');
+    var input2 = document.getElementById('output2');
+    
+    var slider1 = new MobileRangeSlider('slider1', {
+      value: 50,
+      min: 1,
+      max: 100,
+      change: function(percentage) {
+        input1.value = percentage;
+      }
+    });
+
+    var slider2 = new MobileRangeSlider('slider2', {
+      min: -10,
+      max: 10,
+      change: function(value){
+        input2.value = value;
+      }
+    });
+    
+    input1.addEventListener('change', function(){
+      slider1.setValue(input1.value);
+    });
+    
+  </script>
+
+</body>
+</html>

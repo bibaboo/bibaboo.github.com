@@ -63,7 +63,8 @@ var $sidebar,
 		    		},
 					nodes : [
 					    {text : "$.alert()", a_attr:{title: "custom alert"}},     
-					    {text : "$.confirm()", a_attr:{title: "custom confirm"}},
+					    {text : "$.confirm()", a_attr:{title: "custom alert"}},
+					    {text : "$.toast()", a_attr:{title: "toast"}},
 					    {text : "$.hasString()", a_attr:{title: "value에 findStr이 있는지 비교"}},
 					    {text : "$.hasValue()", a_attr:{title: "value에 값이 있는지 여부"}},
 					    {text : "$.isFalse()", a_attr:{title: "false 여부"}},
@@ -189,9 +190,9 @@ var $sidebar,
 				{text : "jquery.transit", id : "transit", a_attr:{title: "transit 정리"}},
 				{text : "moment", a_attr:{title: "momnet 정리"}},
 				{text : "fakeLoader", a_attr:{title: "fakeLoader demo"}},
+				{text : "slider", a_attr:{title: "zoom slider"}, data : {type : pageSetting.moduleDataType.blank}},
 				{text : "swipe", a_attr:{title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
-				{text : "wjquery.timeline", id : "wtimeline", a_attr:{title: "wjquery.timeline"}, data : {type : pageSetting.moduleDataType.blank}},
-				{text : "wjquery.layer", id : "wlayer", a_attr:{title: "wjquery.layer"}},
+				{text : "timeliner", id : "timeliner", a_attr:{title: "timeliner demo"}, data : {type : pageSetting.moduleDataType.blank}},
 				{text : "wjquery.form", id : "wform", a_attr:{title: "wjquery.form"}}
     		]
     	},
@@ -261,7 +262,6 @@ var $sidebar,
     $(document).ready(function () {
     	//템플릿 적용
     	$("body").append($.tmpl(COMMON_TMPL.layout));
-    	
     	//hash change
     	$(window).bind('hashchange', function(event) {
     		if(preventTriggerHashChange){

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+<title>slider</title>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/mobile.css" />
+<link rel="stylesheet" type="text/css" href="/js/lib/mobile-range-slider-master/mobile-range-slider.css">
+<script type="text/javascript" src="/js/lib/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.tmpl.js"></script>
+<script type="text/javascript" src="/js/lib/mobile-range-slider-master/mobile-range-slider.js"></script>
+<script type="text/javascript">
+	var zoomSlider = "<div style=\"position:relative;\"><div id=\"zoomSlider\" class=\"slider\"><div class=\"track\"></div><div class=\"knob\" role=\"slider\"></div></div></div>";
+	
+	$(document).ready(function () {
+		makeZoomSlider($("#templateContentDiv"));
+	});
+</script>
+</head>
+<body style="overflow:auto;">
+<div id="templateContentDiv">
+	<img src="http://movie.phinf.naver.net/20141021_17/14138540655417EjQ6_JPEG/movie_image.jpg" style="width:100%;" />
+</div>
+</body>
+</html>

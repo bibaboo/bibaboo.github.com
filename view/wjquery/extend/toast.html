@@ -1,0 +1,53 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">$.toast(value [,delay])</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">value(default : 2000)</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">message</td>
+					</tr>
+					<tr>
+			  			<td class="name">delay</td>
+			  			<td class="type">Number</td>
+			  			<td class="desc">화면표시 밀리세컨드</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<script type="text/javascript">
+					$("div.entry-source-content").find("pre").html($.toast.toString());
+				</script>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<script type="text/javascript">
+							function demo1_1(){
+								$.toast("demo1_1");
+						  	}
+							
+							function demo1_2(){
+								$.toast("demo1_2", 10000);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [5, 9]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
