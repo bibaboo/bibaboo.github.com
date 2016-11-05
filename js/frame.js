@@ -158,6 +158,8 @@ var $sidebar,
 		    		},
 					nodes : [
 					    {text : "delayFunction", a_attr:{title: "함수 실행 시간 지연"}},
+					    {text : "loadScripts", a_attr:{title: "외부 스크립트 로드"}},
+					    {text : "loadStyles", a_attr:{title: "외부 스타일 로드"}}
 					]
 				},
 				{
@@ -355,14 +357,18 @@ var $sidebar,
 				
 			}
 		).hover(function(){$(this).addClass("ui-state-hover");}, function(){$(this).removeClass("ui-state-hover");});
+		
+		var _setData = function(node){
+			if(!node.id) node.id = getPatternString("alphaNum", node.text);
+			if(!node.a_attr) node.a_attr = {title:node.text};
+			pageSetting.autoData.push({label:node.text + " : " + node.a_attr.title, id:node.id});
+		}
 
 	    //트리
     	var data = $.map(moduleData, function(module){
     		if(module.nodes){
     			module.children = $.map(module.nodes, function(node){
-    				if(!node.id) node.id = getPatternString("alphaNum", node.text);
-    				if(!node.a_attr) node.a_attr = {title:node.text};
-    				pageSetting.autoData.push({label:node.text, id:node.id});
+    				_setData(node);
     				if(node.nodes){
     					if(!node.data && module.data){
     						node.data = module.data;
@@ -370,9 +376,7 @@ var $sidebar,
     						node.data = $.extend({}, module.data, node.data);
     					}
     					node.children = $.map(node.nodes, function(_node){
-    	    				if(!_node.id) _node.id = getPatternString("alphaNum", _node.text);
-    	    				if(!_node.a_attr) _node.a_attr = {title:_node.text};
-    	    				pageSetting.autoData.push({label:_node.text, id:_node.id});
+    						_setData(_node);
     	    				return $.extend({}, pageSetting.leafData, _node);
     	        		});
     					if(!$.isFalse(node.sort)){
@@ -390,9 +394,7 @@ var $sidebar,
     		}else{
     			module.children = false;
     		}
-    		if(!module.id) module.id = getPatternString("alphaNum", module.text);
-    		if(!module.a_attr) module.a_attr = {title: module.text};
-    		pageSetting.autoData.push({label:module.text, id:module.id});
+    		_setData(module);
     		return module;
     	});
     	

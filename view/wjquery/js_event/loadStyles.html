@@ -2,25 +2,15 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">delayFunction(functionName, wait)</span>
+    		<span class="title">loadStyles(url)</span>
 		</h2>
 		<div>
 			<table class="arguments">
 				<tbody>
 					<tr>
-			  			<td class="name">functionName</td>
-			  			<td class="type">String</td>
-			  			<td class="desc">함수명</td>
-					</tr>
-					<tr>
-			  			<td class="name">wait</td>
-			  			<td class="type">Integer</td>
-			  			<td class="desc">지연MM</td>
-					</tr>
-					<tr>
-			  			<td class="name">[,arguments]</td>
-			  			<td class="type">Object</td>
-			  			<td class="desc">인자값들</td>
+			  			<td class="name">url</td>
+			  			<td class="type">String or Array</td>
+			  			<td class="desc">스타일시트 경로</td>
 					</tr>
 				</tbody>
 			</table>
@@ -30,22 +20,22 @@
 					<pre class="brush: js: true;"></pre>
 				</div>
 				<script type="text/javascript">
-					$("div.entry-source-content").find("pre").html(delayFunction.toString());
+					$("div.entry-source-content").find("pre").html(loadStyles.toString());
 				</script>
 				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 				<div>
 					<div class="entry-demo-content">
-						<div id="demo1-id1">demo1_1</div>
-						<div id="demo1-id2">demo1_2</div>
+						<div id="demo1-id1" class="loadStyles1_1">demo1_1</div>
+						<div id="demo1-id2" class="loadStyles1_2">demo1_2</div>
 						<input type="button" onclick="demo1_1();" value="demo1_1" />
 						<input type="button" onclick="demo1_2();" value="demo1_2" />
 						<script type="text/javascript">
 							function demo1_1(){
-								delayFunction("demo1_1_1", 1000, "test demo1..");
+								loadStyles("../../../css/test/loadStyles_001.css");
 						  	}
 							
 							function demo1_2(){
-								delayFunction(function(){$("#demo1-id2").html("test demo2..");}, 1000);
+								loadStyles(["../../../css/test/loadStyles_002.css", "../../../css/test/loadStyles_003.css"]);
 						  	}
 						</script>
 					</div>

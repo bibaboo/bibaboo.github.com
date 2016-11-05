@@ -1,5 +1,5 @@
 ﻿/**
- * wjquery 0.0.3
+ * wjquery 0.9.5
  * by composite (wonchu.net@gmail.com)
  * http://www.wonchu.net
  * This project licensed under a MIT License.
@@ -734,6 +734,43 @@ function delayFunction(functionName, wait) {
 	    	return window[functionName].apply(null, args);
 	    }, wait||0);
 	}
+}
+
+/**
+ * 외부 스크립트 로드
+ * @param url 소스 경로
+ */
+function loadScripts(url, callback) {
+	var _url = typeof(url) === "string"?[url]:url;
+	_url.forEach(function(value, index, array){
+		var _script = document.createElement('script');
+	    _script.charset = "utf-8";
+	    _script.type = 'text/javascript';
+	    _script.async = false;
+	    _script.src = value;
+	    if(callback && _url.length==index+1){
+	    	// IE에서는 onreadystatechange를 사용
+	    	_script.onload = function () {
+	            callback();
+	        };
+	    }
+	    document.getElementsByTagName('head')[0].appendChild(_script);
+    });
+}
+
+/**
+ * 외부 스타일 로드
+ * @param url 소스 경로
+ */
+function loadStyles(url) {
+	var _url = typeof(url) === "string"?[url]:url;
+	_url.forEach(function(value, index, array){
+		var _link = document.createElement("link");
+		_link.type = "text/css";
+		_link.rel = "stylesheet";
+		_link.href = value;
+	    document.getElementsByTagName('head')[0].appendChild(_link);
+    });
 }
 
 //--------------------------------------------------------------------

@@ -2,25 +2,20 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">delayFunction(functionName, wait)</span>
+    		<span class="title">loadScripts(url)</span>
 		</h2>
 		<div>
 			<table class="arguments">
 				<tbody>
 					<tr>
-			  			<td class="name">functionName</td>
-			  			<td class="type">String</td>
-			  			<td class="desc">함수명</td>
+			  			<td class="name">url</td>
+			  			<td class="type">String or Array</td>
+			  			<td class="desc">스크립트 경로</td>
 					</tr>
 					<tr>
-			  			<td class="name">wait</td>
-			  			<td class="type">Integer</td>
-			  			<td class="desc">지연MM</td>
-					</tr>
-					<tr>
-			  			<td class="name">[,arguments]</td>
-			  			<td class="type">Object</td>
-			  			<td class="desc">인자값들</td>
+			  			<td class="name">[,callback]</td>
+			  			<td class="type">Function</td>
+			  			<td class="desc">callback</td>
 					</tr>
 				</tbody>
 			</table>
@@ -30,7 +25,7 @@
 					<pre class="brush: js: true;"></pre>
 				</div>
 				<script type="text/javascript">
-					$("div.entry-source-content").find("pre").html(delayFunction.toString());
+					$("div.entry-source-content").find("pre").html(loadScripts.toString());
 				</script>
 				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 				<div>
@@ -41,11 +36,11 @@
 						<input type="button" onclick="demo1_2();" value="demo1_2" />
 						<script type="text/javascript">
 							function demo1_1(){
-								delayFunction("demo1_1_1", 1000, "test demo1..");
+								loadScripts("../../../js/test/loadScripts_001.js");
 						  	}
 							
 							function demo1_2(){
-								delayFunction(function(){$("#demo1-id2").html("test demo2..");}, 1000);
+								loadScripts(["../../../js/test/loadScripts_002.js", "../../../js/test/loadScripts_003.js"], function(){alert("callback...");});
 						  	}
 						</script>
 					</div>
