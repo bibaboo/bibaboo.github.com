@@ -285,7 +285,9 @@ var $sidebar,
     		toggleAccordian($(this));
     	});
     	
-    	$("#searchWord").autocomplete({
+    	$("#searchWord").focusin(function(){
+    		$(this).select();
+    	}).autocomplete({
     		 source: pageSetting.autoData,
     		 select: function(event, ui ) {
     			 openNode("#" + ui.item.id);
