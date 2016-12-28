@@ -302,7 +302,7 @@ var $sidebar,
     	});
     	
     	//iframe resize
-    	$('#content-iframe').load(function() {
+    	$('#content-iframe').on("load", function() {
     		$(this).css("height", $(this).contents().find("body").height() + "px");
     		resizeLayout();
     	});
