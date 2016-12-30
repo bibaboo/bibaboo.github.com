@@ -43,7 +43,8 @@ var $sidebar,
     		icon : "../images/tree-icon.png",
     		data : {
     			folder : "/view/",
-        		type : pageSetting.moduleDataType.load
+        		type : pageSetting.moduleDataType.load,
+        		accordion : false
     		},
     		a_attr:{title: "wonchu~~"}
     	},
@@ -238,12 +239,45 @@ var $sidebar,
 					]
 				},
 				{
+					text : "java",
+					data : {
+		    			folder : "/view/note/java/"
+		    		},
+					nodes : [
+						{text : "이중 배열을 이용한 코드 관리", id : "arrayCode"}
+					]
+				},
+				{
+					text : "tool",
+					data : {
+		    			folder : "/view/note/tool/"
+		    		},
+					nodes : [
+					]
+				},
+				{
+					text : "dbms",
+					data : {
+		    			folder : "/view/note/dbms/"
+		    		},
+					nodes : [
+					]
+				},
+				{
 					text : "server",
 					data : {
 		    			folder : "/view/note/server/"
 		    		},
 					nodes : [
 					    {text : "톰켓설정", id : "tomcatSetting"}
+					]
+				},
+				{
+					text : "etc",
+					data : {
+		    			folder : "/view/note/ect/"
+		    		},
+					nodes : [
 					]
 				}
     		]
@@ -429,8 +463,8 @@ var $sidebar,
 				var pnode = node.parent=="#"?{data:node.data}:$tree.get_node(node.parent),
 					url = node.data.page?node.data.page:node.id + ".html",
 					type = node.data.type?node.data.type:pnode.data.type,
-					accordion = node.data.accordion?node.data.accordion:pnode.data.accordion?pnode.data.accordion:true;
-				
+					accordion = $.isFalse(node.data.accordion)?node.data.accordion:$.isFalse(pnode.data.accordion)?pnode.data.accordion:true;
+
 				if($.isTrue(node.data.mobile) && !$.isMobile()){
 					if(!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")){
 						return;
