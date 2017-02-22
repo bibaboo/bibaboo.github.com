@@ -4,9 +4,33 @@
 ===============================================================================================
 */
 
-var resizerLeft,
-	preventTriggerHashChange;
+/* 공통 설정 정보 */
+var pageSetting = {
+	//default layout
+	resizeWidth : {
+		sidebar : "15%",
+		content : "85%"
+	},
+	//자식노드 기본정보
+	leafData : {
+		children : false, 
+		icon : false
+	},
+	//트리노드 액션 타입
+	moduleDataType : {
+		load : "load",
+		blank : "blank",
+		link : "link",
+		iframe : "iframe"
+	},
+	//Miscellaneous
+	autoData : [],
+	resizerLeft : null,
+	contentWidth : null,
+	preventTriggerHashChange : null
+};
 
+/* common object */
 var $sidebar,
 	$spacer,
 	$content,
@@ -14,295 +38,275 @@ var $sidebar,
 	$entry,
 	$menuTree;
 
-(function($){
-	/* 공통 설정 정보 */
-	var pageSetting = {
-		resizeWidth : {
-			sidebar : "15%",
-			content : "85%"
+/* 모듈 정보 */
+var moduleData = [
+    {
+   	   	text : "home",
+		icon : "../images/tree-icon.png",
+		data : {
+			folder : "/view/",
+    		type : pageSetting.moduleDataType.load,
+    		accordion : false
 		},
-		autoData : [],
-		//자식노드 기본정보
-		leafData : {
-			children : false, 
-			icon : false
-		},
-		//트리노드 액션 타입
-		moduleDataType : {
-			load : "load",
-			blank : "blank",
-			link : "link",
-			iframe : "iframe"
-		}
-    };
+		a_attr : {title: "wonchu~~"}
+	},
 	
-	/* 모듈 정보 */
-	var moduleData = [
-	    {
-       	   	text : "home",
-    		icon : "../images/tree-icon.png",
-    		data : {
-    			folder : "/view/",
-        		type : pageSetting.moduleDataType.load,
-        		accordion : false
-    		},
-    		a_attr : {title: "wonchu~~"}
-    	},
-    	
-    	{
-       	   	text : "wjquery",
-    		data : {
-    			folder : "/view/wjquery/",
-        		type : pageSetting.moduleDataType.load
-    		},
-    		nodes : [
-				{
-					text : "$.extend",
-					a_attr : {title: "wjquery extend 함수"},
-					data : {
-		    			folder : "/view/wjquery/extend/"
-		    		},
-					nodes : [
-					    {text : "$.alert()", a_attr : {title: "custom alert"}},     
-					    {text : "$.confirm()", a_attr : {title: "custom alert"}},
-					    {text : "$.toast()", a_attr : {title: "toast"}},
-					    {text : "$.hasString()", a_attr : {title: "value에 findStr이 있는지 비교"}},
-					    {text : "$.hasValue()", a_attr : {title: "value에 값이 있는지 여부"}},
-					    {text : "$.isFalse()", a_attr : {title: "false 여부"}},
-					    {text : "$.isTrue()", a_attr : {title: "true 여부"}},
-					    {text : "$.pad()", a_attr : {title: "채우기"}},
-					    {text : "$.nvl()", a_attr : {title: "value에 값이 없을시 replaceString로 대체"}},
-					    {text : "$.replace()", a_attr : {title: "문자열 바꾸기"}}
-					]
-				},
-				{
-					text : "$.fn.extend",
-					a_attr : {title: "wjquery fn.extend 함수"},
-					data : {
-		    			folder : "/view/wjquery/fn_extend/"
-		    		},
-					nodes : [
-					    {text : ".changeClass()", a_attr : {title: "조건에 따른 클래스 변경"}},
-						{text : ".isObject()", a_attr : {title: "개체 존재여부"}},
-						{text : ".outerHtml()", a_attr : {title: "자기 자신을 포함한 HTML"}},
-						{text : ".scrollIntoView()", a_attr : {title: "해당 개체로 스크롤 이동"}},
-						{text : ".wScrollTop()", a_attr : {title: "상위로 이동"}},
-						{text : ".autoGrowTextarea()", a_attr : {title: "textarea 자동 높이 조절"}},
-						{text : ".stripHref()", a_attr : {title: "a, area 링크, 클릭 동작 제어"}}
-					]
-				},
-				{
-					text : "js.lang",
-					a_attr : {title: "문자 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_lang/"
-		    		},
-					nodes : [
-					    {text : "addComma()", a_attr : {title: "3자리마다 콤마추가"}},
-					    {text : "cutString()", a_attr : {title: "문자열 자르기"}},
-					    {text : "randomCode()", a_attr : {title: "랜덤 문자열생성"}},
-					    {text : "initCap()", a_attr : {title: "첫문자를 대문자로변환"}},
-					    {text : "getFirstValue()", a_attr : {title: "구분자 이전 문자열을 리턴"}},
-					    {text : "getLastValue()", a_attr : {title: "구분자 이후 문자열을 리턴"}},
-					    {text : "mappingValue()", a_attr : {title: "문자열 매핑"}}
-					]
-				},
-				{
-					text : "js.date",
-					a_attr : {title: "날자 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_date/"
-		    		},
-					nodes : [
-					    {text : "getFormatDate()", a_attr : {title: "날자 포멧팅"}},
-					    {text : "getToday()", a_attr : {title: "오늘 일자를 구한다"}},
-					    {text : "getTargetDate()", a_attr : {title: "원하는 만큼 일자를 증감해서 리턴"}}
-					]
-				},
-				{
-					text : "js.expr",
-					a_attr : {title: "정규식 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_expr/"
-		    		},
-					nodes : [
-					    {text : "getPattern()", a_attr : {title: "패턴에 매칭되는 값을 리턴"}},
-					    {text : "getPatternArray()", a_attr : {title: "패턴에 맞는 문자열만 추출"}},
-					    {text : "isPattern()", a_attr : {title: "패턴 여부"}},
-					    {text : "replaceString()", a_attr : {title: "문자열 변환"}}
-					]
-				},
-				{
-					text : "js.ui",
-					a_attr : {title: "UI 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_ui/"
-		    		},
-					nodes : [
-					    {text : "dropDown()", a_attr : {title: "hover 메뉴"}},
-					]
-				},
-				{
-					text : "js.form",
-					a_attr : {title: "폼 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_form/"
-		    		},
-					nodes : [
-					]
-				},
-				{
-					text : "js.event",
-					a_attr : {title: "이벤트 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_event/"
-		    		},
-					nodes : [
-					    {text : "delayFunction", a_attr : {title: "함수 실행 시간 지연"}},
-					    {text : "loadScripts", a_attr : {title: "외부 스크립트 로드"}},
-					    {text : "loadStyles", a_attr : {title: "외부 스타일 로드"}}
-					]
-				},
-				{
-					text : "js.object",
-					a_attr : {title: "공통객체 관련 공통함수"},
-					data : {
-		    			folder : "/view/wjquery/js_object/"
-		    		},
-					nodes : [
-					    {text : "base62", a_attr : {title: "base62로 변환"}},
-					    {text : "stopWatch", a_attr : {title: "실행시간 구하기"}},
-					    {text : "wJson", a_attr : {title: "JSON util"}},
-					    {text : "lStorage", a_attr : {title: "localStorage 제어"}},
-					    {text : "sStorage", a_attr : {title: "sessionStorage 제어"}}
-					]
-				}
-	    	]
-    	},
-    	
-    	{
-    		text : "plugin", 
-    		data : {
-    			folder : "/view/plugin/",
-        		type : pageSetting.moduleDataType.load
-    		},
-    		nodes : [
-    		    {text : "jquery.ui", id : "jqueryUi", a_attr : {title: "jquery.ui 정리"}},
-				{text : "jquery.ui.datepicker", id : "datepicker", a_attr : {title: "jquery.ui.datepicker 정리"}},
-				{text : "jquery.tmpl", id : "tmpl", a_attr : {title: "jquery.tmpl 정리"}},
-				{text : "jquery.transit", id : "transit", a_attr : {title: "transit 정리"}},
-				{text : "moment", a_attr : {title: "momnet 정리"}},
-				{text : "fakeLoader", a_attr : {title: "fakeLoader demo"}},
-				{text : "slider", a_attr : {title: "zoom slider"}, data : {type : pageSetting.moduleDataType.blank}},
-				{text : "swipe", a_attr : {title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
-				{text : "timeliner", id : "timeliner", a_attr : {title: "timeliner demo"}, data : {type : pageSetting.moduleDataType.blank}},
-				{text : "wjquery.form", id : "wform", a_attr : {title: "wjquery.form"}}
-    		]
-    	},
-    	
-    	{
-    		text : "note",
-    		data : {
-    			folder : "/view/note/",
-        		type : pageSetting.moduleDataType.load
-    		},
-    		nodes : [
-				{
-					text : "javascript",
-					data : {
-		    			folder : "/view/note/javascript/"
-		    		},
-					nodes : [
-					    {text : "배열 객체", id : "array", a_attr : {title: "배열 정의, 함수 정리"}},
-					    {text : "Math 객체", id : "math", a_attr : {title: "Math 함수"}},
-					    {text : "location 객체", id : "location", a_attr : {title: "location 정리"}},
-					    {text : "함수 리터럴", id : "functionLteral", a_attr : {title: "이름 없이 몸체만 있는 함수"}},
-					    {text : "객체 리터럴", id : "objectLiteral", a_attr : {title: "아무 것도 없거나 하나 이상의 이름/값 쌍들을 둘러싸는 중괄호"}}
-					]
-				},
-				{
-					text : "jquery",
-					data : {
-		    			folder : "/view/note/jquery/"
-		    		},
-					nodes : [
-					   	{text : "플러그인 패턴", id : "pluginPattern"},
-					   	{text : "개발 가이드", id : "guide"}
-					]
-				},
-				{
-					text : "style & html",
-					data : {
-		    			folder : "/view/note/styleNhtml/"
-		    		},
-					nodes : [
-					]
-				},
-				{
-					text : "java",
-					data : {
-		    			folder : "/view/note/java/"
-		    		},
-					nodes : [
-						{text : "이중 배열을 이용한 코드 관리", id : "arrayCode"}
-					]
-				},
-				{
-					text : "tool",
-					data : {
-		    			folder : "/view/note/tool/"
-		    		},
-					nodes : [
-					]
-				},
-				{
-					text : "dbms",
-					data : {
-		    			folder : "/view/note/dbms/"
-		    		},
-					nodes : [
-					]
-				},
-				{
-					text : "server",
-					data : {
-		    			folder : "/view/note/server/"
-		    		},
-					nodes : [
-					    {text : "톰켓설정", id : "tomcatSetting"}
-					]
-				},
-				{
-					text : "etc",
-					data : {
-		    			folder : "/view/note/ect/"
-		    		},
-					nodes : [
-					]
-				}
-    		]
-    	},
-    	
-    	{
-    		text : "project", 
-    		data : {
-    			folder : "/view/project/",
-        		type : pageSetting.moduleDataType.load
-    		},
-    		nodes : [
-				{text : "wjquery.mpicker", id : "mpicker", a_attr : {title: "모바일용"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html", mobile:true}},
-				{text : "wjquery.mobile", id : "mobile", a_attr : {title: "모바일 demo"}, data : {type : pageSetting.moduleDataType.blank, page : "mobile/index.html", mobile:true}}
-  	    	]
-    	}
-    ];
+	{
+   	   	text : "wjquery",
+		data : {
+			folder : "/view/wjquery/",
+    		type : pageSetting.moduleDataType.load
+		},
+		nodes : [
+			{
+				text : "$.extend",
+				a_attr : {title: "wjquery extend 함수"},
+				data : {
+	    			folder : "/view/wjquery/extend/"
+	    		},
+				nodes : [
+				    {text : "$.alert()", a_attr : {title: "custom alert"}},     
+				    {text : "$.confirm()", a_attr : {title: "custom alert"}},
+				    {text : "$.toast()", a_attr : {title: "toast"}},
+				    {text : "$.hasString()", a_attr : {title: "value에 findStr이 있는지 비교"}},
+				    {text : "$.hasValue()", a_attr : {title: "value에 값이 있는지 여부"}},
+				    {text : "$.isFalse()", a_attr : {title: "false 여부"}},
+				    {text : "$.isTrue()", a_attr : {title: "true 여부"}},
+				    {text : "$.pad()", a_attr : {title: "채우기"}},
+				    {text : "$.nvl()", a_attr : {title: "value에 값이 없을시 replaceString로 대체"}},
+				    {text : "$.replace()", a_attr : {title: "문자열 바꾸기"}}
+				]
+			},
+			{
+				text : "$.fn.extend",
+				a_attr : {title: "wjquery fn.extend 함수"},
+				data : {
+	    			folder : "/view/wjquery/fn_extend/"
+	    		},
+				nodes : [
+				    {text : ".changeClass()", a_attr : {title: "조건에 따른 클래스 변경"}},
+					{text : ".isObject()", a_attr : {title: "개체 존재여부"}},
+					{text : ".outerHtml()", a_attr : {title: "자기 자신을 포함한 HTML"}},
+					{text : ".scrollIntoView()", a_attr : {title: "해당 개체로 스크롤 이동"}},
+					{text : ".wScrollTop()", a_attr : {title: "상위로 이동"}},
+					{text : ".autoGrowTextarea()", a_attr : {title: "textarea 자동 높이 조절"}},
+					{text : ".stripHref()", a_attr : {title: "a, area 링크, 클릭 동작 제어"}}
+				]
+			},
+			{
+				text : "js.lang",
+				a_attr : {title: "문자 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_lang/"
+	    		},
+				nodes : [
+				    {text : "addComma()", a_attr : {title: "3자리마다 콤마추가"}},
+				    {text : "cutString()", a_attr : {title: "문자열 자르기"}},
+				    {text : "randomCode()", a_attr : {title: "랜덤 문자열생성"}},
+				    {text : "initCap()", a_attr : {title: "첫문자를 대문자로변환"}},
+				    {text : "getFirstValue()", a_attr : {title: "구분자 이전 문자열을 리턴"}},
+				    {text : "getLastValue()", a_attr : {title: "구분자 이후 문자열을 리턴"}},
+				    {text : "mappingValue()", a_attr : {title: "문자열 매핑"}}
+				]
+			},
+			{
+				text : "js.date",
+				a_attr : {title: "날자 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_date/"
+	    		},
+				nodes : [
+				    {text : "getFormatDate()", a_attr : {title: "날자 포멧팅"}},
+				    {text : "getToday()", a_attr : {title: "오늘 일자를 구한다"}},
+				    {text : "getTargetDate()", a_attr : {title: "원하는 만큼 일자를 증감해서 리턴"}}
+				]
+			},
+			{
+				text : "js.expr",
+				a_attr : {title: "정규식 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_expr/"
+	    		},
+				nodes : [
+				    {text : "getPattern()", a_attr : {title: "패턴에 매칭되는 값을 리턴"}},
+				    {text : "getPatternArray()", a_attr : {title: "패턴에 맞는 문자열만 추출"}},
+				    {text : "isPattern()", a_attr : {title: "패턴 여부"}},
+				    {text : "replaceString()", a_attr : {title: "문자열 변환"}}
+				]
+			},
+			{
+				text : "js.ui",
+				a_attr : {title: "UI 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_ui/"
+	    		},
+				nodes : [
+				    {text : "dropDown()", a_attr : {title: "hover 메뉴"}},
+				]
+			},
+			{
+				text : "js.form",
+				a_attr : {title: "폼 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_form/"
+	    		},
+				nodes : [
+				]
+			},
+			{
+				text : "js.event",
+				a_attr : {title: "이벤트 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_event/"
+	    		},
+				nodes : [
+				    {text : "delayFunction", a_attr : {title: "함수 실행 시간 지연"}},
+				    {text : "loadScripts", a_attr : {title: "외부 스크립트 로드"}},
+				    {text : "loadStyles", a_attr : {title: "외부 스타일 로드"}}
+				]
+			},
+			{
+				text : "js.object",
+				a_attr : {title: "공통객체 관련 공통함수"},
+				data : {
+	    			folder : "/view/wjquery/js_object/"
+	    		},
+				nodes : [
+				    {text : "base62", a_attr : {title: "base62로 변환"}},
+				    {text : "stopWatch", a_attr : {title: "실행시간 구하기"}},
+				    {text : "wJson", a_attr : {title: "JSON util"}},
+				    {text : "lStorage", a_attr : {title: "localStorage 제어"}},
+				    {text : "sStorage", a_attr : {title: "sessionStorage 제어"}}
+				]
+			}
+    	]
+	},
+	
+	{
+		text : "plugin", 
+		data : {
+			folder : "/view/plugin/",
+    		type : pageSetting.moduleDataType.load
+		},
+		nodes : [
+		    {text : "jquery.ui", id : "jqueryUi", a_attr : {title: "jquery.ui 정리"}},
+			{text : "jquery.ui.datepicker", id : "datepicker", a_attr : {title: "jquery.ui.datepicker 정리"}},
+			{text : "jquery.tmpl", id : "tmpl", a_attr : {title: "jquery.tmpl 정리"}},
+			{text : "jquery.transit", id : "transit", a_attr : {title: "transit 정리"}},
+			{text : "moment", a_attr : {title: "momnet 정리"}},
+			{text : "fakeLoader", a_attr : {title: "fakeLoader demo"}},
+			{text : "slider", a_attr : {title: "zoom slider"}, data : {type : pageSetting.moduleDataType.blank}},
+			{text : "swipe", a_attr : {title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
+			{text : "timeliner", id : "timeliner", a_attr : {title: "timeliner demo"}, data : {type : pageSetting.moduleDataType.blank}},
+			{text : "wjquery.form", id : "wform", a_attr : {title: "wjquery.form"}}
+		]
+	},
+	
+	{
+		text : "note",
+		data : {
+			folder : "/view/note/",
+    		type : pageSetting.moduleDataType.load
+		},
+		nodes : [
+			{
+				text : "javascript",
+				data : {
+	    			folder : "/view/note/javascript/"
+	    		},
+				nodes : [
+				    {text : "배열 객체", id : "array", a_attr : {title: "배열 정의, 함수 정리"}},
+				    {text : "Math 객체", id : "math", a_attr : {title: "Math 함수"}},
+				    {text : "location 객체", id : "location", a_attr : {title: "location 정리"}},
+				    {text : "함수 리터럴", id : "functionLteral", a_attr : {title: "이름 없이 몸체만 있는 함수"}},
+				    {text : "객체 리터럴", id : "objectLiteral", a_attr : {title: "아무 것도 없거나 하나 이상의 이름/값 쌍들을 둘러싸는 중괄호"}}
+				]
+			},
+			{
+				text : "jquery",
+				data : {
+	    			folder : "/view/note/jquery/"
+	    		},
+				nodes : [
+				   	{text : "플러그인 패턴", id : "pluginPattern"},
+				   	{text : "개발 가이드", id : "guide"}
+				]
+			},
+			{
+				text : "style & html",
+				data : {
+	    			folder : "/view/note/styleNhtml/"
+	    		},
+				nodes : [
+				]
+			},
+			{
+				text : "java",
+				data : {
+	    			folder : "/view/note/java/"
+	    		},
+				nodes : [
+					{text : "이중 배열을 이용한 코드 관리", id : "arrayCode"}
+				]
+			},
+			{
+				text : "tool",
+				data : {
+	    			folder : "/view/note/tool/"
+	    		},
+				nodes : [
+				]
+			},
+			{
+				text : "dbms",
+				data : {
+	    			folder : "/view/note/dbms/"
+	    		},
+				nodes : [
+				]
+			},
+			{
+				text : "server",
+				data : {
+	    			folder : "/view/note/server/"
+	    		},
+				nodes : [
+				    {text : "톰켓설정", id : "tomcatSetting"}
+				]
+			},
+			{
+				text : "etc",
+				data : {
+	    			folder : "/view/note/ect/"
+	    		},
+				nodes : [
+				]
+			}
+		]
+	},
+	
+	{
+		text : "project", 
+		data : {
+			folder : "/view/project/",
+    		type : pageSetting.moduleDataType.load
+		},
+		nodes : [
+			{text : "wjquery.mpicker", id : "mpicker", a_attr : {title: "모바일용"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html", mobile:true}}
+			//{text : "wjquery.editor", id : "editor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.iframe, page : "weditor/index.html"}},
+			//{text : "wceditor", id : "wceditor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.blank, page : "wceditor/sample01.html"}}
+	    ]
+	}
+];
 
+(function($){
     $(document).ready(function () {
     	//템플릿 적용
     	$("body").append($.tmpl(COMMON_TMPL.layout));
     	//hash change
     	$(window).bind('hashchange', function(event) {
-    		if(preventTriggerHashChange){
-    			preventTriggerHashChange = false;
+    		if(pageSetting.preventTriggerHashChange){
+    			pageSetting.preventTriggerHashChange = false;
     		}else{
     			openNode(document.location.hash);
     		}
@@ -325,7 +329,7 @@ var $sidebar,
     	}).autocomplete({
     		 source: pageSetting.autoData,
     		 select: function(event, ui ) {
-    			 openNode("#" + ui.item.id);
+    			 openNode(CODE_VALUE.sharp + ui.item.id);
     		 }
 	    });
     	
@@ -344,13 +348,13 @@ var $sidebar,
     	
     	//resizer
     	$resizer.draggable({ axis: "x", containment: "#wapper", opacity:0.35,scroll: false, stop : function(){
-    		var before = parseInt(resizerLeft, 10),
+    		var before = parseInt(pageSetting.resizerLeft, 10),
     			after = parseInt($("#resizer").css("left"), 10);
     		
     		$("#searchWord").toggle(after>180);
     		$sidebar.width(after);
     		$content.width($content.width()+(before-after));
-    		resizerLeft = $resizer.css("left");
+    		pageSetting.resizerLeft = $resizer.css("left");
     	}});
     	
     	//맨위로 버튼
@@ -374,7 +378,7 @@ var $sidebar,
 				$spacer.hide();
 				$sidebar.show();
 				$resizer.show();
-				$content.width("85%");
+				$content.width(pageSetting.contentWidth);
 			}
 		).hover(function(){$(this).css("background-color", "#ddd");}, function(){$(this).css("background-color", "#eee");});
     	
@@ -384,6 +388,7 @@ var $sidebar,
 				if($span.hasClass("ui-icon-seek-first")){
 					$sidebar.hide();
 					$resizer.hide();
+					pageSetting.contentWidth = $content.width(); 
 					$content.width("100%");
 					$spacer.show();
 				}else if($span.hasClass("ui-icon-plusthick")){
@@ -568,22 +573,22 @@ var $sidebar,
 function resizeLayout(){
 	if($sidebar.is(":visible")){
 		$("#sidebar>div.sidebar-body, #content>div.content-body").height($(window).height()-LAYOUT_CONFIG.contentHeaderHeight);
-		$sidebar.width("15%");
-		$content.width("85%");
+		$sidebar.width(pageSetting.resizeWidth.sidebar);
+		$content.width(pageSetting.resizeWidth.content);
 		setResizer();
 	}
 }
 
 function setResizer(){
 	$resizer.css("left", $sidebar.width());
-	resizerLeft = $resizer.css("left");
+	pageSetting.resizerLeft = $resizer.css("left");
 }
 
 function setHash(hash, b){
-	hash = "#" + hash;
+	hash = CODE_VALUE.sharp + hash;
 	if(hash != document.location.hash){
     	if(b){
-    		preventTriggerHashChange = true;
+    		pageSetting.preventTriggerHashChange = true;
     	}
     	document.location.hash = hash;
 	}
@@ -600,7 +605,7 @@ function drawLeafNode(node){
 	
 	$entry.find(".entry-api").append($.tmpl(COMMON_TMPL.entryApiItem, arr));
 	$ul.append($.tmpl(COMMON_TMPL.headerLi, arr));
-	LAYOUT_CONFIG.node = node.id;
+	LAYOUT_CONFIG.node = node.id
 }
 
 function openNode(hash){

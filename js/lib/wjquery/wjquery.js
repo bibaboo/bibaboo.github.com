@@ -9,6 +9,7 @@
     $.extend({
     	/**
          * value에 findString이 있는지 여부
+         * @name $.hasString(value, findString)
          * @param value 문자열
          * @param target 찾는 문자열
          * @return Boolean
@@ -19,6 +20,7 @@
         
         /**
          * value에 값이 있는지 비교
+         * @name $.hasValue(value)
          * @param value 문자열
          * @return Boolean
          **/
@@ -39,7 +41,8 @@
         },
         
         /**
-         * true 여부
+         * mobile 여부
+         * @name $.isMobile([type])
          * @param value 비교값
          * @return Boolean
          **/
@@ -70,6 +73,7 @@
         
         /**
          * true 여부
+         * @name $.isTrue(value)
          * @param value 비교값
          * @return Boolean
          **/
@@ -79,6 +83,7 @@
 
         /**
          * false 여부
+         * @name $.isFalse(value)
          * @param value 비교값
          * @return Boolean
          **/
@@ -88,6 +93,7 @@
         
         /**
          * value에 값이 없을시 replaceString로 대체
+         * @name $.nvl(value [, replaceString])
          * @param value 문자열
          * @param replaceString 대체 문자
          * @return String
@@ -98,6 +104,7 @@
         
         /**
          * 문자열 채우기
+         * @name $.pad(value, len [, addStr, isLeft])
          * @param value 문자열
          * @param len 길이
          * @param addStr 채울 문자
@@ -119,6 +126,7 @@
         
         /**
          * 문자열 바꾸기
+         * @name $.replace(value, findString, replaceString [, flag])
          * @param value 원본 문자열
          * @param findString 대상 문자열
          * @param replaceString 대체 문자열
@@ -131,12 +139,12 @@
         
         /**
          * 로그 출력
-         * @param v 대상값
-         * @return boolean
+         * @name $.wLog(value [, tag])
+         * @param value 로그
+         * @param tag 태그
          **/
-        wLog: function (tag, value) {
-        	if(!value){
-        		value = tag;
+        wLog: function (value, tag) {
+        	if(!tag){
         		tag = "log";
         	}
         	if(window.console){
@@ -148,15 +156,15 @@
         
         /**
          * toast
+         * @name $.toast([value, delay])
          * @param value 메시지
-         * @param options 옵션
+         * @param delay 지연 밀리세컨드
          */
         toast : function(value, delay){
-        	if(!value) value = "toast message";
         	if(!delay) delay = 2000;
         	if($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
         	
-        	$("body").append("<div id=\"wjquery-toast\">" + value + "</>");
+        	$("body").append("<div id=\"wjquery-toast\">" + (value||"") + "</>");
         	
         	var w = parseInt($("#wjquery-toast").width()) + 60,
     		 	sw = $("body").width(),
@@ -175,6 +183,7 @@
         
         /**
          * alert
+         * @name $.alert(message [, options])
          * @param message 메시지
          * @param options 옵션
          */
@@ -216,6 +225,7 @@
         
         /**
          * confirm
+         * @name $.confirm(message [, options])
          * @param message 메시지
          * @param options 옵션
          */
@@ -269,6 +279,7 @@
     	
     	/**
          * 개체 존재여부
+         * @name $().isObject([state])
          * @param state 개체의 길이지가 한개일 경우 여부
          * @return Boolean
          **/
@@ -278,6 +289,7 @@
         
         /**
          * 클래스 변경
+         * @name $().changeClass(className1, className2 [, state])
          * @param className1 클래스1
          * @param className2 클래스2
          * @param state class1 삭제/추가 클래스가 될지 여부(default:true)
@@ -302,11 +314,12 @@
         
         /**
          * 스크롤 이동
+         * @name $().scrollIntoView([container, duration])
          * @param container 부분스크롤시 컨테이너
          * @param duration 애니메이션 사용시 밀리세컨드
          * @return this
          **/
-		scrollIntoView : function(container, duration ){
+		scrollIntoView : function(container, duration){
 			//this.get(0).scrollIntoView(false);
 			if(typeof container === "object"){
 				container.animate({scrollTop:container.scrollTop() + this.offset().top - container.offset().top}, duration||500);
@@ -318,6 +331,7 @@
         
         /**
          * 맨위로 이동
+         * @name $().wScrollTop(target [, options])
          * @param target 탑 버튼
          * @param duration 설정 데이터
          * @return this
@@ -345,6 +359,7 @@
         
         /**
          * textarea 자동 높이 조절
+         * @name $().autoGrowTextarea()
          */
         autoGrowTextarea : function() {
         	return this.each(function() {
@@ -372,6 +387,7 @@
         
         /**
          * outerhtml
+         * @name $().outerhtml()
          * @return html 문자열
          */
         outerHtml : function(){
@@ -380,6 +396,7 @@
         
         /**
          * 본문의 링크처리, 클릭처리를 막는다
+         * @name $().stripHref([isNew])
          * @param isNew
          * @return this
          **/
