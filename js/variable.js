@@ -91,12 +91,9 @@ var COMMON_TMPL = {
 				  "   </h2>"+
 				  "	  <div class=\"example\" onclick=\"openNode('${id}')\" style=\"cursor:pointer\">${title}</div>"+
 				  "</li>",
-	pageNotFound :
-	    	"<div style=\"width:100%;margin-top:100px;text-align:center;\"><img src=\"images/404.jpg\" /></div>",
-    menuLi :
-    	"<li><a href=\"javascript:void(0);\">${name}</a></li>",
-    headerLi :
-        	"<li><a href=\"javascript:void(0);\"><span>${text}</span></a></li>",
+	pageNotFound : "<div style=\"width:100%;margin-top:100px;text-align:center;\"><img src=\"images/404.jpg\" /></div>",
+    menuLi : "<li><a href=\"javascript:void(0);\">${name}</a></li>",
+    headerLi : "<li><a href=\"javascript:void(0);\"><span>${text}</span></a></li>",
     plainDiv : "<div>${text}</div>",
     end : ""
 };

@@ -194,6 +194,8 @@ var moduleData = [
 			{text : "jquery.tmpl", id : "tmpl", a_attr : {title: "jquery.tmpl 정리"}},
 			{text : "jquery.transit", id : "transit", a_attr : {title: "transit 정리"}},
 			{text : "moment", a_attr : {title: "momnet 정리"}},
+			{text : "qrcode", a_attr : {title: "qrcode 정리"}},
+			{text : "barcode", a_attr : {title: "barcode 정리"}},
 			{text : "fakeLoader", a_attr : {title: "fakeLoader demo"}},
 			{text : "slider", a_attr : {title: "zoom slider"}, data : {type : pageSetting.moduleDataType.blank}},
 			{text : "swipe", a_attr : {title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
@@ -238,6 +240,8 @@ var moduleData = [
 	    			folder : "/view/note/styleNhtml/"
 	    		},
 				nodes : [
+					{text : "mediaquery", id : "mediaquery"},
+					{text : "keyframes", id : "keyframes"},
 				]
 			},
 			{
@@ -255,6 +259,7 @@ var moduleData = [
 	    			folder : "/view/note/tool/"
 	    		},
 				nodes : [
+					{text : "이클립스 설정", id : "eclpiseSetting"}
 				]
 			},
 			{
@@ -271,7 +276,7 @@ var moduleData = [
 	    			folder : "/view/note/server/"
 	    		},
 				nodes : [
-				    {text : "톰켓설정", id : "tomcatSetting"}
+				    {text : "톰켓 설정", id : "tomcatSetting"}
 				]
 			},
 			{
