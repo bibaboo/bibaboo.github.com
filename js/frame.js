@@ -231,7 +231,8 @@ var moduleData = [
 	    		},
 				nodes : [
 				   	{text : "플러그인 패턴", id : "pluginPattern"},
-				   	{text : "개발 가이드", id : "guide"}
+				   	{text : "개발 가이드", id : "guide"},
+				   	{text : "form 객체", id : "form"}
 				]
 			},
 			{

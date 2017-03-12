@@ -1,0 +1,113 @@
+<div class="entry-summary"></div>
+<ul class="entry-api">
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">common</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            var $demo1_id1_input1_01 = $("#demo1-id1-input1");
+                            var $demo1_id1_input1_02 = $("#demo1-id1 input[type='text']");
+                            var $demo1_id1_input1_03 = $("#demo1-id1 input:text");
+                            var $demo1_id1_input1_04 = $("input[id='demo1-id1-input1']");
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <div id="demo1-id1">
+                            <input type="text" id="demo1-id1-input1" size="10" value="demo1-id1" />
+                        </div>
+                        <input type="button" onclick="demo1_1(this);" value="01" />
+                        <input type="button" onclick="demo1_1(this);" value="02" />
+                        <input type="button" onclick="demo1_1(this);" value="03" />
+                        <input type="button" onclick="demo1_1(this);" value="04" />
+                        <script type="text/javascript">
+                            function demo1_1(t){
+                                var _t = {
+                                	"01" : "#demo1-id1-input1",
+                                	"02" : "#demo1-id1 input[type='text']",
+                                	"03" : "#demo1-id1 input:text",
+                                	"04" : "input[id='demo1-id1-input1']"
+                                };
+                            	var $t = $(_t[$(t).val()]);
+                            	$.alert($t.val());
+                            }
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">radio</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            //selector
+                            var $demo2_name1_radio1 = $("input:radio[name='demo2-name1-radio1']");
+                            //value b object
+                            var $demo2_name1_radio1_01 = $("input:radio[name='demo2-name1-radio1'][value='b']");
+                            //checked object
+                            var $demo2_name1_radio1_02 = $("input:radio[name='demo2-name1-radio1']:checked");
+                            //thrid object
+                            var $demo2_name1_radio1_03 = $("input:radio[name='demo2-name1-radio1']:eq(2)");
+                            //last object (first, event, odd, last)
+                            var $demo2_name1_radio1_04 = $("input:radio[name='demo2-name1-radio1']:last");
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <div id="demo2-id1">
+                            <label><input type="radio" name="demo2-name1-radio1" value="a" /> a</label>
+                            <label><input type="radio" name="demo2-name1-radio1" value="b" /> b</label>
+                            <label><input type="radio" name="demo2-name1-radio1" value="c" /> c</label>
+                            <label><input type="radio" name="demo2-name1-radio1" value="d" /> d</label>
+                        </div>
+                        <input type="button" onclick="demo2_1(this);" value="01" />
+                        <input type="button" onclick="demo2_1(this);" value="02" />
+                        <input type="button" onclick="demo2_1(this);" value="03" />
+                        <input type="button" onclick="demo2_1(this);" value="04" />
+                        <script type="text/javascript">
+                            function demo2_1(t){
+                                var _t = {
+                                    "01" : "input:radio[name='demo2-name1-radio1'][value='b']",
+                                    "02" : "input:radio[name='demo2-name1-radio1']:checked",
+                                    "03" : "input:radio[name='demo2-name1-radio1']:eq(2)",
+                                    "04" : "input:radio[name='demo2-name1-radio1']:last"
+                                };
+                                var $t = $(_t[$(t).val()]);
+                                $t.prop("checked", true);
+                                $.alert($t.val());
+                            }
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true; highlight: [6]"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
