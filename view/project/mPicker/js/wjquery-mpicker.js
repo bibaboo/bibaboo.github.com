@@ -6,21 +6,21 @@
 */
 
 (function($){
-	$.fn.mPicker = function(option){
+	$.fn.mpicker = function(option){
         var $t = $(this);
         var _option = option || {};
         if(!_option.mode) {
-        	_option.mode=_option.setting?mPicker.seq():"Date";
+        	_option.mode=_option.setting?mpicker.seq():"Date";
         }
 
         $t.click(function(){
-        	mPicker.show("m" + _option.mode + "Picker", this);
+        	mpicker.show("m" + _option.mode + "Picker", this);
         });
         
-        mPicker.init("m" + _option.mode + "Picker", option || _option);
+        mpicker.init("m" + _option.mode + "Picker", option || _option);
     };
  
-    var mPicker = new(function() {
+    var mpicker = new(function() {
     	var lang = {
     		ko : {
     			year : "년",
@@ -114,7 +114,7 @@
         	if(!settings[mode].lang) settings[mode].lang = settings.lang;
         	
         	var html = "";
-        	html += '<div class="mPicker" id="' + mode + '"><div class="mpck-container"><div class="mpck-cover"></div><div class="mpck-dialog"><div class="mpck-selects">';
+        	html += '<div class="mpicker" id="' + mode + '"><div class="mpck-container"><div class="mpck-cover"></div><div class="mpck-dialog"><div class="mpck-selects">';
         	$.each(settings[mode].setting, function(){
                 html += '<div class="mpck-selects_group"><div class="mpck-selects_group_title">' + (this.title||lang[settings[mode].lang][this.lang]) + '</div><div class="mpck-selects_group_view"><div class="mpck-items" data-height="240" id="' + mode + this.id + '"></div></div></div>';
             });

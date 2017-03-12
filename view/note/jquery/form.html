@@ -104,7 +104,84 @@
                     </div>
                     <div class="entry-source-title"></div>
                     <div class="entry-demo-source-content">
-                        <pre class="brush: js; html-script: true; highlight: [6]"></pre>
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">select</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            //selected value
+                            $("#demo3-id1-select1").val();
+                            $("#demo3-id1-select1 option:selected").val();
+                            $("#demo3-id1-select1 > option:selected").val()
+                            //selected index
+                            var index = $("#demo3-id1-select1 option").index($("#demo3-id1-select1 option:selected"));
+                            //filter
+                            $("#demo3-id1-select1 option:eq(0)").remove();
+                            $("#demo3-id1-select1 option:first").remove();
+                            $("#demo3-id1-select1 option:last").remove();
+                            //size
+                            $("#demo3-id1-select1 option").size();
+                            $("#demo3-id1-select1 option:selected").prevAll().size();
+                            $("#demo3-id1-select1 option:selected").nextAll().size();
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <div id="demo3-id1">
+                            <select  id="demo3-id1-select1">
+                                <option value="">선택</option>
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                            </select>
+                        </div>
+                        <input type="button" onclick="demo3_1(this);" value="value" />
+                        <input type="button" onclick="demo3_1(this);" value="text" />
+                        <input type="button" onclick="demo3_1(this);" value="change" />
+                        <script type="text/javascript">
+                            function demo3_1(t){
+                            	var $s = $("#demo3-id1-select1");
+                                switch ($(t).val()){
+                                    case "value" :
+	                                    $.alert($s.val());
+	                                    break;
+                                    case "text" :
+                                        $.alert($("option:selected", $s).text());
+                                        break;
+                                    case "change" :
+                                    	if($("option:selected", $s).next().length>0){
+                                    		$("option:selected", $s).next().prop("selected", true);
+                                    	}else{
+                                    		$("option:first", $s).prop("selected", true);
+                                    	}
+                                        $.alert($s.val());
+                                        break;
+                                    default:
+                                        return;
+                                	
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
                     </div>
                 </div>
             </div>
