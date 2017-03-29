@@ -122,12 +122,12 @@
                         <pre class="brush: js;">
                             //selected value
                             $("#demo3-id1-select1").val();
-                            $("#demo3-id1-select1 option:selected").val();
                             $("#demo3-id1-select1 > option:selected").val()
                             //selected index
                             var index = $("#demo3-id1-select1 option").index($("#demo3-id1-select1 option:selected"));
                             //filter
                             $("#demo3-id1-select1 option:eq(0)").remove();
+                            $("#demo3-id1-select1 option:gt(0)").remove();
                             $("#demo3-id1-select1 option:first").remove();
                             $("#demo3-id1-select1 option:last").remove();
                             //size
