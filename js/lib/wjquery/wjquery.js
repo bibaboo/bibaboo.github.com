@@ -164,7 +164,7 @@
         	if(!delay) delay = 2000;
         	if($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
         	
-        	$("body").append("<div id=\"wjquery-toast\">" + (value||"") + "</>");
+        	$("body").append("<div id=\"wjquery-toast\">" + (value||"") + "</div>");
         	
         	var w = parseInt($("#wjquery-toast").width()) + 60,
     		 	sw = $("body").width(),

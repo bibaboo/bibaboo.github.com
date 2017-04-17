@@ -1,0 +1,110 @@
+<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="http://www.jqplot.com/" target="_blank">jqplot</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1"></div>
+						<input type="input" id="startDate" readonly="readonly" style="width:100px;padding:5px;" /> ~
+                         <input type="input" id="endDate" readonly="readonly" style="width:100px;padding:5px;" />
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">	
+                            $.datepicker.regional['ko'] = {
+						        closeText: '닫기',
+						        prevText: '이전달',
+						        nextText: '다음달',
+						        currentText: '오늘',
+						        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+						        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+						        dayNames: ['일','월','화','수','목','금','토'],
+						        dayNamesShort: ['일','월','화','수','목','금','토'],
+						        dayNamesMin: ['일','월','화','수','목','금','토'],
+						        weekHeader: 'Wk',
+						        dateFormat: 'yy-mm-dd (D)',
+						        firstDay: 0,
+						        isRTL: false,
+						        showMonthAfterYear: true,
+						        yearSuffix: ''
+						    };
+						    
+						    $.datepicker.setDefaults($.datepicker.regional['ko']);
+                            
+                            $('#startDate, #endDate').datepicker({ 
+						        showOn: 'button',
+						        buttonImage: 'http://jqueryui.com/resources/demos/datepicker/images/calendar.gif', //이미지 url
+						        //buttonImageOnly: true,
+						        buttonText: "달력",
+						        changeMonth: true,
+						        changeYear: true,
+						        showButtonPanel: true
+						    });
+                            $("#startDate").datepicker("setDate", "-2w");
+                            $("#endDate").datepicker("setDate", new Date());
+				            
+                            var _chart;
+                            function demo1_1(){
+								
+                                var startDate = moment($("#startDate").val(), "YYYY.MM.DD"),
+                                    endDate = moment($("#endDate").val(), "YYYY.MM.DD");
+
+                                if(!startDate.isSame(endDate) && !startDate.isBefore(endDate)){
+                                    alert($.i18n.prop("검색 시작 날짜가 종료 날짜 보다 큽니다."));
+                                    return;
+                                }
+
+                                if(startDate.clone().add(2, "w").isBefore(endDate)){
+                                    alert("조회 기간은 최대 2주 입니다.");
+                                    startDate = endDate.clone().add(-2, "w");
+                                    $("#startDate").datepicker("setDate", startDate.toDate());
+                                    return;
+                                }
+                                
+                                var _diff = endDate.diff(startDate, "d"),
+                                    _startDate = startDate.clone().add(-1, "d"),
+                                    _date = [],
+                                    _item = [];
+
+                                for(var i=0; i<=_diff; i++){
+                                    _date.push(_startDate.add(1, "d").format("MM.DD"));
+                                    _item.push(i%3==0?0:i*3);
+                                }
+
+                                $("#demo1-id1").height("300");
+                                
+                                if(_chart){
+                                    _chart.destroy();
+                                }
+                                
+                                _chart = $.jqplot('demo1-id1', [_item], {
+                                    animate: !$.jqplot.use_excanvas,
+                                    seriesDefaults:{
+                                        renderer:$.jqplot.BarRenderer
+                                    },
+                                    axes: {
+                                        xaxis: {
+                                            renderer: $.jqplot.CategoryAxisRenderer,
+                                            ticks: _date
+                                        },
+                                        yaxis: {
+                                            tickOptions: {formatString: '%d'} 
+                                        }
+                                    },
+                                    highlighter: { show: true }
+                                });
+                             }                            
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -196,6 +196,7 @@ var moduleData = [
 			{text : "moment", a_attr : {title: "momnet 정리"}},
 			{text : "qrcode", a_attr : {title: "qrcode 정리"}},
 			{text : "barcode", a_attr : {title: "barcode 정리"}},
+			{text : "jqplot", a_attr : {title: "jqplot 정리"}, data : {type : pageSetting.moduleDataType.hash}},
 			{text : "fakeLoader", a_attr : {title: "fakeLoader demo"}},
 			{text : "slider", a_attr : {title: "zoom slider"}, data : {type : pageSetting.moduleDataType.blank}},
 			{text : "swipe", a_attr : {title: "모바일용 swipe"}, data : {type : pageSetting.moduleDataType.blank, mobile:true}},
@@ -298,9 +299,10 @@ var moduleData = [
     		type : pageSetting.moduleDataType.load
 		},
 		nodes : [
-			{text : "wjquery.mpicker", id : "mpicker", a_attr : {title: "모바일용"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html", mobile:true}}
-			//{text : "wjquery.editor", id : "editor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.iframe, page : "weditor/index.html"}},
-			//{text : "wceditor", id : "wceditor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.blank, page : "wceditor/sample01.html"}}
+			{text : "wjquery.mpicker", id : "mpicker", a_attr : {title: "모바일용"}, data : {type : pageSetting.moduleDataType.blank, page : "mPicker/index.html", mobile:true}},
+			{text : "wjquery.editor", id : "editor", a_attr : {title: "working"}, data : {type : pageSetting.moduleDataType.blank, page : "weditor/index.html"}},
+			//{text : "wceditor", id : "wceditor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.blank, page : "wceditor/sample01.html"}},
+			{text : "mtmpl", id : "mtmpl", a_attr : {title: "모바일 탬플릿"}, data : {type : pageSetting.moduleDataType.blank, page : "mtmpl/index.html", mobile:true}}
 	    ]
 	}
 ];

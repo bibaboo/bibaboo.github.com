@@ -1,0 +1,27 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wjquery-editor</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../../css/base.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="./css/wjquery-editor.css" />
+<script type="text/javascript" src="../../../js/lib/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../../../js/lib/wjquery/wjquery.js"></script>
+<script type="text/javascript" src="./js/wjquery-editor.js"></script>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function(){
+		$("#contents").weditor();
+	});
+})(jQuery);
+</script>
+<style>
+	h1.title { text-align:center; margin:20px; }
+	body {padding:8px;}
+</style>
+</head>
+<body>
+<h1 class="title">wjquery-editor</h1>
+<textarea id="contents">aa</textarea> 
+</body>
+</html>
