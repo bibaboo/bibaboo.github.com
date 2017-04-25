@@ -74,47 +74,58 @@
                 data: [
                 {
                     value: "돋움, dotum",
-                    text: "돋움 <span>(가나다라)</span>"
+                    text: "돋움",
+                    sample: "가나다라"
                 },
                 {
                     value: "돋움체, dotumche",
-                    text: "돋움체 <span>(가나다라)</span>"
+                    text: "돋움체",
+                    sample: "가나다라"
                 },
                 {
                     value: "굴림, gulim",
-                    text: "굴림 <span>(가나다라)</span>"
+                    text: "굴림",
+                    sample: "가나다라"
                 },
                 {
                     value: "굴림체, gulimche",
-                    text: "굴림체 <span>(가나다라)</span>"
+                    text: "굴림체",
+                    sample: "가나다라"
                 },
                 {
                     value: "바탕, batang",
-                    text: "바탕 <span>(가나다라)</span>"
+                    text: "바탕",
+                    sample: "가나다라"
                 },
                 {
                     value: "바탕체, batangche",
-                    text: "바탕체 <span>(가나다라)</span>"
+                    text: "바탕체",
+                    sample: "가나다라"
                 },
                 {
                     value: "궁서, gungsuh",
-                    text: "궁서 <span>(가나다라)</span>"
+                    text: "궁서",
+                    sample: "가나다라"
                 },
                 {
                     value: "arial",
-                    text: "Arial <span>(abcde)</span>"
+                    text: "Arial",
+                    sample: "가나다라"
                 },
                 {
                     value: "tahoma",
-                    text: "Tahoma <span>(abcde)</span>"
+                    text: "Tahoma",
+                    sample: "abcd"
                 },
                 {
                     value: "times new roman",
-                    text: "Times New Roman <span>(abcde)</span>"
+                    text: "Times New Roman",
+                    sample: "abcd"
                 },
                 {
                     value: "verdana",
-                    text: "verdana <span>(abcde)</span>"
+                    text: "verdana",
+                    sample: "abcd"
                 }
 	         ],
             },
@@ -613,7 +624,7 @@
             switch (buttonName) {
                 case "fontname":
                     $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><span style=\"font-family:" + this.value + ";\">" + this.text + "</span></li>");
+                        $t.append("<li><button><span>" + this.text + " <span>(</span><em style=\"font-family:" + this.value + ";\">" + this.sample + "</em><span>)</span></span></button></li>");
                     });
                     break;
                 case "fontsize":

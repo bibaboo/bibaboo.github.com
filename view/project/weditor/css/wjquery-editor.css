@@ -3,6 +3,7 @@
 /* weditor */
 .weditor-wapper { width: 100%; position: relative; border: 1px solid buttonshadow; }
 .weditor-wapper button {border:0; outline: none; background:none; cursor: pointer;}
+.weditor-wapper em {font-style:normal;}
 .weditor-wapper .none {display:none !important;}
 .weditor-wapper .weditor-button {cursor: pointer;border: 1px solid #999;padding:2px 5px;background-color: #f1f1f1;border-radius: 2px;vertical-align:bottom;}
 
@@ -83,14 +84,20 @@
 .weditor-wapper .weditor-layer ul { width: 100%; list-style: none;}
 .weditor-wapper .weditor-layer ul>li{float: left;line-height:normal;cursor:pointer;}
 
-.weditor-wapper .weditor-layer.fontname {left:5px; width:160px;}
+.weditor-wapper .weditor-layer.fontname {left:5px; width:180px;}
 .weditor-wapper .weditor-layer.fontsize {left:68px; width:300px;}
-.weditor-wapper .weditor-layer.fontname > ul >li,
-.weditor-wapper .weditor-layer.fontsize > ul >li {width:100%;}
-.weditor-wapper .weditor-layer.fontname > ul >li.hover,
-.weditor-wapper .weditor-layer.fontsize > ul >li.hover {background-color:#ebebeb;}
-.weditor-wapper .weditor-layer.fontname > ul >li>span,
-.weditor-wapper .weditor-layer.fontsize > ul >li>span {padding:3px 0 2px 5px;display:block;}
+.weditor-wapper .weditor-layer.fontname > ul > li,
+.weditor-wapper .weditor-layer.fontsize > ul > li {width:100%;}
+.weditor-wapper .weditor-layer.fontname > ul > li:hover,
+.weditor-wapper .weditor-layer.fontsize > ul > li:hover {background-color:#ebebeb;}
+.weditor-wapper .weditor-layer.fontname > ul > li > button,
+.weditor-wapper .weditor-layer.fontsize > ul > li > button {text-align:left;width:100%;padding: 2px 0 2px 0px;}
+.weditor-wapper .weditor-layer.fontname > ul > li > button > span,
+.weditor-wapper .weditor-layer.fontsize > ul > li > button > span {margin:0 0 0 4px; display:block;}
+.weditor-wapper .weditor-layer.fontname > ul > li > button > span > span,
+.weditor-wapper .weditor-layer.fontname > ul > li > button > span > em,
+.weditor-wapper .weditor-layer.fontsize > ul > li > button > span > em,
+.weditor-wapper .weditor-layer.fontsize > ul > li > button > span > span {color:#888;padding:0 1px;}
 
 .weditor-wapper .weditor-layer.forecolormore {left:315px; width:170px;}
 .weditor-wapper .weditor-layer.backcolormore {left:354px; width:170px;}
