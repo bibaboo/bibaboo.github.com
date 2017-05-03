@@ -82,16 +82,20 @@
 
 .weditor-wapper .weditor-layer {position:absolute; top:28px; border: 1px solid #c4c4c4; background-color: #fbfbfb; z-index:100;}
 .weditor-wapper .weditor-layer ul { width: 100%; list-style: none;}
-.weditor-wapper .weditor-layer ul>li{float: left;line-height:normal;cursor:pointer;}
+.weditor-wapper .weditor-layer ul>li{line-height:normal;cursor:pointer;display:block;}
 
 .weditor-wapper .weditor-layer.fontname {left:5px; width:180px;}
 .weditor-wapper .weditor-layer.fontsize {left:68px; width:300px;}
+.weditor-wapper .weditor-layer.hr {left:450px; width:170px;}
 .weditor-wapper .weditor-layer.fontname > ul > li,
-.weditor-wapper .weditor-layer.fontsize > ul > li {width:100%;}
+.weditor-wapper .weditor-layer.fontsize > ul > li,
+.weditor-wapper .weditor-layer.hr > ul > li {width:100%;}
 .weditor-wapper .weditor-layer.fontname > ul > li:hover,
-.weditor-wapper .weditor-layer.fontsize > ul > li:hover {background-color:#ebebeb;}
+.weditor-wapper .weditor-layer.fontsize > ul > li:hover,
+.weditor-wapper .weditor-layer.hr > ul > li:hover {background-color:#ebebeb;}
 .weditor-wapper .weditor-layer.fontname > ul > li > button,
 .weditor-wapper .weditor-layer.fontsize > ul > li > button {text-align:left;width:100%;padding: 2px 0 2px 0px;}
+.weditor-wapper .weditor-layer.hr > ul > li > button {width:100%;height:25px;padding: 5px 10px;}
 .weditor-wapper .weditor-layer.fontname > ul > li > button > span,
 .weditor-wapper .weditor-layer.fontsize > ul > li > button > span {margin:0 0 0 4px; display:block;}
 .weditor-wapper .weditor-layer.fontname > ul > li > button > span > span,
@@ -99,14 +103,16 @@
 .weditor-wapper .weditor-layer.fontsize > ul > li > button > span > em,
 .weditor-wapper .weditor-layer.fontsize > ul > li > button > span > span {color:#888;padding:0 1px;}
 
-.weditor-wapper .weditor-layer.forecolormore {left:315px; width:170px;}
-.weditor-wapper .weditor-layer.backcolormore {left:354px; width:170px;}
-.weditor-wapper .weditor-layer.hr {left:450px; width:170px;}
 
+.weditor-wapper .weditor-layer.forecolormore {left:315px; width:200px;}
+.weditor-wapper .weditor-layer.backcolormore {left:354px; width:200px;}
+.weditor-wapper .weditor-layer.forecolormore > ul,
+.weditor-wapper .weditor-layer.backcolormore > ul {height:100%;width:100%;padding:10px;}
 .weditor-wapper .weditor-layer.forecolormore > ul >li, 
-.weditor-wapper .weditor-layer.backcolormore > ul >li,
-.weditor-wapper .weditor-layer.hr > ul >li {width:50%;height:20px;}
-.weditor-wapper .weditor-layer.hr > ul > li hr{width:90%;}
+.weditor-wapper .weditor-layer.backcolormore > ul >li {padding:2px;border:1px solid #fff;}
+.weditor-wapper .weditor-layer.forecolormore > ul >li button, 
+.weditor-wapper .weditor-layer.backcolormore > ul >li button {width:16px;height:16px;border-radius: 2px;vertical-align: top;}
+
 
 .weditor-wapper .weditor-layer.blockquote {left:296px; width:425px;}
 .weditor-wapper .weditor-layer.blockquote > ul >li {width:8%;padding:1%;}
@@ -114,12 +120,13 @@
 
 .weditor-wapper .weditor-layer.character {left:315px; height:275px;}
 .weditor-wapper .weditor-layer.character > ul {margin:5px;position:relative;height:230px;width:auto;}
+.weditor-wapper .weditor-layer.character > ul >li {float:left;}
 .weditor-wapper .weditor-layer.character > ul >li > button {background-color:#f2f2f2;padding:5px 8px;border-top:1px solid #c1c1c1;border-left:1px solid #c1c1c1;border-bottom:1px solid #c1c1c1;}
 .weditor-wapper .weditor-layer.character > ul >li.active > button {background-color:#fff;border-bottom:none;}
 .weditor-wapper .weditor-layer.character > ul >li:last-child > button {border-right:1px solid #c1c1c1;}
 .weditor-wapper .weditor-layer.character > ul >li >div{display:none;position:absolute;top:42px;left:0;height:180px;}
 .weditor-wapper .weditor-layer.character > ul >li >div>ul{width:418px;height:100%;border:1px solid #c7c7c7;}
-.weditor-wapper .weditor-layer.character > ul >li >div > ul > li{width:20px;height:18px;border-top:1px solid #fff;border-right:1px solid #ebecea;border-bottom:1px solid #ebecea;border-left:1px solid #fff;}
+.weditor-wapper .weditor-layer.character > ul >li >div > ul > li{width:20px;height:18px;border-top:1px solid #fff;border-right:1px solid #ebecea;border-bottom:1px solid #ebecea;border-left:1px solid #fff;float:left;}
 .weditor-wapper .weditor-layer.character > ul >li >div > ul > li.has:hover{border:1px solid #000;}
 .weditor-wapper .weditor-layer.character > ul >li >div > ul > li.empty:hover{}
 .weditor-wapper .weditor-layer.character > ul >li >div > ul > li > button{width:20px;height:18px;}

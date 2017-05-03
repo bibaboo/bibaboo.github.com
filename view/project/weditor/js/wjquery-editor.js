@@ -137,43 +137,43 @@
                 data: [
                 {
                     value: "7pt",
-                    text: "가나다라마(7pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "8pt",
-                    text: "가나다라마(8pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "9pt",
-                    text: "가나다라마(9pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "10pt",
-                    text: "가나다라마(10pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "11pt",
-                    text: "가나다라마(11pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "12pt",
-                    text: "가나다라마(12pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "14pt",
-                    text: "가나다라마(14pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "18pt",
-                    text: "가나다라마(18pt)"
+                    text: "가나다라마"
                 },
                 {
                     value: "24pt",
-                    text: "가나다라(24pt)"
+                    text: "가나다라"
                 },
                 {
                     value: "36pt",
-                    text: "가나다(36pt)"
+                    text: "가나다"
                 }
             ],
             },
@@ -304,17 +304,21 @@
                     "background-color:#ffffee;color:#660066;border:1px dotted #999999;",
                     "background-color:#ffffee;color:#660066;border:none;",
                     "background-color:#aaaaaa;color:#ffffff;border:none;"
-                ],
+                ]
             },
             hr: {
                 hasLayer: true,
                 ifrmLeft: "0",
                 action: "openLayer",
                 title: "밑줄",
-                data: {
-                    text: "가나다라마바",
-                    value: ["#000000", "#ff3300", "#ff0099", "#ff6600", "#cc00ff", "#cc9900", "#0000ff", "#33cc00", "#0099ff", "#009999"]
-                },
+                data: [
+                    "border: black 0px none; border-top: black 1px solid; height: 1px",
+                    "border: black 0px none; border-top: black 1px dotted; height: 1px",
+                    "border: black 0px none; border-top: black 1px dashed; height: 1px",
+                    "border: black 0px none; border-top: black 1px solid; border-bottom: #ccc 1px solid; height: 2px",
+                    "border: black 0px none; border-top: black 1px solid; border-bottom: #ccc 2px solid; height: 3px",
+                    "border: black 0px none; border-top: black 1px solid; border-bottom: black 3px solid; height: 7px"
+                ]
             },
             justifyleft: {
                 hasLayer: false,
@@ -431,7 +435,8 @@
         data: {
             align: "justifyleft;justifycenter;justifyright;justifyfull",
             ffCheck: "bold;italic;underline;strikethrough",
-            keycode: "8;37;38;39;40"
+            keycode: "8;37;38;39;40",
+            moreColor : ["#ff0000", "#ff5e00", "#ffe400", "#abf200", "#00d8ff", "#0055ff", "#6600ff", "#ff00dd", "#000000", "#ffd8d8", "#fae0d4", "#faf4c0", "#e4f7ba", "#d4f4fa", "#d9e5ff", "#e8d9ff", "#ffd9fa", "#ffffff", "#ffa7a7", "#ffc19e", "#faed7d", "#cef279", "#b2ebf4", "#b2ccff", "#d1b2ff", "#ffb2f5", "#bdbdbd", "#f15f5f", "#f29661", "#e5d85c", "#bce55c", "#5cd1e5", "#6699ff", "#a366ff", "#f261df", "#8c8c8c", "#980000", "#993800", "#998a00", "#6b9900", "#008299", "#003399", "#3d0099", "#990085", "#353535", "#670000", "#662500", "#665c00", "#476600", "#005766", "#002266", "#290066", "#660058"]
         },
 
         /* tempate */
@@ -629,17 +634,17 @@
                     break;
                 case "fontsize":
                     $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><span style=\"font-size:" + this.value + ";\">" + this.text + "</span></li>");
+                        $t.append("<li><button><span style=\"font-size:" + this.value + ";\">" + this.text + " <span>(" + this.value + ")</span></span></button></li>");
                     });
                     break;
                 case "forecolormore":
-                    $.each($.weditor.buttons[buttonName].data.value, function () {
-                        $t.append("<li><span style=\"color:" + this + ";\">" + $.weditor.data.forecolor.text + "</span></li>");
+                    $.each($.weditor.data.moreColor, function () {
+                        $t.append("<li><button style=\"background-color:" + this + "\"></button></li>");
                     });
                     break;
                 case "backcolormore":
                     $.each($.weditor.buttons[buttonName].data.value, function () {
-                        $t.append("<li><span style=\"background-color:" + this + ";\">" + $.weditor.data.forecolor.text + "</span></li>");
+                        $t.append("<li><span style=\"background-color:" + this + ";\">" + $.weditor.buttons[buttonName].data.text + "</span></li>");
                     });
                     break;
                 case "blockquote":
@@ -648,8 +653,8 @@
                     });
                     break;
                 case "hr":
-                    $.each($.weditor.buttons[buttonName].data.value, function () {
-                        $t.append("<li><hr size=\"1\" color=\"" + this + "\" /></li>");
+                    $.each($.weditor.buttons[buttonName].data, function () {
+                        $t.append("<li><button><hr style=\"" + this + "\" /></button></li>");
                     });
                     break;
                 case "link":
