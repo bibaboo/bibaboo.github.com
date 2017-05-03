@@ -235,11 +235,7 @@
                 hasLayer: true,
                 ifrmLeft: "0",
                 action: "openLayer",
-                title: "더보기",
-                data: {
-                    text: "가나다라마바",
-                    value: ["#000000", "#ff3300", "#ff0099", "#ff6600", "#cc00ff", "#cc9900", "#0000ff", "#33cc00", "#0099ff", "#009999"]
-                },
+                title: "더보기"
             },
             backcolor: {
                 hasLayer: false,
@@ -252,11 +248,7 @@
                 hasLayer: true,
                 ifrmLeft: "0",
                 action: "openLayer",
-                title: "더보기",
-                data: {
-                    text: "가나다라마바",
-                    value: ["#000000", "#ff3300", "#ff0099", "#ff6600", "#cc00ff", "#cc9900", "#0000ff", "#33cc00", "#0099ff", "#009999"]
-                },
+                title: "더보기"
             },
             bold: {
                 hasLayer: false,
@@ -638,14 +630,10 @@
                     });
                     break;
                 case "forecolormore":
-                    $.each($.weditor.data.moreColor, function () {
-                        $t.append("<li><button style=\"background-color:" + this + "\"></button></li>");
-                    });
+                    $.weditor.action.makePalette($t);
                     break;
                 case "backcolormore":
-                    $.each($.weditor.buttons[buttonName].data.value, function () {
-                        $t.append("<li><span style=\"background-color:" + this + ";\">" + $.weditor.buttons[buttonName].data.text + "</span></li>");
-                    });
+                    $.weditor.action.makePalette($t);
                     break;
                 case "blockquote":
                     $.each($.weditor.buttons[buttonName].data, function () {
@@ -731,6 +719,24 @@
         },
         previewer: function () {
             $.weditor.util.log("previewer", "call");
+        },
+        makePalette: function($t) {
+            var li = [];
+            $.each($.weditor.data.moreColor, function () {
+                li.push("<li><button style=\"background-color:" + this + "\"></button></li>");
+            });
+            li.push("<li><button style=\"border:1px solid #aaa\" onclick=\"$.weditor.action.togglePalette(this);\">+</button></li>");
+            $t.html(li.join(""));
+            $t.after("<div class=\"palette-area\"></div>")
+        },
+        togglePalette: function(t){
+            var $palette = $(t).parent().parent().next();
+
+            if($palette.is(":visible")){
+               $palette.hide();
+            }else{
+               $palette.show();
+            }
         }
 
 
