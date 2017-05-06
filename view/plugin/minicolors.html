@@ -1,0 +1,51 @@
+<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://github.com/claviska/jquery-minicolors" target="_blank">jquery-minicolors</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+                        <div>
+                            <span id="demo1-span1" style="width:28px;height:28px;display:inline-block;background-color:#000000;vertical-align:middle;"></span>
+				            <input type="input" id="demo1-input1" value="#000000" style="padding:5px;" />
+                            <input type="button" onclick="demo1_2();" value="입력"/>
+                        </div>
+                        <div id="demo1-id1">demo1_1</div>
+						
+						<script type="text/javascript">	
+							function demo1_1(){
+								$("#demo1-id1").minicolors(
+                                    {
+                                        inline:true,
+                                        defaultValue:$("#demo1-input1").val(),
+                                        change: function(value, opacity) {
+                                            $("#demo1-input1").val(value),
+                                            $("#demo1-span1").css("background-color", value);
+                                            console.log(value + ' - ' + opacity);
+                                        }
+                                    }
+                                );
+							}
+							
+							function demo1_2(){
+                                var val = $("#demo1-input1").val(),
+                                    isHex = isPattern("hex", val);
+								$.toast($("#demo1-input1").val() + " : " + isHex);
+							}
+							
+							demo1_1();
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -19,9 +19,12 @@
      * @name $.jstree
      */
     $.weditor = {
+        /**
+		 * specifies the weditor version in use
+		 * @name $.weditor.version
+		 */
+        id: "weditor",
         version: "0.0.1",
-        mode: "",
-        printLog: true,
         defaultOptions: {
             root: "/view/project/weditor/",
             width: "100%",
@@ -30,13 +33,14 @@
             minResizHeight: "100px",
             fontname: "돋움, dotum",
             fontsize: "9pt",
-            conversion: ["editor", "html", "text"],
+            conversions: ["editor", "html", "text"],
             defaultConversion: "editor",
             resize: true,
+            paletteDefaultHex: "#000000",
             exceptButtons: [] // header 구성에서 제외할 button
         },
 
-        toolbar: {
+        toolbars: {
             "min": [
     	        ["newpage"],
     	        ["forecolor", "backcolor"],
@@ -65,11 +69,12 @@
             ]
         },
 
-        buttons: {
+        tools: {
             fontname: {
+                key: "fontname",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "글꼴",
                 data: [
                 {
@@ -130,9 +135,10 @@
 	         ],
             },
             fontsize: {
+                key: "fontsize",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "글자크기",
                 data: [
                 {
@@ -178,112 +184,130 @@
             ],
             },
             redo: {
+                key: "redo",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "다시실행"
             },
             undo: {
+                key: "undo",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "되돌리기"
             },
             copy: {
+                key: "copy",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "복사하기"
             },
             cut: {
+                key: "cut",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "잘라내기"
             },
             paste: {
+                key: "paste",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "붙여넣기"
             },
             newpage: {
+                key: "newpage",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "newpage",
                 title: "새로열기"
             },
             previewer: {
+                key: "previewer",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "previewer",
                 title: "미리보기"
             },
             print: {
+                key: "print",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "print",
                 title: "인쇄하기"
             },
             forecolor: {
+                key: "forecolor",
                 hasLayer: false,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "글자색상"
             },
             forecolormore: {
+                key: "forecolormore",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "더보기"
             },
             backcolor: {
+                key: "backcolor",
                 hasLayer: false,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "배경색상"
                 
             },
             backcolormore: {
+                key: "backcolormore",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "더보기"
             },
             bold: {
+                key: "bold",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "굵게(Crtl+B}"
             },
             italic: {
+                key: "italic",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "기울림꼴(Crtl+I}"
             },
             underline: {
+                key: "underline",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "글자밑줄(Crtl+U}"
             },
             strikethrough: {
+                key: "strikethrough",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "취소선"
             },
             table: {
+                key: "table",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "테이블"
             },
             blockquote: {
+                key: "blockquote",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "필드셋",
                 data: [
                     "background-color:#eeeeee;border:1px solid #999999;",
@@ -299,9 +323,10 @@
                 ]
             },
             hr: {
+                key: "hr",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "밑줄",
                 data: [
                     "border: black 0px none; border-top: black 1px solid; height: 1px",
@@ -313,63 +338,73 @@
                 ]
             },
             justifyleft: {
+                key: "justifyleft",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "왼쪽맞춤"
             },
             justifycenter: {
+                key: "justifycenter",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "가운데맞춤"
             },
             justifyright: {
+                key: "justifyright",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "오른쪽맞츰"
             },
             justifyfull: {
+                key: "justifyfull",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "전체맞춤"
             },
             insertorderedlist: {
+                key: "insertorderedlist",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "번호매기기"
             },
             insertunorderedlist: {
+                key: "insertunorderedlist",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "글머리기호"
             },
             indent: {
+                key: "indent",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "들여쓰기"
             },
             outdent: {
+                key: "outdent",
                 hasLayer: false,
                 ifrmLeft: "0",
                 action: "execute",
                 title: "내어쓰기"
             },
             emoticon: {
+                key: "emoticon",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "이모티콘"
             },
             character: {
+                key: "character",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "특수문자",
                 data: {
                     max: 171,
@@ -385,24 +420,28 @@
                 }
             },
             link: {
+                key: "link",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "링크만들기"
             },
             urlimage: {
+                key: "urlimage",
                 hasLayer: true,
                 ifrmLeft: "0",
-                action: "openLayer",
+                action: "open",
                 title: "이미지링크"
             },
             image: {
+                key: "image",
                 hasLayer: true,
                 ifrmLeft: "0",
                 action: "uploadImage",
                 title: "이미지"
             },
             file: {
+                key: "file",
                 hasLayer: true,
                 ifrmLeft: "0",
                 action: "uploadImage",
@@ -410,9 +449,13 @@
             }
         },
         
-        const : {
-            buttons : {},
-            conversion: {editor: "editor", html: "html", text: "text"},
+        codes: {
+            conversions: {editor: "editor", html: "html", text: "text"},
+            align: "justifyleft;justifycenter;justifyright;justifyfull",
+            ffCheck: "bold;italic;underline;strikethrough",
+            keycode: "8;37;38;39;40",
+            paletteColor : ["#ff0000", "#ff5e00", "#ffe400", "#abf200", "#00d8ff", "#0055ff", "#6600ff", "#ff00dd", "#000000", "#ffd8d8", "#fae0d4", "#faf4c0", "#e4f7ba", "#d4f4fa", "#d9e5ff", "#e8d9ff", "#ffd9fa", "#ffffff", "#ffa7a7", "#ffc19e", "#faed7d", "#cef279", "#b2ebf4", "#b2ccff", "#d1b2ff", "#ffb2f5", "#bdbdbd", "#f15f5f", "#f29661", "#e5d85c", "#bce55c", "#5cd1e5", "#6699ff", "#a366ff", "#f261df", "#8c8c8c", "#980000", "#993800", "#998a00", "#6b9900", "#008299", "#003399", "#3d0099", "#990085", "#353535", "#670000", "#662500", "#665c00", "#476600", "#005766", "#002266", "#290066", "#660058"],
+            
             on: "on",
             off: "off",
             more: "more",
@@ -423,23 +466,31 @@
             empty: ""
         },
         
-        /* data */
-        data: {
-            align: "justifyleft;justifycenter;justifyright;justifyfull",
-            ffCheck: "bold;italic;underline;strikethrough",
-            keycode: "8;37;38;39;40",
-            moreColor : ["#ff0000", "#ff5e00", "#ffe400", "#abf200", "#00d8ff", "#0055ff", "#6600ff", "#ff00dd", "#000000", "#ffd8d8", "#fae0d4", "#faf4c0", "#e4f7ba", "#d4f4fa", "#d9e5ff", "#e8d9ff", "#ffd9fa", "#ffffff", "#ffa7a7", "#ffc19e", "#faed7d", "#cef279", "#b2ebf4", "#b2ccff", "#d1b2ff", "#ffb2f5", "#bdbdbd", "#f15f5f", "#f29661", "#e5d85c", "#bce55c", "#5cd1e5", "#6699ff", "#a366ff", "#f261df", "#8c8c8c", "#980000", "#993800", "#998a00", "#6b9900", "#008299", "#003399", "#3d0099", "#990085", "#353535", "#670000", "#662500", "#665c00", "#476600", "#005766", "#002266", "#290066", "#660058"]
-        },
-
         /* tempate */
-        template: {
+        templates: {
             docHtml: "<!DOCTYPE HTML><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><style>body{background-color:#ffffff;word-wrap:break-word;ime-mode:active;margin:10px;padding:0;font-family:@;font-size:@;} P {margin:0;padding:0;line-height:1.5;}</style></head><body>@</body></html>",
             initTag: "<p><br></p>",
-            init: "<div class=\"weditor-wapper\"><div class=\"weditor-headerbg\"></div><div class=\"weditor-header\"><ul><li class=\"starter\"></li></ul></div><div class=\"weditor-section\"><div class=\"weditor-resizebg\"></div><iframe class=\"weditor-editor\" src=\"about:blank\" frameborder=\"0\" /><textarea class=\"weditor-textarea\"></textarea></div><div class=\"weditor-footer\"><div></div><ul><li class=\"text off none\"></li><li class=\"html off none\"></li><li class=\"editor off none\"></li></ul></div></div>",
+            init: "<div class=\"weditor-wapper\"><div class=\"weditor-headerbg\"></div><div class=\"weditor-header\"><ul><li class=\"starter\"></li></ul></div><div class=\"weditor-section\"><div class=\"weditor.core.resizebg\"></div><iframe class=\"weditor-editor\" src=\"about:blank\" frameborder=\"0\" /><textarea class=\"weditor-textarea\"></textarea></div><div class=\"weditor-footer\"><div></div><ul><li class=\"text off none\"></li><li class=\"html off none\"></li><li class=\"editor off none\"></li></ul></div></div>",
             headerButton: "<li title=\"@\"><button class=\"@\">@</button></li>",
             separator: "<li class=\"separator\"></li>",
             actionLayer: "<div class=\"weditor-layer @\"><ul></ul></div>",
-            resizemore : "<span class=\"resizemore off\"/>"
+            resizemore : "<span class=\"resizemore off\"/>",
+            fontname: "<li><button><span>@ <span>(</span><em style=\"font-family:@;\">@</em><span>)</span></span></button></li>",
+            fontsize: "<li><button><span style=\"font-size:@;\">@ <span>(@)</span></span></button></li>",
+            blockquote: "<li><blockquote style=\"@\">&nbsp;</blockquote></li>",
+            hr: "<li><button><hr style=\"@\" /></button></li>",
+            link: "<li><input type=\"text\" /> <button class=\"weditor-button\">적용</button> <button class=\"weditor-button\">취소</button></li>",
+            character: {
+                tab: "<li><button><span>@</span></button><div><ul></ul></div></li>",
+                char: "<li class=\"has\"><button><span>@</span></button></li>",
+                blank: "<li class=\"empty\"><button><span></span></button></li>",
+                select: "<p><span>선택한 기호</span> <input type=\"text\" name=\"selectedCharacter\" /> <button class=\"weditor-button\">적용</button> <button class=\"weditor-button\">취소</button></p>"
+            },
+            palette: {
+                color: "<li><button title=\"@\" style=\"background-color:@\"><span></span></button></li>",
+                more: "<li><button class=\"palette-more\" onclick=\"$.weditor.core.palette.toggle(this);\"></button></li>",
+                select: "<div class=\"palette-wapper\"><div class=\"palette-action\"><span></span><input type=\"input\" value=\"@\" /><button class=\"weditor-button\" onclick=\"$.weditor.core.palette.select(this);\">입력</button></div><div class=\"palette-area\"></div></div>"
+            }
         },
         options: null,
         //element
@@ -449,7 +500,7 @@
     $.weditor.create = function ($target, options) {
         $.weditor.util.log(options, "customed options");
         this.options = $.extend(true, {}, this.defaultOptions, options);
-        $target.hide().before(this.template.init);
+        $target.hide().before(this.templates.init);
         $.weditor.util.log(this.options, "create options");
 
         var $wapper = $(".weditor-wapper");
@@ -459,7 +510,7 @@
             $headerbg: $(".weditor-headerbg", $wapper),
             $header: $(".weditor-header", $wapper),
             $section: $(".weditor-section", $wapper),
-            $resizebg: $(".weditor-resizebg", $wapper),
+            $resizebg: $(".weditor.core.resizebg", $wapper),
             $editor: $(".weditor-editor", $wapper),
             $editorCw: $(".weditor-editor", $wapper)[0].contentWindow,
             $editorDoc: $(".weditor-editor", $wapper)[0].contentWindow.document,
@@ -468,9 +519,9 @@
         };
 
         this.el.$editorDoc.open();
-        this.el.$editorDoc.write(mappingValue(this.template.docHtml, [this.options.fontName, this.options.fontSize, this.data.initTag]));
+        this.el.$editorDoc.write(mappingValue(this.templates.docHtml, [this.options.fontName, this.options.fontSize, this.templates.initTag]));
         this.el.$editorDoc.close();
-        this.el.$editorDoc.designMode = $.weditor.const.on;
+        this.el.$editorDoc.designMode = $.weditor.codes.on;
 
         if (options.width != this.defaultOptions.width) {
             this.el.$section.width(this.options.width);
@@ -480,236 +531,29 @@
             this.el.$section.height(this.options.height);
         }
 
-        // allow buttons
-        $.each(this.toolbar.max, function () {
-            $.each(this, function (){
-                $.weditor.const.buttons[this] = this;
-            });
-        });
+        this.core.tool.init();
+        this.core.conversion.init();
+        this.core.resize.init();
+        if($.weditor.util.hasValue(this.el.$target.val())){
+            this.core.editor.setContent(this.el.$target.val());
+        }
+    };
     
-        var _li = [];
-        $.each(this.toolbar[this.options.toolbar], function (index, unit) {
-            if (index != 0) _li.push($.weditor.template.separator);
-            $.each(unit, function (index2, buttonName) {
-                if (buttonName == $.weditor.const.buttons.fontname || buttonName == $.weditor.const.buttons.fontsize) {
-                    _li.push($.weditor.event.makeButton(buttonName, "<span>" + $.weditor.util.getFirsArrayData($.weditor.options[buttonName]) + "</span>"));
-                } else {
-                    if($.weditor.const.buttons[buttonName]){
-                        _li.push($.weditor.event.makeButton(buttonName, $.weditor.const.empty));    
-                    }
-                }
-
-                if (buttonName == $.weditor.const.buttons.forecolor || buttonName == $.weditor.const.buttons.backcolor) {
-                    _li.push($.weditor.event.makeButton(buttonName + $.weditor.const.more, $.weditor.const.empty));
-                }
-            });
-        });
-
-        if (_li.length > 0) this.el.$header.find("ul").append(_li.join($.weditor.const.empty));
-        this.el.$button = $("li>button", $.weditor.el.$header);
-
-        // button event
-        $("ul > li:not('.starter,.separator')", $.weditor.el.$header)
-        .on("mouseover", function (event) {
-            $.weditor.event.changeButton($(this), $.weditor.const.over);
-        })
-        .on("mouseout", function (event) {
-            $.weditor.event.changeButton($(this), $.weditor.const.out);
-        })
-        .on("mousedown", function (event) {
-            $.weditor.event.changeButton($(this), $.weditor.const.down);
-        })
-        .on("mouseup", function (event) {
-            if (!$.weditor.buttons[$(this).find("button").attr("class")].hasLayer) {
-                $.weditor.event.changeButton($(this), $.weditor.const.up);
-            }
-        })
-        .on("click", function (event) {
-            $.weditor.event.clickButton($(this).find("button").attr("class"));
-        });
-
-        this.setContent(this.el.$target.val());
-
-        // conversion mode
-        $.each(this.options.conversion, function () {
-            $("ul li." + this, $.weditor.el.$footer).removeClass("none");
-        });
-
-        $("ul li", this.el.$footer).click(function () {
-            var skip = false;
-            if ($(this).hasClass($.weditor.const.conversion.editor) && $(this).hasClass($.weditor.const.off)) {
-                $.weditor.el.$textEditor.hide();
-                $.weditor.el.$editor.show();
-                $.weditor.el.$headerbg.hide();
-                if ($("ul li." + $.weditor.const.conversion.html, $.weditor.el.$footer).hasClass($.weditor.const.on)) {
-                    $.weditor.setContent($.weditor.getContent("text"));
-                } else if ($("ul li." + $.weditor.const.conversion.text, $.weditor.el.$footer).hasClass($.weditor.const.on)) {
-                    $.weditor.setContent($.weditor.el.$textEditor.val(), "text");
-                }
-                $.weditor.mode = $.weditor.const.conversion.editor;
-            } else if ($(this).hasClass($.weditor.const.conversion.html) && $(this).hasClass($.weditor.const.off)) {
-                $.weditor.el.$textEditor.hide();
-                $.weditor.el.$editor.show();
-                $.weditor.el.$headerbg.show();
-                if ($("ul li." + $.weditor.const.conversion.editor, $.weditor.el.$footer).hasClass($.weditor.const.on)) {
-                    $.weditor.setContent($.weditor.getContent(), "text");
-                } else if ($("ul li." + $.weditor.const.conversion.text, $.weditor.el.$footer).hasClass($.weditor.const.on)) {
-                    $.weditor.setContent($.weditor.el.$textEditor.val(), "text");
-                }
-                $.weditor.mode = $.weditor.const.conversion.html;
-            } else if ($(this).hasClass("text") && $(this).hasClass($.weditor.const.off)) {
-                if ($.weditor.getContent("text")!=$.weditor.const.empty) {
-                    if (!confirm("전환하시겠습니까?")) skip = true;
-                }
-
-                if (!skip) {
-                    $.weditor.el.$textEditor.show();
-                    $.weditor.el.$editor.hide();
-                    $.weditor.el.$headerbg.show();
-                    if ($("ul li." + $.weditor.const.conversion.html, $.weditor.el.$footer).hasClass($.weditor.const.on)) {
-                        $.weditor.setContent($.weditor.getContent("text"));
-                    }
-                    $.weditor.el.$textEditor.val($.weditor.getContent("text"));
-                    $.weditor.mode = $.weditor.const.conversion.text;
-                }
-            }
-
-            if (!skip) {
-                $(this).siblings().removeClass($.weditor.const.on).addClass($.weditor.const.off);
-                $(this).removeClass($.weditor.const.off).addClass($.weditor.const.on);
-                $.weditor.util.log($.weditor.mode, "footer mode");
-            }
-        });
-
-        $("ul li." + this.options.defaultConversion, $.weditor.el.$footer).trigger("click");
-
-        if (this.options.resize) {
-            this
-            .el.$footer.find("div")
-            .addClass("resize")
-            .bind("mousedown", function (event) {
-                $.weditor.resize.start(event)
-            }).html(this.template.resizemore);
-        }
-    };
-
-    $.weditor.event = {
-        makeButton: function (buttonName, addStr) {
-            return mappingValue($.weditor.template.headerButton, [$.weditor.buttons[buttonName].title, buttonName, addStr]);
-        },
-        changeButton: function ($t, mode, p) {
-            if (typeof ($t) == "string") $t = $($t, this.el.$button);
-            var className = $t.attr("class");
-            
-            if (mode == $.weditor.const.down && className == $.weditor.const.down && typeof (p) == "undefined") {
-                if (className = $.weditor.const.up) $t.attr("class", $.weditor.const.up);
-            } else if ((mode == $.weditor.const.up && className == $.weditor.const.down) || className != $.weditor.const.down) {
-                if (className != mode) $t.attr("class", mode);
-            }
-            
-            $.weditor.util.log(mode, "changeButton " + $t.attr("title"));
-        },
-        clickButton: function (buttonName) {
-            $.weditor.action[$.weditor.buttons[buttonName].action].apply(null, [buttonName]);
-        }
-    };
-
     $.weditor.action = {
-        makeLayer: function (buttonName) {
-            $.weditor.el.$wapper.append(mappingValue($.weditor.template.actionLayer, [buttonName]));
-            var $t = $(".weditor-layer." + buttonName + ">ul", $.weditor.el.$wapper);
-            switch (buttonName) {
-                case "fontname":
-                    $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><button><span>" + this.text + " <span>(</span><em style=\"font-family:" + this.value + ";\">" + this.sample + "</em><span>)</span></span></button></li>");
-                    });
-                    break;
-                case "fontsize":
-                    $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><button><span style=\"font-size:" + this.value + ";\">" + this.text + " <span>(" + this.value + ")</span></span></button></li>");
-                    });
-                    break;
-                case "forecolormore":
-                    $.weditor.action.makePalette($t);
-                    break;
-                case "backcolormore":
-                    $.weditor.action.makePalette($t);
-                    break;
-                case "blockquote":
-                    $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><blockquote style=\"" + this + "\">&nbsp;</blockquote></li>");
-                    });
-                    break;
-                case "hr":
-                    $.each($.weditor.buttons[buttonName].data, function () {
-                        $t.append("<li><button><hr style=\"" + this + "\" /></button></li>");
-                    });
-                    break;
-                case "link":
-                    $t.append("<li><input type=\"text\" /> <button class=\"weditor-button\">적용</button> <button class=\"weditor-button\">취소</button></li>");
-                    break;
-                case "character":
-                    $.each($.weditor.buttons[buttonName].data.tab, function (index) {
-                        var $li = $("<li><button><span>" + this + "</span></button><div><ul></ul></div></li>");
-                        var char = [];
-                        $.each(unescape($.weditor.buttons[buttonName].data.value[index]).split(' '), function () {
-                            char.push("<li class=\"has\"><button><span>" + this + "</span></button></li>");
-                        });
-
-                        var _n = $.weditor.buttons[buttonName].data.max - char.length;
-                        for (var i = 0; i < _n; i++) {
-                            char.push("<li class=\"empty\"><button><span></span></button></li>");
-                        }
-
-                        $li.find("ul").html(char.join(""));
-                        $t.append($li);
-                    });
-
-                    $(">li>button", $t).click(function () {
-                        var $p = $(this).parent();
-                        if (!$p.hasClass("active")) {
-                            $p.siblings("li").removeClass("active").children("div").hide();
-                            $p.addClass("active").children("div").show();
-                        }
-                    });
-
-                    $("div button", $t).click(function () {
-                        $("input[name='selectedCharacter']", $t.parent()).val($("input[name='selectedCharacter']", $t.parent()).val() + $(this).find("span").html());
-                    });
-
-                    $t.parent().append("<p><span>선택한 기호</span> <input type=\"text\" name=\"selectedCharacter\" /> <button class=\"weditor-button\">적용</button> <button class=\"weditor-button\">취소</button></p>");
-
-                    $(">li:eq(0)>button", $t).trigger("click");
-                    break;
-            };
-
-            /*
-            $(">li", $t)
-            .hover(
-            	function(){$(this).addClass("hover");}, 
-            	function(){$(this).removeClass("hover");}
-            );
-            */
-
-        },
-        openLayer: function (buttonName) {
-            var $o = $(".weditor-layer." + buttonName, $.weditor.el.$wapper);
-
+        open: function (tool) {
+            var $o = $(".weditor-layer." + tool, $.weditor.el.$wapper);
             if ($o.length == 0) {
-                $.weditor.action.closeLayer();
-                $.weditor.action.makeLayer(buttonName);
+                $.weditor.core.tool.closeLayer();
+                $.weditor.core.tool.makeLayer(tool);
             } else if ($o.is(":visible")) {
                 $o.hide();
             } else {
-                $.weditor.action.closeLayer();
+                $.weditor.core.tool.closeLayer();
                 $o.show();
             }
         },
-        closeLayer: function () {
-            $(".weditor-layer", $.weditor.el.$wapper).hide();
-        },
-        execute: function (buttonName) {
-            $.weditor.util.log(buttonName, "execute");
+        execute: function (tool) {
+            $.weditor.util.log(tool, "execute");
         },
         newpage: function () {
             $.weditor.util.log("newpage", "call");
@@ -719,87 +563,315 @@
         },
         previewer: function () {
             $.weditor.util.log("previewer", "call");
-        },
-        makePalette: function($t) {
-            var li = [];
-            $.each($.weditor.data.moreColor, function () {
-                li.push("<li><button style=\"background-color:" + this + "\"></button></li>");
-            });
-            li.push("<li><button style=\"border:1px solid #aaa\" onclick=\"$.weditor.action.togglePalette(this);\">+</button></li>");
-            $t.html(li.join(""));
-            $t.after("<div class=\"palette-area\"></div>")
-        },
-        togglePalette: function(t){
-            var $palette = $(t).parent().parent().next();
+        }
+    };
 
-            if($palette.is(":visible")){
-               $palette.hide();
-            }else{
-               $palette.show();
+    $.weditor.core = {
+        editor : {
+            setContent : function (str, mode) {
+                $($.weditor.el.$editorDoc.body)[mode || "html"](str);
+            },
+            getContent : function (mode) {
+                return $($.weditor.el.$editorDoc.body)[mode || "html"]();
+            }
+        },
+        tool : {
+            init: function(){
+                var tools = [];
+                $.each($.weditor.toolbars[$.weditor.options.toolbar], function (index, unit) {
+                    if (index != 0) tools.push($.weditor.templates.separator);
+                    $.each(unit, function (index2, tool) {
+                        if (tool == $.weditor.tools.fontname.key || tool == $.weditor.tools.fontsize.key) {
+                            tools.push($.weditor.core.tool.make(tool, "<span>" + $.weditor.util.getFirsArrayData($.weditor.options[tool]) + "</span>"));
+                        } else {
+                            if($.weditor.tools[tool]){
+                                tools.push($.weditor.core.tool.make(tool, $.weditor.codes.empty));    
+                            }
+                        }
+
+                        if (tool == $.weditor.tools.forecolor.key || tool == $.weditor.tools.backcolor.key) {
+                            tools.push($.weditor.core.tool.make(tool + $.weditor.codes.more, $.weditor.codes.empty));
+                        }
+                    });
+                });
+                if (tools.length > 0) $.weditor.el.$header.find("ul").append(tools.join($.weditor.codes.empty));
+
+                // tool event
+                $("ul > li:not('.starter, .separator')", $.weditor.el.$header)
+                .on("mouseover", function (event) {
+                    $.weditor.core.tool.action($(this), $.weditor.codes.over);
+                })
+                .on("mouseout", function (event) {
+                    $.weditor.core.tool.action($(this), $.weditor.codes.out);
+                })
+                .on("mousedown", function (event) {
+                    $.weditor.core.tool.action($(this), $.weditor.codes.down);
+                })
+                .on("mouseup", function (event) {
+                    if (!$.weditor.tools[$(this).find("button").attr("class")].hasLayer) {
+                        $.weditor.core.tool.action($(this), $.weditor.codes.up);
+                    }
+                })
+                .on("click", function (event) {
+                    $.weditor.core.tool.click($(this).find("button").attr("class"));
+                });
+            },
+            make: function (tool, addStr) {
+                return mappingValue($.weditor.templates.headerButton, [$.weditor.tools[tool].title, tool, addStr]);
+            },
+            action: function ($t, mode, p) {
+              if (typeof ($t) == "string") $t = $("li>button." + $t, $.weditor.el.$header);
+                var className = $t.attr("class");
+
+                if (mode == $.weditor.codes.down && className == $.weditor.codes.down && typeof (p) == "undefined") {
+                    if (className = $.weditor.codes.up) $t.attr("class", $.weditor.codes.up);
+                } else if ((mode == $.weditor.codes.up && className == $.weditor.codes.down) || className != $.weditor.codes.down) {
+                    if (className != mode) $t.attr("class", mode);
+                }
+
+                $.weditor.util.log(mode, "tool.action " + $t.attr("title"));
+            },
+            click: function (tool) {
+                $.weditor.action[$.weditor.tools[tool].action].apply(null, [tool]);
+                $.weditor.util.log("click", "tool.action " + tool);
+            },
+            makeLayer: function (tool) {
+                $.weditor.el.$wapper.append(mappingValue($.weditor.templates.actionLayer, [tool]));
+                var $t = $(".weditor-layer." + tool + ">ul", $.weditor.el.$wapper);
+                
+                switch (tool) {
+                    case $.weditor.tools.forecolormore.key:
+                        $.weditor.core.palette.make($t);
+                        break;
+                    case $.weditor.tools.backcolormore.key:
+                        $.weditor.core.palette.make($t);
+                        break;
+                    case $.weditor.tools.link.key:
+                        $t.html($.weditor.templates.link);
+                        break;
+                    case $.weditor.tools.character.key:
+                        $.each($.weditor.tools[tool].data.tab, function (index) {
+                            var $li = $(mappingValue($.weditor.templates.character.tab, [this]));
+                            var char = [];
+                            $.each(unescape($.weditor.tools[tool].data.value[index]).split(' '), function () {
+                                char.push(mappingValue($.weditor.templates.character.char, [this]));
+                            });
+
+                            var _n = $.weditor.tools[tool].data.max - char.length;
+                            for (var i = 0; i < _n; i++) {
+                                char.push($.weditor.templates.character.blank);
+                            }
+
+                            $li.find("ul").html(char.join($.weditor.codes.empty));
+                            $t.append($li);
+                        });
+
+                        $(">li>button", $t).click(function () {
+                            var $p = $(this).parent();
+                            if (!$p.hasClass("active")) {
+                                $p.siblings("li").removeClass("active").children("div").hide();
+                                $p.addClass("active").children("div").show();
+                            }
+                        });
+
+                        $("div button", $t).click(function () {
+                            $("input[name='selectedCharacter']", $t.parent()).val($("input[name='selectedCharacter']", $t.parent()).val() + $(this).find("span").html());
+                        });
+
+                        $t.parent().append($.weditor.templates.character.select);
+                        $(">li:eq(0)>button", $t).trigger("click");
+                        break;
+                    default:
+                        var li = [];
+                        $.each($.weditor.tools[tool].data, function () {
+                            var a = tool == $.weditor.tools.fontname.key?[this.text, this.value, this.sample]:tool == $.weditor.tools.fontsize.key?[this.value, this.text, this.value]:[this];
+                            li.push(mappingValue($.weditor.templates[tool], a));
+                        });
+                        $t.html(li.join($.weditor.codes.empty));
+				        break;
+                };
+            },
+            closeLayer: function () {
+                $(".weditor-layer", $.weditor.el.$wapper).hide();
+            }
+        },
+        palette: {
+            make: function($t, tp) {
+                var li = [];
+                $t.parent().addClass("palette" + (tp||"1"));
+                $.each($.weditor.codes.paletteColor, function () {
+                    li.push(mappingValue($.weditor.templates.palette.color, [this, this]));
+                });
+                li.push($.weditor.templates.palette.more);
+                $t.html(li.join($.weditor.codes.empty));
+                $t.after(mappingValue($.weditor.templates.palette.select, [$.weditor.options.paletteDefaultHex]));
+                $t.next().find(".palette-area").minicolors({
+                    inline:true,
+                    defaultValue: $.weditor.options.paletteDefaultHex,
+                    change: function(value, opacity) {
+                        var $c = $(this).parent().prev();
+                        $c.find("input").val(value);
+                        $c.find("span").css("background-color", value);
+                        $.weditor.util.log(value, "palette change");
+                    }
+                });
+            },
+            toggle: function(t){
+                var $palette = $(t).parent().parent().next();
+
+                if($palette.is(":visible")){
+                    $(t).removeClass("down");
+                    $palette.hide();
+                }else{
+                $(t).addClass("down");
+                   $palette.show();
+                }
+            },
+            select: function(t){
+                var hex = $(t).prev().val();
+                if((/^#?([a-f0-9]{6}|[a-f0-9]{3})$/).test(hex)){
+                    //TODO: editor 값 전달
+                }else{
+                    alert("올바른 색상코드를 입력해주세요!");
+                }
+            }
+        },
+        resize: {
+            y: 0,
+            init : function(){
+                if ($.weditor.options.resize) {
+                    $.weditor
+                    .el.$footer.find("div")
+                    .addClass("resize")
+                    .bind("mousedown", function (event) {
+                        $.weditor.core.resize.start(event)
+                    }).html($.weditor.templates.resizemore);
+                }
+            },
+            start: function (e) {
+                if ($.weditor.core.resize.y == 0) $.weditor.core.resize.y = e.clientY + $(document).scrollTop();
+                $(document)
+                    .on("mousemove", $.weditor.core.resize.move)
+                    .on("mouseup", $.weditor.core.resize.stop);
+            },
+            move: function (e) {
+                if ($.weditor.core.conversion.mode != $.weditor.codes.conversions.text) {
+                    $.weditor.el.$editor.hide();
+                    $.weditor.el.$resizebg.show();
+                }
+
+                var _h = e.clientY + $(document).scrollTop() - $.weditor.core.resize.y + parseInt($.weditor.options.height);
+                if (_h < parseInt(parseInt($.weditor.options.minResizHeight))) return;
+                $.weditor.el.$section.height(_h);
+                $.weditor.el.$footer.find(".resizemore").removeClass($.weditor.codes.off).addClass($.weditor.codes.on);
+            },
+            stop: function () {
+                $(document).off("mousemove", $.weditor.core.resize.move).off("mouseup", $.weditor.core.resize.stop);
+                $.weditor.el.$footer.find(".resizemore").removeClass($.weditor.codes.on).addClass($.weditor.codes.off);
+
+                if ($.weditor.core.conversion.mode != $.weditor.codes.conversions.text) {
+                    $.weditor.el.$editor.show();
+                    $.weditor.el.$resizebg.hide();
+                }
+            }
+        },
+        conversion : {
+            mode: "",
+            init : function(){
+                // conversions mode
+                $.each($.weditor.options.conversions, function () {
+                    $("ul li." + this, $.weditor.el.$footer).removeClass("none");
+                });
+
+                $("ul li", $.weditor.el.$footer).click(function () {
+                    var skip = false;
+                    if ($(this).hasClass($.weditor.codes.conversions.editor) && $(this).hasClass($.weditor.codes.off)) {
+                        $.weditor.el.$textEditor.hide();
+                        $.weditor.el.$editor.show();
+                        $.weditor.el.$headerbg.hide();
+                        if ($("ul li." + $.weditor.codes.conversions.html, $.weditor.el.$footer).hasClass($.weditor.codes.on)) {
+                            $.weditor.core.editor.setContent($.weditor.core.editor.getContent("text"));
+                        } else if ($("ul li." + $.weditor.codes.conversions.text, $.weditor.el.$footer).hasClass($.weditor.codes.on)) {
+                            $.weditor.core.editor.setContent($.weditor.el.$textEditor.val(), "text");
+                        }
+                        $.weditor.core.conversion.mode = $.weditor.codes.conversions.editor;
+                    } else if ($(this).hasClass($.weditor.codes.conversions.html) && $(this).hasClass($.weditor.codes.off)) {
+                        $.weditor.el.$textEditor.hide();
+                        $.weditor.el.$editor.show();
+                        $.weditor.el.$headerbg.show();
+                        if ($("ul li." + $.weditor.codes.conversions.editor, $.weditor.el.$footer).hasClass($.weditor.codes.on)) {
+                            $.weditor.core.editor.setContent($.weditor.core.editor.getContent(), "text");
+                        } else if ($("ul li." + $.weditor.codes.conversions.text, $.weditor.el.$footer).hasClass($.weditor.codes.on)) {
+                            $.weditor.core.editor.setContent($.weditor.el.$textEditor.val(), "text");
+                        }
+                        $.weditor.core.conversion.mode = $.weditor.codes.conversions.html;
+                    } else if ($(this).hasClass("text") && $(this).hasClass($.weditor.codes.off)) {
+                        if ($.weditor.core.editor.getContent("text")!=$.weditor.codes.empty) {
+                            if (!confirm("전환하시겠습니까?")) skip = true;
+                        }
+
+                        if (!skip) {
+                            $.weditor.el.$textEditor.show();
+                            $.weditor.el.$editor.hide();
+                            $.weditor.el.$headerbg.show();
+                            if ($("ul li." + $.weditor.codes.conversions.html, $.weditor.el.$footer).hasClass($.weditor.codes.on)) {
+                                $.weditor.core.editor.setContent($.weditor.core.editor.getContent("text"));
+                            }
+                            $.weditor.el.$textEditor.val($.weditor.core.editor.getContent("text"));
+                            $.weditor.core.conversion.mode = $.weditor.codes.conversions.text;
+                        }
+                    }
+
+                    if (!skip) {
+                        $(this).siblings().removeClass($.weditor.codes.on).addClass($.weditor.codes.off);
+                        $(this).removeClass($.weditor.codes.off).addClass($.weditor.codes.on);
+                        $.weditor.util.log($.weditor.core.conversion.mode, "footer mode");
+                    }
+                });
+                $("ul li." + $.weditor.options.defaultConversion, $.weditor.el.$footer).trigger("click");
             }
         }
-
-
     };
 
     $.weditor.util = {
-        hasValue: function (v) {
-            return (typeof (v) == "undefined") ? false : true;
+        hasValue: function (value) {
+            try {
+                switch (typeof (value)) {
+                    case "undefined":
+                    case "null":
+                        return false;
+                }
+                if ($.trim(value) == "") {
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                return false;
+            }
         },
         getFirsArrayData: function (s, p) {
-            if (!this.hasValue(p)) p = ",";
+            if (typeof (p) == "undefined") p = ",";
             var a = s.split(p);
             return $.trim(a[0]);
         },
         log: function (value, tag) {
-            if($.weditor.printLog && window.console){
+            if(true && window.console){
                 if (!tag) {
                     tag = "weditor";
                 }
                 console.log(tag + " ==> " + ($.isPlainObject(value) || $.isArray(value) ? JSON.stringify(value) : value));
             }
         }
-    }
-
-    $.weditor.setContent = function (str, mode) {
-        $(this.el.$editorDoc.body)[mode || "html"](str);
     };
-
-    $.weditor.getContent = function (mode) {
-        return $(this.el.$editorDoc.body)[mode || "html"]();
+    
+    $.weditor.interface = {
+        get : function(mode){
+            return $.weditor.core.editor.getContent(mode);
+        },
+        set : function(str, mode){
+            $.weditor.core.editor.setContent(str, mode);
+        },
     };
-
-    /* 리사이즈 */
-    $.weditor.resize = {
-        y: 0,
-        start: function (e) {
-            if ($.weditor.resize.y == 0) $.weditor.resize.y = e.clientY + $(document).scrollTop();
-            $(document)
-                .on("mousemove", $.weditor.resize.move)
-                .on("mouseup", $.weditor.resize.stop);
-        },
-        move: function (e) {
-            if ($.weditor.mode != "text") {
-                $.weditor.el.$editor.hide();
-                $.weditor.el.$resizebg.show();
-            }
-
-            var _h = e.clientY + $(document).scrollTop() - $.weditor.resize.y + parseInt($.weditor.options.height);
-            if (_h < parseInt(parseInt($.weditor.options.minResizHeight))) return;
-            $.weditor.el.$section.height(_h + "px");
-            $.weditor.el.$footer.find(".resizemore").removeClass($.weditor.const.off).addClass($.weditor.const.on);
-        },
-        stop: function () {
-            $(document).off("mousemove", $.weditor.resize.move).off("mouseup", $.weditor.resize.stop);
-            $.weditor.el.$footer.find(".resizemore").removeClass($.weditor.const.on).addClass($.weditor.const.off);
-
-            if ($.weditor.mode != "text") {
-                $.weditor.el.$editor.show();
-                $.weditor.el.$resizebg.hide();
-            }
-        }
-    }
-
 
     /**
      * Create an instance, get an instance or invoke a command on a instance.
@@ -828,11 +900,11 @@
         }
 
         if (isMethod) {
-            if ($.weditor[arg]) {
+            if ($.weditor.interface[arg]) {
                 $.weditor.util.log(args, "call method");
-                result = $.weditor[arg].apply(this, args);
+                result = $.weditor.interface[arg].apply(this, args);
             } else {
-                $.alert("Method " + arg + " does not exist on jQuery.wEditor");
+                $.alert("Method " + arg + " does not exist");
             }
         } else {
             $.weditor.create(this, arg || {});

@@ -438,6 +438,13 @@ var moduleData = [
                 }
             },
             {
+                text: "jquery-minicolors",
+                id: "minicolors",
+                a_attr: {
+                    title: "jquery-minicolors 정리"
+                }
+            },
+            {
                 text: "moment",
                 a_attr: {
                     title: "momnet 정리"
