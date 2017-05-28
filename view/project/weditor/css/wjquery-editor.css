@@ -32,10 +32,10 @@
 .weditor-wapper .weditor-header .newpage { background-position: -71px -36px; }
 .weditor-wapper .weditor-header .previewer { background-position: -7px -67px; }
 .weditor-wapper .weditor-header .print { background-position: -36px -67px; }
-.weditor-wapper .weditor-header .forecolor { background-position: -69px -69px; background-color:#000000; }
+.weditor-wapper .weditor-header .forecolor { background-position: -69px -69px;}
 .weditor-wapper .weditor-header .forecolormore { width:10px;background-position:-88px -390px;}
 .weditor-wapper .weditor-header .down .forecolormore { width:10px;background-position:-2px -390px;}
-.weditor-wapper .weditor-header .backcolor { background-position: -7px -102px; background-color:#ffffff; }
+.weditor-wapper .weditor-header .backcolor { background-position: -7px -102px;}
 .weditor-wapper .weditor-header .backcolormore { width:10px;background-position:-88px -390px;}
 .weditor-wapper .weditor-header .down .backcolormore { width:10px;background-position:-2px -390px;}
 .weditor-wapper .weditor-header .bold { background-position: -38px -99px; }
