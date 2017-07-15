@@ -19,11 +19,11 @@
 .weditor-wapper .weditor-header ul li.up { border-color:#f0f0f0; background-color:#f0f0f0 }
 .weditor-wapper .weditor-header ul li.over { border-bottom:buttonshadow solid 1px; border-left:buttonhighlight solid 1px; border-right:buttonshadow solid 1px; border-top:buttonhighlight solid 1px; }
 
-.weditor-wapper .weditor-header .fontname { width:60px; background-position:-38px -390px; }
-.weditor-wapper .weditor-header .down .fontname {background-position:46px -390px; }
-.weditor-wapper .weditor-header .fontname span { width:50px; display:block; overflow:hidden; }
-.weditor-wapper .weditor-header .fontsize { text-align:left;padding-left:5px;width:42px; background-position: -57px -390px; }
-.weditor-wapper .weditor-header .down .fontsize {background-position:27px -390px; }
+.weditor-wapper .weditor-header .fontName { width:60px; background-position:-38px -390px; }
+.weditor-wapper .weditor-header .down .fontName {background-position:46px -390px; }
+.weditor-wapper .weditor-header .fontName span { width:50px; display:block; overflow:hidden; }
+.weditor-wapper .weditor-header .fontSize { text-align:left;padding-left:5px;width:42px; background-position: -57px -390px; }
+.weditor-wapper .weditor-header .down .fontSize {background-position:27px -390px; }
 .weditor-wapper .weditor-header .undo { background-position: -8px -4px; }
 .weditor-wapper .weditor-header .redo { background-position: -40px -4px; }
 .weditor-wapper .weditor-header .copy { background-position: -6px -37px; }
@@ -32,12 +32,12 @@
 .weditor-wapper .weditor-header .newpage { background-position: -71px -36px; }
 .weditor-wapper .weditor-header .previewer { background-position: -7px -67px; }
 .weditor-wapper .weditor-header .print { background-position: -36px -67px; }
-.weditor-wapper .weditor-header .forecolor { background-position: -69px -69px;}
-.weditor-wapper .weditor-header .forecolormore { width:10px;background-position:-88px -390px;}
-.weditor-wapper .weditor-header .down .forecolormore { width:10px;background-position:-2px -390px;}
-.weditor-wapper .weditor-header .backcolor { background-position: -7px -102px;}
-.weditor-wapper .weditor-header .backcolormore { width:10px;background-position:-88px -390px;}
-.weditor-wapper .weditor-header .down .backcolormore { width:10px;background-position:-2px -390px;}
+.weditor-wapper .weditor-header .foreColor { background-position: -69px -69px;}
+.weditor-wapper .weditor-header .foreColorMore { width:10px;background-position:-88px -390px;}
+.weditor-wapper .weditor-header .down .foreColorMore { width:10px;background-position:-2px -390px;}
+.weditor-wapper .weditor-header .backColor { background-position: -7px -102px;}
+.weditor-wapper .weditor-header .backColorMore { width:10px;background-position:-88px -390px;}
+.weditor-wapper .weditor-header .down .backColorMore { width:10px;background-position:-2px -390px;}
 .weditor-wapper .weditor-header .bold { background-position: -38px -99px; }
 .weditor-wapper .weditor-header .italic { background-position: -71px -101px; }
 .weditor-wapper .weditor-header .strikethrough { background-position: -7px -133px; }
@@ -58,18 +58,18 @@
 .weditor-wapper .weditor-header .file { background-position: -5px -292px; }
 .weditor-wapper .weditor-header .something1 { background-position: -40px -294px; }
 .weditor-wapper .weditor-header .something2 { background-position: -72px -294px; }
-.weditor-wapper .weditor-section { height:350px; }
-.weditor-wapper .weditor-section .weditor-resizebg{ width:100%; height:100%; display:none; background-color:#f9f9f9; }
-.weditor-wapper .weditor-section .weditor-editor { width:100%; height:100%; border:none; }
+.weditor-wapper .weditor-section { height:350px; position: relative;}
+.weditor-wapper .weditor-section .weditor-resizebg{ z-index: 100; position: absolute; left:0; bottom:0; width:100%; display:none; background-color:#f9f9f9; ; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; filter:alpha(opacity=60); opacity: 0.6;}
+.weditor-wapper .weditor-section .weditor-editor { width:100%; height:100%; border:none; z-index:99;}
 .weditor-wapper .weditor-section .weditor-textarea { width:100%; height:100%; display:none; overflow:auto; margin:0; padding:5px; border:none !important; }
 
 
 
 .weditor-wapper .weditor-footer { position:relative; }
 .weditor-wapper .weditor-footer .resize{ cursor:n-resize; background-color:#f0f0f0; height:17px; border-top:buttonshadow solid 1px;}
-.weditor-wapper .weditor-footer .resizemore{display:block;width:15px;height:15px;background: url(../images/ui-bg.png) no-repeat;margin:0 auto;}
-.weditor-wapper .weditor-footer .resizemore.off{background-position: -41px -423px;}
-.weditor-wapper .weditor-footer .resizemore.on{background-position: -73px -423px;}
+.weditor-wapper .weditor-footer .resizeMore{display:block;width:15px;height:15px;background: url(../images/ui-bg.png) no-repeat;margin:0 auto;}
+.weditor-wapper .weditor-footer .resizeMore.off{background-position: -41px -423px;}
+.weditor-wapper .weditor-footer .resizeMore.on{background-position: -73px -423px;}
 
 .weditor-wapper .weditor-footer ul {list-style:none;padding:0px;margin:0px;position:absolute;top:0;right:2px;}
 .weditor-wapper .weditor-footer ul li {float:right;height:15px;cursor:pointer;width:59px;background:url('../images/button.png') no-repeat;vertical-align:top;}
@@ -80,37 +80,38 @@
 .weditor-wapper .weditor-footer ul .text.on {background-position: -118px -25px;}
 .weditor-wapper .weditor-footer ul .text.off {background-position: -118px 0;}
 
-.weditor-wapper .weditor-layer {position:absolute; top:28px; border: 1px solid #c4c4c4; background-color: #fbfbfb; z-index:100;}
+.weditor-wapper .weditor-layer {position:absolute; top:28px; border: 1px solid #c4c4c4; background-color: #fbfbfb; z-index:101;}
 .weditor-wapper .weditor-layer ul { width: 100%; list-style: none;}
 .weditor-wapper .weditor-layer ul>li{line-height:normal;cursor:pointer;display:block;}
 
-.weditor-wapper .weditor-layer.fontname {left:5px; width:180px;}
-.weditor-wapper .weditor-layer.fontsize {left:68px; width:300px;}
+.weditor-wapper .weditor-layer.fontName {left:5px; width:180px;}
+.weditor-wapper .weditor-layer.fontSize {left:68px; width:300px;}
 .weditor-wapper .weditor-layer.hr {left:450px; width:170px;}
-.weditor-wapper .weditor-layer.fontname > ul > li,
-.weditor-wapper .weditor-layer.fontsize > ul > li,
+.weditor-wapper .weditor-layer.fontName > ul > li,
+.weditor-wapper .weditor-layer.fontSize > ul > li,
 .weditor-wapper .weditor-layer.hr > ul > li {width:100%;}
-.weditor-wapper .weditor-layer.fontname > ul > li:hover,
-.weditor-wapper .weditor-layer.fontsize > ul > li:hover,
+.weditor-wapper .weditor-layer.fontName > ul > li:hover,
+.weditor-wapper .weditor-layer.fontSize > ul > li:hover,
 .weditor-wapper .weditor-layer.hr > ul > li:hover {background-color:#ebebeb;}
-.weditor-wapper .weditor-layer.fontname > ul > li > button,
-.weditor-wapper .weditor-layer.fontsize > ul > li > button {text-align:left;width:100%;padding: 2px 0 2px 0px;}
+.weditor-wapper .weditor-layer.fontName > ul > li > button,
+.weditor-wapper .weditor-layer.fontSize > ul > li > button {text-align:left;width:100%;padding: 2px 0 2px 0px;}
 .weditor-wapper .weditor-layer.hr > ul > li > button {width:100%;height:25px;padding: 5px 10px;}
-.weditor-wapper .weditor-layer.fontname > ul > li > button > span,
-.weditor-wapper .weditor-layer.fontsize > ul > li > button > span {margin:0 0 0 4px; display:block;}
-.weditor-wapper .weditor-layer.fontname > ul > li > button > span > span,
-.weditor-wapper .weditor-layer.fontname > ul > li > button > span > em,
-.weditor-wapper .weditor-layer.fontsize > ul > li > button > span > em,
-.weditor-wapper .weditor-layer.fontsize > ul > li > button > span > span {color:#888;padding:0 1px;}
+.weditor-wapper .weditor-layer.fontName > ul > li > button > span,
+.weditor-wapper .weditor-layer.fontSize > ul > li > button > span {margin:0 0 0 4px; display:block;}
+.weditor-wapper .weditor-layer.fontName > ul > li > button > span > span,
+.weditor-wapper .weditor-layer.fontName > ul > li > button > span > em,
+.weditor-wapper .weditor-layer.fontSize > ul > li > button > span > em,
+.weditor-wapper .weditor-layer.fontSize > ul > li > button > span > span {color:#888;padding:0 1px;}
 
 
-.weditor-wapper .weditor-layer.forecolormore {left:315px; width:190px;}
-.weditor-wapper .weditor-layer.backcolormore {left:354px; width:190px;}
+.weditor-wapper .weditor-layer.foreColorMore {left:315px; width:190px;}
+.weditor-wapper .weditor-layer.backColorMore {left:354px; width:190px;}
 
 
 
 .weditor-wapper .weditor-layer.blockquote {left:296px; width:425px;}
 .weditor-wapper .weditor-layer.blockquote > ul >li {float:left;width:8%;padding:1%;}
+.weditor-wapper .weditor-layer.blockquote > ul >li button{width:100%;}
 .weditor-wapper .weditor-layer.blockquote > ul >li blockquote{ height:30px;}
 
 .weditor-wapper .weditor-layer.character {left:315px; height:275px;}
@@ -153,28 +154,9 @@
 .weditor-wapper .weditor-layer .box2 {cursor: pointer;display:inline;}
 .weditor-wapper .weditor-layer>div>span {}
 .weditor-wapper .weditor-layer>div.hover{background-color:#ebebeb;}
-.weditor-wapper .weditor-layer.fontname {top:28px; left:5px; width:160px; height:255px;}
-.weditor-wapper .weditor-layer.fontsize {top:28px; left:68px; width:300px; height:283px;}
+.weditor-wapper .weditor-layer.fontName {top:28px; left:5px; width:160px; height:255px;}
+.weditor-wapper .weditor-layer.fontSize {top:28px; left:68px; width:300px; height:283px;}
 */
-
-
-
-.weditor-wapper .weditor-section #editIframe {overflow-x: auto; overflow-y: scroll;}
-
-.weditor-wapper iframe.buttonIframe{position:absolute;top:28px;left:0px;display:none;}
-.weditor-wapper #fontnameFrame {width:160px;height:255px;z-index:1001;}
-.weditor-wapper #fontsizeFrame {width:300px;height:283px;z-index:1002;}
-.weditor-wapper #forecolorFrame {width:230px;height:300px;z-index:1003;}
-.weditor-wapper #backcolorFrame {width:230px;height:300px;z-index:1004;}
-.weditor-wapper #tableFrame {width:200px;height:185px;z-index:1005;}
-.weditor-wapper #tableConfigFrame {width:130px;height:190px;z-index:1012;}
-.weditor-wapper #blockquoteFrame {width:485px;height:55px;z-index:1006;}
-.weditor-wapper #hrFrame {width:230px;height:313px;z-index:1007;}
-.weditor-wapper #linkFrame {width:300px;height:35px;z-index:1009;}
-.weditor-wapper #urlimageFrame {width:290px;height:45px;z-index:1009;}
-.weditor-wapper #imageFrame {width:300px;height:75px;z-index:1010;}
-.weditor-wapper #characterFrame {width:490px;height:300px;z-index:1011;}
-.weditor-wapper #emoticonFrame {width:210px;height:185px;z-index:1012;}
 
 
 
