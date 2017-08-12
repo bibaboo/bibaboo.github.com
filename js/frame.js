@@ -39,8 +39,7 @@ var $sidebar,
     $menuTree;
 
 /* 모듈 정보 */
-var moduleData = [
-    {
+var moduleData = [{
         text: "home",
         icon: "../images/tree-icon.png",
         data: {
@@ -51,7 +50,7 @@ var moduleData = [
         a_attr: {
             title: "wonchu~~"
         }
-	},
+    },
 
     {
         text: "wjquery",
@@ -59,8 +58,7 @@ var moduleData = [
             folder: "/view/wjquery/",
             type: pageSetting.moduleDataType.load
         },
-        nodes: [
-            {
+        nodes: [{
                 text: "$.extend",
                 a_attr: {
                     title: "wjquery extend 함수"
@@ -68,8 +66,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/extend/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "$.alert()",
                         a_attr: {
                             title: "custom alert"
@@ -129,8 +126,8 @@ var moduleData = [
                             title: "문자열 바꾸기"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "$.fn.extend",
                 a_attr: {
@@ -139,8 +136,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/fn_extend/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: ".changeClass()",
                         a_attr: {
                             title: "조건에 따른 클래스 변경"
@@ -182,8 +178,8 @@ var moduleData = [
                             title: "a, area 링크, 클릭 동작 제어"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "js.lang",
                 a_attr: {
@@ -192,8 +188,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_lang/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "addComma()",
                         a_attr: {
                             title: "3자리마다 콤마추가"
@@ -235,8 +230,8 @@ var moduleData = [
                             title: "문자열 매핑"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "js.date",
                 a_attr: {
@@ -245,8 +240,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_date/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "getFormatDate()",
                         a_attr: {
                             title: "날자 포멧팅"
@@ -264,8 +258,8 @@ var moduleData = [
                             title: "원하는 만큼 일자를 증감해서 리턴"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "js.expr",
                 a_attr: {
@@ -274,8 +268,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_expr/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "getPattern()",
                         a_attr: {
                             title: "패턴에 매칭되는 값을 리턴"
@@ -299,8 +292,8 @@ var moduleData = [
                             title: "문자열 변환"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "js.ui",
                 a_attr: {
@@ -309,15 +302,13 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_ui/"
                 },
-                nodes: [
-                    {
-                        text: "dropDown()",
-                        a_attr: {
-                            title: "hover 메뉴"
-                        }
+                nodes: [{
+                    text: "dropDown()",
+                    a_attr: {
+                        title: "hover 메뉴"
                     }
-				]
-			},
+                }]
+            },
             {
                 text: "js.form",
                 a_attr: {
@@ -326,9 +317,8 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_form/"
                 },
-                nodes: [
-				]
-			},
+                nodes: []
+            },
             {
                 text: "js.event",
                 a_attr: {
@@ -337,8 +327,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_event/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "delayFunction",
                         a_attr: {
                             title: "함수 실행 시간 지연"
@@ -356,8 +345,8 @@ var moduleData = [
                             title: "외부 스타일 로드"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "js.object",
                 a_attr: {
@@ -366,8 +355,7 @@ var moduleData = [
                 data: {
                     folder: "/view/wjquery/js_object/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "base62",
                         a_attr: {
                             title: "base62로 변환"
@@ -397,10 +385,10 @@ var moduleData = [
                             title: "sessionStorage 제어"
                         }
                     }
-				]
-			}
-    	]
-	},
+                ]
+            }
+        ]
+    },
 
     {
         text: "plugin",
@@ -408,8 +396,7 @@ var moduleData = [
             folder: "/view/plugin/",
             type: pageSetting.moduleDataType.load
         },
-        nodes: [
-            {
+        nodes: [{
                 text: "jquery.ui",
                 id: "jqueryUi",
                 a_attr: {
@@ -513,8 +500,8 @@ var moduleData = [
                     title: "wjquery.form"
                 }
             }
-		]
-	},
+        ]
+    },
 
     {
         text: "note",
@@ -522,14 +509,12 @@ var moduleData = [
             folder: "/view/note/",
             type: pageSetting.moduleDataType.load
         },
-        nodes: [
-            {
+        nodes: [{
                 text: "javascript",
                 data: {
                     folder: "/view/note/javascript/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "배열 객체",
                         id: "array",
                         a_attr: {
@@ -564,15 +549,14 @@ var moduleData = [
                             title: "아무 것도 없거나 하나 이상의 이름/값 쌍들을 둘러싸는 중괄호"
                         }
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "jquery",
                 data: {
                     folder: "/view/note/jquery/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "플러그인 패턴",
                         id: "pluginPattern"
                     },
@@ -584,15 +568,14 @@ var moduleData = [
                         text: "form 객체",
                         id: "form"
                     }
-				]
-			},
+                ]
+            },
             {
                 text: "style & html",
                 data: {
                     folder: "/view/note/styleNhtml/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "mediaquery",
                         id: "mediaquery"
                     },
@@ -600,62 +583,66 @@ var moduleData = [
                         text: "keyframes",
                         id: "keyframes"
                     },
-				]
-			},
+                ]
+            },
             {
                 text: "java",
                 data: {
                     folder: "/view/note/java/"
                 },
-                nodes: [
-                    {
-                        text: "이중 배열을 이용한 코드 관리",
-                        id: "arrayCode"
-                    }
-				]
-			},
+                nodes: [{
+                    text: "이중 배열을 이용한 코드 관리",
+                    id: "arrayCode"
+                }]
+            },
             {
                 text: "tool",
                 data: {
                     folder: "/view/note/tool/"
                 },
-                nodes: [
-                    {
-                        text: "이클립스 설정",
-                        id: "eclpiseSetting"
-                    }
-				]
-			},
+                nodes: [{
+                    text: "이클립스 설정",
+                    id: "eclpiseSetting"
+                }]
+            },
             {
                 text: "dbms",
                 data: {
                     folder: "/view/note/dbms/"
                 },
-                nodes: [
-				]
-			},
+                nodes: []
+            },
             {
                 text: "server",
                 data: {
                     folder: "/view/note/server/"
                 },
-                nodes: [
-                    {
-                        text: "톰켓 설정",
-                        id: "tomcatSetting"
-                    }
-				]
-			},
+                nodes: [{
+                    text: "톰켓 설정",
+                    id: "tomcatSetting"
+                }]
+            },
             {
                 text: "etc",
                 data: {
                     folder: "/view/note/ect/"
                 },
-                nodes: [
-				]
-			}
-		]
-	},
+                nodes: []
+            }
+        ]
+    },
+
+    {
+        text: "snippet",
+        data: {
+            folder: "/view/snippet/",
+            type: pageSetting.moduleDataType.load
+        },
+        nodes: [{
+            text: "simple button",
+            id: "simpleButton"
+        }]
+    },
 
     {
         text: "project",
@@ -663,8 +650,7 @@ var moduleData = [
             folder: "/view/project/",
             type: pageSetting.moduleDataType.load
         },
-        nodes: [
-            {
+        nodes: [{
                 text: "wjquery.mpicker",
                 id: "mpicker",
                 a_attr: {
@@ -679,6 +665,7 @@ var moduleData = [
             {
                 text: "wjquery.editor",
                 id: "editor",
+                used: true,
                 a_attr: {
                     title: "working"
                 },
@@ -687,7 +674,7 @@ var moduleData = [
                     page: "weditor/index.html"
                 }
             },
-			//{text : "wceditor", id : "wceditor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.blank, page : "wceditor/sample01.html"}},
+            //{text : "wceditor", id : "wceditor", a_attr : {title: "weditor"}, data : {type : pageSetting.moduleDataType.blank, page : "wceditor/sample01.html"}},
             {
                 text: "mtmpl",
                 id: "mtmpl",
@@ -700,8 +687,21 @@ var moduleData = [
                     mobile: true
                 }
             }
-	    ]
-	}
+        ]
+    },
+
+    {
+        text: "template",
+        used: true,
+        data: {
+            folder: "/view/template/",
+            type: pageSetting.moduleDataType.load
+        },
+        nodes: [{
+            text: "type1",
+            id: "type1"
+        }]
+    }
 ];
 
 (function ($) {
@@ -836,8 +836,13 @@ var moduleData = [
 
         //트리
         var data = $.map(moduleData, function (module) {
+            if ($.isFalse(module.used)) return;
             if (module.nodes) {
                 module.children = $.map(module.nodes, function (node) {
+                    if ($.isFalse(node.used)) {
+
+                        return;
+                    }
                     _setData(node);
                     if (node.nodes) {
                         if (!node.data && module.data) {
@@ -957,12 +962,34 @@ var moduleData = [
                                         $content.find(".content-body>.setting").removeClass("none");
                                     }
 
+                                    $entry.find(".entry-source-content[data-wjquery]").each(function () {
+                                        if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
+                                            $(this).find("pre").html($[$(this).attr("data-wjquery")].toString());
+                                        } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
+                                            $(this).find("pre").html($.fn[$(this).attr("data-wjquery")].toString());
+                                        }
+                                    });
+
                                     $entry.find(".entry-demo-content").each(function () {
                                         $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
                                     });
 
                                     $entry.find(".entry-demo-textarea-content").each(function () {
-                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).val()));
+                                        var _html = $(this).val();
+                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
+
+                                        $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
+                                            var $iframe = $(this)[0].contentWindow.document;
+                                            $iframe.open();
+                                            $iframe.write(_html);
+                                            $iframe.close();
+
+                                            $(this).on("load", function () {
+                                                alert(1)
+                                                $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
+                                                resizeLayout();
+                                            });
+                                        });
                                     });
 
                                     setHash(node.id, true);

@@ -58,19 +58,17 @@
 .weditor-wapper .weditor-header .file { background-position: -5px -292px; }
 .weditor-wapper .weditor-header .something1 { background-position: -40px -294px; }
 .weditor-wapper .weditor-header .something2 { background-position: -72px -294px; }
+
 .weditor-wapper .weditor-section { height:350px; position: relative;}
 .weditor-wapper .weditor-section .weditor-resizebg{ z-index: 100; position: absolute; left:0; bottom:0; width:100%; display:none; background-color:#f9f9f9; ; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; filter:alpha(opacity=60); opacity: 0.6;}
 .weditor-wapper .weditor-section .weditor-editor { width:100%; height:100%; border:none; z-index:99;}
 .weditor-wapper .weditor-section .weditor-textarea { width:100%; height:100%; display:none; overflow:auto; margin:0; padding:5px; border:none !important; }
-
-
 
 .weditor-wapper .weditor-footer { position:relative; }
 .weditor-wapper .weditor-footer .resize{ cursor:n-resize; background-color:#f0f0f0; height:17px; border-top:buttonshadow solid 1px;}
 .weditor-wapper .weditor-footer .resizeMore{display:block;width:15px;height:15px;background: url(../images/ui-bg.png) no-repeat;margin:0 auto;}
 .weditor-wapper .weditor-footer .resizeMore.off{background-position: -41px -423px;}
 .weditor-wapper .weditor-footer .resizeMore.on{background-position: -73px -423px;}
-
 .weditor-wapper .weditor-footer ul {list-style:none;padding:0px;margin:0px;position:absolute;top:0;right:2px;}
 .weditor-wapper .weditor-footer ul li {float:right;height:15px;cursor:pointer;width:59px;background:url('../images/button.png') no-repeat;vertical-align:top;}
 .weditor-wapper .weditor-footer ul .editor.on {background-position: 0 -25px;}
@@ -83,7 +81,6 @@
 .weditor-wapper .weditor-layer {position:absolute; top:28px; border: 1px solid #c4c4c4; background-color: #fbfbfb; z-index:101;}
 .weditor-wapper .weditor-layer ul { width: 100%; list-style: none;}
 .weditor-wapper .weditor-layer ul>li{line-height:normal;cursor:pointer;display:block;}
-
 .weditor-wapper .weditor-layer.fontName {left:5px; width:180px;}
 .weditor-wapper .weditor-layer.fontSize {left:68px; width:300px;}
 .weditor-wapper .weditor-layer.hr {left:450px; width:170px;}
@@ -102,18 +99,12 @@
 .weditor-wapper .weditor-layer.fontName > ul > li > button > span > em,
 .weditor-wapper .weditor-layer.fontSize > ul > li > button > span > em,
 .weditor-wapper .weditor-layer.fontSize > ul > li > button > span > span {color:#888;padding:0 1px;}
-
-
 .weditor-wapper .weditor-layer.foreColorMore {left:315px; width:190px;}
 .weditor-wapper .weditor-layer.backColorMore {left:354px; width:190px;}
-
-
-
 .weditor-wapper .weditor-layer.blockquote {left:296px; width:425px;}
 .weditor-wapper .weditor-layer.blockquote > ul >li {float:left;width:8%;padding:1%;}
 .weditor-wapper .weditor-layer.blockquote > ul >li button{width:100%;}
 .weditor-wapper .weditor-layer.blockquote > ul >li blockquote{ height:30px;}
-
 .weditor-wapper .weditor-layer.character {left:315px; height:275px;}
 .weditor-wapper .weditor-layer.character > ul {margin:5px;position:relative;height:230px;width:auto;}
 .weditor-wapper .weditor-layer.character > ul >li {float:left;}
@@ -130,11 +121,8 @@
 .weditor-wapper .weditor-layer.character > p {margin:5px;vertical-align:middle;}
 .weditor-wapper .weditor-layer.character > p>input {margin-left:10px;padding:4px 0 0 5px;width:200px; height: 19px;border: 1px solid #aaa; border-radius: 2px;box-shadow: 0 3px 4px rgba(0,0,0,0.06) inset;-webkit-appearance: none;}
 .weditor-wapper .weditor-layer.character > p>button {}
-
-
 .weditor-wapper .weditor-layer.link {left:450px;}
 .weditor-wapper .weditor-layer.link > ul > li{padding:5px;}
-
 .weditor-wapper .weditor-layer.palette1 > ul {height:127px;width:100%;padding:5px;}
 .weditor-wapper .weditor-layer.palette1 > ul >li {padding:2px;float:left;}
 .weditor-wapper .weditor-layer.palette1 > ul >li button {width:16px;height:16px;border-radius: 2px;vertical-align: top;border:1px solid transparent;}
@@ -148,15 +136,6 @@
 .weditor-wapper .weditor-layer .palette-wapper .palette-action span{width:25px;height:25px;display:inline-block;background-color:#000000;vertical-align:middle;margin-right:2px;}
 .weditor-wapper .weditor-layer .palette-wapper .palette-action input{width:90px;padding:3px;margin-right:2px;}
 .weditor-wapper .weditor-layer .palette-wapper .palette-action button{}
-
-/*
-.weditor-wapper .weditor-layer .box {height: 13px;padding: 5px;cursor: pointer;}
-.weditor-wapper .weditor-layer .box2 {cursor: pointer;display:inline;}
-.weditor-wapper .weditor-layer>div>span {}
-.weditor-wapper .weditor-layer>div.hover{background-color:#ebebeb;}
-.weditor-wapper .weditor-layer.fontName {top:28px; left:5px; width:160px; height:255px;}
-.weditor-wapper .weditor-layer.fontSize {top:28px; left:68px; width:300px; height:283px;}
-*/
 
 
 
