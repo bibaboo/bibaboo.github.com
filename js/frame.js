@@ -591,9 +591,10 @@ var moduleData = [{
                     folder: "/view/note/java/"
                 },
                 nodes: [{
-                    text: "이중 배열을 이용한 코드 관리",
-                    id: "arrayCode"
-                }]
+                        text: "이중 배열을 이용한 코드 관리",
+                        id: "arrayCode"
+                    }
+                ]
             },
             {
                 text: "tool",
@@ -601,9 +602,14 @@ var moduleData = [{
                     folder: "/view/note/tool/"
                 },
                 nodes: [{
-                    text: "이클립스 설정",
-                    id: "eclpiseSetting"
-                }]
+                        text: "이클립스 설정",
+                        id: "eclpiseSetting"
+                    },
+                    {
+                        text: "vi 에디터",
+                        id: "viEditor"
+                    }
+                ]
             },
             {
                 text: "dbms",
