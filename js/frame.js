@@ -591,10 +591,9 @@ var moduleData = [{
                     folder: "/view/note/java/"
                 },
                 nodes: [{
-                        text: "이중 배열을 이용한 코드 관리",
-                        id: "arrayCode"
-                    }
-                ]
+                    text: "이중 배열을 이용한 코드 관리",
+                    id: "arrayCode"
+                }]
             },
             {
                 text: "tool",
@@ -608,6 +607,10 @@ var moduleData = [{
                     {
                         text: "vi 에디터",
                         id: "viEditor"
+                    },
+                    {
+                        text: "Visual Studio Code",
+                        id: "vscode"
                     }
                 ]
             },
@@ -952,7 +955,9 @@ var moduleData = [{
                             if (pnode.data.loading) $("#back-white").show();
                             $.get(url, function (html) {
                                     $entry.html(html).prev().html(node.text);
-                                    $entry.find("div.entry-summary").prepend(node.a_attr.title);
+                                    if(node.text!=node.a_attr.title){
+                                        $entry.find("div.entry-summary").prepend(node.a_attr.title);
+                                    }
                                     $("input[type=button]").button().addClass("mtb10");
 
                                     //make content-header
