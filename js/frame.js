@@ -484,6 +484,13 @@ var moduleData = [{
                 }
             },
             {
+                text: "naverMap",
+                id: "naverMap",
+                a_attr: {
+                    title: "naverMap demo"
+                }
+            },
+            {
                 text: "timeliner",
                 id: "timeliner",
                 a_attr: {
@@ -601,11 +608,11 @@ var moduleData = [{
                     folder: "/view/note/tool/"
                 },
                 nodes: [{
-                        text: "이클립스 설정",
+                        text: "eclipse",
                         id: "eclpiseSetting"
                     },
                     {
-                        text: "vi 에디터",
+                        text: "vi editor",
                         id: "viEditor"
                     },
                     {
@@ -619,17 +626,28 @@ var moduleData = [{
                 data: {
                     folder: "/view/note/dbms/"
                 },
-                nodes: []
+                nodes: [
+                    {
+                        text: "mysql",
+                        id: "mysql"
+                    }
+                ]
             },
             {
                 text: "server",
                 data: {
                     folder: "/view/note/server/"
                 },
-                nodes: [{
-                    text: "톰켓 설정",
-                    id: "tomcatSetting"
-                }]
+                nodes: [
+                    {
+                        text: "tomcat",
+                        id: "tomcatSetting"
+                    },
+                    {
+                        text: "linux",
+                        id: "linux"
+                    }
+				]
             },
             {
                 text: "etc",

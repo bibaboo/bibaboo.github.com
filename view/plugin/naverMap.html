@@ -1,0 +1,36 @@
+﻿<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://navermaps.github.io/maps.js/" target="_blank">네이버 지도 API v3</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">마커 표시하기</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="wrap" class="section">
+							<div id="map" style="width:100%;height:600px;"></div>
+							<code id="snippet" class="snippet"></code>
+						</div>
+						<script id="code">
+						var map = new naver.maps.Map('map', {
+							center: new naver.maps.LatLng(37.6498507, 127.0440489),
+							zoom: 20
+						});
+
+						var marker = new naver.maps.Marker({
+							position: new naver.maps.LatLng(37.6498507, 127.0440489),
+							map: map
+						});
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
