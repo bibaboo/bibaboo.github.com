@@ -2,7 +2,7 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">sample</span>
+    		<span class="title">rotate</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -59,6 +59,49 @@
 								$("#demo1-id1 .sync").toggleClass("rotate");
 							}
 						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">loading</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style type="text/css">
+							.load{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);
+								/*change these sizes to fit into your project*/
+								width:100px;
+								height:100px;
+							}
+							.load hr{border:0;margin:0;width:40%;height:40%;position:absolute;border-radius:50%;animation:spin2 2s ease infinite}
+
+							.load :first-child{background:#19A68C;animation-delay:-1.5s}
+							.load :nth-child(2){background:#F63D3A;animation-delay:-1s}
+							.load :nth-child(3){background:#FDA543;animation-delay:-0.5s}
+							.load :last-child{background:#193B48}
+
+							@keyframes spin2{
+								0%,100%{transform:translate(0)}
+								25%{transform:translate(160%)}
+								50%{transform:translate(160%, 160%)}
+								75%{transform:translate(0, 160%)}
+							}
+						</style>
+						<div id="demo2-id1" style="position:relative;height:100px;">
+							<div class="load">
+								<hr/><hr/><hr/><hr/>
+							</div>
+						</div>
 					</div>
 					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">

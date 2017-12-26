@@ -29,7 +29,6 @@ input[type="search"]::-webkit-search-decoration {
 
 .btd {border-top: 1px solid #ddd;}
 .mtb10 {margin:10px 0;}
-
 .clearboth { clear:both; }
 
 /* OVERLIDE
@@ -48,9 +47,10 @@ input[type="search"]::-webkit-search-decoration {
 #sidebar {float: left; width: 15%; position:relative; overflow-y: scroll; overflow-x: hidden;}
 .sidebar-head {position:relative;background: #eee; height: 24px; border-bottom: 1px solid #ddd;padding-top:7px;}
 .sidebar-head a {font-size: 1.3em; color: #333333; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);padding-left:7px;}
-.sidebar-head input {margin-left:10px; width:50%;}
 .sidebar-head ul{position:absolute;top:9px;right:5px;}
 .sidebar-head ul li{float:left;margin-left:5px;cursor:pointer;}
+.sidebar-search {width:100%;text-align:center;display:none;}
+.sidebar-search input {width:100%;}
 #resizer {position:absolute;background-color:#000;top:0;left:100px;height:100%;cursor: col-resize;opacity:0.1;}
 #spacer{position:absolute;top:30px;width:19px;height:100%;background-color:#eee;display:none;z-index:101;cursor:pointer;}
 #spacer span{margin:450px 1px;}

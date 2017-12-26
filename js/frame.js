@@ -762,6 +762,7 @@ var moduleData = [{
             source: pageSetting.autoData,
             select: function (event, ui) {
                 openNode(CODE_VALUE.sharp + ui.item.id);
+                $("#searchWord").parent().hide();
             }
         });
 
@@ -788,7 +789,7 @@ var moduleData = [{
                 var before = parseInt(pageSetting.resizerLeft, 10),
                     after = parseInt($("#resizer").css("left"), 10);
 
-                $("#searchWord").toggle(after > 180);
+                $(".sidebar-head .ui-widget").toggle(after > 120);
                 $sidebar.width(after);
                 $content.width($content.width() + (before - after));
                 pageSetting.resizerLeft = $resizer.css("left");
@@ -831,7 +832,13 @@ var moduleData = [{
         $sidebar.find(".sidebar-head>ul>li").click(
             function () {
                 var $span = $(this).find("span");
-                if ($span.hasClass("ui-icon-seek-first")) {
+                if ($span.hasClass("ui-icon-search")) {
+                    $(".sidebar-search").slideToggle("fast", function(){
+                        if($(this).is(":visible")){
+                            $(this).find("input").trigger("focusin");
+                        }
+                    });
+                }else if ($span.hasClass("ui-icon-seek-first")) {
                     $sidebar.hide();
                     $resizer.hide();
                     pageSetting.contentWidth = $content.width();

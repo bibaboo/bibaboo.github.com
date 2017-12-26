@@ -48,15 +48,15 @@ var COMMON_TMPL = {
         "<div id=\"wapper\">" +
         "	<div id=\"sidebar\">" +
         "	    <div class=\"sidebar-head\">" +
-        //"			<a href=\"javascript:void(0);\">wjquery</a>" +
-        "			<input type=\"search\" id=\"searchWord\"/ results=\"0\" placeholder=\"Search\">" +
+        "			<a href=\"javascript:void(0);\">wjquery</a>" +
         "			<ul class=\"ui-widget ui-helper-clearfix\">" +
+        "				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-search\"><span class=\"ui-icon ui-icon-search\"></span></li>" +
         "				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-close\"><span class=\"ui-icon ui-icon-seek-first\"></span></li>" +
         "				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-plus\"><span class=\"ui-icon ui-icon-plusthick\"></span></li>" +
         "				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-minus\"><span class=\"ui-icon ui-icon-minusthick\"></span></li>" +
         "			</ul>" +
         "		</div>" +
-        "	    <div class=\"sidebar-body\"><div id=\"menuTree\"></div></div>" +
+        "	    <div class=\"sidebar-body\"><div class=\"sidebar-search\"><input type=\"search\" id=\"searchWord\"/ results=\"0\" placeholder=\"Search\"></div><div id=\"menuTree\"></div></div>" +
         "	</div>" +
         "	<div id=\"spacer\">" +
         "		<span class=\"ui-icon ui-icon-seek-end\"></span>" +
