@@ -11,11 +11,6 @@ var pageSetting = {
         sidebar: "15%",
         content: "85%"
     },
-    //자식노드 기본정보
-    leafData: {
-        children: false,
-        icon: false
-    },
     //트리노드 액션 타입
     moduleDataType: {
         load: "load",
@@ -23,6 +18,48 @@ var pageSetting = {
         link: "link",
         iframe: "iframe"
     },
+    //plugin
+    plugin: {
+        template: {
+            loaded: false,
+            css: [""],
+            js: [""]
+
+        },
+        barcode: {
+            loaded: false,
+            js: ["/js/lib/JsBarcode.all.min.js"]
+
+        },
+        qrcode: {
+            loaded: false,
+            js: ["/js/lib/jquery.qrcode.min.js"]
+
+        },
+        naverMap: {
+            loaded: false,
+            js: ["https://openapi.map.naver.com/openapi/v3/maps.js?clientId=FEyy5fmQU1_i7I7Y4Yey&submodules=geocoder"]
+
+        },
+        minicolors: {
+            loaded: false,
+            css: ["/js/lib/jquery-minicolors-master/jquery.minicolors.css"],
+            js: ["/js/lib/jquery-minicolors-master/jquery.minicolors.min.js"]
+
+        },
+        jqplot: {
+            loaded: false,
+            css: ["/js/lib/jquery.jqplot.1.0.9/jquery.jqplot.min.css"],
+            js: ["/js/lib/jquery.jqplot.1.0.9/jquery.jqplot.min.js", "/js/lib/jquery.jqplot.1.0.9/plugins/jqplot.barRenderer.js", "/js/lib/jquery.jqplot.1.0.9/plugins/jqplot.categoryAxisRenderer.js"]
+        },
+        fakeLoader: {
+            loaded: false,
+            css: ["/js/lib/fakeLoader.js-master/fakeLoader.css"],
+            js: ["/js/lib/fakeLoader.js-master/fakeLoader.js"]
+        }
+    },
+
+
     //Miscellaneous
     autoData: [],
     resizerLeft: null,
@@ -428,7 +465,8 @@ var moduleData = [{
                 text: "jquery-minicolors",
                 id: "minicolors",
                 a_attr: {
-                    title: "jquery-minicolors 정리"
+                    title: "jquery-minicolors 정리",
+                    plugin: "minicolors"
                 }
             },
             {
@@ -440,19 +478,22 @@ var moduleData = [{
             {
                 text: "qrcode",
                 a_attr: {
-                    title: "qrcode 정리"
+                    title: "qrcode 정리",
+                    plugin: "qrcode"
                 }
             },
             {
                 text: "barcode",
                 a_attr: {
-                    title: "barcode 정리"
+                    title: "barcode 정리",
+                    plugin: "barcode"
                 }
             },
             {
                 text: "jqplot",
                 a_attr: {
-                    title: "jqplot 정리"
+                    title: "jqplot 정리",
+                    plugin: "jqplot"
                 },
                 data: {
                     type: pageSetting.moduleDataType.hash
@@ -461,7 +502,8 @@ var moduleData = [{
             {
                 text: "fakeLoader",
                 a_attr: {
-                    title: "fakeLoader demo"
+                    title: "fakeLoader demo",
+                    plugin: "fakeLoader"
                 }
             },
             {
@@ -487,7 +529,8 @@ var moduleData = [{
                 text: "naverMap",
                 id: "naverMap",
                 a_attr: {
-                    title: "naverMap demo"
+                    title: "naverMap demo",
+                    plugin: "naverMap"
                 }
             },
             {
@@ -626,20 +669,17 @@ var moduleData = [{
                 data: {
                     folder: "/view/note/dbms/"
                 },
-                nodes: [
-                    {
-                        text: "mysql",
-                        id: "mysql"
-                    }
-                ]
+                nodes: [{
+                    text: "mysql",
+                    id: "mysql"
+                }]
             },
             {
                 text: "server",
                 data: {
                     folder: "/view/note/server/"
                 },
-                nodes: [
-                    {
+                nodes: [{
                         text: "tomcat",
                         id: "tomcatSetting"
                     },
@@ -647,7 +687,7 @@ var moduleData = [{
                         text: "linux",
                         id: "linux"
                     }
-				]
+                ]
             },
             {
                 text: "etc",
@@ -833,12 +873,12 @@ var moduleData = [{
             function () {
                 var $span = $(this).find("span");
                 if ($span.hasClass("ui-icon-search")) {
-                    $(".sidebar-search").slideToggle("fast", function(){
-                        if($(this).is(":visible")){
+                    $(".sidebar-search").slideToggle("fast", function () {
+                        if ($(this).is(":visible")) {
                             $(this).find("input").trigger("focusin");
                         }
                     });
-                }else if ($span.hasClass("ui-icon-seek-first")) {
+                } else if ($span.hasClass("ui-icon-seek-first")) {
                     $sidebar.hide();
                     $resizer.hide();
                     pageSetting.contentWidth = $content.width();
@@ -857,57 +897,59 @@ var moduleData = [{
             $(this).removeClass("ui-state-hover");
         });
 
-        var _setData = function (node) {
+        var _setData = function (node, module) {
+            if ($.isFalse(node.used)) return false;
+            if (!node.nodes) {
+                node.children = false;
+                if (!node.icon) node.icon = false;
+            }
             if (!node.id) node.id = getPatternString("alphaNum", node.text);
+
             if (!node.a_attr) node.a_attr = {
                 title: node.text
-            };
+            }
+
+            if (module && module.data && !node.data) {
+                node.data = module.data;
+            } else if (module && module.data && node.data) {
+                node.data = $.extend({}, module.data, node.data);
+            }
+
             pageSetting.autoData.push({
                 label: node.text + " : " + node.a_attr.title,
                 id: node.id
             });
-        }
+            return true;
+        };
+
+        var _sort = function (node) {
+            delete node.nodes;
+            if (!$.isFalse(node.sort)) {
+                node.children.sort(function (a, b) {
+                    return a.text < b.text ? -1 : (a.text > b.text) ? 1 : 0;
+                });
+            }
+        };
 
         //트리
         var data = $.map(moduleData, function (module) {
-            if ($.isFalse(module.used)) return;
-            if (module.nodes) {
+            if (_setData(module) && module.nodes) {
                 module.children = $.map(module.nodes, function (node) {
-                    if ($.isFalse(node.used)) {
-
-                        return;
-                    }
-                    _setData(node);
-                    if (node.nodes) {
-                        if (!node.data && module.data) {
-                            node.data = module.data;
-                        } else if (node.data && module.data) {
-                            node.data = $.extend({}, module.data, node.data);
-                        }
+                    if (_setData(node, module) && node.nodes) {
                         node.children = $.map(node.nodes, function (_node) {
-                            _setData(_node);
-                            return $.extend({}, pageSetting.leafData, _node);
+                            _setData(_node, node);
+                            return _node;
                         });
-                        if (!$.isFalse(node.sort)) {
-                            node.children.sort(function (a, b) {
-                                return a.text < b.text ? -1 : (a.text > b.text) ? 1 : 0;
-                            });
-                        }
-                        return node;
-                    } else {
-                        return $.extend({}, pageSetting.leafData, node);
+                        _sort(node);
                     }
+                    return node;
                 });
-                delete module.nodes;
-                module.children.sort(function (a, b) {
-                    a.text < b.text ? -1 : (a.text > b.text) ? 1 : 0;
-                });
-            } else {
-                module.children = false;
+                _sort(module);
             }
-            _setData(module);
             return module;
         });
+
+        //console.log(data);
 
         $menuTree
             .jstree({
@@ -932,132 +974,142 @@ var moduleData = [{
                     $tree = $menuTree.jstree(true)
 
                 $content.find("div.content-body>.setting").addClass("none");
-
                 if (!node.data) node.data = {};
                 if ($tree.is_leaf(node) && (node.id == "home" || !node.icon)) {
-                    var pnode = node.parent == "#" ? {
-                            data: node.data
-                        } : $tree.get_node(node.parent),
-                        url = node.data.page ? node.data.page : node.id + ".html",
-                        type = node.data.type ? node.data.type : pnode.data.type,
-                        accordion = $.isFalse(node.data.accordion) ? node.data.accordion : $.isFalse(pnode.data.accordion) ? pnode.data.accordion : true;
+                    var loadPage = function () {
+                        var pnode = node.parent == CODE_VALUE.sharp ? {
+                                data: node.data
+                            } : $tree.get_node(node.parent),
+                            url = node.data.page ? node.data.page : node.id + ".html",
+                            type = node.data.type ? node.data.type : pnode.data.type,
+                            accordion = $.isFalse(node.data.accordion) ? node.data.accordion : $.isFalse(pnode.data.accordion) ? pnode.data.accordion : true;
 
-                    if ($.isTrue(node.data.mobile) && !$.isMobile()) {
-                        if (!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")) {
-                            return;
-                        }
-                    }
-
-                    if (type != "iframe" && $("#content-iframe").is(":visible")) {
-                        $("#content-iframe").hide().siblings().show();
-                    }
-
-                    if (!$.hasString(url, "http")) {
-                        url = pnode.data.folder + url;
-                    }
-
-                    if (accordion) $("#accordian1").click();
-
-                    switch (type) {
-                        case pageSetting.moduleDataType.blank:
-                            window.open(url);
-                            break;
-                        case pageSetting.moduleDataType.link:
-                            location.href = url;
-                            break;
-                        case pageSetting.moduleDataType.iframe:
-                            if ($("#content-iframe").is(":visible")) {
-                                $("#content-iframe").attr("src", url);
-                            } else {
-                                $entry.empty().prev().empty();
-                                $content.find("div.content-header>ul").empty();
-                                $("#content-iframe").attr("src", url).show().siblings().hide();
+                        if ($.isTrue(node.data.mobile) && !$.isMobile()) {
+                            if (!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")) {
+                                return;
                             }
-                            setHash(node.id, true);
-                            break;
-                        case pageSetting.moduleDataType.load:
-                            $("#btn-top").click();
-                            if (pnode.data.loading) $("#back-white").show();
-                            $.get(url, function (html) {
-                                    $entry.html(html).prev().html(node.text);
-                                    if(node.text!=node.a_attr.title){
-                                        $entry.find("div.entry-summary").prepend(node.a_attr.title);
-                                    }
-                                    $("input[type=button]").button().addClass("mtb10");
+                        }
 
-                                    //make content-header
-                                    var $ul = $content.find("div.content-header>ul").empty();
-                                    var titles = $entry.find(".entry-api span.title").map(function () {
-                                        return {
-                                            text: $(this).text()
-                                        };
-                                    }).get();
-                                    $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
+                        if (type != "iframe" && $("#content-iframe").is(":visible")) {
+                            $("#content-iframe").hide().siblings().show();
+                        }
 
-                                    if (accordion && titles.length > 1) {
-                                        $content.find(".content-body>.setting").removeClass("none");
-                                    }
+                        if (!$.hasString(url, "http")) {
+                            url = pnode.data.folder + url;
+                        }
 
-                                    $entry.find(".entry-source-content[data-wjquery]").each(function () {
-                                        if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
-                                            $(this).find("pre").html($[$(this).attr("data-wjquery")].toString());
-                                        } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
-                                            $(this).find("pre").html($.fn[$(this).attr("data-wjquery")].toString());
+                        if (accordion) $("#accordian1").click();
+
+                        switch (type) {
+                            case pageSetting.moduleDataType.blank:
+                                window.open(url);
+                                break;
+                            case pageSetting.moduleDataType.link:
+                                location.href = url;
+                                break;
+                            case pageSetting.moduleDataType.iframe:
+                                if ($("#content-iframe").is(":visible")) {
+                                    $("#content-iframe").attr("src", url);
+                                } else {
+                                    $entry.empty().prev().empty();
+                                    $content.find("div.content-header>ul").empty();
+                                    $("#content-iframe").attr("src", url).show().siblings().hide();
+                                }
+                                setHash(node.id, true);
+                                break;
+                            case pageSetting.moduleDataType.load:
+                                $("#btn-top").click();
+                                if (!$.isFalse(pnode.data.loading)) $("#back-white").show();
+
+                                $.get(url, function (html) {
+                                        $entry.html(html).prev().html(node.text);
+                                        if (node.text != node.a_attr.title) {
+                                            $entry.find("div.entry-summary").prepend(node.a_attr.title);
                                         }
-                                    });
+                                        $("input[type=button]").button().addClass("mtb10");
 
-                                    $entry.find(".entry-demo-content").each(function () {
-                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
-                                    });
+                                        //make content-header
+                                        var $ul = $content.find("div.content-header>ul").empty();
+                                        var titles = $entry.find(".entry-api span.title").map(function () {
+                                            return {
+                                                text: $(this).text()
+                                            };
+                                        }).get();
+                                        $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
 
-                                    $entry.find(".entry-demo-textarea-content").each(function () {
-                                        var _html = $(this).val();
-                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
+                                        if (accordion && titles.length > 1) {
+                                            $content.find(".content-body>.setting").removeClass("none");
+                                        }
 
-                                        $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
-                                            var $iframe = $(this)[0].contentWindow.document;
-                                            $iframe.open();
-                                            $iframe.write(_html);
-                                            $iframe.close();
+                                        $entry.find(".entry-source-content[data-wjquery]").each(function () {
+                                            if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
+                                                $(this).find("pre").html($[$(this).attr("data-wjquery")].toString());
+                                            } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
+                                                $(this).find("pre").html($.fn[$(this).attr("data-wjquery")].toString());
+                                            }
+                                        });
 
-                                            $(this).on("load", function () {
-                                                alert(1)
-                                                $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
-                                                resizeLayout();
+                                        $entry.find(".entry-demo-content").each(function () {
+                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
+                                        });
+
+                                        $entry.find(".entry-demo-textarea-content").each(function () {
+                                            var _html = $(this).val();
+                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
+
+                                            $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
+                                                var $iframe = $(this)[0].contentWindow.document;
+                                                $iframe.open();
+                                                $iframe.write(_html);
+                                                $iframe.close();
+
+                                                $(this).on("load", function () {
+                                                    $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
+                                                    resizeLayout();
+                                                });
                                             });
                                         });
-                                    });
 
-                                    setHash(node.id, true);
-                                    if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
-                                        SyntaxHighlighter.highlight();
-                                    }
-
-                                    $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
-                                        $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
-                                        $(this).parent().next().slideToggle();
-                                    });
-                                }, "html")
-                                .fail(function (response, status, xhr) {
-                                    try {
-                                        if (status == "error") {
-                                            $entry.empty().prev().html(node.text);
-                                            $content.find("div.content-header>ul").empty();
-                                            $entry.html(COMMON_TMPL.pageNotFound);
-                                            $.wLog(xhr);
+                                        setHash(node.id, true);
+                                        if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
+                                            SyntaxHighlighter.highlight();
                                         }
-                                    } catch (e) {
-                                        $.wLog(e);
-                                    }
-                                })
-                                .always(function () {
-                                    if (pnode.data.loading) setTimeout(function () {
-                                        $("#back-white").hide();
-                                    }, 100);
-                                });
-                            break;
-                        default:
-                            return;
+
+                                        $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
+                                            $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
+                                            $(this).parent().next().slideToggle();
+                                        });
+                                    }, "html")
+                                    .fail(function (response, status, xhr) {
+                                        try {
+                                            if (status == "error") {
+                                                $entry.empty().prev().html(node.text);
+                                                $content.find("div.content-header>ul").empty();
+                                                $entry.html(COMMON_TMPL.pageNotFound);
+                                                $.wLog(xhr);
+                                            }
+                                        } catch (e) {
+                                            $.wLog(e);
+                                        }
+                                    })
+                                    .always(function () {
+                                        if (!$.isFalse(pnode.data.loading)) {
+                                            setTimeout(function () {
+                                                $("#back-white").hide();
+                                            }, 100);
+                                        }
+                                    });
+                                break;
+                            default:
+                                return;
+                        }
+                    };
+
+                    if (node.a_attr.plugin && pageSetting.plugin[node.a_attr.plugin] && !pageSetting.plugin[node.a_attr.plugin].loaded) {
+                        var promise = loadPlugin(node.a_attr.plugin);
+                        promise.done(loadPage);
+                    } else {
+                        loadPage();
                     }
                 } else {
                     $tree[$tree.is_open(node) ? "close_node" : "open_node"](node);
@@ -1067,6 +1119,23 @@ var moduleData = [{
                 }
             });
     });
+
+    function loadPlugin(plugin) {
+        var deferred = $.Deferred();
+        if (pageSetting.plugin[plugin].css) {
+            loadStyles(pageSetting.plugin[plugin].css);
+        }
+
+        if (pageSetting.plugin[plugin].js) {
+            loadScripts(pageSetting.plugin[plugin].js, function () {
+                pageSetting.plugin[plugin].loaded = true;
+                deferred.resolve();
+            });
+        } else {
+            deferred.resolve();
+        }
+        return deferred.promise();
+    }
 })(jQuery);
 
 function resizeLayout() {

@@ -2,7 +2,7 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">general</span>
+    		<span class="title">format</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -27,6 +27,42 @@
 							
 							function demo1_3(){
 								$("#demo1-id3").html(moment().format("LL"));	
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">diff</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">demo2_1</div>
+						<div id="demo2-id2">demo2_2</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<input type="button" onclick="demo2_2();" value="demo2_2" />
+						<script type="text/javascript">	
+							function demo2_1(){
+								var startDate = moment().add(-1, "M"),
+									endDate = moment();
+									diff = endDate.diff(startDate, "d");
+									$("#demo2-id1").text(diff);
+							}
+							function demo2_2(){
+								var startDate = moment().add(-12, "M"),
+									endDate = moment();
+									diff = endDate.diff(startDate, "M");
+									$("#demo2-id2").text(diff);
 							}
 						</script>
 					</div>
