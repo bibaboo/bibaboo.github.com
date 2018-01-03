@@ -598,6 +598,13 @@ var moduleData = [{
                         a_attr: {
                             title: "아무 것도 없거나 하나 이상의 이름/값 쌍들을 둘러싸는 중괄호"
                         }
+                    },
+                    {
+                        text: "C&P1",
+                        id: "jscNp1",
+                        a_attr: {
+                            title: "Copy & Paste 1"
+                        }
                     }
                 ]
             },
@@ -827,7 +834,7 @@ var moduleData = [{
             scroll: false,
             stop: function () {
                 var before = parseInt(pageSetting.resizerLeft, 10),
-                    after = parseInt($("#resizer").css("left"), 10);
+                    after = parseInt($resizer.css("left"), 10);
 
                 $(".sidebar-head .ui-widget").toggle(after > 120);
                 $sidebar.width(after);
@@ -960,7 +967,7 @@ var moduleData = [{
                 //,"plugins" : ["sort"]
             })
             .one("loaded.jstree", function (event, data) {
-                if (document.location.hash && $("#menuTree").jstree(true).get_node(document.location.hash)) {
+                if (document.location.hash && $menuTree.jstree(true).get_node(document.location.hash)) {
                     openNode(document.location.hash);
                 } else {
                     goHome();
