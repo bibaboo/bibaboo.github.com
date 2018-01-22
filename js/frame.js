@@ -36,6 +36,11 @@ var pageSetting = {
             js: ["/js/lib/jquery.qrcode.min.js"]
 
         },
+        clipboard: {
+            loaded: false,
+            js: ["/js/lib/clipboard.min.js"]
+
+        },
         naverMap: {
             loaded: false,
             js: ["https://openapi.map.naver.com/openapi/v3/maps.js?clientId=FEyy5fmQU1_i7I7Y4Yey&submodules=geocoder"]
@@ -480,6 +485,13 @@ var moduleData = [{
                 a_attr: {
                     title: "qrcode 정리",
                     plugin: "qrcode"
+                }
+            },
+            {
+                text: "clipboard",
+                a_attr: {
+                    title: "clipboard 정리",
+                    plugin: "clipboard"
                 }
             },
             {

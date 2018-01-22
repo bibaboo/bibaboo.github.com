@@ -1,0 +1,40 @@
+<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://github.com/zenorocha/clipboard.js" target="_blank">clipboard</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<input type="button" class="clipboardBtn" data-clipboard-text="가나다라마바사아자차카타파하" value="copyText" />
+						<br/>
+						<input type="input" value="1234567" id="clipboardCopy" style="padding:5px;" />
+						<input type="button" class="clipboardBtn" data-clipboard-target="#clipboardCopy" value="copy" />
+						<br/>
+						<input type="input" value="abcdefg" id="clipboardCut" style="padding:5px;" />
+						<input type="button" class="clipboardBtn" data-clipboard-action="cut" data-clipboard-target="#clipboardCut" value="cut" />
+						<script type="text/javascript">
+							var clipboard = new Clipboard('.clipboardBtn');
+							clipboard.on('success', function(e) {
+								/*
+								console.info('Action:', e.action);
+								console.info('Text:', e.text);
+								console.info('Trigger:', e.trigger);
+								*/
+								$.toast("copied..");
+								e.clearSelection();
+							});
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

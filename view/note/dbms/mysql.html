@@ -29,4 +29,116 @@
 			</div>
 		</div>
 	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">procedure</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						DROP PROCEDURE IF EXISTS proc_test_001;
+						delimiter //
+						create PROCEDURE proc_test_001 (IN target_date varchar(8))
+						begin
+							DECLARE start_date datetime;
+							DECLARE end_date datetime;
+
+							set start_date = CONVERT_TZ(STR_TO_DATE(target_date,'%Y%m%d'), @@session.time_zone, '+00:00');
+							set end_date = CONVERT_TZ(DATE_ADD(STR_TO_DATE(target_date,'%Y%m%d'), INTERVAL '1' DAY), @@session.time_zone, '+00:00');
+
+
+							delete from sampleTable where visitedDate = target_date;
+
+							insert into sampleTable(a, b, c, d)
+							select  a,
+									b,
+									c
+							from targetTble
+							where insertDateTime >= start_date
+							and	insertDateTime < end_date
+
+						end//
+						delimiter ;
+					</textarea>
+					<div class="entry-source-title">basic</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: sql;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">function</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						delimiter $$
+
+						create function get_seq (p_seq_name varchar(10))
+
+						returns int reads sql data
+
+						begin
+
+							declare _seq int;
+							declare _result int;
+
+							select seq into _seq from deviceSeq where seq_name = p_seq_name;
+
+							if _seq is null then
+								set _result = 1;
+								insert into deviceSeq(seq_name, seq) values(p_seq_name, _result);
+							else
+								set _result = _seq + 1;
+								update deviceSeq set seq = _result where seq_name = p_seq_name;
+							end if;
+
+						return _result;
+
+						end $$
+
+						delimiter ;
+					</textarea>
+					<div class="entry-source-title">basic</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: sql;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">기본 함수</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						select 	concat(substring(num, 1, 1), space(3), ',', alpa, ifnull(hangul, '')) as concatTest,
+									case when hangul is null then 'unknown' when hangul='가' then 'best' else 'so so..' end caseTest,
+									replace(alpa, 'a', 'A') as replaceTest,
+									insert(num, 2, 2, '00') as insertTest,
+									num, alpa, hangul
+						from(
+							select 123 as num, 'a' as alpa, '가' as hangul union
+							select 234 as num, 'b' as alpa, '나' as hangul union
+							select 345 as num, 'c' as alpa, '다' as hangul union
+							select 456 as num, 'd' as alpa, null as hangul union
+							select 567 as num, 'e' as alpa, null as hangul
+						) a
+					</textarea>
+					<div class="entry-source-title">basic</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: sql;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
 </ul>
