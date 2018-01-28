@@ -1,0 +1,69 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div class="example">	
+			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div class="entry-source-content">
+				<pre class="brush: js: true;"></pre>
+			</div>
+			<script type="text/javascript">
+				$("div.entry-source-content").find("pre").html(stringBuffer.toString());
+			</script>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">.append(value)</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+							<td class="name">value</td>
+							<td class="type">String</td>
+							<td class="desc">문자열</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<h2>
+    		<span class="title">.toString(delm)</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">delm</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">구분값(default:'');</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<script type="text/javascript">
+							function demo1_1(){
+								var sb = new stringBuffer();
+								sb.append("aaaa");
+								sb.append("bbbb");
+								sb.append("cccc");
+								$("#demo1-id1").html(sb.toString());
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [4]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

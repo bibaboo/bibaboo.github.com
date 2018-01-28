@@ -426,6 +426,12 @@ var moduleData = [{
                         a_attr: {
                             title: "sessionStorage 제어"
                         }
+                    },
+                    {
+                        text: "stringBuffer",
+                        a_attr: {
+                            title: "stringBuffer"
+                        }
                     }
                 ]
             }

@@ -20,6 +20,22 @@
         },
 
         /**
+         * 문자열 반환
+         * @name $.getString(value)
+         * @param value 문자열
+         * @return String
+         **/
+        getString: function (value) {
+            if(typeof(value)==="string"){
+                return value;
+            }else if(typeof(value)==="object"){
+                return JSON.stringify(value);
+            }else{
+                return value;
+            }
+        },
+
+        /**
          * value에 값이 있는지 비교
          * @name $.hasValue(value)
          * @param value 문자열
@@ -594,6 +610,26 @@ function initCap(value) {
     return value.length > 1 ? value.substring(0, 1).toUpperCase() + value.substring(1, value.length).toLowerCase() : value;
 }
 
+/**
+ * setTmpl
+ * @param a Array
+ */
+function setTmpl(a){
+    $.each(a, function(key, value){
+        $.template(key, value);
+    });
+}
+
+/**
+ * setTmpl
+ * @param a Array
+ */
+function drawTmplList(c, t, a, f){
+    if(!$.isArray(a)) return;
+    if(typeof(c)==="string") c = $(c);
+    $.tmpl(t, $.map(a, f)).appendTo(c);
+}
+
 //--------------------------------------------------------------------
 // date
 //--------------------------------------------------------------------
@@ -1076,3 +1112,16 @@ var sStorage = {
         window.sessionStorage.clear();
     }
 };
+
+/**
+ * stringBuffer
+ */
+function stringBuffer (){
+    var buffer = new Array();
+    this.append = function(value){
+        buffer.push($.getString(value));
+    }
+    this.toString = function(delm){
+        return buffer.join(delm||"");
+    }
+}

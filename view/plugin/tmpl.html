@@ -2,7 +2,7 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">general</span>
+    		<span class="title">simple</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -12,7 +12,7 @@
 						<div id="demo1-id1">demo1_1</div>
 						<div id="demo1-id2">demo1_2</div>
 						<input type="button" onclick="demo1_1();" value="demo1_1" />
-						<input type="button" onclick="demo1_2();" value="demo2_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
 						<script type="text/javascript">	
 							var demo1 = "<div><b>${name} ${jobTitle}</b></div>";
 							function demo1_1(){
@@ -21,6 +21,43 @@
 							
 							function demo1_2(){
 								$("#demo1-id2").empty().append($.tmpl(demo1, [{name:"개발자1-2", jobTitle:"팀장"}, {name:"개발자1-3", jobTitle:"팀장"}]));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id3">demo1_3</div>
+						<input type="button" onclick="demo1_3();" value="demo1_3" />
+						<script type="text/javascript">	
+							var _tmpl = {
+								"demo1_3" : "<div style='color:${color}'><b>${name} ${jobTitle}</b></div>",
+								"demo1_4" : "<div>${age}}</div>"
+							}
+
+							setTmpl(_tmpl);
+							
+							function demo1_3(){
+								var testData = [{name:"개발자1-2", jobTitle:"팀원"}, {name:"개발자1-3", jobTitle:"팀장"}];
+								var $c = $("#demo1-id3").empty();
+								drawTmplList($c, "demo1_3", testData, function(item){
+									item.color = item.jobTitle=="팀장"?"blue":"black";
+									return item;
+								});
 						  	}
 						</script>
 					</div>
