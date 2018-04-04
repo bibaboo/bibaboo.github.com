@@ -680,7 +680,7 @@ function getTargetDate(dt, mode, len, delim) {
 }
 
 //--------------------------------------------------------------------
-// expr
+// regexp
 //--------------------------------------------------------------------
 /**
  * 패턴 매치되는 여부
@@ -766,6 +766,31 @@ function replaceString(targetName, value) {
         return value.replace(/\d{2,3}[-|\)]\d{3,4}-\d{3,4}/g, '<a tel="$&" class="tel-link">$&</a>');
     }
     return value;
+}
+
+/**
+ * replaceRegExpContentImgUrl
+ */
+function replaceRegExpContentImgUrl(s){
+	var mobileApi = "https://m.wonchu.com/rest/common/file/downloadFileForImage?path=",
+		targets = [
+			"http://www.wonchu.com/support/fileupload/downloadFile.do",
+			"http://www.wonchu.com/base/images/common"
+		];
+
+	var re = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/g,
+		re2 = /src="|'/g;
+	return s.replace(re, function(match){
+		var b = false;
+		for(var i=0;targets.length>i;i++){
+			if(match.indexOf(targets[i])>-1){
+				b = true;
+				break;
+			}
+		}
+
+		return b?match.replace(/\?/g, "_Q_").replace(/\&amp;/g, "_A_").replace(/\&/g, "_A_").replace(re2, '$&' + mobileApi).replace("https", "http"):match;
+	});
 }
 
 //--------------------------------------------------------------------

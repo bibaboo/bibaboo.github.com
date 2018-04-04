@@ -637,7 +637,7 @@ var moduleData = [
                     },
                     {
                         text: "정규식",
-                        id: "regex",
+                        id: "regexp",
                         a_attr: {
                             title: "정규식 정리"
                         }
