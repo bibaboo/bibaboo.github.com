@@ -63,8 +63,6 @@ var pageSetting = {
             js: ["/js/lib/fakeLoader.js-master/fakeLoader.js"]
         }
     },
-
-
     //Miscellaneous
     autoData: [],
     resizerLeft: null,
@@ -81,7 +79,23 @@ var $sidebar,
     $menuTree;
 
 /* 모듈 정보 */
-var moduleData = [{
+var moduleData = [
+    /*
+    {
+        text: "sample",                              // 트리 노드에 표시 될 텍스트
+        used: false,                                 // 트리 노드에 표시 여부 default=true
+        icon: "../images/tree-icon.png",             // 트리 노드에 표시 될 아이콘 default=false
+        data: {
+            folder: "/view/",
+            type: pageSetting.moduleDataType.load,
+            accordion: false
+        },
+        a_attr: {
+            title: "wonchu~~"
+        }
+    }
+    */
+    {
         text: "home",
         icon: "../images/tree-icon.png",
         data: {
@@ -93,7 +107,6 @@ var moduleData = [{
             title: "wonchu~~"
         }
     },
-
     {
         text: "wjquery",
         data: {
@@ -303,12 +316,12 @@ var moduleData = [{
                 ]
             },
             {
-                text: "js.expr",
+                text: "js.regexp",
                 a_attr: {
                     title: "정규식 관련 공통함수"
                 },
                 data: {
-                    folder: "/view/wjquery/js_expr/"
+                    folder: "/view/wjquery/js_regexp/"
                 },
                 nodes: [{
                         text: "getPattern()",
@@ -437,7 +450,6 @@ var moduleData = [{
             }
         ]
     },
-
     {
         text: "plugin",
         data: {
@@ -570,7 +582,6 @@ var moduleData = [{
             }
         ]
     },
-
     {
         text: "note",
         data: {
@@ -622,6 +633,13 @@ var moduleData = [{
                         id: "jscNp1",
                         a_attr: {
                             title: "Copy & Paste 1"
+                        }
+                    },
+                    {
+                        text: "정규식",
+                        id: "regex",
+                        a_attr: {
+                            title: "정규식 정리"
                         }
                     }
                 ]
@@ -723,7 +741,6 @@ var moduleData = [{
             }
         ]
     },
-
     {
         text: "snippet",
         data: {
@@ -735,7 +752,6 @@ var moduleData = [{
             id: "simpleButton"
         }]
     },
-
     {
         text: "project",
         data: {
@@ -757,7 +773,6 @@ var moduleData = [{
             {
                 text: "wjquery.editor",
                 id: "editor",
-                used: true,
                 a_attr: {
                     title: "working"
                 },
@@ -781,7 +796,6 @@ var moduleData = [{
             }
         ]
     },
-
     {
         text: "template",
         used: true,
@@ -958,20 +972,25 @@ var moduleData = [{
 
         //트리
         var data = $.map(moduleData, function (module) {
-            if (_setData(module) && module.nodes) {
-                module.children = $.map(module.nodes, function (node) {
-                    if (_setData(node, module) && node.nodes) {
-                        node.children = $.map(node.nodes, function (_node) {
-                            _setData(_node, node);
-                            return _node;
-                        });
-                        _sort(node);
-                    }
-                    return node;
-                });
-                _sort(module);
+            if (_setData(module)) {
+                if (module.nodes) {
+                    module.children = $.map(module.nodes, function (node) {
+                        if (_setData(node, module)) {
+                            if (node.nodes) {
+                                node.children = $.map(node.nodes, function (_node) {
+                                    if(_setData(_node, node)){   
+                                        return _node;
+                                    }
+                                });
+                                _sort(node);
+                            }
+                            return node;
+                        }
+                    });
+                    _sort(module);
+                }
+                return module;
             }
-            return module;
         });
 
         //console.log(data);
