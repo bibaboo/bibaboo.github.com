@@ -1,0 +1,145 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.wform('get')</span>
+    		<span class="return">→ Variant</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">method</td>
+			  			<td class="type">String</td>
+			  			<td class="desc"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content" data-wjquery="wform">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" class="demo1-class1">
+							<div>
+								text 	<input type="text" name="demo1-input" size="10" value="a" />
+										<input type="text" name="demo1-input" size="10" value="b" />
+										<input type="text" name="demo1-input" size="10" value="c" />
+							</div>
+							<div>
+								radio 	<label><input type="radio" name="demo1-radio" value="d" /> d</label>
+										<label><input type="radio" name="demo1-radio" value="e" checked="checked"/> e</label>
+										<label><input type="radio" name="demo1-radio" value="f" /> f</label>
+							</div>
+							<div>
+								chekcbox 	<label><input type="checkbox" name="demo1-checkbox" value="g" /> g</label>
+										<label><input type="checkbox" name="demo1-checkbox" value="h" checked="checked"/> h</label>
+										<label><input type="checkbox" name="demo1-checkbox" value="i" checked="checked" /> i</label>
+							</div>
+						</div>
+						<input type="button" onclick="demo1_1();" value="demo1_1" />
+						<input type="button" onclick="demo1_2();" value="demo1_2" />
+						<input type="button" onclick="demo1_3();" value="demo1_3" />
+						
+						<script type="text/javascript">
+							function demo1_1(){
+								var v = $.getString($("input[name='demo1-input']").wform("get"));
+								$.alert(v);
+							}
+							  
+							function demo1_2(){
+								var v = $.getString($("input[name='demo1-radio']").wform("get"));
+								$.alert(v);
+							}
+							  
+							function demo1_3(){
+								var v = $.getString($("input[name='demo1-checkbox']").wform("get"));
+								$.alert(v);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [1, 2]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.wform('set', value)</span>
+    		<span class="return">→ jQuery</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">method</td>
+			  			<td class="type">String</td>
+			  			<td class="desc"></td>
+					</tr>
+					<tr>
+						<td class="name">value</td>
+						<td class="type">String</td>
+						<td class="desc"></td>
+				  </tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content" data-wjquery="wform">
+					<pre class="brush: js: true;"></pre>
+				</div>
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1" class="demo2-class1">
+							<div>
+								text 	<input type="text" name="demo2-input" size="10" value="a" />
+										<input type="text" name="demo2-input" size="10" value="b" />
+										<input type="text" name="demo2-input" size="10" value="c" />
+							</div>
+							<div>
+								radio 	<label><input type="radio" name="demo2-radio" value="d" /> d</label>
+										<label><input type="radio" name="demo2-radio" value="e" checked="checked"/> e</label>
+										<label><input type="radio" name="demo2-radio" value="f" /> f</label>
+							</div>
+							<div>
+								chekcbox 	<label><input type="checkbox" name="demo2-checkbox" value="g" /> g</label>
+										<label><input type="checkbox" name="demo2-checkbox" value="h" checked="checked"/> h</label>
+										<label><input type="checkbox" name="demo2-checkbox" value="i" checked="checked" /> i</label>
+							</div>
+						</div>
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<input type="button" onclick="demo2_2();" value="demo2_2" />
+						<input type="button" onclick="demo2_3();" value="demo2_3" />
+						
+						<script type="text/javascript">
+							function demo2_1(){
+								$("input[name='demo2-input']:eq(1)").wform("set", "B");
+							}
+							  
+							function demo2_2(){
+								var v = $.getString($("input[name='demo2-radio']").wform("set"));
+								$.alert(v);
+							}
+							  
+							function demo2_3(){
+								var v = $.getString($("input[name='demo2-checkbox']").wform("set"));
+								$.alert(v);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [1, 2]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

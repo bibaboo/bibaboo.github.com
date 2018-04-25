@@ -19,7 +19,7 @@
                 result = WFORM[method].apply(this, args);
             });
         }
-        return typeof (result) == "undefined" ? $(this) : result;
+        return result ? $(this) : result;
     };
 
     var WFORM = new(function () {

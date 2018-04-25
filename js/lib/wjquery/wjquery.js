@@ -459,7 +459,48 @@
                 });
             }
             return this;
+        },
+
+        wform: function (method) {
+            return WFORM[method].apply(this, Array.prototype.slice.call(arguments, 1)) || $(this);
         }
+    });
+
+    var WFORM = new(function () {
+        function get() {
+            var $t = $(this);
+            if ($t.is("input:radio")) {
+                alert($(":checked", $t).length)
+                return $(":checked", $t).val() || "";
+            } else if ($t.is("input:checkbox")) {
+                return $("input:checkbox[name='" + $t.attr("name") + "']:checked").map(function () {
+                    return this.value;
+                }).get();
+            } else {
+                return $(this).val();
+            }
+        }
+
+        function set(v, b) {
+            if ($(this).length == 0) return
+            var $t = $(this[0]);
+            if ($t.is("input:radio")) {
+                $("input:radio[name='" + $t.attr("name") + "'][value='" + v + "']").attr("checked", true);
+            } else if ($t.is("input:checkbox")) {
+                var _v = $.isArray(v) ? v : [v];
+                if (b) $("input:checkbox[name='" + $t.attr("name") + "']:checked").attr("checked", false);
+                $.each(_v, function () {
+                    $("input:checkbox[name='" + $t.attr("name") + "'][value='" + this + "']").attr("checked", true);
+                });
+            } else {
+                $(this).val(v);
+            }
+        }
+        
+        return {
+            get: get,
+            set : set
+        };
     });
 
 })(jQuery);

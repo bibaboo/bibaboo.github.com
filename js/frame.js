@@ -232,6 +232,12 @@ var moduleData = [
                         a_attr: {
                             title: "a, area 링크, 클릭 동작 제어"
                         }
+                    },
+                    {
+                        text: ".wform()",
+                        a_attr: {
+                            title: "form 개체 컨트롤"
+                        }
                     }
                 ]
             },
@@ -571,13 +577,6 @@ var moduleData = [
                 },
                 data: {
                     type: pageSetting.moduleDataType.blank
-                }
-            },
-            {
-                text: "wjquery.form",
-                id: "wform",
-                a_attr: {
-                    title: "wjquery.form"
                 }
             }
         ]
