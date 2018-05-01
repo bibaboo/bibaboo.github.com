@@ -17,7 +17,7 @@
 			</table>
 			<div class="example">
 				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
-				<div class="entry-source-content" data-wjquery="wform">
+				<div class="entry-source-content">
 					<pre class="brush: js: true;"></pre>
 				</div>
 				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
@@ -26,8 +26,6 @@
 						<div id="demo1-id1" class="demo1-class1">
 							<div>
 								text 	<input type="text" name="demo1-input" size="10" value="a" />
-										<input type="text" name="demo1-input" size="10" value="b" />
-										<input type="text" name="demo1-input" size="10" value="c" />
 							</div>
 							<div>
 								radio 	<label><input type="radio" name="demo1-radio" value="d" /> d</label>
@@ -43,18 +41,19 @@
 						<input type="button" onclick="demo1_1();" value="demo1_1" />
 						<input type="button" onclick="demo1_2();" value="demo1_2" />
 						<input type="button" onclick="demo1_3();" value="demo1_3" />
-						
+
 						<script type="text/javascript">
+							$(".entry-source-content:eq(0)>pre").html($("body").wform("toString", "get"));
 							function demo1_1(){
 								var v = $.getString($("input[name='demo1-input']").wform("get"));
 								$.alert(v);
 							}
-							  
+
 							function demo1_2(){
 								var v = $.getString($("input[name='demo1-radio']").wform("get"));
 								$.alert(v);
 							}
-							  
+
 							function demo1_3(){
 								var v = $.getString($("input[name='demo1-checkbox']").wform("get"));
 								$.alert(v);
@@ -91,7 +90,7 @@
 			</table>
 			<div class="example">
 				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
-				<div class="entry-source-content" data-wjquery="wform">
+				<div class="entry-source-content">
 					<pre class="brush: js: true;"></pre>
 				</div>
 				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
@@ -100,8 +99,6 @@
 						<div id="demo2-id1" class="demo2-class1">
 							<div>
 								text 	<input type="text" name="demo2-input" size="10" value="a" />
-										<input type="text" name="demo2-input" size="10" value="b" />
-										<input type="text" name="demo2-input" size="10" value="c" />
 							</div>
 							<div>
 								radio 	<label><input type="radio" name="demo2-radio" value="d" /> d</label>
@@ -117,20 +114,19 @@
 						<input type="button" onclick="demo2_1();" value="demo2_1" />
 						<input type="button" onclick="demo2_2();" value="demo2_2" />
 						<input type="button" onclick="demo2_3();" value="demo2_3" />
-						
+
 						<script type="text/javascript">
+							$(".entry-source-content:eq(1)>pre").html($("body").wform("toString", "set"));
 							function demo2_1(){
-								$("input[name='demo2-input']:eq(1)").wform("set", "B");
+								$("input[name='demo2-input']").wform("set", "b");
 							}
-							  
+
 							function demo2_2(){
-								var v = $.getString($("input[name='demo2-radio']").wform("set"));
-								$.alert(v);
+								$("input[name='demo2-radio']").wform("set", "f");
 							}
-							  
+
 							function demo2_3(){
-								var v = $.getString($("input[name='demo2-checkbox']").wform("set"));
-								$.alert(v);
+								$("input[name='demo2-checkbox']").wform("set", ["g", "h"], true);
 						  	}
 						</script>
 					</div>

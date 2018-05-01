@@ -1,0 +1,50 @@
+<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://github.com/lindell/JsBarcode" target="_blank">JsBarcode</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" style="height:200px;width:500px;margin-left:100px;background-color:#f1f1f1;border:1px solid #ddd;"></div>
+						<div id="demo1-id2" style="height:100px;width:500px;margin-top:30px;margin-left:100px;border:1px solid #ddd;overflow-y:scroll;"></div>
+						<script type="text/javascript">
+							$("#demo1-id1").wswipe( {
+								swipeRight:function(event, direction, distance, duration, fingerCount, target, pos) {
+									if(target!=undefined && typeof(window["swipeRightHandler"])=="function"){
+										swipeRightHandler(target);
+									}else{
+										//default function
+									}
+								},
+								swipeLeft:function(event, direction, distance, duration, fingerCount, target, pos) {
+									if(target!=undefined && typeof(window["swipeLeftHandler"])=="function"){
+										swipeLeftHandler(target);
+									}else{
+										//default function
+									}
+								}
+								,threshold:50,maxTimeThreshold:2000,print:$("#demo1-id2")
+							});
+
+							function swipeLeftHandler(){
+								console.log("left");
+							}
+
+							function swipeRightHandler(){
+								console.log("right");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

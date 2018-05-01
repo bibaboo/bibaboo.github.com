@@ -470,10 +470,9 @@
         function get() {
             var $t = $(this);
             if ($t.is("input:radio")) {
-                alert($(":checked", $t).length)
-                return $(":checked", $t).val() || "";
+                return $t.filter(":checked").val() || "";
             } else if ($t.is("input:checkbox")) {
-                return $("input:checkbox[name='" + $t.attr("name") + "']:checked").map(function () {
+                return $t.filter(":checked").map(function () {
                     return this.value;
                 }).get();
             } else {
@@ -482,24 +481,28 @@
         }
 
         function set(v, b) {
-            if ($(this).length == 0) return
-            var $t = $(this[0]);
+            var $t = $(this);
             if ($t.is("input:radio")) {
-                $("input:radio[name='" + $t.attr("name") + "'][value='" + v + "']").attr("checked", true);
+                $t.filter("[value='" + v + "']").attr("checked", true);
             } else if ($t.is("input:checkbox")) {
                 var _v = $.isArray(v) ? v : [v];
-                if (b) $("input:checkbox[name='" + $t.attr("name") + "']:checked").attr("checked", false);
+                if (b) $t.filter(":checked").attr("checked", false);
                 $.each(_v, function () {
-                    $("input:checkbox[name='" + $t.attr("name") + "'][value='" + this + "']").attr("checked", true);
+                    $t.filter("[value='" + this + "']").attr("checked", true)
                 });
             } else {
                 $(this).val(v);
             }
         }
-        
+
+        function toString(m){
+            return WFORM[m].toString();
+        }
+
         return {
             get: get,
-            set : set
+            set : set,
+            toString : toString
         };
     });
 
@@ -698,7 +701,7 @@ function getToday(delim) {
  * @param dt Date or String
  * @param mode Y or M or D
  * @param len 길이
- * @param delim 
+ * @param delim
  * @return String
  */
 function getTargetDate(dt, mode, len, delim) {

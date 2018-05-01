@@ -46,6 +46,11 @@ var pageSetting = {
             js: ["https://openapi.map.naver.com/openapi/v3/maps.js?clientId=FEyy5fmQU1_i7I7Y4Yey&submodules=geocoder"]
 
         },
+        wswipe: {
+            loaded: false,
+            js: ["/js/lib/wjquery/wjquery.swipe.js"]
+
+        },
         minicolors: {
             loaded: false,
             css: ["/js/lib/jquery-minicolors-master/jquery.minicolors.css"],
@@ -562,6 +567,13 @@ var moduleData = [
                 }
             },
             {
+                text: "wswipe",
+                a_attr: {
+                    title: "웹/모바일용 swipe",
+                    plugin: "wswipe"
+                }
+            },
+            {
                 text: "naverMap",
                 id: "naverMap",
                 a_attr: {
@@ -977,7 +989,7 @@ var moduleData = [
                         if (_setData(node, module)) {
                             if (node.nodes) {
                                 node.children = $.map(node.nodes, function (_node) {
-                                    if(_setData(_node, node)){   
+                                    if(_setData(_node, node)){
                                         return _node;
                                     }
                                 });
