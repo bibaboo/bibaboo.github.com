@@ -103,8 +103,8 @@
 		redraw : function($element, options){
 			$element.find(".link-prev").toggleClass("wpaging-none", options.startPage==1);
 			$element.find(".link-next").toggleClass("wpaging-none", options.totalPage==options.endPage);
+			
 			var _page = options.startPage;
-			console.log(options);
 			for(var i=0; i<=options.pageCount-1;i++){
 				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wpaging-none", _page>options.totalPage);
 				_page++;
