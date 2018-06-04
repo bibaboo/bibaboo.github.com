@@ -52,7 +52,7 @@
 					_data.type = "prev";
 					_data.page = options.startPage - options.pageCount;
 				} else if($(this).hasClass("link-next")){
-					_data.type = "prev";
+					_data.type = "next";
 					_data.page = options.endPage + 1;
 				} else if($(this).hasClass("link-num")){
 					_data.type = "page";

@@ -17,7 +17,7 @@
 						<script type="text/javascript">
 							var paginInf = {
 								currentPage: 1,
-								totalCount: 62,
+								totalCount: 160,
 								listSize: 10,
 								pageCount: 5,
 								callback: demo1_process
@@ -27,21 +27,24 @@
 
 							function demo1_process(result) {
 								//* 목록 조회
-								alert("retrieve page : " + result.page);
+								alert("retrieve type : " + result.type + ", page : " + result.page);
 								//*/
 
 								switch (result.type) {
 									case "prev":
 										{
 											var _paginInf = {
-												currentPage: result.page,
-												totalCount: 63
+												currentPage: result.page
 											};
 
 											$("#demo1-id1").wpaging("redraw", _paginInf);
 										}
 									case "next":
-										{}
+										var _paginInf = {
+                                            currentPage: result.page
+                                        };
+
+                                        $("#demo1-id1").wpaging("redraw", _paginInf);
 									case "page":
 										{
 											$("#demo1-id1").wpaging("setNum", result.page);
