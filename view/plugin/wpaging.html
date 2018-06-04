@@ -1,0 +1,69 @@
+<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo
+					<a href="javascript:void(0);" class="ui-state-default ui-corner-all">
+						<span class="ui-icon ui-icon-circle-triangle-s"></span>
+					</a>
+				</div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1" style="height:50px;"></div>
+						<script type="text/javascript">
+							var paginInf = {
+								currentPage: 1,
+								totalCount: 62,
+								listSize: 10,
+								pageCount: 5,
+								callback: demo1_process
+							};
+
+							$("#demo1-id1").wpaging(paginInf);
+
+							function demo1_process(result) {
+								//* 목록 조회
+								alert("retrieve page : " + result.page);
+								//*/
+
+								switch (result.type) {
+									case "prev":
+										{
+											var _paginInf = {
+												currentPage: result.page,
+												totalCount: 63
+											};
+
+											$("#demo1-id1").wpaging("redraw", _paginInf);
+										}
+									case "next":
+										{}
+									case "page":
+										{
+											$("#demo1-id1").wpaging("setNum", result.page);
+										}
+								};
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+				<div class="entry-source-title">css source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content" data-plugin="wpaging" data-plugin-type="css">
+					<pre class="brush: css: true;"></pre>
+				</div>
+				<div class="entry-source-title">js source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div class="entry-source-content" data-plugin="wpaging" data-plugin-type="js">
+					<pre class="brush: js: true;"></pre>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -26,6 +26,12 @@ var pageSetting = {
             js: [""]
 
         },
+        wjquery: {
+            loaded: true,
+            css: ["/js/lib/wjquery/wjquery.css"],
+            js: ["/js/lib/wjquery/wjquery.js"]
+
+        },
         barcode: {
             loaded: false,
             js: ["/js/lib/JsBarcode.all.min.js"]
@@ -51,6 +57,12 @@ var pageSetting = {
             js: ["/js/lib/wjquery/wjquery.swipe.js"]
 
         },
+        wpaging: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.paging.css"],
+            js: ["/js/lib/wjquery/wjquery.paging.js"]
+
+        },
         minicolors: {
             loaded: false,
             css: ["/js/lib/jquery-minicolors-master/jquery.minicolors.css"],
@@ -69,6 +81,7 @@ var pageSetting = {
         }
     },
     //Miscellaneous
+    isAccordion: false,
     autoData: [],
     resizerLeft: null,
     contentWidth: null,
@@ -574,6 +587,13 @@ var moduleData = [
                 }
             },
             {
+                text: "wpaging",
+                a_attr: {
+                    title: "page navigation",
+                    plugin: "wpaging"
+                }
+            },
+            {
                 text: "naverMap",
                 id: "naverMap",
                 a_attr: {
@@ -892,8 +912,7 @@ var moduleData = [
         //컨텐츠 헤더
         $content.find("div.content-header>ul").on("click", "a", function () {
             event.preventDefault();
-            var index = $content.find("div.content-header>ul>li").index($(this).parent());
-            $entry.find("ul.entry-api>li").eq(index).scrollIntoView($content.find("div.content-body"));
+            $entry.find("ul.entry-api>li").eq($content.find("div.content-header>ul>li").index($(this).parent())).scrollIntoView($content.find("div.content-body"));
         });
 
         $sidebar.find(".sidebar-head>a").click(
@@ -924,9 +943,7 @@ var moduleData = [
                 var $span = $(this).find("span");
                 if ($span.hasClass("ui-icon-search")) {
                     $(".sidebar-search").slideToggle("fast", function () {
-                        if ($(this).is(":visible")) {
-                            $(this).find("input").trigger("focusin");
-                        }
+                        if ($(this).is(":visible")) $(this).find("input").trigger("focusin");
                     });
                 } else if ($span.hasClass("ui-icon-seek-first")) {
                     $sidebar.hide();
@@ -989,9 +1006,7 @@ var moduleData = [
                         if (_setData(node, module)) {
                             if (node.nodes) {
                                 node.children = $.map(node.nodes, function (_node) {
-                                    if(_setData(_node, node)){
-                                        return _node;
-                                    }
+                                    if (_setData(_node, node)) return _node;
                                 });
                                 _sort(node);
                             }
@@ -1040,9 +1055,7 @@ var moduleData = [
                             accordion = $.isFalse(node.data.accordion) ? node.data.accordion : $.isFalse(pnode.data.accordion) ? pnode.data.accordion : true;
 
                         if ($.isTrue(node.data.mobile) && !$.isMobile()) {
-                            if (!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")) {
-                                return;
-                            }
+                            if (!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")) return;
                         }
 
                         if (type != "iframe" && $("#content-iframe").is(":visible")) {
@@ -1052,8 +1065,6 @@ var moduleData = [
                         if (!$.hasString(url, "http")) {
                             url = pnode.data.folder + url;
                         }
-
-                        if (accordion) $("#accordian1").click();
 
                         switch (type) {
                             case pageSetting.moduleDataType.blank:
@@ -1078,29 +1089,26 @@ var moduleData = [
 
                                 $.get(url, function (html) {
                                         $entry.html(html).prev().html(node.text);
-                                        if (node.text != node.a_attr.title) {
-                                            $entry.find("div.entry-summary").prepend(node.a_attr.title);
-                                        }
+                                        if (node.text != node.a_attr.title) $entry.find("div.entry-summary").prepend(node.a_attr.title);
                                         $("input[type=button]").button().addClass("mtb10");
 
                                         //make content-header
                                         var $ul = $content.find("div.content-header>ul").empty();
                                         var titles = $entry.find(".entry-api span.title").map(function () {
-                                            return {
-                                                text: $(this).text()
-                                            };
+                                            return {text: $(this).text()};
                                         }).get();
                                         $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
 
                                         if (accordion && titles.length > 1) {
                                             $content.find(".content-body>.setting").removeClass("none");
+                                            $("#accordian" + (pageSetting.isAccordion?"2":"1")).click();
                                         }
 
                                         $entry.find(".entry-source-content[data-wjquery]").each(function () {
                                             if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
-                                                $(this).find("pre").html($[$(this).attr("data-wjquery")].toString());
+                                                $(this).find("pre").html(replaceString("htmlEscape", $[$(this).attr("data-wjquery")].toString()));
                                             } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
-                                                $(this).find("pre").html($.fn[$(this).attr("data-wjquery")].toString());
+                                                $(this).find("pre").html(replaceString("htmlEscape", $.fn[$(this).attr("data-wjquery")].toString()));
                                             }
                                         });
 
@@ -1111,7 +1119,6 @@ var moduleData = [
                                         $entry.find(".entry-demo-textarea-content").each(function () {
                                             var _html = $(this).val();
                                             $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
-
                                             $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
                                                 var $iframe = $(this)[0].contentWindow.document;
                                                 $iframe.open();
@@ -1125,15 +1132,29 @@ var moduleData = [
                                             });
                                         });
 
-                                        setHash(node.id, true);
-                                        if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
-                                            SyntaxHighlighter.highlight();
+                                        if($entry.find(".entry-source-content[data-plugin]").isObject()){
+                                            var _pn = $entry.find(".entry-source-content[data-plugin]").length;
+                                            $entry.find(".entry-source-content[data-plugin]").each(function (index) {
+                                                var $t = $(this);
+                                                $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function(html) {
+                                                    $t.find("pre").html(replaceString("htmlEscape", html));
+                                                    if(_pn==index+1){
+                                                        SyntaxHighlighter.highlight();
+                                                    }
+                                                });
+                                            });
+                                        }else{
+                                            if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
+                                                SyntaxHighlighter.highlight();
+                                            }
                                         }
 
                                         $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
                                             $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
                                             $(this).parent().next().slideToggle();
                                         });
+
+                                        setHash(node.id, true);
                                     }, "html")
                                     .fail(function (response, status, xhr) {
                                         try {
@@ -1149,9 +1170,7 @@ var moduleData = [
                                     })
                                     .always(function () {
                                         if (!$.isFalse(pnode.data.loading)) {
-                                            setTimeout(function () {
-                                                $("#back-white").hide();
-                                            }, 100);
+                                            setTimeout(function () {$("#back-white").hide();}, 100);
                                         }
                                     });
                                 break;
@@ -1161,16 +1180,13 @@ var moduleData = [
                     };
 
                     if (node.a_attr.plugin && pageSetting.plugin[node.a_attr.plugin] && !pageSetting.plugin[node.a_attr.plugin].loaded) {
-                        var promise = loadPlugin(node.a_attr.plugin);
-                        promise.done(loadPage);
+                        loadPlugin(node.a_attr.plugin).done(loadPage);
                     } else {
                         loadPage();
                     }
                 } else {
                     $tree[$tree.is_open(node) ? "close_node" : "open_node"](node);
-                    if (LAYOUT_CONFIG.node != node.id) {
-                        drawLeafNode(node);
-                    }
+                    if (LAYOUT_CONFIG.node != node.id) drawLeafNode(node);
                 }
             });
     });
@@ -1219,8 +1235,7 @@ function setHash(hash, b) {
 
 function drawLeafNode(node) {
     $entry.html(COMMON_TMPL.entryApi).prev().html(node.text);
-    var $ul = $content.find("div.content-header>ul").empty();
-    var arr = [];
+    var $ul = $content.find("div.content-header>ul").empty(), arr = [];
     $.each($menuTree.jstree(true).get_children_dom(node), function () {
         var _node = $menuTree.jstree(true).get_node(this);
         arr.push({
@@ -1251,9 +1266,11 @@ function toggleAccordian($t) {
         if ($c.accordion("instance")) {
             $c.accordion("destroy");
         }
+        pageSetting.isAccordion = false;
     } else if ($t.attr("id") == "accordian2") {
         $c.accordion({
             heightStyle: "content"
         });
+        pageSetting.isAccordion = true;
     }
 }

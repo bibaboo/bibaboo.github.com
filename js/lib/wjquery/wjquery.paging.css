@@ -1,0 +1,59 @@
+/* wjquery.paging
+---------------------------------------------------------*/
+
+.wpaging-none {
+    display: none !important;
+}
+
+.wpaging-wrap {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 30px;
+    padding: 17px 0 25px;
+    text-align: center;
+}
+
+.wpaging-area {
+    text-align: center;
+}
+
+.wpaging-paging {
+    display: inline-block;
+}
+
+.wpaging-paging .link-page {
+    float: left;
+    min-width: 8px;
+    height: 28px;
+    padding: 0 10px;
+    margin: 0 2px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: tahoma, sans-serif;
+    line-height: 26px;
+    text-decoration: none;
+}
+
+.wpaging-paging .link-page:hover {
+    border-color: #dbdbdb;
+}
+
+.wpaging-paging .current-link-num,
+.wpaging-paging .current-link-num:hover {
+    border-color: #227fe7;
+    color: #0294e8;
+    cursor: default;
+}
+
+.wpaging-paging .link-num {
+    font-size: 1.1em;
+}
+
+.wpaging-paging .link-prev {
+    font-size: 1.2em;
+}
+
+.wpaging-paging .link-next {
+    font-size: 1.2em;
+}
