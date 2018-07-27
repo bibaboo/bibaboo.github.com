@@ -111,4 +111,38 @@
 			</div>
 		</div>
 	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">image blink</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style type="text/css">
+							.blink-img{animation:blink 1s ease infinite}
+							@keyframes blink{
+								from {opacity: 1.0;}
+  								to {opacity: 0.0;}
+							}
+						</style>
+						<div id="demo4-id1" style="position:relative;height:100px;">
+							<img src="https://lgdeviceon.com/Console/Management/resources/Images/DeviceON_logo.PNG" />
+							<input type="button" onclick="demo4_1();" value="demo4_1" />
+						</div>
+						<script type="text/javascript">	
+							function demo4_1(){
+								$("#demo4-id1 img").toggleClass("blink-img");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
 </ul>

@@ -461,6 +461,15 @@
             return this;
         },
 
+        bindEvent : function(callback){
+            var $t = $(this);
+            $t.keypress(function(e){
+                if ((e.keyCode || e.which) == 13 && callback) {
+                    callback();
+                }
+            });
+        },
+
         wform: function (method) {
             return WFORM[method].apply(this, Array.prototype.slice.call(arguments, 1)) || $(this);
         }
