@@ -461,11 +461,20 @@
             return this;
         },
 
-        bindEvent : function(callback){
-            var $t = $(this);
-            $t.keypress(function(e){
-                if ((e.keyCode || e.which) == 13 && callback) {
-                    callback();
+         /**
+         * 본문의 링크처리, 클릭처리를 막는다
+         * @name $().keyBind()
+         * @param callback
+         * @param b 엔터키
+         * @return this
+         **/
+        keyBind : function(callback, onlyEnter){
+            $(this).keypress(function(e){
+                if(callback){
+                    var key = (e.keyCode || e.which);
+                    if((onlyEnter && key==13) || (!onlyEnter)){
+                        callback(key);
+                    }
                 }
             });
         },
