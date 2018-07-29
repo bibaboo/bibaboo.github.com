@@ -468,13 +468,10 @@
          * @param b 엔터키
          * @return this
          **/
-        keyBind : function(callback, onlyEnter){
+        enterKey : function(callback){
             $(this).keypress(function(e){
-                if(callback){
-                    var key = (e.keyCode || e.which);
-                    if((onlyEnter && key==13) || (!onlyEnter)){
-                        callback(key);
-                    }
+                if((e.keyCode || e.which)==13 && callback){
+                    callback(key);
                 }
             });
         },
