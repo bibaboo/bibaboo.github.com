@@ -471,7 +471,7 @@
         enterKey : function(callback){
             $(this).keypress(function(e){
                 if((e.keyCode || e.which)==13 && callback){
-                    callback(key);
+                    callback(e);
                 }
             });
         },
