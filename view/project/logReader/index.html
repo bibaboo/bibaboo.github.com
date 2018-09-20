@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>logReader</title>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 80%/1.5em 'Malgun Gothic', dotum, sans-serif, NanumGothic, ng, HelveticaNeue-Light, 'AppleSDGothicNeo-Light', sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+select {
+    height: 25px;
+}
+
+input[type="text"] {
+    height: 20px;
+    padding: 2px;
+}
+
+.wapper {
+    margin: 10px;
+}
+
+.file-area {
+    height: 30px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.condition-area, .tag-area {
+    margin: 5px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.tag-area>span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 7px;
+    margin-top: 5px;
+    margin-right: 3px;
+    color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+
+.data-area {
+    color: #ffffff;
+}
+
+.data-area>p {
+    padding-left: 5px;
+    line-height: 25px;
+    border-bottom: 1px solid #fff;
+}
+
+#readFileBtn {
+    padding: 2px;
+}
+
+.default {
+    background-color: #333333;
+}
+
+.brown {
+    background-color: brown;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.gray {
+    background-color: gray;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.js"  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+(function ($) {
+
+   /*
+    * wjquery-readFile 0.1.0
+    *
+    * 0.1.0
+    * - alpha 버전 배포
+    */
+
+	var tags, tagData;
+
+    var	useSort = true, //시간순..
+        colors = ["default", "brown", "red", "blue", "green", "orange", "purple", "gray"],
+		defaultTags = [
+			{
+				"title": "test",
+				"class": "orange"
+			},
+			{
+				"title": "테스트",
+				"class": "default"
+			}
+		];
+
+	$(document).ready(function () {
+		makeSelect($("#month"), 1, 12);
+		makeSelect($("#day"), 1, 31);
+		makeSelect($("#hour"), 0, 23);
+
+		$("#month").on("change", function () {
+			if ($(this).val() == "") {
+				$("#day").val("");
+				$("#hour").val("");
+			}
+		});
+
+		$("#day").on("change", function () {
+			if ($(this).val() == "") {
+				$("#hour").val("");
+			}
+		});
+
+		$.each(defaultTags, function () {
+			addTag(this.title, this.class);
+		});
+
+		$("#readFileBtn").click(function () {
+			readFile();
+        });
+
+        $("#useTag").click(function(){
+            $(".tag-area").toggle();
+        });
+
+		$(".tag-area").on("click", "span>item", function () {
+			var $t = $(this).parent();
+			for (var i = 0; i < colors.length; i++) {
+				if (colors[i] == $t.attr("class")) {
+					$t.attr("class", colors[(i + 1 == colors.length ? 0 : i + 1)]);
+					break;
+				}
+			}
+		});
+
+		$(".tag-area").on("click", "span>btn", function () {
+			$(this).parent().remove();
+		});
+
+		$('#tag').keypress(function (event) {
+			if (event.which == 13) {
+				var _tag = $.trim($(this).val());
+				if (_tag != "") {
+					addTag(_tag);
+					$(this).val("");
+				}
+				return false;
+			}
+		});
+	});
+
+	function readFile() {
+		var file = $("#file")[0].files[0];
+		if (!file) {
+			alert("파일을 선택해주세요.");
+			return;
+        }
+
+        $(".data-area").empty().html("<p class='default'>loading..</p>");
+
+		/* name, size
+		file.name;
+		file.size;
+		*/
+		tags = [];
+		tagData = [];
+		$(".tag-area>span>item").each(function () {
+			tags.push({
+				"text": $(this).text(),
+				"class": $(this).parent().attr("class")
+			});
+		});
+
+		var reader = new FileReader();
+		reader.readAsText(file, "utf-8");
+
+		reader.onload = function () {
+			var lines = useSort ? reader.result.split("\n").sort() : reader.result.split("\n"),
+				date = checkDate();
+
+			$(".data-area").empty();
+			for (var i = 0; i < lines.length; i++) {
+				if (date == "" || lines[i].indexOf(date) > -1) {
+                    if($("#useTag").prop("checked")){
+                        checkTagData(lines[i], i);
+                    }else{
+                        addTagData("default", lines[i]);
+                    }
+				}
+			}
+
+			if (tagData.length > 0) {
+				$(".data-area").empty().html(tagData.join(""));
+			} else {
+				$(".data-area").empty().html("<p class='default'>no data..</p>");
+			}
+		}
+
+		reader.onerror = function (e) {
+			alert("읽기 오류:" + e.tag.error.code);
+			return;
+		}
+	}
+
+	function checkTagData(line, num) {
+		for (var i = 0; i < tags.length; i++) {
+			if (line.indexOf(tags[i].text) > -1) {
+				addTagData(tags[i].class, line);
+				break;
+			}
+		}
+    }
+
+    function addTagData(className, line){
+        tagData.push("<p class='" + className + "'>" + (htmlEscape(line)) + "</p>");
+    }
+
+	function addTag(_tag, className) {
+		$("#tag").before("<span class='" + (className || "default") + "'><item>" + _tag + "</item>&nbsp; <btn>X</btn></span>");
+	}
+
+	function makeSelect($t, s, e) {
+		for (var i = s; i <= e; i++) {
+			var v = i < 10 ? "0" + String(i) : i;
+			$t.append("<option value='" + v + "'>" + v + "</option>");
+		}
+	}
+
+	function checkDate() {
+		var month = $("#month").val(),
+			day = $("#day").val(),
+			hour = $("#hour").val();
+		date = "";
+
+		if (month != "") {
+			date = month + "-";
+			if (day != "") {
+				date += day + " ";
+				if (hour != "") {
+					date += hour + ":";
+				}
+			}
+		}
+		return date;
+	}
+
+	function htmlEscape(s) {
+		return s.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	}
+})(jQuery);
+</script>
+</head>
+<body>
+    <div class="wapper">
+        <div class="file-area">
+            <input type="file"	id="file">
+            &nbsp;<button id="readFileBtn">Search</button>
+        </div>
+        <div class="condition-area">
+            <select id="month">
+                <option value="">선택</option>
+            </select>월
+            <select id="day">
+                <option value="">선택</option>
+            </select>일
+            <select id="hour">
+                <option value="">선택</option>
+            </select>시
+            &nbsp;&nbsp;<label><input type="checkbox" id="useTag" checked="checked" /> 태그사용</label>
+        </div>
+        <div class="tag-area">
+            <input type="text" size="10" id="tag" />
+        </div>
+        <div class="data-area"></div>
+    </div>
+</body>
+</html>
