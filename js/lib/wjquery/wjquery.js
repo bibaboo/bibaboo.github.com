@@ -893,6 +893,21 @@ function dropDown($1, $2, options) {
 // event
 //--------------------------------------------------------------------
 /**
+ * 함수 실행
+ * @param functionName 함수명
+ * @param arguments 인자값들
+ * @return Boolean
+ */
+function doFunction(s){
+    if(typeof(window[s])=="function"){
+        window[s].apply(null, Array.prototype.slice.call(arguments, 1));
+        return true;
+    }else{
+        return false;
+    }
+}
+
+/**
  * 함수 실행 시간 지연
  * @param functionName 함수명
  * @param wait 지연MM
