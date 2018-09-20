@@ -700,6 +700,10 @@ var moduleData = [
                     folder: "/view/note/styleNhtml/"
                 },
                 nodes: [{
+                        text: "C&P1",
+                        id: "stytlecNp1"
+                    },
+                    {
                         text: "mediaquery",
                         id: "mediaquery"
                     },
@@ -823,6 +827,17 @@ var moduleData = [
                     type: pageSetting.moduleDataType.blank,
                     page: "mtmpl/index.html",
                     mobile: true
+                }
+            },
+            {
+                text: "logReader",
+                id: "logReader",
+                a_attr: {
+                    title: "logReader"
+                },
+                data: {
+                    type: pageSetting.moduleDataType.blank,
+                    page: "logReader/index.html"
                 }
             }
         ]
