@@ -86,6 +86,7 @@
 
 		return {
 			init:init,
+			distory:distory,
 			redraw:redraw,
 			setNum:setNum
 		};
