@@ -90,8 +90,8 @@
 
 		return {
 			init:init,
-			init:init,
 			distory:distory,
+			redraw:redraw,
 			setNum:setNum
 		};
 	}

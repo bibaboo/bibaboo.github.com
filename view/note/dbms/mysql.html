@@ -33,7 +33,7 @@
 		<h2>
     		<span class="title">procedure</span>
 		</h2>
-		<div>
+		<div>			
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
@@ -67,6 +67,30 @@
 					</div>
 				</div>
 			</div>
+			<div class="example">
+                <div>
+                    <textarea class="entry-demo-textarea-content none">
+                        DROP PROCEDURE IF EXISTS loopInsert
+                        delimiter //
+						CREATE PROCEDURE loopInsert() 
+						BEGIN
+						    DECLARE i INT DEFAULT 1;
+						
+						    WHILE i <= 500 DO
+						        Insert into TABLE_NAME (ColumnA, ColumnB) VALUES(i, 컬럼 값);
+						        SET i = i + 1;
+						    END WHILE;
+						END//
+                        delimiter ;
+						
+						CALL loopInsert();
+                    </textarea>
+                    <div class="entry-source-title">dumy data</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: sql;"></pre>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</li>
 	<li class="entry-api-item">
