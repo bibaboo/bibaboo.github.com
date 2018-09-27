@@ -19,7 +19,11 @@
 				} else {
 					alert('Method ' + method + ' does not exist on jQuery.wpaging');
 				}
-			} else if (!plugin && (typeof method === 'object' || !method)) {
+			} else if (typeof method === 'object' || !method) {
+				if(plugin) {
+					plugin["distory"]();
+					$element.removeData(DATA_NS);
+				}
 				var _WPAGING = new WPAGING();
 				_WPAGING.init($element, $.extend({}, $.fn.wpaging.defaultSettings, method || {}));
 				$element.data(DATA_NS, _WPAGING);
@@ -30,8 +34,8 @@
 
 	$.fn.wpaging.defaultSettings = {
 		currentPage : 1, 	//현재 페이지
-		listSize : 10,		//리스트에 나타낼 데이터 수
-		totalCount : 153,	//총 데이터 수
+		listSize : 20,		//리스트에 나타낼 데이터 수
+		totalCount : 1,	//총 데이터 수
 		pageCount : 10		//화면에 나타낼 페이지 수
 	};
 
@@ -109,6 +113,9 @@
 				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wpaging-none", _page>options.totalPage);
 				_page++;
 			}
+		},
+		distory : function(){
+			$element.empty();
 		},
 		calcurate : function(options){
 			options.totalPage = Math.ceil(options.totalCount/options.listSize);    	// 총 페이지 수
