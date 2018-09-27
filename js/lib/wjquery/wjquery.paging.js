@@ -83,11 +83,15 @@
 			$element.find(".wpaging-paging a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
 			if(page) options.currentPage = page;
 		}
+		
+		function distory(){
+			$element.empty();
+		}
 
 		return {
 			init:init,
+			init:init,
 			distory:distory,
-			redraw:redraw,
 			setNum:setNum
 		};
 	}
@@ -114,9 +118,6 @@
 				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wpaging-none", _page>options.totalPage);
 				_page++;
 			}
-		},
-		distory : function(){
-			$element.empty();
 		},
 		calcurate : function(options){
 			options.totalPage = Math.ceil(options.totalCount/options.listSize);    	// 총 페이지 수
