@@ -513,6 +513,8 @@
         function isAllCheckBoxChecked(){
         	var $t = $(this);
         	if ($t.is("input:checkbox")) {
+        		alert($t.length);
+        		alert($t.filter(":checked").length);
         		return $t.length == $t.filter(":checked").length;
         	}else{
         		return false;
