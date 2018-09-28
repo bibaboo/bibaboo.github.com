@@ -20,13 +20,14 @@
 					alert('Method ' + method + ' does not exist on jQuery.wpaging');
 				}
 			} else if (typeof method === 'object' || !method) {
+				var options = $.extend({}, $.fn.wpaging.defaultSettings, method || {});
 				if(plugin) {
 					plugin["distory"]();
 					$element.removeData(DATA_NS);
+				}else if(options.totalCount>0){
+					$element.data(DATA_NS, new WPAGING().init($element, options));
 				}
-				var _WPAGING = new WPAGING();
-				_WPAGING.init($element, $.extend({}, $.fn.wpaging.defaultSettings, method || {}));
-				$element.data(DATA_NS, _WPAGING);
+				
 			}
 		});
 		return result?result:$(this);
