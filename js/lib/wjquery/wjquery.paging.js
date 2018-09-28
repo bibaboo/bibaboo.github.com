@@ -24,10 +24,10 @@
 				if(plugin) {
 					plugin["distory"]();
 					$element.removeData(DATA_NS);
-				}else if(options.totalCount>0){
+				}
+				if(options.totalCount>0){
 					var _WPAGING = new WPAGING();
-					_WPAGING.init($element, options);
-					$element.data(DATA_NS, _WPAGING);
+					$element.data(DATA_NS, _WPAGING.init($element, options));
 				}
 			}
 		});
