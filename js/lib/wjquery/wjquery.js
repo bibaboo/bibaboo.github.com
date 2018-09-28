@@ -509,6 +509,15 @@
                 $(this).val(v);
             }
         }
+        
+        function isAllCheckBoxChecked(){
+        	var $t = $(this);
+        	if ($t.is("input:checkbox")) {
+        		return $t.length == $t.filter(":checked").length;
+        	}else{
+        		return false;
+        	}
+        }
 
         function toString(m){
             return WFORM[m].toString();
@@ -517,6 +526,7 @@
         return {
             get: get,
             set : set,
+            isAllCheckBoxChecked : isAllCheckBoxChecked, 
             toString : toString
         };
     });
