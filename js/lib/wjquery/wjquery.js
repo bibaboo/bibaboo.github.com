@@ -498,12 +498,12 @@
         function set(v, b) {
             var $t = $(this);
             if ($t.is("input:radio")) {
-                $t.filter("[value='" + v + "']").attr("checked", true);
+                $t.filter("[value='" + v + "']").prop("checked", true);
             } else if ($t.is("input:checkbox")) {
                 var _v = $.isArray(v) ? v : [v];
-                if (b) $t.filter(":checked").attr("checked", false);
+                if (b) $t.filter(":checked").prop("checked", false);
                 $.each(_v, function () {
-                    $t.filter("[value='" + this + "']").attr("checked", true)
+                    $t.filter("[value='" + this + "']").prop("checked", true)
                 });
             } else {
                 $(this).val(v);
@@ -525,7 +525,7 @@
 
         return {
             get: get,
-            set : set,
+            set : set, 
             isAllCheckBoxChecked : isAllCheckBoxChecked, 
             toString : toString
         };
