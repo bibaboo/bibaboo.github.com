@@ -25,9 +25,10 @@
 					plugin["distory"]();
 					$element.removeData(DATA_NS);
 				}else if(options.totalCount>0){
-					$element.data(DATA_NS, new WPAGING().init($element, options));
+					var _WPAGING = new WPAGING();
+					_WPAGING.init($element, options);
+					$element.data(DATA_NS, _WPAGING);
 				}
-				
 			}
 		});
 		return result?result:$(this);
