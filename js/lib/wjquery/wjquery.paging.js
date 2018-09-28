@@ -27,7 +27,8 @@
 				}
 				if(options.totalCount>0){
 					var _WPAGING = new WPAGING();
-					$element.data(DATA_NS, _WPAGING.init($element, options));
+					_WPAGING.init($element, options);
+					$element.data(DATA_NS, _WPAGING);
 				}
 			}
 		});
