@@ -477,7 +477,7 @@
         },
 
         wform: function (method) {
-            return WFORM[method].apply(this, Array.prototype.slice.call(arguments, 1)) || $(this);
+            return WFORM[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }
     });
 
@@ -513,7 +513,7 @@
         function isAllCheckBoxChecked(){
         	var $t = $(this);
         	if ($t.is("input:checkbox")) {
-        		return $t.length == $t.filter(":checked").length?true:false;
+        		return $t.length == $t.filter(":checked").length;
         	}else{
         		return false;
         	}
