@@ -482,7 +482,7 @@
     });
 
     var WFORM = new(function () {
-        function get() {
+        function get(p1) {
             var $t = $(this);
             if ($t.is("input:radio")) {
                 return $t.filter(":checked").val() || "";
@@ -490,7 +490,12 @@
                 return $t.filter(":checked").map(function () {
                     return this.value;
                 }).get();
+            } else if ($t.is("select")) {
+            	return $(this).val();
             } else {
+            	if(!$.isFalse(p1)){
+            		$(this).val($.trim($(this).val()));
+            	}
                 return $(this).val();
             }
         }
@@ -762,8 +767,12 @@ function isPattern(patternName, value) {
         number: /^[0-9]+$/,
         alphabat: /^[a-zA-Z]+$/,
         alphaNum: /^[0-9a-zA-Z]+$/,
+        id: /^[A-za-z0-9]{5,15}$/,
+        password:/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+        password2:/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/, //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
         hangul: /^[가-힣]+$/,
         email: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+        email2:/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
         url: /^(http|https|ftp|mailto):(?:\/\/)?((\w|-)+(?:[\.:@](\w|-))+)(?:\/|@)?([^"\?]*?)(?:\?([^\?"]*?))?$/,
         url2: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w_\.-]*)*\/?$/,
         phone: /^\d{2,3}-\d{3,4}-\d{3,4}$/,
@@ -771,8 +780,8 @@ function isPattern(patternName, value) {
         hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/
     };
 
-    if (!pattern[patternName]) return false;
-    else return (pattern[patternName]).test(value);
+    if (pattern[patternName]) return (pattern[patternName]).test(value);
+    else return (patternName).test(value);
 }
 
 /**
