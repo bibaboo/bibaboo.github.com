@@ -667,6 +667,13 @@ var moduleData = [
                         }
                     },
                     {
+                        text: "C&P2",
+                        id: "jscNp2",
+                        a_attr: {
+                            title: "Copy & Paste 2"
+                        }
+                    },
+                    {
                         text: "정규식",
                         id: "regexp",
                         a_attr: {
