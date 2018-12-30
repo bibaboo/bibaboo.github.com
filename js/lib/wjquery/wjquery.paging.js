@@ -36,6 +36,7 @@
 	};
 
 	$.fn.wpaging.defaultSettings = {
+		hash : false,
 		currentPage : 1, 	//현재 페이지
 		listSize : 20,		//리스트에 나타낼 데이터 수
 		totalCount : 1,	//총 데이터 수
@@ -65,7 +66,11 @@
 					_data.type = "page";
 					_data.page = $(this).attr("data-page");
 				}
-
+				
+				if(options.hash){
+					setHash(SERVICE_CONFIG.hash.menus.paging, _data.page);
+				}
+				
 				if(options.callback){
 					options.callback(_data);
 				}else{
@@ -86,6 +91,14 @@
 			$element.find(".wpaging-paging a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
 			if(page) options.currentPage = page;
 		}
+
+		function checkNum(page){
+			if($element.find(".wpaging-paging a[data-page='" + page + "']").length==1){
+				setNum(page);
+			} else{
+				redraw({currentPage: page})
+			}
+		}
 		
 		function distory(){
 			$element.empty();
@@ -95,7 +108,8 @@
 			init:init,
 			distory:distory,
 			redraw:redraw,
-			setNum:setNum
+			setNum:setNum,
+			checkNum:checkNum
 		};
 	}
 

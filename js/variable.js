@@ -10,6 +10,13 @@ var SERVICE_CONFIG = {
     owner: "www.wonchu.net",
     fileExt: {
         image: ["gif", "jpg", "jpeg", "png"]
+    },
+    hash :{
+        skip : false,
+        menus : {
+            module : "M",
+            paging : "P"
+        }
     }
 };
 
@@ -39,7 +46,8 @@ var CODE_VALUE = {
     comma: ",",
     dot: ".",
     dash: "-",
-    underline: "_"
+    underline: "_",
+    slash: "/"
 };
 
 /** common template */

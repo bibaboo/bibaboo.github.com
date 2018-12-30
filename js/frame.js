@@ -84,8 +84,7 @@ var pageSetting = {
     isAccordion: false,
     autoData: [],
     resizerLeft: null,
-    contentWidth: null,
-    preventTriggerHashChange: null
+    contentWidth: null
 };
 
 /* common object */
@@ -869,10 +868,10 @@ var moduleData = [
         $("body").append($.tmpl(COMMON_TMPL.layout));
         //hash change
         $(window).bind('hashchange', function (event) {
-            if (pageSetting.preventTriggerHashChange) {
-                pageSetting.preventTriggerHashChange = false;
+            if (SERVICE_CONFIG.hash.skip) {
+                SERVICE_CONFIG.hash.skip = false;
             } else {
-                openNode(document.location.hash);
+                checkHash();
             }
         });
 
@@ -1052,11 +1051,7 @@ var moduleData = [
                 //,"plugins" : ["sort"]
             })
             .one("loaded.jstree", function (event, data) {
-                if (document.location.hash && $menuTree.jstree(true).get_node(document.location.hash)) {
-                    openNode(document.location.hash);
-                } else {
-                    goHome();
-                }
+                checkHash();
             })
             .on("changed.jstree", function (e, data) {
                 if (!data.node) return;
@@ -1103,7 +1098,7 @@ var moduleData = [
                                     $content.find("div.content-header>ul").empty();
                                     $("#content-iframe").attr("src", url).show().siblings().hide();
                                 }
-                                setHash(node.id, true);
+                                setHash(SERVICE_CONFIG.hash.menus.module, node.id);
                                 break;
                             case pageSetting.moduleDataType.load:
                                 $("#btn-top").click();
@@ -1176,7 +1171,7 @@ var moduleData = [
                                             $(this).parent().next().slideToggle();
                                         });
 
-                                        setHash(node.id, true);
+                                        setHash(SERVICE_CONFIG.hash.menus.module, node.id);
                                     }, "html")
                                     .fail(function (response, status, xhr) {
                                         try {
@@ -1245,13 +1240,28 @@ function setResizer() {
     pageSetting.resizerLeft = $resizer.css("left");
 }
 
-function setHash(hash, b) {
-    hash = CODE_VALUE.sharp + hash;
-    if (hash != document.location.hash) {
-        if (b) {
-            pageSetting.preventTriggerHashChange = true;
+function checkHash(){
+    if(document.location.hash){
+        var _hashes= document.location.hash.split(CODE_VALUE.slash);
+        if(_hashes.length && _hashes.length==3){
+            if(_hashes[1]==SERVICE_CONFIG.hash.menus.module){
+                openNode(_hashes[0] + _hashes[2]);        
+            }else if(_hashes[1]==SERVICE_CONFIG.hash.menus.paging){
+                doFunction("hashchangePagingHandler", _hashes[2]);
+            }
         }
-        document.location.hash = hash;
+    }else{
+        goHome();
+    }
+}
+
+function setHash(menu, key, b) {
+    var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key ;
+    if (_hash != document.location.hash) {
+        if (!$.isFalse(b)) {
+            SERVICE_CONFIG.hash.skip = true;
+        }
+        document.location.hash = _hash;
     }
 }
 

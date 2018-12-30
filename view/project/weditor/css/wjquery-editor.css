@@ -21,7 +21,7 @@
 
 .weditor-wapper .weditor-header .fontName { width:60px; background-position:-38px -390px; }
 .weditor-wapper .weditor-header .down .fontName {background-position:46px -390px; }
-.weditor-wapper .weditor-header .fontName span { width:50px; display:block; overflow:hidden; }
+.weditor-wapper .weditor-header .fontName span { width:50px; display:block;text-overflow:hidden; white-space:nowrap; overflow:hidden;}
 .weditor-wapper .weditor-header .fontSize { text-align:left;padding-left:5px;width:42px; background-position: -57px -390px; }
 .weditor-wapper .weditor-header .down .fontSize {background-position:27px -390px; }
 .weditor-wapper .weditor-header .undo { background-position: -8px -4px; }
