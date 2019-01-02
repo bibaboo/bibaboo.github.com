@@ -68,8 +68,6 @@
 					_data.page = $(this).attr("data-page");
 				}
 				
-				_setHash(_data.page);
-				
 				if(options.callback){
 					options.callback(_data);
 				}else{
