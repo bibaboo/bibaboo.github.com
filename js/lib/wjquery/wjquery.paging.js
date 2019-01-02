@@ -150,6 +150,7 @@
 			return options;
 		}
 	}
+	
 })(jQuery);
 
 
