@@ -17,6 +17,9 @@
 						<script type="text/javascript">
 							var paginInf = {
 								hash: true,
+								hashFunc: function(page){
+									setHash(SERVICE_CONFIG.hash.menus.paging, page);
+								},
 								currentPage: 1,
 								totalCount: 160,
 								listSize: 10,

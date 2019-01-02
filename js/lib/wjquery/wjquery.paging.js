@@ -37,6 +37,7 @@
 
 	$.fn.wpaging.defaultSettings = {
 		hash : false,
+		hashFunc : null,
 		currentPage : 1, 	//현재 페이지
 		listSize : 20,		//리스트에 나타낼 데이터 수
 		totalCount : 1,	//총 데이터 수
@@ -68,7 +69,11 @@
 				}
 				
 				if(options.hash){
-					setHash(SERVICE_CONFIG.hash.menus.paging, _data.page);
+					if(options.hashFunc==null){
+						document.location.hash = "#" + _data.page;
+					}else{
+						options.hashFunc(_data.page);
+					}
 				}
 				
 				if(options.callback){
