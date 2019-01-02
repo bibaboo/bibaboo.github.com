@@ -868,8 +868,10 @@ var moduleData = [
         $("body").append($.tmpl(COMMON_TMPL.layout));
         //hash change
         $(window).bind('hashchange', function (event) {
-            if (SERVICE_CONFIG.hash.skip) {
-                SERVICE_CONFIG.hash.skip = false;
+            if (SERVICE_CONFIG.hash.M.skip) {
+                SERVICE_CONFIG.hash.M.skip = false;
+            }else if (SERVICE_CONFIG.hash.P.skip) {
+                SERVICE_CONFIG.hash.P.skip = false;
             } else {
                 checkHash();
             }
@@ -1098,98 +1100,97 @@ var moduleData = [
                                     $content.find("div.content-header>ul").empty();
                                     $("#content-iframe").attr("src", url).show().siblings().hide();
                                 }
-                                setHash(SERVICE_CONFIG.hash.menus.module, node.id);
+                                setHash(SERVICE_CONFIG.hash.M.key, node.id);
                                 break;
                             case pageSetting.moduleDataType.load:
                                 $("#btn-top").click();
                                 if (!$.isFalse(pnode.data.loading)) $("#back-white").show();
 
                                 $.get(url, function (html) {
-                                        $entry.html(html).prev().html(node.text);
-                                        if (node.text != node.a_attr.title) $entry.find("div.entry-summary").prepend(node.a_attr.title);
-                                        $("input[type=button]").button().addClass("mtb10");
+                                	setHash(SERVICE_CONFIG.hash.M.key, node.id);
+                                	$entry.html(html).prev().html(node.text);
+                                    if (node.text != node.a_attr.title) $entry.find("div.entry-summary").prepend(node.a_attr.title);
+                                    $("input[type=button]").button().addClass("mtb10");
 
-                                        //make content-header
-                                        var $ul = $content.find("div.content-header>ul").empty();
-                                        var titles = $entry.find(".entry-api span.title").map(function () {
-                                            return {text: $(this).text()};
-                                        }).get();
-                                        $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
+                                    //make content-header
+                                    var $ul = $content.find("div.content-header>ul").empty();
+                                    var titles = $entry.find(".entry-api span.title").map(function () {
+                                        return {text: $(this).text()};
+                                    }).get();
+                                    $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
 
-                                        if (accordion && titles.length > 1) {
-                                            $content.find(".content-body>.setting").removeClass("none");
-                                            $("#accordian" + (pageSetting.isAccordion?"2":"1")).click();
-                                        }
+                                    if (accordion && titles.length > 1) {
+                                        $content.find(".content-body>.setting").removeClass("none");
+                                        $("#accordian" + (pageSetting.isAccordion?"2":"1")).click();
+                                    }
 
-                                        $entry.find(".entry-source-content[data-wjquery]").each(function () {
-                                            if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
-                                                $(this).find("pre").html(replaceString("htmlEscape", $[$(this).attr("data-wjquery")].toString()));
-                                            } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
-                                                $(this).find("pre").html(replaceString("htmlEscape", $.fn[$(this).attr("data-wjquery")].toString()));
-                                            }
-                                        });
-
-                                        $entry.find(".entry-demo-content").each(function () {
-                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
-                                        });
-
-                                        $entry.find(".entry-demo-textarea-content").each(function () {
-                                            var _html = $(this).val();
-                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
-                                            $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
-                                                var $iframe = $(this)[0].contentWindow.document;
-                                                $iframe.open();
-                                                $iframe.write(_html);
-                                                $iframe.close();
-
-                                                $(this).on("load", function () {
-                                                    $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
-                                                    resizeLayout();
-                                                });
-                                            });
-                                        });
-
-                                        if($entry.find(".entry-source-content[data-plugin]").isObject()){
-                                            var _pn = $entry.find(".entry-source-content[data-plugin]").length;
-                                            $entry.find(".entry-source-content[data-plugin]").each(function (index) {
-                                                var $t = $(this);
-                                                $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function(html) {
-                                                    $t.find("pre").html(replaceString("htmlEscape", html));
-                                                    if(_pn==index+1){
-                                                        SyntaxHighlighter.highlight();
-                                                    }
-                                                });
-                                            });
-                                        }else{
-                                            if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
-                                                SyntaxHighlighter.highlight();
-                                            }
-                                        }
-
-                                        $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
-                                            $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
-                                            $(this).parent().next().slideToggle();
-                                        });
-
-                                        setHash(SERVICE_CONFIG.hash.menus.module, node.id);
-                                    }, "html")
-                                    .fail(function (response, status, xhr) {
-                                        try {
-                                            if (status == "error") {
-                                                $entry.empty().prev().html(node.text);
-                                                $content.find("div.content-header>ul").empty();
-                                                $entry.html(COMMON_TMPL.pageNotFound);
-                                                $.wLog(xhr);
-                                            }
-                                        } catch (e) {
-                                            $.wLog(e);
-                                        }
-                                    })
-                                    .always(function () {
-                                        if (!$.isFalse(pnode.data.loading)) {
-                                            setTimeout(function () {$("#back-white").hide();}, 100);
+                                    $entry.find(".entry-source-content[data-wjquery]").each(function () {
+                                        if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
+                                            $(this).find("pre").html(replaceString("htmlEscape", $[$(this).attr("data-wjquery")].toString()));
+                                        } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
+                                            $(this).find("pre").html(replaceString("htmlEscape", $.fn[$(this).attr("data-wjquery")].toString()));
                                         }
                                     });
+
+                                    $entry.find(".entry-demo-content").each(function () {
+                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
+                                    });
+
+                                    $entry.find(".entry-demo-textarea-content").each(function () {
+                                        var _html = $(this).val();
+                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
+                                        $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
+                                            var $iframe = $(this)[0].contentWindow.document;
+                                            $iframe.open();
+                                            $iframe.write(_html);
+                                            $iframe.close();
+
+                                            $(this).on("load", function () {
+                                                $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
+                                                resizeLayout();
+                                            });
+                                        });
+                                    });
+
+                                    if($entry.find(".entry-source-content[data-plugin]").isObject()){
+                                        var _pn = $entry.find(".entry-source-content[data-plugin]").length;
+                                        $entry.find(".entry-source-content[data-plugin]").each(function (index) {
+                                            var $t = $(this);
+                                            $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function(html) {
+                                                $t.find("pre").html(replaceString("htmlEscape", html));
+                                                if(_pn==index+1){
+                                                    SyntaxHighlighter.highlight();
+                                                }
+                                            });
+                                        });
+                                    }else{
+                                        if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
+                                            SyntaxHighlighter.highlight();
+                                        }
+                                    }
+
+                                    $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
+                                        $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
+                                        $(this).parent().next().slideToggle();
+                                    });
+                                }, "html")
+                                .fail(function (response, status, xhr) {
+                                    try {
+                                        if (status == "error") {
+                                            $entry.empty().prev().html(node.text);
+                                            $content.find("div.content-header>ul").empty();
+                                            $entry.html(COMMON_TMPL.pageNotFound);
+                                            $.wLog(xhr);
+                                        }
+                                    } catch (e) {
+                                        $.wLog(e);
+                                    }
+                                })
+                                .always(function () {
+                                    if (!$.isFalse(pnode.data.loading)) {
+                                        setTimeout(function () {$("#back-white").hide();}, 100);
+                                    }
+                                });
                                 break;
                             default:
                                 return;
@@ -1244,9 +1245,9 @@ function checkHash(){
     if(document.location.hash){
         var _hashes= document.location.hash.split(CODE_VALUE.slash);
         if(_hashes.length && _hashes.length==3){
-            if(_hashes[1]==SERVICE_CONFIG.hash.menus.module){
+            if(_hashes[1]==SERVICE_CONFIG.hash.M.key){
                 openNode(_hashes[0] + _hashes[2]);        
-            }else if(_hashes[1]==SERVICE_CONFIG.hash.menus.paging){
+            }else if(_hashes[1]==SERVICE_CONFIG.hash.P.key){
                 doFunction("hashchangePagingHandler", _hashes[2]);
             }
         }
@@ -1256,10 +1257,11 @@ function checkHash(){
 }
 
 function setHash(menu, key, b) {
+	console.log(menu)
     var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key ;
     if (_hash != document.location.hash) {
         if (!$.isFalse(b)) {
-            SERVICE_CONFIG.hash.skip = true;
+            SERVICE_CONFIG.hash[menu].skip = true;
         }
         document.location.hash = _hash;
     }

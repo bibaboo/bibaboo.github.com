@@ -68,13 +68,7 @@
 					_data.page = $(this).attr("data-page");
 				}
 				
-				if(options.hash){
-					if(options.hashFunc==null){
-						document.location.hash = "#" + _data.page;
-					}else{
-						options.hashFunc(_data.page);
-					}
-				}
+				_setHash(_data.page);
 				
 				if(options.callback){
 					options.callback(_data);
@@ -82,6 +76,17 @@
 					console.log(_data);
 				}
 			});
+		}
+		
+		function _setHash(page){
+			if(options.hash){
+				if(options.hashFunc==null){
+					document.location.hash = "#/" + page;
+				}else{
+					options.hashFunc(page);
+				}
+			}
+			
 		}
 
 		function redraw(_options){
@@ -95,6 +100,7 @@
 		function setNum(page){
 			$element.find(".wpaging-paging a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
 			if(page) options.currentPage = page;
+			_setHash(options.currentPage);
 		}
 
 		function checkNum(page){

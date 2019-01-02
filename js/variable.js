@@ -12,7 +12,17 @@ var SERVICE_CONFIG = {
         image: ["gif", "jpg", "jpeg", "png"]
     },
     hash :{
-        skip : false,
+        M : {
+        	key : "M",
+        	skip : false
+        		
+        },
+        P : {
+        	key : "P",
+        	skip : false
+        		
+        },
+    	skip : false,
         menus : {
             module : "M",
             paging : "P"
