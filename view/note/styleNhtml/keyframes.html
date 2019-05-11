@@ -113,7 +113,58 @@
 	</li>
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">image blink</span>
+			<span class="title">text loading</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style type="text/css">
+							/*
+							.anim-loading-text {position: fixed;width: 100%;height: 100%;left: 0;top: 0; font-size:18px;}
+							.anim-loading-text .spinner {color:#fff;position: fixed;width: 200px;height: 30px;text-align: center;top: calc(45% - 30px/2);left: calc(50% - 200px/2)}
+							*/
+							.anim-loading-text .spinner>div {display: inline-block; -webkit-animation: stretchdelay 1.2s infinite ease-in-out;}
+							.anim-loading-text .spinner .circ2 {-webkit-animation-delay: -1.1s;}
+							.anim-loading-text .spinner .circ3 {-webkit-animation-delay: -1.0s;}
+							.anim-loading-text .spinner .circ4 {-webkit-animation-delay: -0.9s;}
+							.anim-loading-text .spinner .circ5 {-webkit-animation-delay: -0.8s;}
+							.anim-loading-text .spinner .circ6 {-webkit-animation-delay: -0.7s;}
+							.anim-loading-text .spinner .circ7 {-webkit-animation-delay: -0.6s;}
+							.anim-loading-text .spinner .circ8 {-webkit-animation-delay: -0.5s;}
+							.anim-loading-text .spinner .circ9 {-webkit-animation-delay: -0.4s;}
+
+							@-webkit-keyframes stretchdelay {
+								0%,100%,40% {-webkit-transform: translateY(-12px)}
+								20% {-webkit-transform: translateY(-20px)}
+							}
+						</style>
+						<div id="demo3-id1" class="anim-loading-text" style="margin-top:20px;">
+							<div class="spinner">
+								<div class="circ1">l</div>
+								<div class="circ2">o</div>
+								<div class="circ3">a</div>
+								<div class="circ4">d</div>
+								<div class="circ5">i</div>
+								<div class="circ6">n</div>
+								<div class="circ7">g</div>
+								<div class="circ8">.</div>
+								<div class="circ9">.</div>
+							</div>
+						</div>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">image blink</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -124,11 +175,11 @@
 							.blink-img{animation:blink 1s ease infinite}
 							@keyframes blink{
 								from {opacity: 1.0;}
-  								to {opacity: 0.0;}
+								to {opacity: 0.0;}
 							}
 						</style>
 						<div id="demo4-id1" style="position:relative;height:100px;">
-							<img src="https://lgdeviceon.com/Console/Management/resources/Images/DeviceON_logo.PNG" />
+							<img src="http://lgdeviceon.com/Console/Management/resources/Images/DeviceON_logo.PNG" />
 							<input type="button" onclick="demo4_1();" value="demo4_1" />
 						</div>
 						<script type="text/javascript">	

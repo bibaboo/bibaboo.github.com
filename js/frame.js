@@ -24,23 +24,19 @@ var pageSetting = {
             loaded: false,
             css: [""],
             js: [""]
-
         },
         wjquery: {
             loaded: true,
             css: ["/js/lib/wjquery/wjquery.css"],
             js: ["/js/lib/wjquery/wjquery.js"]
-
         },
         barcode: {
             loaded: false,
             js: ["/js/lib/JsBarcode.all.min.js"]
-
         },
         qrcode: {
             loaded: false,
             js: ["/js/lib/jquery.qrcode.min.js"]
-
         },
         clipboard: {
             loaded: false,
@@ -50,7 +46,6 @@ var pageSetting = {
         naverMap: {
             loaded: false,
             js: ["https://openapi.map.naver.com/openapi/v3/maps.js?clientId=FEyy5fmQU1_i7I7Y4Yey&submodules=geocoder"]
-
         },
         wswipe: {
             loaded: false,
@@ -624,6 +619,13 @@ var moduleData = [
                     folder: "/view/note/javascript/"
                 },
                 nodes: [{
+                    text: "C&P",
+                    id: "jscNp",
+                    a_attr: {
+                        title: "Copy & Paste"
+                    }
+                    },
+                    {
                         text: "배열 객체",
                         id: "array",
                         a_attr: {
@@ -656,20 +658,6 @@ var moduleData = [
                         id: "objectLiteral",
                         a_attr: {
                             title: "아무 것도 없거나 하나 이상의 이름/값 쌍들을 둘러싸는 중괄호"
-                        }
-                    },
-                    {
-                        text: "C&P1",
-                        id: "jscNp1",
-                        a_attr: {
-                            title: "Copy & Paste 1"
-                        }
-                    },
-                    {
-                        text: "C&P2",
-                        id: "jscNp2",
-                        a_attr: {
-                            title: "Copy & Paste 2"
                         }
                     },
                     {
@@ -706,8 +694,8 @@ var moduleData = [
                     folder: "/view/note/styleNhtml/"
                 },
                 nodes: [{
-                        text: "C&P1",
-                        id: "stytlecNp1"
+                        text: "C&P",
+                        id: "stytlecNp"
                     },
                     {
                         text: "mediaquery",
@@ -725,8 +713,8 @@ var moduleData = [
                     folder: "/view/note/java/"
                 },
                 nodes: [{
-                    text: "이중 배열을 이용한 코드 관리",
-                    id: "arrayCode"
+                    text: "utils",
+                    id: "utils"
                 }]
             },
             {
@@ -754,9 +742,21 @@ var moduleData = [
                     folder: "/view/note/dbms/"
                 },
                 nodes: [{
-                    text: "mysql",
-                    id: "mysql"
-                }]
+                        text: "mysql",
+                        id: "mysql",
+                        order:1
+                    },
+                    {
+                        text: "oracle",
+                        id: "oracle",
+                        order:2
+                    },
+                    {
+                        text: "msql",
+                        id: "mssql",
+                        order:3
+                    }
+                ]
             },
             {
                 text: "server",
@@ -870,7 +870,7 @@ var moduleData = [
         $(window).bind('hashchange', function (event) {
             if (SERVICE_CONFIG.hash.M.skip) {
                 SERVICE_CONFIG.hash.M.skip = false;
-            }else if (SERVICE_CONFIG.hash.P.skip) {
+            } else if (SERVICE_CONFIG.hash.P.skip) {
                 SERVICE_CONFIG.hash.P.skip = false;
             } else {
                 checkHash();
@@ -1016,7 +1016,7 @@ var moduleData = [
             delete node.nodes;
             if (!$.isFalse(node.sort)) {
                 node.children.sort(function (a, b) {
-                    return a.text < b.text ? -1 : (a.text > b.text) ? 1 : 0;
+                    return (a.order||a.text) < (b.order||b.text) ? -1 : ((a.order||a.text) > (b.order||b.text)) ? 1 : 0;
                 });
             }
         };
@@ -1107,90 +1107,94 @@ var moduleData = [
                                 if (!$.isFalse(pnode.data.loading)) $("#back-white").show();
 
                                 $.get(url, function (html) {
-                                	setHash(SERVICE_CONFIG.hash.M.key, node.id);
-                                	$entry.html(html).prev().html(node.text);
-                                    if (node.text != node.a_attr.title) $entry.find("div.entry-summary").prepend(node.a_attr.title);
-                                    $("input[type=button]").button().addClass("mtb10");
+                                        setHash(SERVICE_CONFIG.hash.M.key, node.id);
+                                        $entry.html(html).prev().html(node.text);
+                                        if (node.text != node.a_attr.title) $entry.find("div.entry-summary").prepend(node.a_attr.title);
+                                        $("input[type=button]").button().addClass("mtb10");
 
-                                    //make content-header
-                                    var $ul = $content.find("div.content-header>ul").empty();
-                                    var titles = $entry.find(".entry-api span.title").map(function () {
-                                        return {text: $(this).text()};
-                                    }).get();
-                                    $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
+                                        //make content-header
+                                        var $ul = $content.find("div.content-header>ul").empty();
+                                        var titles = $entry.find(".entry-api span.title").map(function () {
+                                            return {
+                                                text: $(this).text()
+                                            };
+                                        }).get();
+                                        $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
 
-                                    if (accordion && titles.length > 1) {
-                                        $content.find(".content-body>.setting").removeClass("none");
-                                        $("#accordian" + (pageSetting.isAccordion?"2":"1")).click();
-                                    }
-
-                                    $entry.find(".entry-source-content[data-wjquery]").each(function () {
-                                        if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
-                                            $(this).find("pre").html(replaceString("htmlEscape", $[$(this).attr("data-wjquery")].toString()));
-                                        } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
-                                            $(this).find("pre").html(replaceString("htmlEscape", $.fn[$(this).attr("data-wjquery")].toString()));
+                                        if (accordion && titles.length > 1) {
+                                            $content.find(".content-body>.setting").removeClass("none");
+                                            $("#accordian" + (pageSetting.isAccordion ? "2" : "1")).click();
                                         }
-                                    });
 
-                                    $entry.find(".entry-demo-content").each(function () {
-                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
-                                    });
+                                        $entry.find(".entry-source-content[data-wjquery]").each(function () {
+                                            if (typeof ($[$(this).attr("data-wjquery")]) !== "undefined") {
+                                                $(this).find("pre").html(replaceString("htmlEscape", $[$(this).attr("data-wjquery")].toString()));
+                                            } else if (typeof ($.fn[$(this).attr("data-wjquery")]) !== "undefined") {
+                                                $(this).find("pre").html(replaceString("htmlEscape", $.fn[$(this).attr("data-wjquery")].toString()));
+                                            }
+                                        });
 
-                                    $entry.find(".entry-demo-textarea-content").each(function () {
-                                        var _html = $(this).val();
-                                        $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
-                                        $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
-                                            var $iframe = $(this)[0].contentWindow.document;
-                                            $iframe.open();
-                                            $iframe.write(_html);
-                                            $iframe.close();
+                                        $entry.find(".entry-demo-content").each(function () {
+                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", $(this).html()));
+                                        });
 
-                                            $(this).on("load", function () {
-                                                $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
-                                                resizeLayout();
+                                        $entry.find(".entry-demo-textarea-content").each(function () {
+                                            var _html = $(this).val();
+                                            $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
+                                            $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
+                                                var $iframe = $(this)[0].contentWindow.document;
+                                                $iframe.open();
+                                                $iframe.write(_html);
+                                                $iframe.close();
+
+                                                $(this).on("load", function () {
+                                                    $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
+                                                    resizeLayout();
+                                                });
                                             });
                                         });
-                                    });
 
-                                    if($entry.find(".entry-source-content[data-plugin]").isObject()){
-                                        var _pn = $entry.find(".entry-source-content[data-plugin]").length;
-                                        $entry.find(".entry-source-content[data-plugin]").each(function (index) {
-                                            var $t = $(this);
-                                            $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function(html) {
-                                                $t.find("pre").html(replaceString("htmlEscape", html));
-                                                if(_pn==index+1){
-                                                    SyntaxHighlighter.highlight();
-                                                }
+                                        if ($entry.find(".entry-source-content[data-plugin]").isObject()) {
+                                            var _pn = $entry.find(".entry-source-content[data-plugin]").length;
+                                            $entry.find(".entry-source-content[data-plugin]").each(function (index) {
+                                                var $t = $(this);
+                                                $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function (html) {
+                                                    $t.find("pre").html(replaceString("htmlEscape", html));
+                                                    if (_pn == index + 1) {
+                                                        SyntaxHighlighter.highlight();
+                                                    }
+                                                });
                                             });
-                                        });
-                                    }else{
-                                        if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
-                                            SyntaxHighlighter.highlight();
+                                        } else {
+                                            if ($entry.find(".entry-source-content").isObject() || $entry.find(".entry-demo-source-content").isObject()) {
+                                                SyntaxHighlighter.highlight();
+                                            }
                                         }
-                                    }
 
-                                    $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
-                                        $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
-                                        $(this).parent().next().slideToggle();
-                                    });
-                                }, "html")
-                                .fail(function (response, status, xhr) {
-                                    try {
-                                        if (status == "error") {
-                                            $entry.empty().prev().html(node.text);
-                                            $content.find("div.content-header>ul").empty();
-                                            $entry.html(COMMON_TMPL.pageNotFound);
-                                            $.wLog(xhr);
+                                        $("div.entry-source-title, div.entry-demo-title", $entry).find("a").click(function () {
+                                            $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
+                                            $(this).parent().next().slideToggle();
+                                        });
+                                    }, "html")
+                                    .fail(function (response, status, xhr) {
+                                        try {
+                                            if (status == "error") {
+                                                $entry.empty().prev().html(node.text);
+                                                $content.find("div.content-header>ul").empty();
+                                                $entry.html(COMMON_TMPL.pageNotFound);
+                                                $.wLog(xhr);
+                                            }
+                                        } catch (e) {
+                                            $.wLog(e);
                                         }
-                                    } catch (e) {
-                                        $.wLog(e);
-                                    }
-                                })
-                                .always(function () {
-                                    if (!$.isFalse(pnode.data.loading)) {
-                                        setTimeout(function () {$("#back-white").hide();}, 100);
-                                    }
-                                });
+                                    })
+                                    .always(function () {
+                                        if (!$.isFalse(pnode.data.loading)) {
+                                            setTimeout(function () {
+                                                $("#back-white").hide();
+                                            }, 100);
+                                        }
+                                    });
                                 break;
                             default:
                                 return;
@@ -1241,24 +1245,24 @@ function setResizer() {
     pageSetting.resizerLeft = $resizer.css("left");
 }
 
-function checkHash(){
-    if(document.location.hash){
-        var _hashes= document.location.hash.split(CODE_VALUE.slash);
-        if(_hashes.length && _hashes.length==3){
-            if(_hashes[1]==SERVICE_CONFIG.hash.M.key){
-                openNode(_hashes[0] + _hashes[2]);        
-            }else if(_hashes[1]==SERVICE_CONFIG.hash.P.key){
+function checkHash() {
+    if (document.location.hash) {
+        var _hashes = document.location.hash.split(CODE_VALUE.slash);
+        if (_hashes.length && _hashes.length == 3) {
+            if (_hashes[1] == SERVICE_CONFIG.hash.M.key) {
+                openNode(_hashes[0] + _hashes[2]);
+            } else if (_hashes[1] == SERVICE_CONFIG.hash.P.key) {
                 doFunction("hashchangePagingHandler", _hashes[2]);
             }
         }
-    }else{
+    } else {
         goHome();
     }
 }
 
 function setHash(menu, key, b) {
-	console.log(menu)
-    var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key ;
+    console.log(menu)
+    var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
     if (_hash != document.location.hash) {
         if (!$.isFalse(b)) {
             SERVICE_CONFIG.hash[menu].skip = true;
@@ -1269,7 +1273,8 @@ function setHash(menu, key, b) {
 
 function drawLeafNode(node) {
     $entry.html(COMMON_TMPL.entryApi).prev().html(node.text);
-    var $ul = $content.find("div.content-header>ul").empty(), arr = [];
+    var $ul = $content.find("div.content-header>ul").empty(),
+        arr = [];
     $.each($menuTree.jstree(true).get_children_dom(node), function () {
         var _node = $menuTree.jstree(true).get_node(this);
         arr.push({

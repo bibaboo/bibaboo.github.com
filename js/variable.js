@@ -11,21 +11,21 @@ var SERVICE_CONFIG = {
     fileExt: {
         image: ["gif", "jpg", "jpeg", "png"]
     },
-    hash :{
-        M : {
-        	key : "M",
-        	skip : false
-        		
+    hash: {
+        M: {
+            key: "M",
+            skip: false
+
         },
-        P : {
-        	key : "P",
-        	skip : false
-        		
+        P: {
+            key: "P",
+            skip: false
+
         },
-    	skip : false,
-        menus : {
-            module : "M",
-            paging : "P"
+        skip: false,
+        menus: {
+            module: "M",
+            paging: "P"
         }
     }
 };
@@ -62,8 +62,7 @@ var CODE_VALUE = {
 
 /** common template */
 var COMMON_TMPL = {
-    layout: 
-        "<div id=\"wapper\">" +
+    layout: "<div id=\"wapper\">" +
         "	<div id=\"sidebar\">" +
         "	    <div class=\"sidebar-head\">" +
         "			<a href=\"javascript:void(0);\">wjquery</a>" +
@@ -102,23 +101,16 @@ var COMMON_TMPL = {
         "</div>" +
         "<div class=\"fakeloader\"></div>" +
         "<div id=\"dialog-message\" title=\"\"><p></p></div>",
-    entryApi: 
-        "<ul class=\"entry-api\"></ul>",
-    entryApiItem: 
-        "<li class=\"entry-api-item\">" +
+    entryApi: "<ul class=\"entry-api\"></ul>",
+    entryApiItem: "<li class=\"entry-api-item\">" +
         "   <h2>" +
         "       <span>${text}</span>" +
         "   </h2>" +
         "	  <div class=\"example\" onclick=\"openNode('${id}')\" style=\"cursor:pointer\">${title}</div>" +
         "</li>",
-    pageNotFound: 
-        "<div style=\"width:100%;margin-top:100px;text-align:center;\"><img src=\"images/404.jpg\" /></div>",
-    menuLi: 
-        "<li><a href=\"javascript:void(0);\">${name}</a></li>",
-    headerLi: 
-        "<li><a href=\"javascript:void(0);\"><span>${text}</span></a></li>",
-    plainDiv: 
-        "<div>${text}</div>",
-    end: 
-        ""
+    pageNotFound: "<div style=\"width:100%;margin-top:100px;text-align:center;\"><img src=\"images/404.jpg\" /></div>",
+    menuLi: "<li><a href=\"javascript:void(0);\">${name}</a></li>",
+    headerLi: "<li><a href=\"javascript:void(0);\"><span>${text}</span></a></li>",
+    plainDiv: "<div>${text}</div>",
+    end: ""
 };

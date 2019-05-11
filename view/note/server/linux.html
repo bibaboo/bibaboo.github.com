@@ -30,22 +30,19 @@
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-						tar -cvzf test.tar.gz test
-						tar -cvzf /var/log/test.tar.gz test
+						* zip 압축
+						zip [압축파일명.zip] [압축대상디렉토리 or 파일]
+
+						* zip 하위디렉토리 포함 압축 : -r 옵션
+						zip -r [압축파일명.zip] [압축대상디렉토리 or 파일]
+
+						* zip 압축 해제
+						unzip [압축파일명.zip]
+
+						* zip 압축 해제 - 경로 지정
+						unzip [압축파일명.zip] -d [압축해제디렉토리]
 					</textarea>
 					<div class="entry-source-title">zip</div>
-					<div class="entry-demo-source-content">
-						<pre class="brush: text;"></pre>
-					</div>
-				</div>
-			</div>
-			<div class="example">
-				<div>
-					<textarea class="entry-demo-textarea-content none">
-						tar -xvzf test.tar.gz
-						tar -xvzf test.tar.gz -C /home
-					</textarea>
-					<div class="entry-source-title">unzip</div>
 					<div class="entry-demo-source-content">
 						<pre class="brush: text;"></pre>
 					</div>
