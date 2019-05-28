@@ -1,5 +1,5 @@
 /*
- * wjquery.paing 0.1.0
+ * wjquery.tree 0.1.0
  * by composite (wonchu.net@gmail.com)
  * http://www.wonchu.net
  * This project licensed under a MIT License.
@@ -8,49 +8,43 @@
 */
 
 (function($){
-	var WPAGEING_DATA_NS = "wpaging";
-	$.fn.wpaging = function(method){
+	var WTREE_DATA_NS = "wtree";
+	$.fn.wtree = function(method){
 		var result, _arguments = arguments;
 		this.each(function(i, element) {
-			var $element = $(element), plugin = $element.data(WPAGEING_DATA_NS);
+			var $element = $(element), plugin = $element.data(WTREE_DATA_NS);
 			if (plugin && typeof method === 'string') {
 				if (plugin[method]) {
 					result = plugin[method].apply(this, Array.prototype.slice.call(_arguments, 1));
 				} else {
-					alert('Method ' + method + ' does not exist on jQuery.wpaging');
+					alert('Method ' + method + ' does not exist on jQuery.wtree');
 				}
 			} else if (typeof method === 'object' || !method) {
-				var options = $.extend({}, $.fn.wpaging.defaultSettings, method || {});
+				var options = $.extend({}, $.fn.wtree.defaultSettings, method || {});
 				if(plugin) {
 					plugin["distory"]();
-					$element.removeData(WPAGEING_DATA_NS);
+					$element.removeData(WTREE_DATA_NS);
 				}
 				if(options.totalCount>0){
-					var _WPAGING = new WPAGING();
-					_WPAGING.init($element, options);
-					$element.data(WPAGEING_DATA_NS, _WPAGING);
+					var _WTREE = new WTREE();
+					_WTREE.init($element, options);
+					$element.data(WTREE_DATA_NS, _WTREE);
 				}
 			}
 		});
 		return result?result:$(this);
 	};
 
-	$.fn.wpaging.defaultSettings = {
-		hash : false,
-		hashFunc : null,
-		currentPage : 1, 	//현재 페이지
-		listSize : 20,		//리스트에 나타낼 데이터 수
-		totalCount : 1,	//총 데이터 수
-		pageCount : 10		//화면에 나타낼 페이지 수
+	$.fn.wtree.defaultSettings = {
 	};
 
-	function WPAGING() {
+	function WTREE() {
 		var $element, options;
 		function init(_element, _options){
 			$element = _element;
 			options = _options;
-			_WPAGING.calcurate(options);
-			_WPAGING.draw($element, options);
+			_WTREE.calcurate(options);
+			_WTREE.draw($element, options);
 			setNum();
 
 			$element.find("a.link-page").click(function(){
@@ -90,19 +84,19 @@
 		function redraw(_options){
 			if(_options.currentPage) options.currentPage=_options.currentPage;
 			if(_options.totalCount) options.totalCount=_options.totalCount;
-			_WPAGING.calcurate(options);
-			_WPAGING.redraw($element, options);
+			_WTREE.calcurate(options);
+			_WTREE.redraw($element, options);
 			setNum(_options.currentPage);
 		}
 
 		function setNum(page){
-			$element.find(".wpaging-paging a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
+			$element.find(".wtree-tree a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
 			if(page) options.currentPage = page;
 			_setHash(options.currentPage);
 		}
 
 		function checkNum(page){
-			if($element.find(".wpaging-paging a[data-page='" + page + "']").length==1){
+			if($element.find(".wtree-tree a[data-page='" + page + "']").length==1){
 				setNum(page);
 			} else{
 				redraw({currentPage: page})
@@ -122,26 +116,26 @@
 		};
 	}
 
-	var  _WPAGING = {
+	var  _WTREE = {
 		draw : function($element, options){
 			//make wapper
-			$element.html("<div class=\"wpaging-wrap\"><div class=\"wpaging-area\"><span class=\"wpaging-paging\"></span></div></div>");
+			$element.html("<div class=\"wtree-wrap\"><div class=\"wtree-area\"><span class=\"wtree-tree\"></span></div></div>");
 
 			var _html = [];
-			_html.push("<a href=\"javascript:;\" class=\"link-prev link-page" + (options.startPage==1?" wpaging-none":"") + "\"><</a>");
+			_html.push("<a href=\"javascript:;\" class=\"link-prev link-page" + (options.startPage==1?" wtree-none":"") + "\"><</a>");
 			for(var i=options.startPage; i<=options.pageCount;i++){
-				_html.push("<a href=\"javascript:;\" class=\"link-num link-page" + (i<=options.endPage?"":" wpaging-none") + "\" data-page=\"" + i + "\">" + i + "</a>");
+				_html.push("<a href=\"javascript:;\" class=\"link-num link-page" + (i<=options.endPage?"":" wtree-none") + "\" data-page=\"" + i + "\">" + i + "</a>");
 			}
-			_html.push("<a href=\"javascript:;\" class=\"link-next link-page" + (options.totalPage==options.endPage?" wpaging-none":"") + "\">></a>");
-			$element.find(".wpaging-paging").html(_html.join(""));
+			_html.push("<a href=\"javascript:;\" class=\"link-next link-page" + (options.totalPage==options.endPage?" wtree-none":"") + "\">></a>");
+			$element.find(".wtree-tree").html(_html.join(""));
 		},
 		redraw : function($element, options){
-			$element.find(".link-prev").toggleClass("wpaging-none", options.startPage==1);
-			$element.find(".link-next").toggleClass("wpaging-none", options.totalPage==options.endPage);
+			$element.find(".link-prev").toggleClass("wtree-none", options.startPage==1);
+			$element.find(".link-next").toggleClass("wtree-none", options.totalPage==options.endPage);
 			
 			var _page = options.startPage;
 			for(var i=0; i<=options.pageCount-1;i++){
-				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wpaging-none", _page>options.totalPage);
+				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wtree-none", _page>options.totalPage);
 				_page++;
 			}
 		},

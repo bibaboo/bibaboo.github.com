@@ -58,6 +58,12 @@ var pageSetting = {
             js: ["/js/lib/wjquery/wjquery.paging.js"]
 
         },
+        wtree: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.tree.css"],
+            js: ["/js/lib/wjquery/wjquery.tree.js"]
+
+        },
         minicolors: {
             loaded: false,
             css: ["/js/lib/jquery-minicolors-master/jquery.minicolors.css"],
@@ -585,6 +591,13 @@ var moduleData = [
                 a_attr: {
                     title: "page navigation",
                     plugin: "wpaging"
+                }
+            },
+            {
+                text: "wtree",
+                a_attr: {
+                    title: "tree view",
+                    plugin: "wtree"
                 }
             },
             {

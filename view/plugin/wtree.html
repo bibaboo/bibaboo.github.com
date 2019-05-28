@@ -15,36 +15,49 @@
 					<div class="entry-demo-content">
 						<div id="demo1-id1" style="height:50px;"></div>
 						<script type="text/javascript">
-							var paginInf = {
-								hash: true,
-								hashFunc: function(page){
-									setHash(SERVICE_CONFIG.hash.P.key, page);
-								},
-								currentPage: 1,
-								totalCount: 160,
-								listSize: 10,
-								pageCount: 5,
-								callback: demo1_process
-							};
-
-							function hashchangePagingHandler(page){
-								demo1_process({
-									type : "prev",
-									page : page
-								});
-							}
-
-							$("#demo1-id1").wpaging(paginInf);
-
-							function demo1_process(result) {
-								//* 목록 조회
-								alert("retrieve type : " + result.type + ", page : " + result.page);
-								//*/
-								$("#demo1-id1").wpaging("checkNum", result.page);
-							}
+							
 						</script>
 					</div>
 					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">sample</span>
+		</h2>
+		<div>
+			<div class="example">
+				
+				<div>
+					<div class="entry-demo-content none">
+						<script type="text/javascript">
+							var wtree_sample = {
+								D000 : {
+									dept : [
+										{deptId : "D100", hasChildren : true},
+										{deptId : "D200", hasChildren : true},
+										{deptId : "D300", hasChildren : true},
+										{deptId : "D400", hasChildren : true},
+										{deptId : "D500", hasChildren : true},
+										{deptId : "D600", hasChildren : false},
+										{deptId : "D700", hasChildren : true}
+									],
+									user : [
+										{userId : "D001"},
+										{userId : "D002"},
+										{userId : "D003"},
+										{userId : "D004"}
+									]
+								}
+							}
+						</script>
+					</div>
+					<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 					<div class="entry-demo-source-content">
 						<pre class="brush: js; html-script: true;"></pre>
 					</div>
@@ -59,7 +72,7 @@
 		<div>
 			<div class="example">
 				<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
-				<div class="entry-source-content" data-plugin="wpaging" data-plugin-type="css">
+				<div class="entry-source-content" data-plugin="wtree" data-plugin-type="css">
 					<pre class="brush: css: true;"></pre>
 				</div>
 			</div>
@@ -72,7 +85,7 @@
 		<div>
 			<div class="example">
 				<div class="entry-source-title"> source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
-				<div class="entry-source-content" data-plugin="wpaging" data-plugin-type="js">
+				<div class="entry-source-content" data-plugin="wtree" data-plugin-type="js">
 					<pre class="brush: js: true;"></pre>
 				</div>
 			</div>
