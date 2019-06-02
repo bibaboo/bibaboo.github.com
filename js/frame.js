@@ -632,11 +632,11 @@ var moduleData = [
                     folder: "/view/note/javascript/"
                 },
                 nodes: [{
-                    text: "C&P",
-                    id: "jscNp",
-                    a_attr: {
-                        title: "Copy & Paste"
-                    }
+                        text: "C&P",
+                        id: "jscNp",
+                        a_attr: {
+                            title: "Copy & Paste"
+                        }
                     },
                     {
                         text: "배열 객체",
@@ -757,17 +757,17 @@ var moduleData = [
                 nodes: [{
                         text: "mysql",
                         id: "mysql",
-                        order:1
+                        order: 1
                     },
                     {
                         text: "oracle",
                         id: "oracle",
-                        order:2
+                        order: 2
                     },
                     {
                         text: "msql",
                         id: "mssql",
-                        order:3
+                        order: 3
                     }
                 ]
             },
@@ -1029,7 +1029,7 @@ var moduleData = [
             delete node.nodes;
             if (!$.isFalse(node.sort)) {
                 node.children.sort(function (a, b) {
-                    return (a.order||a.text) < (b.order||b.text) ? -1 : ((a.order||a.text) > (b.order||b.text)) ? 1 : 0;
+                    return (a.order || a.text) < (b.order || b.text) ? -1 : ((a.order || a.text) > (b.order || b.text)) ? 1 : 0;
                 });
             }
         };

@@ -5,55 +5,58 @@
     position: relative;
 }
 
-.wtree-wrap ul{
+.wtree-wrap ul {
     list-style: none;
-    display:block;
+    display: block;
     font-size: 14px;
 }
 
-.wtree-wrap li.root>ul>li li{
+.wtree-wrap li.root>ul>li li {
     margin-left: 20px;
 }
 
-.wtree-wrap li.root li a{
-    display:block;
-    width:100%;
-    height:30px;
+.wtree-wrap li.root li a.item {
+    display: block;
+    width: 100%;
+    height: 30px;
     line-height: 30px;
     background-image: url(../../../images/border_bottom_d9d9d9.png);
-    background-position: 20px 28px; 
+    background-position: 20px 28px;
     background-repeat: no-repeat;
     /*border-bottom: 1px solid #d9d9d9;*/
 }
 
-.wtree-wrap li.root li i{
-    display:inline-block;
-    vertical-align:middle;
-    width:16px;
-    height:16px;
+.wtree-wrap li.root li i {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
     background-image: url(../jquery-ui-1.12.1.custom/images/ui-icons_222222_256x240.png);
-    background-position: -32px -129px;
 }
 
-.wtree-wrap li.root li i.empty{
-    margin-right:5px;
+.wtree-wrap li.root li i.empty {
+    margin-right: 5px;
     background-position: 16px 0px;
 }
 
-.wtree-wrap li.root li i.plus{
-    margin-right:5px;
+.wtree-wrap li.root li i.plus {
+    margin-right: 5px;
     background-position: -32px -129px;
 }
 
-.wtree-wrap li.root li i.minus{
-    margin-right:5px;
+.wtree-wrap li.root li i.minus {
+    margin-right: 5px;
     background-position: -64px -129px;
 }
 
-.wtree-wrap li.root li i.node{    
+.wtree-wrap li.root li i.closed {
     background-position: 0px -337px;
 }
 
-.wtree-wrap li.root li i.leaf{
+.wtree-wrap li.root li i.opened {
+    background-position: -16px -337px;
+}
+
+.wtree-wrap li.root li i.leaf {
     background-position: -32px -337px;
 }
