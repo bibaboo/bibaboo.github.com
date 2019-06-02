@@ -8,149 +8,131 @@
 */
 
 (function($){
-	var WTREE_DATA_NS = "wtree";
+    var WTREE_DATA_NS = "wtree",
+        WTREE_CODE = {
+            type : {
+                node : "N",
+                leaf : "L"
+            },
+            icon : {
+                plus : "plus",
+                minus : "minus",
+                empty : "empty",
+                node : "node",
+                leaf : "leaf"
+            }
+        };
 	$.fn.wtree = function(method){
 		var result, _arguments = arguments;
 		this.each(function(i, element) {
-			var $element = $(element), plugin = $element.data(WTREE_DATA_NS);
+            var $element = $(element), plugin = $element.data(WTREE_DATA_NS);
+            
 			if (plugin && typeof method === 'string') {
 				if (plugin[method]) {
 					result = plugin[method].apply(this, Array.prototype.slice.call(_arguments, 1));
 				} else {
 					alert('Method ' + method + ' does not exist on jQuery.wtree');
-				}
-			} else if (typeof method === 'object' || !method) {
-				var options = $.extend({}, $.fn.wtree.defaultSettings, method || {});
-				if(plugin) {
-					plugin["distory"]();
-					$element.removeData(WTREE_DATA_NS);
-				}
-				if(options.totalCount>0){
-					var _WTREE = new WTREE();
-					_WTREE.init($element, options);
-					$element.data(WTREE_DATA_NS, _WTREE);
-				}
-			}
+                }
+            } else if (!plugin && (typeof method === 'object' || !method)) {
+                var _WTREE = new WTREE();
+                $element.data(WTREE_DATA_NS, _WTREE);
+                _WTREE.init($element, $.extend({}, $.fn.wtree.defaultSettings, method || {}));
+            }
 		});
 		return result?result:$(this);
 	};
 
 	$.fn.wtree.defaultSettings = {
+        rootNodeId : "",
+        rootTitle : "root"
 	};
 
-	function WTREE() {
-		var $element, options;
+	function WTREE(_element, _options) {
+        var $element, options;
 		function init(_element, _options){
 			$element = _element;
-			options = _options;
-			_WTREE.calcurate(options);
-			_WTREE.draw($element, options);
-			setNum();
+            options = _options;
 
-			$element.find("a.link-page").click(function(){
-				var _data = {type:"", page:0};
-				if($(this).hasClass("current-link-num")){
-					return false;
-				} else if($(this).hasClass("link-prev")){
-					_data.type = "prev";
-					_data.page = options.startPage - options.pageCount;
-				} else if($(this).hasClass("link-next")){
-					_data.type = "next";
-					_data.page = options.endPage + 1;
-				} else if($(this).hasClass("link-num")){
-					_data.type = "page";
-					_data.page = $(this).attr("data-page");
-				}
-				
-				if(options.callback){
-					options.callback(_data);
-				}else{
-					console.log(_data);
-				}
-			});
+            $element.html("<ul><li data-type=\"" + WTREE_CODE.type.node + "\" data-id=\"" + _options.rootNodeId + "\" class=\"root\">" + _options.rootTitle + "<li></ul>");
+            doFunction(_options.fnc, _options.rootNodeId);
+        }
+
+		function draw(nodeId, data){
+			_WTREE.draw($element, options, nodeId, data);
+        }
+        
+        function select(t){
+            var $t = $(t),
+                $p = $t.parent(),
+                type = $p.attr("data-type");
+                id = $p.attr("data-id");
+
+            if(type==WTREE_CODE.type.node){
+                if($t.find("i." + WTREE_CODE.icon.plus).length==1){
+                    if($p.children("ul").length==0){
+                        doFunction(options.fnc, id);
+                    }else{
+                        $t.next().show();
+                    }
+                    $t.find("i." + WTREE_CODE.icon.plus).changeClass(WTREE_CODE.icon.plus, WTREE_CODE.icon.minus);
+                }else if($t.find("i.minus").length==1){
+                    /* 현재레벨 
+                    $t.find("i.minus").changeClass("minus", "plus");
+                    $t.next().hide();
+                    */
+
+                    //* 하위포함
+                    $p.find("i." + WTREE_CODE.icon.minus).each(function(){
+                        $(this).changeClass(WTREE_CODE.icon.minus, WTREE_CODE.icon.plus);
+                        $(this).parent().next().hide();
+                    });
+                    //*/
+                }
+            }else if(type==WTREE_CODE.type.leaf){
+                $.alert(id);
+            }
 		}
 		
-		function _setHash(page){
-			if(options.hash){
-				if(options.hashFunc==null){
-					document.location.hash = "#/" + page;
-				}else{
-					options.hashFunc(page);
-				}
-			}
-			
-		}
-
-		function redraw(_options){
-			if(_options.currentPage) options.currentPage=_options.currentPage;
-			if(_options.totalCount) options.totalCount=_options.totalCount;
-			_WTREE.calcurate(options);
-			_WTREE.redraw($element, options);
-			setNum(_options.currentPage);
-		}
-
-		function setNum(page){
-			$element.find(".wtree-tree a[data-page='" + (page||options.currentPage) + "']").addClass("current-link-num").siblings().removeClass("current-link-num");
-			if(page) options.currentPage = page;
-			_setHash(options.currentPage);
-		}
-
-		function checkNum(page){
-			if($element.find(".wtree-tree a[data-page='" + page + "']").length==1){
-				setNum(page);
-			} else{
-				redraw({currentPage: page})
-			}
-		}
-		
-		function distory(){
-			$element.empty();
-		}
-
 		return {
-			init:init,
-			distory:distory,
-			redraw:redraw,
-			setNum:setNum,
-			checkNum:checkNum
+            init:init,
+            draw:draw,
+            select:select
 		};
 	}
 
 	var  _WTREE = {
-		draw : function($element, options){
-			//make wapper
-			$element.html("<div class=\"wtree-wrap\"><div class=\"wtree-area\"><span class=\"wtree-tree\"></span></div></div>");
+		draw : function($element, options, nodeId, data){
+            var $c = $element.find("[data-type='" + WTREE_CODE.type.node + "'][data-id='" + nodeId + "']");
+            if($c.children("ul").isObject()){
+            }else{
+                var nodes = data.nodes||[],
+                    leaves = data.leaves||[];
+                    $ul = $("<ul/>");
 
-			var _html = [];
-			_html.push("<a href=\"javascript:;\" class=\"link-prev link-page" + (options.startPage==1?" wtree-none":"") + "\"><</a>");
-			for(var i=options.startPage; i<=options.pageCount;i++){
-				_html.push("<a href=\"javascript:;\" class=\"link-num link-page" + (i<=options.endPage?"":" wtree-none") + "\" data-page=\"" + i + "\">" + i + "</a>");
-			}
-			_html.push("<a href=\"javascript:;\" class=\"link-next link-page" + (options.totalPage==options.endPage?" wtree-none":"") + "\">></a>");
-			$element.find(".wtree-tree").html(_html.join(""));
-		},
-		redraw : function($element, options){
-			$element.find(".link-prev").toggleClass("wtree-none", options.startPage==1);
-			$element.find(".link-next").toggleClass("wtree-none", options.totalPage==options.endPage);
-			
-			var _page = options.startPage;
-			for(var i=0; i<=options.pageCount-1;i++){
-				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wtree-none", _page>options.totalPage);
-				_page++;
-			}
-		},
-		calcurate : function(options){
-			options.totalPage = Math.ceil(options.totalCount/options.listSize);    	// 총 페이지 수
-			options.pageGroup = Math.ceil(options.currentPage/options.pageCount);  	// 페이지 그룹
-			options.endPage = options.pageGroup * options.pageCount;    			// 화면에 보여질 마지막 페이지 번호
-			options.startPage = options.endPage - (options.pageCount-1);   			// 화면에 보여질 첫번째 페이지 번호
-			if(options.endPage > options.totalPage) options.endPage = options.totalPage;
-			return options;
-		}
+                var sb = new stringBuffer();
+                $.each(nodes, function(){
+                    sb.append("<li data-type=\"" + WTREE_CODE.type.node + "\" data-id=\"" + this.nodeId + "\"><a href=\"javascript:void(0);\" class=\"item\"><i class=\"" + (this.hasChildren?WTREE_CODE.icon.plus:WTREE_CODE.icon.empty) + "\"></i><i class=\"" + WTREE_CODE.icon.node + "\"></i><span>" + this.nodeId +  "</span></a></li>");
+                });
+
+                $.each(leaves, function(){
+                    sb.append("<li data-type=\"" + WTREE_CODE.type.leaf + "\" data-id=\"" + this.leafId + "\"><a href=\"javascript:void(0);\" class=\"item\"><i class=\"" + WTREE_CODE.icon.empty + "\"></i><i class=\"" + WTREE_CODE.icon.leaf + "\"></i><span>" + this.leafId +  "</span></a></li>");
+                });
+
+                if(sb.size()>0){
+                    $ul.append(sb.toString());
+                    $ul.find("a.item").click(function(){
+                        $element.wtree("select", this);
+                    });
+                    $c.append($ul);
+                }
+            }
+        },
+        select : function(t, fnc){
+            alert(fnc)
+        }
 	}
 	
 })(jQuery);
-
 
 
 

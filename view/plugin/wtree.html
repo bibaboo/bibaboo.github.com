@@ -1,3 +1,4 @@
+
 <div class="entry-summary"></div>
 <ul class="entry-api">
 	<li class="entry-api-item">
@@ -13,9 +14,22 @@
 				</div>
 				<div>
 					<div class="entry-demo-content">
-						<div id="demo1-id1" style="height:50px;"></div>
+                        <div id="demo1-id1" class="wtree-wrap"></div>
+                        <div style="height:20px;width:1px;"></div>
+                        <div id="demo1-id2" class="wtree-wrap"></div>
 						<script type="text/javascript">
-							
+							$(document).ready(function(){
+                                $("#demo1-id1").wtree({rootNodeId : "D000", fnc : "getTreeData1", rootTitle : "root1"});
+                                $("#demo1-id2").wtree({rootNodeId : "D000", fnc : "getTreeData2", rootTitle : "root2"});
+                            });
+                            
+                            function getTreeData1(nodeId){
+                                $("#demo1-id1").wtree("draw", nodeId, wtree_sample[nodeId]);
+                            }
+
+                            function getTreeData2(nodeId){
+                                $("#demo1-id2").wtree("draw", nodeId, wtree_sample[nodeId]);
+                            }
 						</script>
 					</div>
 					<div class="entry-source-title"></div>
@@ -28,30 +42,87 @@
 	</li>
 	<li class="entry-api-item">
 		<h2>
-			<span class="title">sample</span>
+			<span class="title">data</span>
 		</h2>
 		<div>
 			<div class="example">
-				
 				<div>
 					<div class="entry-demo-content none">
 						<script type="text/javascript">
 							var wtree_sample = {
 								D000 : {
-									dept : [
-										{deptId : "D100", hasChildren : true},
-										{deptId : "D200", hasChildren : true},
-										{deptId : "D300", hasChildren : true},
-										{deptId : "D400", hasChildren : true},
-										{deptId : "D500", hasChildren : true},
-										{deptId : "D600", hasChildren : false},
-										{deptId : "D700", hasChildren : true}
+									nodes : [
+										{nodeId : "D100", hasChildren : true},
+										{nodeId : "D200", hasChildren : false},
+										{nodeId : "D300", hasChildren : true},
+										{nodeId : "D400", hasChildren : false}
 									],
-									user : [
-										{userId : "D001"},
-										{userId : "D002"},
-										{userId : "D003"},
-										{userId : "D004"}
+									leaves : [
+										{leafId : "U001"},
+										{leafId : "U002"},
+										{leafId : "U003"},
+										{leafId : "U004"}
+									]
+                                },
+                                D100 : {
+									nodes : [
+										{nodeId : "D110", hasChildren : true},
+										{nodeId : "D120", hasChildren : false},
+										{nodeId : "D130", hasChildren : true},
+										{nodeId : "D140", hasChildren : false}
+									],
+									leaves : [
+                                        {leafId : "U101"},
+										{leafId : "U102"},
+										{leafId : "U103"},
+										{leafId : "U104"}
+									]
+                                },
+                                D110 : {
+									leaves : [
+                                        {leafId : "U111"},
+										{leafId : "U112"},
+										{leafId : "U113"},
+                                        {leafId : "U114"},
+                                        {leafId : "U115"},
+                                        {leafId : "U116"},
+                                        {leafId : "U117"}
+									]
+                                },
+                                D130 : {
+									leaves : [
+                                        {leafId : "U131"},
+										{leafId : "U132"},
+										{leafId : "U133"}
+									]
+                                },
+                                D300 : {
+									nodes : [
+										{nodeId : "D310", hasChildren : true},
+										{nodeId : "D320", hasChildren : false},
+										{nodeId : "D330", hasChildren : true},
+										{nodeId : "D340", hasChildren : false}
+									],
+									leaves : [
+                                        {leafId : "U301"},
+										{leafId : "U302"},
+										{leafId : "U303"},
+										{leafId : "U304"}
+									]
+                                },
+                                D310 : {
+									leaves : [
+                                        {leafId : "U311"},
+										{leafId : "U312"},
+										{leafId : "U313"},
+										{leafId : "U314"}
+									]
+                                },
+                                D330 : {
+									leaves : [
+                                        {leafId : "U331"},
+										{leafId : "U332"},
+										{leafId : "U333"}
 									]
 								}
 							}

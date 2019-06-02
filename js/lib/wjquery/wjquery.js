@@ -1239,6 +1239,9 @@ function stringBuffer (){
     this.append = function(value){
         buffer.push($.getString(value));
     }
+    this.size = function(){
+        return buffer.length;
+    }
     this.toString = function(delm){
         return buffer.join(delm||"");
     }
