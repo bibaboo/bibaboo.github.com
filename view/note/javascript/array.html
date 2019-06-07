@@ -194,7 +194,7 @@
 				<tbody>
 					<tr>
 			  			<td class="func">sort()</td>
-			  			<td class="desc">배열을 알파벳 순으로 분류한다.</td>
+			  			<td class="desc">배열을 정렬한다.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -202,36 +202,72 @@
 				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 				<div>
 					<div class="entry-demo-content">
-						<div id="demo7-id1">demo7_1</div>
-						<div id="demo7-id2">demo7_2</div>
-						<div id="demo7-id3">demo7_3</div>
+						<div id="demo7-id1">demo7_1 문자</div>
+						<div id="demo7-id2">demo7_2 숫자 asc</div>
+						<div id="demo7-id3">demo7_3 숫자 desc</div>
+						<div id="demo7-id4">demo7_3 객체 asc</div>
+						<div id="demo7-id5">demo7_3 객체 desc</div>
 						<input type="button" onclick="demo7_1();" value="demo7_1" />
 						<input type="button" onclick="demo7_2();" value="demo7_2" />
 						<input type="button" onclick="demo7_3();" value="demo7_3" />
+						<input type="button" onclick="demo7_4('name');" value="demo7_4_name" />
+						<input type="button" onclick="demo7_5('name');" value="demo7_5_name" />
+						<input type="button" onclick="demo7_4('age');" value="demo7_4_age" />
+						<input type="button" onclick="demo7_5('age');" value="demo7_5_age" />
 						<script type="text/javascript">
+							var demo7_arr = ["orange", "kiwi", "apple", "banana"];
+							var demo7_arr2 = [1,10,5,4,7,20,31,18,90,100,6];
+							var demo7_arr3 = [
+								{ name : "자자", age : 7},
+								{ name : "나나", age : 10},
+								{ name : "하하", age : 21},
+								{ name : "다다", age : 25},
+								{ name : "가가", age : 13},
+								{ name : "아아", age : 44}
+							];
+						
 							function demo7_1(){
-								var arr = ["10", "20", "100", "99"];
-								arr.sort();
-								$("#demo7-id1").html(arr.toString());
-						  	}
-							
+								var demo7_1_demo = Array.prototype.slice.call(demo7_arr);
+								demo7_1_demo.sort();
+								$("#demo7-id1").html(demo7_1_demo.toString());
+							}
+							  
 							function demo7_2(){
-								var arr = ["10", "20", "100", "99"];
-								arr.sort(function(a, b){return a-b;});;
-								$("#demo7-id2").html(arr.toString());
-						  	}
-							
+								var demo7_2_demo = Array.prototype.slice.call(demo7_arr2);
+								demo7_2_demo.sort(function(a, b){
+									return a-b;
+								});
+								$("#demo7-id2").html(demo7_2_demo.toString());
+							}
+							  
 							function demo7_3(){
-								var arr = ["10", "20", "100", "99"];
-								arr.sort(function(a, b){return b-a;});;
-								$("#demo7-id3").html(arr.toString());
+								var demo7_3_demo = Array.prototype.slice.call(demo7_arr2);
+								demo7_3_demo.sort(function(a, b){
+									return b-a;
+								});
+								$("#demo7-id3").html(demo7_3_demo.toString());
+							  }
+							  
+							function demo7_4(key){
+								var demo7_4_demo = Array.prototype.slice.call(demo7_arr3);
+								demo7_4_demo.sort(function(a, b){
+									return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
+								});
+								$("#demo7-id4").html(JSON.stringify(demo7_4_demo));
+							}
+							  
+							function demo7_5(key){
+								var demo7_5_demo = Array.prototype.slice.call(demo7_arr3);
+								demo7_5_demo.sort(function(a, b){
+									return a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0;
+								});
+								$("#demo7-id5").html(JSON.stringify(demo7_5_demo));
 						  	}
-							
 						</script>
 					</div>
 					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">
-						<pre class="brush: js; html-script: true; highlight: [10, 16, 22]"></pre>
+						<pre class="brush: js; html-script: true; highlight: [14, 15, 16]"></pre>
 					</div>
 				</div>
 			</div>
