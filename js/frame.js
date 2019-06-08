@@ -948,7 +948,13 @@ var moduleData = [
         //컨텐츠 헤더
         $content.find("div.content-header>ul").on("click", "a", function () {
             event.preventDefault();
-            $entry.find("ul.entry-api>li").eq($content.find("div.content-header>ul>li").index($(this).parent())).scrollIntoView($content.find("div.content-body"));
+            if(pageSetting.isAccordion){
+                $entry.find("ul.entry-api").accordion({
+                    active: $content.find("div.content-header>ul>li").index($(this).parent())
+                });
+            }else{
+                $entry.find("ul.entry-api>li").eq($content.find("div.content-header>ul>li").index($(this).parent())).scrollIntoView($content.find("div.content-body"));
+            }
         });
 
         $sidebar.find(".sidebar-head>a").click(
