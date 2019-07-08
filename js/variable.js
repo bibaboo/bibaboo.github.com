@@ -73,7 +73,7 @@ var COMMON_TMPL = {
         "				<li class=\"ui-state-default ui-corner-all\" title=\".ui-icon-minus\"><span class=\"ui-icon ui-icon-minusthick\"></span></li>" +
         "			</ul>" +
         "		</div>" +
-        "	    <div class=\"sidebar-body\"><div class=\"sidebar-search\"><input type=\"search\" id=\"searchWord\"/ results=\"0\" placeholder=\"Search\"></div><div id=\"menuTree\"></div></div>" +
+        "	    <div class=\"sidebar-body\"><div class=\"sidebar-search\"><input type=\"search\" id=\"searchWord\" results=\"0\" placeholder=\"Search\"></div><div id=\"menuTree\"></div></div>" +
         "	</div>" +
         "	<div id=\"spacer\">" +
         "		<span class=\"ui-icon ui-icon-seek-end\"></span>" +
