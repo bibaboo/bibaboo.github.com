@@ -913,16 +913,15 @@ var moduleData = [
         });
 
         //리사이즈 이벤트
-        resizeLayout();
-        setResizer();
+        resizeLayout(true);
         $(window).resize(function () {
-            resizeLayout();
+            resizeLayout(false);
         });
 
         //iframe resize
         $('#content-iframe').on("load", function () {
             $(this).css("height", $(this).contents().find("body").height() + "px");
-            resizeLayout();
+            resizeLayout(false);
         });
 
         //resizer
@@ -1168,7 +1167,7 @@ var moduleData = [
 
                                                 $(this).on("load", function () {
                                                     $(this).css("height", $(this).contents().find("body").height() + 20 + "px");
-                                                    resizeLayout();
+                                                    resizeLayout(false);
                                                 });
                                             });
                                         });
@@ -1250,18 +1249,17 @@ var moduleData = [
     }
 })(jQuery);
 
-function resizeLayout() {
+function resizeLayout(init) {
     if ($sidebar.is(":visible")) {
         $("#sidebar>div.sidebar-body, #content>div.content-body").height($(window).height() - LAYOUT_CONFIG.contentHeaderHeight);
         $sidebar.width(pageSetting.resizeWidth.sidebar);
         $content.width(pageSetting.resizeWidth.content);
-        setResizer();
+        
+        if(!init){
+            $resizer.css("left", parseInt($sidebar.width(), 10));
+        }
+        pageSetting.resizerLeft = $resizer.css("left");
     }
-}
-
-function setResizer() {
-    $resizer.css("left", $sidebar.width());
-    pageSetting.resizerLeft = $resizer.css("left");
 }
 
 function checkHash() {

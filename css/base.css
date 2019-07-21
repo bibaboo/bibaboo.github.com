@@ -51,7 +51,7 @@ input[type="search"]::-webkit-search-decoration {
 .sidebar-head ul li{float:left;margin-left:5px;cursor:pointer;}
 .sidebar-search {width:100%;text-align:center;display:none;}
 .sidebar-search input {width:100%;}
-#resizer {position:absolute;background-color:#000;top:0;left:100px;height:100%;cursor: col-resize;opacity:0.1;}
+#resizer {position:absolute;background-color:#000;top:0;left:15%;height:100%;cursor: col-resize;opacity:0.1;}
 #spacer{position:absolute;top:30px;width:19px;height:100%;background-color:#eee;display:none;z-index:101;cursor:pointer;}
 #spacer span{margin:450px 1px;}
 
