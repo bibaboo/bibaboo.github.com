@@ -11,12 +11,24 @@
         /**
          * value에 findString이 있는지 여부
          * @name $.hasString(value, findString)
-         * @param value 문자열
+         * @param value 문자열 or 배열
          * @param target 찾는 문자열
          * @return Boolean
          **/
-        hasString: function (value, findString) {
-            return !!~value.indexOf(findString);
+        hasString : function(value, findString){
+        	if($.isArray(value)){
+        		var b = false;
+        		for (var i = 0; value.length > i; i++) {
+    				if (findString.indexOf(value[i]) > -1) {
+    					b = true;
+    					break;
+    				}
+    			}
+        		return b;
+        	}else{
+                return !!~value.indexOf(findString);
+        		//return value.indexOf(findString)>-1;
+        	}
         },
 
         /**
