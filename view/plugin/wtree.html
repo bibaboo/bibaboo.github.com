@@ -13,29 +13,39 @@
 				</div>
 				<div>
 					<div class="entry-demo-content">
+                        <input type="button" onclick="$('#demo1-id1').wtree('openAll');" value="+" />
+                        <input type="button" onclick="$('#demo1-id1').wtree('closeAll');" value="-" />
 						<div id="demo1-id1" class="wtree-wrap"></div>
-						<div style="height:20px;width:1px;"></div>
+                        <div style="height:20px;width:1px;"></div>
+                        <input type="button" onclick="$('#demo1-id2').wtree('openAll');" value="+" />
+                        <input type="button" onclick="$('#demo1-id2').wtree('closeAll');" value="-" />
 						<div id="demo1-id2" class="wtree-wrap"></div>
 						<script type="text/javascript">
 							$(document).ready(function () {
 								$("#demo1-id1").wtree({
 									rootNodeId: "D000",
-									fnc: "getTreeData1",
+                                    fnc: "getTreeData1",
+                                    leafNodeCallback: "selectedTreeData1",
 									rootTitle: "root1"
 								});
 								$("#demo1-id2").wtree({
 									rootNodeId: "D000",
-									fnc: "getTreeData2",
+                                    data: wtree_sample,
+                                    leafNodeCallback: "selectedTreeData2",
 									rootTitle: "root2"
 								});
 							});
 
-							function getTreeData1(nodeId) {
-								$("#demo1-id1").wtree("draw", nodeId, wtree_sample[nodeId]);
+							function getTreeData1(id) {
+								$("#demo1-id1").wtree("draw", id, wtree_sample[id]);
+                            }
+                            
+                            function selectedTreeData1(data) {
+								alert(data);
 							}
 
-							function getTreeData2(nodeId) {
-								$("#demo1-id2").wtree("draw", nodeId, wtree_sample[nodeId]);
+                            function selectedTreeData2(data) {
+								alert(data);
 							}
 						</script>
 					</div>
@@ -59,160 +69,166 @@
 							var wtree_sample = {
 								D000: {
 									nodes: [{
-											nodeId: "D100",
+                                            id: "D100",
+                                            name: "그룹1",
 											hasChildren: true
 										},
 										{
-											nodeId: "D200",
+											id: "D200",
 											hasChildren: false
 										},
 										{
-											nodeId: "D300",
+											id: "D300",
 											hasChildren: true
 										},
 										{
-											nodeId: "D400",
+											id: "D400",
 											hasChildren: false
 										}
 									],
 									leaves: [{
-											leafId: "U001"
+                                            id: "U001",
+                                            data: "data-U001"
 										},
 										{
-											leafId: "U002"
+                                            id: "U002",
+                                            data: {
+                                                type:"url",
+                                                url: "https://www.naver.com"
+                                            }
 										},
 										{
-											leafId: "U003"
+											id: "U003"
 										},
 										{
-											leafId: "U004"
+											id: "U004"
 										}
 									]
 								},
 								D100: {
 									nodes: [{
-											nodeId: "D110",
+											id: "D110",
 											hasChildren: true
 										},
 										{
-											nodeId: "D120",
+											id: "D120",
 											hasChildren: false
 										},
 										{
-											nodeId: "D130",
+											id: "D130",
 											hasChildren: true
 										},
 										{
-											nodeId: "D140",
+											id: "D140",
 											hasChildren: false
 										}
 									],
 									leaves: [{
-											leafId: "U101"
+											id: "U101"
 										},
 										{
-											leafId: "U102"
+											id: "U102"
 										},
 										{
-											leafId: "U103"
+											id: "U103"
 										},
 										{
-											leafId: "U104"
+											id: "U104"
 										}
 									]
 								},
 								D110: {
 									leaves: [{
-											leafId: "U111"
+											id: "U111"
 										},
 										{
-											leafId: "U112"
+											id: "U112"
 										},
 										{
-											leafId: "U113"
+											id: "U113"
 										},
 										{
-											leafId: "U114"
+											id: "U114"
 										},
 										{
-											leafId: "U115"
+											id: "U115"
 										},
 										{
-											leafId: "U116"
+											id: "U116"
 										},
 										{
-											leafId: "U117"
+											id: "U117"
 										}
 									]
 								},
 								D130: {
 									leaves: [{
-											leafId: "U131"
+											id: "U131"
 										},
 										{
-											leafId: "U132"
+											id: "U132"
 										},
 										{
-											leafId: "U133"
+											id: "U133"
 										}
 									]
 								},
 								D300: {
 									nodes: [{
-											nodeId: "D310",
+											id: "D310",
 											hasChildren: true
 										},
 										{
-											nodeId: "D320",
+											id: "D320",
 											hasChildren: false
 										},
 										{
-											nodeId: "D330",
+											id: "D330",
 											hasChildren: true
 										},
 										{
-											nodeId: "D340",
+											id: "D340",
 											hasChildren: false
 										}
 									],
 									leaves: [{
-											leafId: "U301"
+											id: "U301"
 										},
 										{
-											leafId: "U302"
+											id: "U302"
 										},
 										{
-											leafId: "U303"
+											id: "U303"
 										},
 										{
-											leafId: "U304"
+											id: "U304"
 										}
 									]
 								},
 								D310: {
 									leaves: [{
-											leafId: "U311"
+											id: "U311"
 										},
 										{
-											leafId: "U312"
+											id: "U312"
 										},
 										{
-											leafId: "U313"
+											id: "U313"
 										},
 										{
-											leafId: "U314"
+											id: "U314"
 										}
 									]
 								},
 								D330: {
 									leaves: [{
-											leafId: "U331"
+											id: "U331"
 										},
 										{
-											leafId: "U332"
+											id: "U332"
 										},
 										{
-											leafId: "U333"
+											id: "U333"
 										}
 									]
 								}
