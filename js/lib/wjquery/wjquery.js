@@ -1047,7 +1047,7 @@ function stopWatch(_title) {
         } else if (mode == "return") {
             return endTime - this.startTime;
         } else {
-            $.wLog(this.title, " duaration : " + duration + " seconds");
+            $.wLog(" duaration : " + duration + " seconds", this.title);
         }
     };
 }
@@ -1132,7 +1132,7 @@ var lStorage = {
     },
     exist: function (key) {
         var b = window.localStorage && window.localStorage[key] ? true : false;
-        $.wLog("lStorage.exist", key + " : " + b);
+        $.wLog(key + " : " + b, "lStorage.exist");
         return b;
     },
     get: function (key, toJson, isDel) {
@@ -1151,9 +1151,9 @@ var lStorage = {
                 window.localStorage.removeItem(key);
             }
 
-            $.wLog("lStorage.get", key);
+            $.wLog(key, "lStorage.exist");
         } catch (e) {
-            $.wLog("lStorage.get", "error : " + e.message);
+            $.wLog("error : " + e.message, "lStorage.get");
         }
         return result;
     },
@@ -1163,7 +1163,7 @@ var lStorage = {
             window.localStorage[key] = toString ? JSON.stringify(value) : value;
             $.wLog(key, "lStorage.set");
         } catch (e) {
-            $.wLog("lStorage.set", "error : " + e.message);
+            $.wLog("error : " + e.message, "lStorage.set");
         }
     },
     remove: function (key) {
@@ -1173,7 +1173,7 @@ var lStorage = {
                 $.wLog(key, "lStorage.remove");
             }
         } catch (e) {
-            $.wLog("lStorage.remove", "error : " + e.message);
+            $.wLog("error : " + e.message, "lStorage.remove");
         }
     },
     removeList: function (keys) {
@@ -1185,7 +1185,7 @@ var lStorage = {
                 }
             });
         } catch (e) {
-            $.wLog("sStorage.remove", "error : " + e.message);
+            $.wLog("error : " + e.message, "sStorage.remove");
         }
     },
     clear: function () {
@@ -1202,7 +1202,7 @@ var sStorage = {
     },
     exist: function (key) {
         var b = window.sessionStorage && window.sessionStorage[key] ? true : false;
-        $.wLog("sStorage.exist", key + " : " + b);
+        $.wLog(key + " : " + b, "sStorage.exist");
         return b;
     },
     get: function (key, toJson, isDel) {
@@ -1221,9 +1221,9 @@ var sStorage = {
                 window.sessionStorage.removeItem(key);
             }
 
-            $.wLog("sStorage.get", key);
+            $.wLog(key, "sStorage.get");
         } catch (e) {
-            $.wLog("sStorage.get", "error : " + e.message);
+            $.wLog("error : " + e.message, "sStorage.get");
         }
         return result;
     },
@@ -1233,7 +1233,7 @@ var sStorage = {
             window.sessionStorage[key] = toString ? JSON.stringify(value) : value;
             $.wLog(key, "sStorage.set");
         } catch (e) {
-            $.wLog("sStorage.set", "error : " + e.message);
+            $.wLog("error : " + e.message, "sStorage.set");
         }
     },
     remove: function (key) {
@@ -1243,7 +1243,7 @@ var sStorage = {
                 $.wLog(key, "sStorage.remove");
             }
         } catch (e) {
-            $.wLog("sStorage.remove", "error : " + e.message);
+            $.wLog("error : " + e.message, "sStorage.remove");
         }
     },
     removeList: function (keys) {
@@ -1255,7 +1255,7 @@ var sStorage = {
                 }
             });
         } catch (e) {
-            $.wLog("sStorage.remove", "error : " + e.message);
+            $.wLog("error : " + e.message, "sStorage.remove");
         }
     },
     clear: function () {

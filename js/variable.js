@@ -32,7 +32,7 @@ var SERVICE_CONFIG = {
 
 /** layout */
 var LAYOUT_CONFIG = {
-    contentHeaderHeight: 31,
+    resizerLeft: "140px",
     node: "",
     accordian: false
 };
