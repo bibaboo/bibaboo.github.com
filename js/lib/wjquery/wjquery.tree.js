@@ -120,7 +120,7 @@
                 });
 
                 $.each(leaves, function () {
-                    sb.append("<li data-type=\"" + WTREE_CODE.type.leaf + "\" data-id=\"" + this.id + "\" data-data=\"" + $.replace($.getString($.nvl(this.data, "")), "\"", "\'") + "\"><a href=\"javascript:void(0);\" class=\"item\"><i class=\"" + WTREE_CODE.icon.empty + "\"></i><i class=\"" + WTREE_CODE.icon.leaf + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
+                    sb.append("<li data-type=\"" + WTREE_CODE.type.leaf + "\" data-id=\"" + this.id + "\" data-data=\"" + $.replace($.getString($.nvl(this.data, "")), "\"", "_@_") + "\"><a href=\"javascript:void(0);\" class=\"item\"><i class=\"" + WTREE_CODE.icon.empty + "\"></i><i class=\"" + WTREE_CODE.icon.leaf + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
                 });
 
                 if (sb.size() > 0) {
@@ -180,7 +180,7 @@
                 }
             } else if (type == WTREE_CODE.type.leaf) {
                 if(options.leafNodeCallback && $.hasValue($p.attr("data-data"))){
-                    doFunction(options.leafNodeCallback, $p.attr("data-data"));
+                    doFunction(options.leafNodeCallback, $.replace($p.attr("data-data"), "_@_", "\""));
                 }else{
                     //console.log("leafId : " + id);
                 }

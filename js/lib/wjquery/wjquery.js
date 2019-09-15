@@ -1095,31 +1095,11 @@ var wJson = new(function () {
         return $.extend({}, json1, json2 || {});
     }
 
-    function isJsonString(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-    }
-
-    function isJsonObject(obj) {
-        try {
-            JSON.parse(JSON.stringify(obj));
-        } catch (e) {
-            return false;
-        }
-        return true;
-    }
-
     return {
         init: init,
         keys: keys,
         values: values,
-        clone: clone,
-        isJsonString : isJsonString,
-        isJsonObject : isJsonObject
+        clone: clone
     };
 });
 
