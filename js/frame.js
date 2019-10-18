@@ -935,11 +935,11 @@ var moduleData = [
         //컨텐츠 헤더
         $content.find("div.content-header>ul").on("click", "a", function () {
             event.preventDefault();
-            if(pageSetting.isAccordion){
+            if (pageSetting.isAccordion) {
                 $entry.find("ul.entry-api").accordion({
                     active: $content.find("div.content-header>ul>li").index($(this).parent())
                 });
-            }else{
+            } else {
                 $entry.find("ul.entry-api>li").eq($content.find("div.content-header>ul>li").index($(this).parent())).scrollIntoView($content.find("div.content-body"));
             }
         });
@@ -1000,10 +1000,9 @@ var moduleData = [
                 if (!node.icon) node.icon = false;
             }
             if (!node.id) node.id = getPatternString("alphaNum", node.text);
-
             if (!node.a_attr) node.a_attr = {
                 title: node.text
-            }
+            };
 
             if (module && module.data && !node.data) {
                 node.data = module.data;
@@ -1066,7 +1065,7 @@ var moduleData = [
                 LAYOUT_CONFIG.node = "";
 
                 var node = data.node,
-                    $tree = $menuTree.jstree(true)
+                    $tree = $menuTree.jstree(true);
 
                 $content.find("div.content-body>.setting").addClass("none");
                 if (!node.data) node.data = {};
@@ -1239,10 +1238,10 @@ var moduleData = [
 
 function resizeLayout(pos) {
     if ($sidebar.is(":visible")) {
-        var _pos = pos||LAYOUT_CONFIG.resizerLeft;
+        var _pos = pos || LAYOUT_CONFIG.resizerLeft;
         $sidebar.width(_pos);
         $resizer.css("left", _pos);
-        $content.width("calc(100% - " + _pos + ")");   
+        $content.width("calc(100% - " + _pos + ")");
     }
 }
 
@@ -1262,7 +1261,6 @@ function checkHash() {
 }
 
 function setHash(menu, key, b) {
-    console.log(menu)
     var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
     if (_hash != document.location.hash) {
         if (!$.isFalse(b)) {
@@ -1287,7 +1285,7 @@ function drawLeafNode(node) {
 
     $entry.find(".entry-api").append($.tmpl(COMMON_TMPL.entryApiItem, arr));
     $ul.append($.tmpl(COMMON_TMPL.headerLi, arr));
-    LAYOUT_CONFIG.node = node.id
+    LAYOUT_CONFIG.node = node.id;
 }
 
 function openNode(hash) {
