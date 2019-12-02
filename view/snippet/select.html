@@ -1,0 +1,173 @@
+﻿
+<div class="entry-summary"></div>
+<ul class="entry-api">
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">sample 01</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css"> 
+                            .select-user{display:none;position:absolute;top:0;min-width:180px;min-height:50px;border: 1px solid #a5a5a5;background: #fff !important;box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);color: #333333;z-index:100;}
+                            .select-user li a:hover {background-color: #E6E6E6;}
+                            .select-user li a.current{background-color: #E6E6E6;}
+                            .select-user li a{padding:7px;display:block;position:relative !important;text-align:left !important;text-decoration:none !important;}
+                        </style>
+                        <div id="demo1-id1">
+                            사용자 : <input type="text" id="userName" name="userName" size="20" placeholder="이름을 입력해주세요." />
+                        </div>
+                        <script type="text/javascript"> 
+                            $('#userName').keypress( function(event) {
+                                demo1_1(event, function(data){
+                                    alert(JSON.stringify(data));
+                                });
+                            });
+                            
+                            function demo1_1(event, callback){
+                                var prefix =    "selectUser_",
+                                    tmplLi =    "<li>" +
+                                                "   <a href=\"javascript:void(0);\">" +
+                                                "       <span>\${userName} \${jobTitleName}</span>&nbsp;" +
+                                                "       <span>\${teamName}</span>" +
+                                                "   </a>" +
+                                                "</li>";
+
+                                if ((event.keyCode || event.which) == 13) {
+                                    var $el = $(event.target),
+                                        id = $el.attr("id")||$el.attr("name"),
+                                        _id = "#" + prefix + id,
+                                        name = $el.val(),
+                                        $c;
+                                    
+                                    if($(_id).length!=0){
+                                        $c = $(_id);
+                                        if($c.is(":visible") && $c.find("a.current").length>0){
+                                            $c.find("a.current").trigger("click");
+                                            return false;
+                                        }
+                                    }
+                                    
+                                    if(!name) {
+                                        alert("이름을 입력해주세요.");
+                                    } else {
+                                        var _users = [{
+                                                "id": "user01_P1",
+                                                "userName": "사용자01",
+                                                "jobTitleName": "사원",
+                                                "teamName": "경영지원실"
+                                            }, {
+                                                "id": "user02_P1",
+                                                "userName": "사용자02",
+                                                "jobTitleName": "대리",
+                                                "teamName": "물류팀"
+                                            }, {
+                                                "id": "user03_P1",
+                                                "userName": "사용자03",
+                                                "jobTitleName": "과장",
+                                                "teamName": "경영진단팀"
+                                            }, {
+                                                "id": "user04_P1",
+                                                "userName": "사용자04",
+                                                "jobTitleName": "사원",
+                                                "teamName": "경영지원실"
+                                            }, {
+                                                "id": "user05_P1",
+                                                "userName": "사용자05",
+                                                "jobTitleName": "부장",
+                                                "teamName": "물류팀"
+                                            }, {
+                                                "id": "user06_P1",
+                                                "userName": "사용자06",
+                                                "jobTitleName": "팀장",
+                                                "teamName": "경영진단팀"
+                                            }];
+
+                                        if(_users.length==0){
+                                            return;
+                                        }else if(_users.length==1){
+                                            callback(_users);
+                                        }else {
+                                            if($(_id).length==0){
+                                                $el.after("<div id=\"" + prefix + id + "\" class=\"select-user\"><ul></ul></div>");
+                                                var _css = {
+                                                    "top": $el.position().top + $el.outerHeight()
+                                                }
+                                                
+                                                if($el.parent().hasClass("schedule_quickSearch")){ //일정사용작 검색
+                                                    _css.right = "0px";
+                                                }else{
+                                                    _css.left =  $el.position().left;
+                                                }
+                                                
+                                                $(_id).css(_css);
+
+                                                $c = $(_id);
+                                                $(document).mouseup(function (e){
+                                                    if (!$c.is(e.target) && $c.has(e.target).length === 0){
+                                                        $c.fadeOut();
+                                                        $c.find("ul").empty();
+                                                    }
+                                                });
+
+                                                $el.keyup(function(event){
+                                                    var key = event.keyCode || event.which;
+                                                    if($c.is(":visible") && (key==40 || key==38)){
+                                                        var _index=-1;
+                                                            _n = $c.find("a").length;
+
+                                                        if($c.find("a.current").length>0){
+                                                            _index = $c.find("a").index($c.find("a.current"));
+                                                        }
+
+                                                        $c.find("a.current").removeClass("current");
+                                                        if(key==40){
+                                                            if(_index==-1){
+                                                                _index = 0;
+                                                            }else if(_index==_n-1){
+                                                                _index = 0;
+                                                            }else{
+                                                                _index++;
+                                                            }
+                                                        }else if(key==38){
+                                                            if(_index==-1){
+                                                                _index = 0;
+                                                            }else if(_index==0){
+                                                                _index = _n-1;
+                                                            }else{
+                                                                _index--;
+                                                            }
+                                                        }
+                                                        $c.find("a:eq(" + _index + ")").addClass("current");
+                                                    }
+                                                });
+                                            }
+
+                                            var $ul = $c.find("ul").empty();
+                                            $.each(_users, function(){
+                                                var $li = $.tmpl(tmplLi, this).data("data", this);
+                                                $li.appendTo($ul);
+                                            });
+                                            
+                                            $c.find("li>a").off("click").on("click", function(){
+                                                callback([$(this).parent().data("data")]);
+                                                $c.fadeOut();
+                                            });
+                                            $c.show();
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

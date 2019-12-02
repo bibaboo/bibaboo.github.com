@@ -797,9 +797,14 @@ var moduleData = [
             type: pageSetting.moduleDataType.load
         },
         nodes: [{
-            text: "simple button",
-            id: "simpleButton"
-        }]
+	            text: "button",
+	            id: "button"
+        	},
+        	{
+	            text: "select",
+	            id: "select"
+        	}
+        ]
     },
     {
         text: "project",
