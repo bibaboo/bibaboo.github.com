@@ -44,24 +44,29 @@ input[type="search"]::-webkit-search-decoration {
 
 #meunUl {padding-left:10px;}
 #wapper {width:100%; height:100%; overflow:hidden;}
-#sidebar {float: left; height:100%; width: 200px; position:relative; overflow-y: scroll; overflow-x: hidden;}
+#sidebar {float: left; height:100%; width: 200px; position:relative; overflow: hidden; z-index:2;}
 .sidebar-head {position:relative;background: #eee; height: 24px; border-bottom: 1px solid #ddd;padding-top:7px;}
 .sidebar-head a {font-size: 1.3em; color: #333333; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);padding-left:7px;}
-.sidebar-head ul{position:absolute;top:9px;right:5px;}
+.sidebar-head ul{position:absolute;top:9px;right:0px;}
 .sidebar-head ul li{float:left;margin-left:5px;cursor:pointer;}
-.sidebar-body {height: calc(100% - 32px);}
-
+.sidebar-body {height: calc(100% - 32px); overflow:auto;}
 .sidebar-search {width:100%;text-align:center;display:none;}
 .sidebar-search input {width:100%;}
-#resizer {position:absolute;background-color:#000;top:0;left:200px;height:100%;cursor: col-resize;opacity:0.1;}
+
+#resizer {position:absolute;background-color:#eee;border-left: 1px solid #ddd;border-right: 1px solid #ddd;top:31px;width:8px;left:200px;height:calc(100% - 31px);cursor: w-resize;z-index:3;}
+#resizer:hover{background-color:#ddd;}
+#resizer .resize-toggler {position:absolute;top:40%;left:0;}
+#resizer .resize-toggler>a{width:9px; height:22px;background-position: -101px -14px; background-color:#ddd;}
+#resizer .resize-toggler>a:hover{background-color:#eee;}
 #spacer{position:absolute;top:30px;width:19px;height:100%;background-color:#eee;display:none;z-index:101;cursor:pointer;}
 #spacer span{margin:450px 1px;}
 
 #content {float: left; height:100%; width: calc(100% - 200px); position:relative;}
 .content-header div.home {position:absolute;top:0;right:0; height:31px; border-left: 1px solid #ddd}
-.content-header {background: #eee; position: relative; min-height: 31px; border-bottom: 1px solid #ddd; overflow: hidden;}
-.content-header ul {position: absolute; height:31px; top:0px; left:0px;}
+.content-header {background: #eee; position: relative; min-height: 31px; border-bottom: 1px solid #ddd; z-index: 2;}
+.content-header ul {position: absolute; height:31px; top:0px; left:0px; margin-left:10px;}
 .content-header ul li {float: left; height:100%;}
+/* .content-header ul li:first-child a {border-left: 1px solid #ddd;} */
 .content-header ul li a, .content-header div a {display: block; height: 100%; border-right: 1px solid #ddd; font-size: 1.1em; color: #333333; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);}
 .content-header ul li a:hover, .content-header div a:hover {background: #ddd; color: #111111;}
 .content-header ul li a span, .content-header div span {display: block; padding: 7px 10px 5px 10px;}

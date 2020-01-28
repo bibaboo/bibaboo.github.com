@@ -15,20 +15,20 @@
          * @param target 찾는 문자열
          * @return Boolean
          **/
-        hasString : function(value, findString){
-        	if($.isArray(value)){
-        		var b = false;
-        		for (var i = 0; value.length > i; i++) {
-    				if (findString.indexOf(value[i]) > -1) {
-    					b = true;
-    					break;
-    				}
-    			}
-        		return b;
-        	}else{
+        hasString: function (value, findString) {
+            if ($.isArray(value)) {
+                var b = false;
+                for (var i = 0; value.length > i; i++) {
+                    if (findString.indexOf(value[i]) > -1) {
+                        b = true;
+                        break;
+                    }
+                }
+                return b;
+            } else {
                 return !!~value.indexOf(findString);
-        		//return value.indexOf(findString)>-1;
-        	}
+                //return value.indexOf(findString)>-1;
+            }
         },
 
         /**
@@ -38,11 +38,11 @@
          * @return String
          **/
         getString: function (value) {
-            if(typeof(value)==="string"){
+            if (typeof (value) === "string") {
                 return value;
-            }else if(typeof(value)==="object"){
+            } else if (typeof (value) === "object") {
                 return JSON.stringify(value);
-            }else{
+            } else {
                 return value;
             }
         },
@@ -259,7 +259,7 @@
                             }
                             $("#dialog-message").dialog("close");
                         }
-    				}]
+                    }]
                 });
             }
         },
@@ -305,7 +305,7 @@
                                 }
                                 $("#dialog-message").dialog("close");
                             }
-    				},
+                        },
                         {
                             text: _option.buttonText[1],
                             click: function () {
@@ -314,7 +314,8 @@
                                 }
                                 $("#dialog-message").dialog("close");
                             }
-    				}]
+                        }
+                    ]
                 });
             }
         }
@@ -473,16 +474,16 @@
             return this;
         },
 
-         /**
+        /**
          * 본문의 링크처리, 클릭처리를 막는다
          * @name $().keyBind()
          * @param callback
          * @param b 엔터키
          * @return this
          **/
-        enterKey : function(callback){
-            $(this).keypress(function(e){
-                if((e.keyCode || e.which)==13 && callback){
+        enterKey: function (callback) {
+            $(this).keypress(function (e) {
+                if ((e.keyCode || e.which) == 13 && callback) {
                     callback(e);
                 }
             });
@@ -503,11 +504,11 @@
                     return this.value;
                 }).get();
             } else if ($t.is("select")) {
-            	return $(this).val();
+                return $(this).val();
             } else {
-            	if(!$.isFalse(p1)){
-            		$(this).val($.trim($(this).val()));
-            	}
+                if (!$.isFalse(p1)) {
+                    $(this).val($.trim($(this).val()));
+                }
                 return $(this).val();
             }
         }
@@ -526,25 +527,25 @@
                 $(this).val(v);
             }
         }
-        
-        function isAllCheckBoxChecked(){
-        	var $t = $(this);
-        	if ($t.is("input:checkbox")) {
-        		return $t.length == $t.filter(":checked").length;
-        	}else{
-        		return false;
-        	}
+
+        function isAllCheckBoxChecked() {
+            var $t = $(this);
+            if ($t.is("input:checkbox")) {
+                return $t.length == $t.filter(":checked").length;
+            } else {
+                return false;
+            }
         }
 
-        function toString(m){
+        function toString(m) {
             return WFORM[m].toString();
         }
 
         return {
             get: get,
-            set : set, 
-            isAllCheckBoxChecked : isAllCheckBoxChecked, 
-            toString : toString
+            set: set,
+            isAllCheckBoxChecked: isAllCheckBoxChecked,
+            toString: toString
         };
     });
 
@@ -700,8 +701,8 @@ function initCap(value) {
  * setTmpl
  * @param a Array
  */
-function setTmpl(a){
-    $.each(a, function(key, value){
+function setTmpl(a) {
+    $.each(a, function (key, value) {
         $.template(key, value);
     });
 }
@@ -710,9 +711,9 @@ function setTmpl(a){
  * setTmpl
  * @param a Array
  */
-function drawTmplList(c, t, a, f){
-    if(!$.isArray(a)) return;
-    if(typeof(c)==="string") c = $(c);
+function drawTmplList(c, t, a, f) {
+    if (!$.isArray(a)) return;
+    if (typeof (c) === "string") c = $(c);
     $.tmpl(t, $.map(a, f)).appendTo(c);
 }
 
@@ -780,11 +781,11 @@ function isPattern(patternName, value) {
         alphabat: /^[a-zA-Z]+$/,
         alphaNum: /^[0-9a-zA-Z]+$/,
         id: /^[A-za-z0-9]{5,15}$/,
-        password:/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
-        password2:/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/, //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
+        password: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/, //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+        password2: /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/, //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
         hangul: /^[가-힣]+$/,
         email: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
-        email2:/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+        email2: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
         url: /^(http|https|ftp|mailto):(?:\/\/)?((\w|-)+(?:[\.:@](\w|-))+)(?:\/|@)?([^"\?]*?)(?:\?([^\?"]*?))?$/,
         url2: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w_\.-]*)*\/?$/,
         phone: /^\d{2,3}-\d{3,4}-\d{3,4}$/,
@@ -854,6 +855,14 @@ function replaceString(targetName, value) {
         return $.replace($.replace(value, "<br>", "\n", "gi"), "<br/>", "\n", "gi");
     } else if (targetName == "telLink") {
         return value.replace(/\d{2,3}[-|\)]\d{3,4}-\d{3,4}/g, '<a tel="$&" class="tel-link">$&</a>');
+    } else if (targetName == "underline2camel") {
+        return value.toLowerCase().replace(/(\_[a-z])/g, function (arg) {
+            return arg.toUpperCase().replace('_', '');
+        });
+    } else if (targetName == "camel2underline") {
+        return value.replace(/([A-Z])/g, function (arg) {
+            return "_" + arg.toLowerCase();
+        }).toUpperCase();
     }
     return value;
 }
@@ -861,26 +870,26 @@ function replaceString(targetName, value) {
 /**
  * replaceRegExpContentImgUrl
  */
-function replaceRegExpContentImgUrl(s){
-	var mobileApi = "https://m.wonchu.com/rest/common/file/downloadFileForImage?path=",
-		targets = [
-			"http://www.wonchu.com/support/fileupload/downloadFile.do",
-			"http://www.wonchu.com/base/images/common"
-		];
+function replaceRegExpContentImgUrl(s) {
+    var mobileApi = "https://m.wonchu.com/rest/common/file/downloadFileForImage?path=",
+        targets = [
+            "http://www.wonchu.com/support/fileupload/downloadFile.do",
+            "http://www.wonchu.com/base/images/common"
+        ];
 
-	var re = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/g,
-		re2 = /src="|'/g;
-	return s.replace(re, function(match){
-		var b = false;
-		for(var i=0;targets.length>i;i++){
-			if(match.indexOf(targets[i])>-1){
-				b = true;
-				break;
-			}
-		}
+    var re = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/g,
+        re2 = /src="|'/g;
+    return s.replace(re, function (match) {
+        var b = false;
+        for (var i = 0; targets.length > i; i++) {
+            if (match.indexOf(targets[i]) > -1) {
+                b = true;
+                break;
+            }
+        }
 
-		return b?match.replace(/\?/g, "_Q_").replace(/\&amp;/g, "_A_").replace(/\&/g, "_A_").replace(re2, '$&' + mobileApi).replace("https", "http"):match;
-	});
+        return b ? match.replace(/\?/g, "_Q_").replace(/\&amp;/g, "_A_").replace(/\&/g, "_A_").replace(re2, '$&' + mobileApi).replace("https", "http") : match;
+    });
 }
 
 //--------------------------------------------------------------------
@@ -929,11 +938,11 @@ function dropDown($1, $2, options) {
  * @param arguments 인자값들
  * @return Boolean
  */
-function doFunction(s){
-    if(typeof(window[s])=="function"){
+function doFunction(s) {
+    if (typeof (window[s]) == "function") {
         window[s].apply(null, Array.prototype.slice.call(arguments, 1));
         return true;
-    }else{
+    } else {
         return false;
     }
 }
@@ -1246,15 +1255,15 @@ var sStorage = {
 /**
  * stringBuffer
  */
-function stringBuffer (){
+function stringBuffer() {
     var buffer = new Array();
-    this.append = function(value){
+    this.append = function (value) {
         buffer.push($.getString(value));
     }
-    this.size = function(){
+    this.size = function () {
         return buffer.length;
     }
-    this.toString = function(delm){
-        return buffer.join(delm||"");
+    this.toString = function (delm) {
+        return buffer.join(delm || "");
     }
 }

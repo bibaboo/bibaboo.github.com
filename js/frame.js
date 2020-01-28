@@ -721,9 +721,14 @@ var moduleData = [
                     folder: "/view/note/java/"
                 },
                 nodes: [{
-                    text: "utils",
-                    id: "utils"
-                }]
+                        text: "general",
+                        id: "general"
+                    },
+                    {
+                        text: "utils",
+                        id: "utils"
+                    }
+                ]
             },
             {
                 text: "tool",
@@ -797,13 +802,13 @@ var moduleData = [
             type: pageSetting.moduleDataType.load
         },
         nodes: [{
-	            text: "button",
-	            id: "button"
-        	},
-        	{
-	            text: "select",
-	            id: "select"
-        	}
+                text: "button",
+                id: "button"
+            },
+            {
+                text: "select",
+                id: "select"
+            }
         ]
     },
     {
@@ -927,7 +932,7 @@ var moduleData = [
         $resizer.draggable({
             axis: "x",
             containment: "#wapper",
-            opacity: 0.35,
+            opacity: 0.5,
             scroll: false,
             stop: function () {
                 resizeLayout($resizer.css("left"));
@@ -1087,7 +1092,7 @@ var moduleData = [
                             if (!confirm("모바일 브라우져(android, iOS) 또는 크롬 모바일모드에서만 확인 할수 있습니다.")) return;
                         }
 
-                        if (type != "iframe" && $("#content-iframe").is(":visible")) {
+                        if (type != pageSetting.moduleDataType.iframe && $("#content-iframe").is(":visible")) {
                             $("#content-iframe").hide().siblings().show();
                         }
 
