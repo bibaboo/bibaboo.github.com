@@ -21,16 +21,16 @@
 }
 
 .wtree-wrap li.root li a.item span{
-    padding:1px;
+    padding:1px 2px;
 }
 
 .wtree-wrap li.root li a.item.selected span{
-    background-color:#ddd;
+    background-color:#beebff;
 }
 
 .wtree-wrap li.root li a.item span:hover,
 .wtree-wrap li.root li a.item span:active{
-    background-color:#f1f1f1;
+    background-color:#e7f4f9;
 }
 
 .wtree-wrap li.root li i {

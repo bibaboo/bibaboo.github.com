@@ -627,10 +627,17 @@ var moduleData = [
                     folder: "/view/note/javascript/"
                 },
                 nodes: [{
-                        text: "C&P",
-                        id: "jscNp",
+                        text: "Basic",
+                        id: "jsBasic",
                         a_attr: {
-                            title: "Copy & Paste"
+                            title: "javacript 기본"
+                        }
+                    },
+                    {
+                        text: "wjavascript",
+                        id: "wjavascript",
+                        a_attr: {
+                            title: "javacript C&P"
                         }
                     },
                     {
@@ -674,25 +681,27 @@ var moduleData = [
                         a_attr: {
                             title: "정규식 정리"
                         }
-                    }
-                ]
-            },
-            {
-                text: "jquery",
-                data: {
-                    folder: "/view/note/jquery/"
-                },
-                nodes: [{
-                        text: "플러그인 패턴",
-                        id: "pluginPattern"
                     },
                     {
-                        text: "개발 가이드",
-                        id: "guide"
+                        text: "jQuery 개발 가이드",
+                        id: "jqueryGuide",
+                        a_attr: {
+                            title: "jQuery 개발시 참고"
+                        }
                     },
                     {
-                        text: "form 객체",
-                        id: "form"
+                        text: "jQuery 플러그인 패턴",
+                        id: "jqueryPluginPattern",
+                        a_attr: {
+                            title: "jQuery 플러그인 패턴 정리"
+                        }
+                    },
+                    {
+                        text: "jQuery Selectors",
+                        id: "jquerySelectors",
+                        a_attr: {
+                            title: "jQuery Selectors 정리"
+                        }
                     }
                 ]
             },
@@ -702,8 +711,16 @@ var moduleData = [
                     folder: "/view/note/styleNhtml/"
                 },
                 nodes: [{
-                        text: "C&P",
-                        id: "stytlecNp"
+                        text: "Style Basic",
+                        id: "styleBasic"
+                    },
+                    {
+                        text: "wstyle",
+                        id: "wstyle"
+                    },
+                    {
+                        text: "wlayout",
+                        id: "wlayout"
                     },
                     {
                         text: "mediaquery",
@@ -721,12 +738,12 @@ var moduleData = [
                     folder: "/view/note/java/"
                 },
                 nodes: [{
-                        text: "general",
-                        id: "general"
+                        text: "jstl",
+                        id: "jstl"
                     },
                     {
-                        text: "utils",
-                        id: "utils"
+                        text: "wjava",
+                        id: "wjava"
                     }
                 ]
             },
@@ -785,13 +802,6 @@ var moduleData = [
                         id: "linux"
                     }
                 ]
-            },
-            {
-                text: "etc",
-                data: {
-                    folder: "/view/note/ect/"
-                },
-                nodes: []
             }
         ]
     },
@@ -802,8 +812,8 @@ var moduleData = [
             type: pageSetting.moduleDataType.load
         },
         nodes: [{
-                text: "button",
-                id: "button"
+                text: "form",
+                id: "formSpt"
             },
             {
                 text: "select",
@@ -874,9 +884,26 @@ var moduleData = [
             type: pageSetting.moduleDataType.load
         },
         nodes: [{
-            text: "type1",
-            id: "type1"
-        }]
+	            text: "type1",
+	            id: "type1"
+	        },
+	        {
+	            text: "api",
+	            id: "apiTmpl"
+	        },
+	        {
+	            text: "iframe",
+	            id: "iframeTmpl"
+	        },
+	        {
+	            text: "demo",
+	            id: "demoTmpl"
+	        },
+	        {
+	            text: "note",
+	            id: "noteTmpl"
+	        }
+        ]
     }
 ];
 

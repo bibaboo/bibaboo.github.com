@@ -52,7 +52,8 @@
     $.fn.wtree.defaultSettings = {
         rootNodeId: "",
         rootTitle: "",
-        subNodeClose: true
+        subNodeClose: true,
+        notSelectTreeNode: true
     };
 
     function WTREE(_element, _options) {
@@ -68,7 +69,11 @@
         }
 
         function select(t, useSelected) {
-            _WTREE.select(t, $element, options, useSelected);
+            _WTREE.select($element, t, options, useSelected);
+        }
+
+        function selected(t) {
+            _WTREE.selected($element, t, options);
         }
 
         function openAll() {
@@ -83,6 +88,7 @@
             init: init,
             draw: draw,
             select: select,
+            selected: selected,
             openAll: openAll,
             closeAll: closeAll
         };
@@ -143,15 +149,14 @@
                 }
             }
         },
-        select: function (t, $element, options, useSelected) {
+        select: function ($element, t, options, useSelected) {
             var $t = $(t),
                 $p = $t.parent(),
                 type = $p.attr("data-type"),
                 id = $p.attr("data-id");
             
             if(!$.isFalse(useSelected)){
-                $element.find("a.item.selected").removeClass("selected");
-                $t.addClass("selected");
+                this.selected($element, $t, options);
             }
             
             if (type == WTREE_CODE.type.node) {
@@ -184,6 +189,13 @@
                 }else{
                     //console.log("leafId : " + id);
                 }
+            }
+        },
+        selected :  function ($element, t, options){
+            var $t = typeof t === 'string' ? $element.find("li[data-id=" + t + "]>a"): t;
+            if($.hasValue($t.parent().attr("data-type")) && !(options.notSelectTreeNode && $t.parent().attr("data-type") == WTREE_CODE.type.node)){
+                $element.find("a.item.selected").removeClass("selected");
+                $t.addClass("selected");
             }
         },
         openAll: function($element, options){

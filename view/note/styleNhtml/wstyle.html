@@ -1,0 +1,71 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">selector</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style type="text/css">
+							#demo4-id1 li:first-child { color:blue; }
+							#demo4-id1 li:last-child { color:green; }
+
+							#demo4-id1 li:nth-child(4) { color:hotpink; }
+							#demo4-id1 li:nth-last-child(2) { color:brown; }
+						</style>
+						<div id="demo4-id1">
+							<ul>
+								<li>11111111111111</li>
+								<li>22222222222222</li>
+								<li>33333333333333</li>
+								<li>44444444444444</li>
+								<li>55555555555555</li>
+								<li>66666666666666</li>
+								<li>77777777777777</li>
+								<li>88888888888888</li>
+							</ul>
+							<input type="button" onclick="demo4_1();" value="demo4_1" />
+						</div>
+						<script type="text/javascript">	
+							function demo4_1(){
+								$("#demo4-id1 img").toggleClass("blink-img");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">placeholder</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            [contentEditable=true]:empty:not(:focus):before { content:attr(placeholder) }
+                            #demo5-id1{border:1px solid #ddd;padding:10px;}
+                        </style>
+                        <div id="demo5-id1">
+                            <div contentEditable=true placeholder="Enter text here"></div>
+                        </div>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
