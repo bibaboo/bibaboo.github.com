@@ -8,29 +8,66 @@
 			<div class="entry-source-title">source <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 			<div class="entry-source-content">
 				<pre class="brush: js: true;">
-				var wJson = new(function() {
-					function init(json, isClone){
-						var result = isClone?$.extend({}, json):json;
-						$.each(result, function(key){
-							if($.hasValue(result[key])){
-								if($.isArray(result[key])){
-									result[key] = [];
-								}else if(typeof(result[key])=="object"){
-									result[key] = {};
-								}else if($.isNumeric(result[key])){
-									result[key] = 0;
-								}else{
-									result[key] = "";
+					var wJson = new(function () {
+						function init(json, isClone) {
+							var result = isClone ? $.extend({}, json) : json;
+							$.each(result, function (key) {
+								if ($.hasValue(result[key])) {
+									if ($.isArray(result[key])) {
+										result[key] = [];
+									} else if (typeof (result[key]) === "object") {
+										result[key] = {};
+									} else if ($.isNumeric(result[key])) {
+										result[key] = 0;
+									} else {
+										result[key] = "";
+									}
 								}
-							}
-						});
-						return result;
-					}
+							});
+							return result;
+						}
 					
-					return {
-						init : init
-					};
-				});
+						function keys(json) {
+							var result = [];
+							if (typeof (json) === "object") {
+								for (var key in json) result.push(key);
+							}
+							return result;
+						}
+					
+						function values(json) {
+							var result = [];
+							if (typeof (json) === "object") {
+								for (var key in json) result.push(json[key]);
+							}
+							return result;
+						}
+					
+						function clone(json1, json2) {
+							return $.extend({}, json1, json2 || {});
+						}
+					
+						function sort(data, key, type) {
+							if (!type) type = "asc";
+							return data.sort(function(a, b) {
+								var x = a[key];
+								var y = b[key];
+								if (type == "desc") {
+									return x > y ? -1 : x < y ? 1 : 0;
+								} else if (type == "asc") {
+									return x < y ? -1 : x > y ? 1 : 0;
+								}
+							});
+						}
+					
+						return {
+							init: init,
+							keys: keys,
+							values: values,
+							clone: clone,
+							sort: sort
+						};
+					});
 				</pre>
 			</div>
 		</div>
@@ -232,6 +269,68 @@
 								var _json4_1 = wJson.clone(json4_1, {c:"c"});
 								
 								$.alert("_json4_1 : " + JSON.stringify(_json4_1) + "<br/>json4_1 : " + JSON.stringify(json4_1));
+							}
+							
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">.sort(data, key, type)</span>
+    		<span class="return"> → JSON</span>
+    		<span class="desc">json 정렬</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">data</td>
+			  			<td class="type">Array</td>
+			  			<td class="desc">json</td>
+					</tr>
+					<tr>
+			  			<td class="name">key</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">대상</td>
+					</tr>
+					<tr>
+						<td class="name">type</td>
+						<td class="type">String</td>
+						<td class="desc">asc/desc</td>
+				  </tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo5-id1" class="demo5-class1">demo5_1</div>
+						<div id="demo5-id2" class="demo5-class1">demo5_2</div>
+						<input type="button" onclick="demo5_1('name', 'asc');" value="이름 오름차순" />
+						<input type="button" onclick="demo5_1('name', 'desc');" value="이름 내림차순" />
+						<input type="button" onclick="demo5_1('age', 'asc');" value="나이 오름차순" />
+						<input type="button" onclick="demo5_1('age', 'desc');" value="나이 내림차순" />
+						<script type="text/javascript">
+							var json5_1 = [
+								{name : "김길동", age : 20},
+								{name : "홍길동", age : 10},
+								{name : "이길동", age : 15},
+								{name : "신길동", age : 9},
+								{name : "나길동", age : 12}
+							];
+							
+							$("#demo5-id1").text(JSON.stringify(json5_1));
+							
+							function demo5_1(key, type){
+								var _json5_1 = wJson.sort(json5_1, key, type);
+								$("#demo5-id2").text(JSON.stringify(_json5_1));
 							}
 							
 						</script>

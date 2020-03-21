@@ -1,0 +1,173 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">selector</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<style type="text/css">
+							#demo4-id1 li:first-child { color:blue; }
+							#demo4-id1 li:last-child { color:green; }
+
+							#demo4-id1 li:nth-child(4) { color:hotpink; }
+							#demo4-id1 li:nth-last-child(2) { color:brown; }
+						</style>
+						<div id="demo4-id1">
+							<ul>
+								<li>11111111111111</li>
+								<li>22222222222222</li>
+								<li>33333333333333</li>
+								<li>44444444444444</li>
+								<li>55555555555555</li>
+								<li>66666666666666</li>
+								<li>77777777777777</li>
+								<li>88888888888888</li>
+							</ul>
+							<input type="button" onclick="demo4_1();" value="demo4_1" />
+						</div>
+						<script type="text/javascript">	
+							function demo4_1(){
+								$("#demo4-id1 img").toggleClass("blink-img");
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">placeholder</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            [contentEditable=true]:empty:not(:focus):before { content:attr(placeholder) }
+                            #demo2-id1{border:1px solid #ddd;padding:10px;}
+                        </style>
+                        <div id="demo2-id1">
+                            <div contentEditable=true placeholder="Enter text here"></div>
+                        </div>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">button</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css"> 
+                            .button01 {
+                              width: 150px;
+                              height: 70px;
+                              background-color: #FF6A00;
+                              border-radius: 30px;
+                              box-shadow: 5px 5px 5px #A9A9A9;
+                            }   
+                            .button01 > a {         
+                              display: block;
+                              font: italic bold 2em/70px Arial, Helvetica, sans-serif;
+                              text-decoration: none;
+                              text-align: center; 
+                            }
+                        </style>
+                        <div id="demo3-id1">
+                            <div class="button01">
+                                <a href="#">Click</a>
+                            </div>    
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">tab</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css"> 
+                            .block-tab { display:table; width:auto;  background:#fff; ovarflow:scroll; border-bottom:3px solid #ddd; min-width:100%;}
+                            .block-tab li { display:table-cell; padding:0 6px;}
+                            .block-tab li a { display:block; height:42px; line-height:42px; font-size:15px; font-weight:bold; color:#000; text-align:center; border-bottom:2px solid #fff; }
+                            .block-tab li.current a { font-weight:bold; color:#00a885; border-color:#00a885; }
+                        </style>
+                        <script type="text/javascript"> 
+                            $(document).ready(function () {
+                                $(".block-tab a").click(function(){
+                                    $(this).parent().addClass("current").siblings(".current").removeClass("current");
+                                });
+                            });
+						</script>
+                        <div id="demo4-id1" style="width:500px;">
+                            <ul class="block-tab">
+                                <li class="current"><a href="javascript:void(0);">메일</a></li>
+                                <li><a href="javascript:void(0);">일정</a></li>
+                                <li><a href="javascript:void(0);">결재</a></li>
+                                <li><a href="javascript:void(0);">할일</a></li>
+                            </ul>
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">center</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            #demo5-id1 {position:relative;height:100px;width:100%;}
+                            .div-center {position: absolute; background-color:bisque; width:200px;height:30px;text-align:center;top: calc(50% - 30px/2);left:calc(50% - 200px/2)}
+                        </style>
+                        <div id="demo5-id1" style="position:relative;">
+                            <div class="div-center"></div>
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

@@ -2,25 +2,111 @@
 <ul class="entry-api">
     <li class="entry-api-item">
         <h2>
-            <span class="title">sample</span>
+            <span class="title">select group</span>
         </h2>
         <div>
             <div class="example">
                 <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
-                <div>
+                <div class="clearboth">
                     <div class="entry-demo-content">
                         <style type="text/css">
-                            a.sample {color:red;}
-                        </style>
-                        <div id="demo1-id1">
-                            
-                        </div>
-                        <input type="button" onclick="demo1_1();" value="demo1_1" />
-                        <script type="text/javascript"> 
-                            function demo1_1(){
-                                $("#demo1-id1").html("<a href='#' class='sample'>sample</a>");
-                            }
-                        </script>
+                            #demo1-id1 {width:500px;height:200px;}
+ 						    #demo1-id1>form>div{float:left;}
+ 						    #demo1-id1 select {width:100%;}
+ 						    .demo1-class1, .demo1-class3{width:130px;}
+						    .demo1-class2, .demo1-class4{width:80px;padding-top:30px;}
+						    .demo1-class2>div, .demo1-class4>div{width:80px;margin:5px 0;}
+						    .demo1-class2 button, .demo1-class4 button{width:40px;}
+						</style>
+						<script type="text/javascript"> 
+                            $(document).ready(function () {
+								$("#demo1-id1 button[data-action]").click(function(){
+									var action = $(this).attr("data-action"),
+										$select1 = $("#demo1-select1"),
+										$select2 = $("#demo1-select2");
+									
+									switch (action) {
+										case "rigtAll":
+											$("#demo1-select1 option").remove().appendTo('#demo1-select2');  
+											break;
+										case "right":
+											$("#demo1-select1 option:selected").remove().appendTo('#demo1-select2');  
+											break
+										case "leftAll":
+											$("#demo1-select2 option").remove().appendTo('#demo1-select1');  
+											break;
+										case "left":
+											$("#demo1-select2 option:selected").remove().appendTo('#demo1-select1');  
+											break
+										case "up":
+										case "down":
+											let selectedCount =  $("#demo1-select2 option:selected").length;
+											if(selectedCount>0){
+												if(selectedCount>1){
+													$("#demo1-select2 option:selected").not(":first").prop("selected", false);	
+												}
+												
+												let $t = $("#demo1-select2 option:selected").first();
+												if(action=="up"){
+													if($t.prev().length>0){
+														$t.prev().before($t);
+													}
+												}else if(action=="down"){
+													if($t.next().length>0){
+														$t.next().after($t);
+													}
+												}
+											}
+											break
+										default:
+											console.log('Error');
+									}
+								});
+
+								$("#demo1-select1").dblclick(function(event){
+									if($("#demo1-select1 option:selected").length){
+										$("#demo1-id1 button[data-action='right']").trigger("click");
+									}
+								});
+
+								$("#demo1-select2").dblclick(function(event){
+									if($("#demo1-select2 option:selected").length){
+										$("#demo1-id1 button[data-action='left']").trigger("click");
+									}
+								});
+							});
+						</script>
+						<div id="demo1-id1" class="text-center">
+						<form id="demo1-form">
+						    <div class="demo1-class1">
+						        <select id="demo1-select1" multiple="multiple" style="height:200px;">
+						            <option value="2">Row 2</option>  
+						            <option value="4">Row 4</option>  
+						            <option value="5">Row 5</option>  
+						            <option value="6">Row 6</option>  
+						            <option value="7">Row 7</option>  
+						            <option value="8">Row 8</option>  
+						            <option value="9">Row 9</option> 
+						        </select>
+						    </div>
+						    <div class="demo1-class2">
+						        <div><button type="button" data-action="rigtAll">->></button></div>
+						        <div><button type="button" data-action="right">-></button></div>
+						        <div><button type="button" data-action="left"><-</button></div>
+						        <div><button type="button" data-action="leftAll"><<-</button></div>
+						    </div>
+						    <div class="demo1-class3">
+						        <select id="demo1-select2" name="demo1-select2[]" multiple="multiple" style="height:200px;">
+						            <option value="1">Row 1</option>  
+						            <option value="3">Row 3</option>
+						        </select>
+						    </div>
+						    <div class="demo1-class4">
+                                <div><button type="button" data-action="up">up</button></div>
+                                <div><button type="button" data-action="down">down</button></div>
+							</div>
+						</form>
+						</div>
                     </div>
                     <div class="entry-source-title"></div>
                     <div class="entry-demo-source-content">

@@ -1103,11 +1103,25 @@ var wJson = new(function () {
         return $.extend({}, json1, json2 || {});
     }
 
+    function sort(data, key, type) {
+        if (!type) type = "asc";
+        return data.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            if (type == "desc") {
+                return x > y ? -1 : x < y ? 1 : 0;
+            } else if (type == "asc") {
+                return x < y ? -1 : x > y ? 1 : 0;
+            }
+        });
+    }
+
     return {
         init: init,
         keys: keys,
         values: values,
-        clone: clone
+        clone: clone,
+        sort: sort
     };
 });
 

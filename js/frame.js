@@ -702,6 +702,13 @@ var moduleData = [
                         a_attr: {
                             title: "jQuery Selectors 정리"
                         }
+                    },
+                    {
+                        text: "jQuery Api",
+                        id: "jqueryApi",
+                        a_attr: {
+                            title: "jQuery Api 정리"
+                        }
                     }
                 ]
             },
@@ -715,21 +722,9 @@ var moduleData = [
                         id: "styleBasic"
                     },
                     {
-                        text: "wstyle",
-                        id: "wstyle"
-                    },
-                    {
-                        text: "wlayout",
-                        id: "wlayout"
-                    },
-                    {
                         text: "mediaquery",
                         id: "mediaquery"
-                    },
-                    {
-                        text: "keyframes",
-                        id: "keyframes"
-                    },
+                    }
                 ]
             },
             {
@@ -818,6 +813,18 @@ var moduleData = [
             {
                 text: "select",
                 id: "select"
+            },
+            {
+                text: "wjavascript",
+                id: "wjavascript"
+            },
+            {
+                text: "wstyle",
+                id: "wstyle"
+            },
+            {
+                text: "keyframe",
+                id: "keyframes"
             }
         ]
     },

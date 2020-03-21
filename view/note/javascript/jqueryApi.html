@@ -1,0 +1,68 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">$.inArray</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <div id="demo1-id1">
+							<input type="text" value="b" />
+						</div>
+                        <input type="button" onclick="demo1_1();" value="demo1_1" />
+                        <script type="text/javascript"> 
+							var demo1Arr = ["a","b","c","d","a","e","f"];
+							
+							function demo1_1(){
+								var val = $("#demo1-id1>input").val();
+								alert($.inArray(val, demo1Arr)!==-1);
+							}
+                        </script>
+                    </div>
+                    <div class="entry-source-title">중복된 배열 요소 찾기</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">$.map</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+						<input type="button" onclick="demo2_1();" value="demo2_1" />
+						<input type="button" onclick="demo2_2();" value="demo2_2" />
+                        <script type="text/javascript"> 
+							function demo2_1(){
+								var demo2_1 = $.map( [ 0, 1, 52, 97 ], function( a ) {
+									return (a > 50 ? a - 45 : null);
+								});
+								$.alert((demo2_1.toString()));
+							}
+
+							function demo2_2(){
+								var demo2_2 = $.map( { width: 10, height: 15, length: 20 }, function( value, key ) {
+									return key;
+								});
+								$.alert((demo2_2.toString()));
+							}
+                        </script>
+                    </div>
+                    <div class="entry-source-title">새로은 배열을 만들때</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

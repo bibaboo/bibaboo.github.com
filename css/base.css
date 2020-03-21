@@ -27,9 +27,17 @@ input[type="search"]::-webkit-search-decoration {
 .hide {display:none}
 .blind { position:absolute; left:-10000px; top:-10000px; width:0; height:0; font-size:0; }
 
+.w100p { width:100% !important; }
+.w49p { width:49% !important; }
+.w50p { width:50% !important; }
+
 .btd {border-top: 1px solid #ddd;}
 .mtb10 {margin:10px 0;}
 .clearboth { clear:both; }
+
+.text-center{text-align:center;}
+.text-left{text-align:left;}
+.text-right{text-align:right;}
 
 /* OVERLIDE
 ---------------------------------------------------------*/
@@ -95,7 +103,7 @@ input[type="search"]::-webkit-search-decoration {
 .entry-api-item table.arguments tr td.type {width: 100px; color: #888;}
 .entry-api-item table.arguments tr td.return {width: 100px; color: #888; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);}
 .entry-api-item div.example {padding: 10px 20px;}
-.entry-demo-title, .entry-source-title {position:relative;font-weight:bold; font-size:1.2em; border-bottom:1px solid #ccc; margin-top:10px;}
+.entry-demo-title, .entry-source-title {position:relative;font-weight:bold; height:1.3em;font-size:1.2em; border-bottom:1px solid #ccc; margin-top:10px;}
 .entry-demo-title a, .entry-source-title a {position:absolute;top:0;right:0;} 
 .entry-demo-content {padding-top:10px;}
 .entry-source-content, .entry-demo-source-content, .entry-demo-source-content-manual{padding-bottom:5px;}
