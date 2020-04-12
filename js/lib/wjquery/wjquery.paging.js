@@ -90,6 +90,7 @@
 		function redraw(_options){
 			if(_options.currentPage) options.currentPage=_options.currentPage;
 			if(_options.totalCount) options.totalCount=_options.totalCount;
+			if(_options.listSize) options.listSize=_options.listSize;
 			_WPAGING.calcurate(options);
 			_WPAGING.redraw($element, options);
 			setNum(_options.currentPage);
