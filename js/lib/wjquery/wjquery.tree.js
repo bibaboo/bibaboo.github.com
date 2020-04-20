@@ -41,9 +41,9 @@
                     alert('Method ' + method + ' does not exist on jQuery.wtree');
                 }
             } else if (!plugin && (typeof method === 'object' || !method)) {
-                var _WTREE = new WTREE();
-                $element.data(WTREE_DATA_NS, _WTREE);
-                _WTREE.init($element, $.extend({}, $.fn.wtree.defaultSettings, method || {}));
+                var wtree = new WTREE();
+                $element.data(WTREE_DATA_NS, wtree);
+                wtree.init($element, $.extend({}, $.fn.wtree.defaultSettings, method || {}));
             }
         });
         return result ? result : $(this);

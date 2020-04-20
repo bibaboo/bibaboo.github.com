@@ -59,6 +59,12 @@ var pageSetting = {
             js: ["/js/lib/wjquery/wjquery.tree.js"]
 
         },
+        wautocomplete: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.autocomplete.css"],
+            js: ["/js/lib/wjquery/wjquery.autocomplete.js"]
+
+        },
         minicolors: {
             loaded: false,
             css: ["/js/lib/jquery-minicolors-master/jquery.minicolors.css"],
@@ -596,6 +602,13 @@ var moduleData = [
                 }
             },
             {
+                text: "wautocomplete",
+                a_attr: {
+                    title: "autocomplete",
+                    plugin: "wautocomplete"
+                }
+            },
+            {
                 text: "naverMap",
                 id: "naverMap",
                 a_attr: {
@@ -812,7 +825,8 @@ var moduleData = [
             },
             {
                 text: "select",
-                id: "select"
+                id: "select",
+                used: false
             },
             {
                 text: "wjavascript",

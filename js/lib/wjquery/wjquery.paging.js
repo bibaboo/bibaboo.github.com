@@ -26,9 +26,9 @@
 					$element.removeData(WPAGEING_DATA_NS);
 				}
 				if(options.totalCount>0){
-					var _WPAGING = new WPAGING();
-					_WPAGING.init($element, options);
-					$element.data(WPAGEING_DATA_NS, _WPAGING);
+					var wpaging = new WPAGING();
+					wpaging.init($element, options);
+					$element.data(WPAGEING_DATA_NS, wpaging);
 				}
 			}
 		});

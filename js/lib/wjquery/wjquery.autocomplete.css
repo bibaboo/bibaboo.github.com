@@ -1,0 +1,35 @@
+/* wjquery.autocomplete
+---------------------------------------------------------*/
+
+.wautocomplete {
+    display: none;
+    position: absolute;
+    top: 28px;
+    left: 0;
+    min-width: 180px;
+    max-height: 300px;
+    overflow: auto;
+    min-height: 30px;
+    border: 1px solid #a5a5a5;
+    background: #fff !important;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+    color: #333333;
+    z-index: 100;
+    font-size: 13px;
+}
+
+.wautocomplete li a:hover {
+    background-color: #E6E6E6;
+}
+
+.wautocomplete li a.current {
+    background-color: #E6E6E6;
+}
+
+.wautocomplete li a {
+    padding: 7px;
+    display: block;
+    position: relative !important;
+    text-align: left !important;
+    text-decoration: none !important;
+}
