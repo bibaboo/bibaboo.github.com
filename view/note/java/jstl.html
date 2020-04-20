@@ -2,31 +2,165 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">simple...</span>
+    		<span class="title">cout</span>
 		</h2>
 		<div>
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-						Serve modules without publishing, Publish module contexts to seperate XML files
+						<c:out value='${user.name}' escapeXml='false'/>
 					</textarea>
-					<div class="entry-source-title">Note1</div>
+					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">
-						<pre class="brush: text;"></pre>
+						<pre class="brush: java;"></pre>
 					</div>
 				</div>
 			</div>
-			<div class="example">
+		</div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">if</span>
+        </h2>
+        <div>
+            <div class="example">
                 <div>
                     <textarea class="entry-demo-textarea-content none">
-                        Serve modules without publishing, Publish module contexts to seperate XML files
+                        <c:if test="${user.gender == 'm'}">man</c:if>
+    
+					    <c:if test="${not empty user.name}">
+					        <c:out value='${user.name}' escapeXml='false'/>
+					    </c:if>
                     </textarea>
-                    <div class="entry-source-title">Note2</div>
+                    <div class="entry-source-title"></div>
                     <div class="entry-demo-source-content">
-                        <pre class="brush: text;"></pre>
+                        <pre class="brush: java;"></pre>
                     </div>
                 </div>
             </div>
-		</div>
-	</li>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">set</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <textarea class="entry-demo-textarea-content none">
+                         <c:set var="userType" >
+				            <wjava:message key="ui.common.inside" />
+				        </c:set>
+    
+                        <c:set var="cnt" value="${(weekDay+size-index)%7}" />    
+                    </textarea>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: java;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">forEach</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <textarea class="entry-demo-textarea-content none">
+                         <c:forEach var="item" items="${list}" varStatus="status"> 
+				            <c:out value='${status.index}' escapeXml='false'/>
+				            <c:if test="${!status.first}">first</c:if>
+				            <c:if test="${!status.last}">last</c:if>
+				        </c:forEach>
+				        
+				        <c:forEach var="temp" begin="1" end="10" step="2">
+				            ${temp}<br>
+				        </c:forEach>
+				        
+				        <c:forTokens var="temp" items="111 222 333" delims=" ">
+				            ${temp}<br>
+				        </c:forTokens>    
+                    </textarea>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: java;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">choose</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <textarea class="entry-demo-textarea-content none">
+                        <c:choose>
+					        <c:when test="${localeGbn == 'true'}">
+					            <c:set var="displayUserName" value="${personName}"/>                                                                                                                                    
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="displayUserName" value="${personEnglishName}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    
+					    <c:choose>
+					        <c:when test="${fn:length(list) == 0}">
+					            <div>no data</div> 
+					        </c:when>
+					        <c:otherwise>
+					            <c:forEach var="item" items="${list}" varStatus="status">
+					            </c:forEach>
+					        </c:otherwise> 
+					    </c:choose> 
+                    </textarea>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: java;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">fn</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div>
+                    <textarea class="entry-demo-textarea-content none">
+				        <% 
+				            pageContext.setAttribute("lf", "\n"); 
+				        %>
+				        
+				        ${fn:replace(bcardHistory.contents, lf, "<br/>")}
+				     
+				        <c:if test="${fn:length(searchResult.entity) == 0}">
+				            no data
+				        </c:if>
+				        
+				        ${fn:substring(car.carProduceDate, 0, 4)}
+				        				     
+				        ${fn:split(item.scheduleDateString,' ')[0]}
+				        
+				        ${fn:escapeXml(boardItem.contents)}
+				        
+				        ${fn:contains(status.value, 'LIST')}
+				        
+				        fn:containsIgnoreCase(string, sbustring)
+                    </textarea>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: java;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>
