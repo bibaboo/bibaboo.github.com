@@ -80,6 +80,10 @@ var pageSetting = {
             loaded: false,
             css: ["/js/lib/fakeLoader.js-master/fakeLoader.css"],
             js: ["/js/lib/fakeLoader.js-master/fakeLoader.js"]
+        },
+        d3: {
+            loaded: false,
+            js: ["/js/lib/d3.min.js"]
         }
     },
     //Miscellaneous
@@ -606,6 +610,13 @@ var moduleData = [
                 a_attr: {
                     title: "autocomplete",
                     plugin: "wautocomplete"
+                }
+            },
+            {
+                text: "d3",
+                a_attr: {
+                    title: "d3 social network",
+                    plugin: "d3"
                 }
             },
             {

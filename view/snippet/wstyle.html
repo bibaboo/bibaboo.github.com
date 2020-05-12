@@ -170,4 +170,146 @@
             </div>
         </div>
     </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">switches</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            input.wradio {
+                                width: 20px;
+                                height: 20px;
+                                vertical-align: middle;
+                                -webkit-appearance: none;
+                                padding: 1px;
+                                margin-top: -4px;
+                                background: #fff;
+                                border: solid 1px #ccc;
+                                border-radius: 50%;
+                            }
+
+                            input.wradio:after  {
+                                content: ' ';
+                                position: relative;
+                                top: 3px;
+                                left: 3px;
+                                display: block;
+                                width: 10px;
+                                height: 10px;
+                                background: #ccc;
+                                border-radius: 50%;
+                            }
+
+                            input.wradio:checked {
+                                padding: 0;
+                                background: #fff;
+                                border: solid 1px #00a885;
+                            }
+
+                            input.wradio:checked:after {
+                                top: 4px;
+                                left: 4px;
+                                background: #00a885;
+                            }
+
+                            input.wcheckbox {
+                                width: 22px;
+                                height: 22px;
+                                background: url(../images/btn_form.png) no-repeat 0 0;
+                                background-size: 22px auto;
+                                -webkit-appearance: none;
+                                border: 0;
+                                cursor: pointer;
+                            }
+
+                            input.wcheckbox:checked {
+                                background-position: 0 -50px;
+                            }
+
+                            .switch {
+                                display:inline-block;
+                                cursor: pointer;
+                            }
+
+                            .switch input {
+                                position: absolute;
+                                opacity: 0;
+                            }
+
+                            .switch span.box {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                display: inline-block;
+                                width: 52px;
+                                height: 26px;
+                                border-radius: 20px;
+                                background-color: #ccc;
+                                -webkit-transition: background-color 0.35s;
+                                transition: background-color 0.35s;
+                            }
+
+                            .switch span.box:after {
+                                position: absolute;
+                                content: "";
+                                left: 5px;
+                                top: 5px;
+                                bottom: 5px;
+                                width: 16px;
+                                background-color: #fff;
+                                border-radius: 20px;
+                                -webkit-transition: all 0.15s ease-out;
+                                transition: all 0.15s ease-out;
+                            }
+
+                            .switch input:checked+span.box:after {
+                                left: 28px;
+                                width: 22px;
+                                top: 2px;
+                                bottom: 2px;
+                                border: none;
+                            }
+
+                            .switch input:checked+span.box {
+                             background-color: #eee;
+                            }
+
+                            .switch-color1 span.box {
+                                border: none;
+                            }
+
+                            .switch-color1 input:checked+span.box {
+                             background-color: #00a885;
+                            }
+
+                            #demo6-id1>div {
+                                height:30px;
+                            }
+                        </style>
+                        <div id="demo6-id1">
+                            <div>
+                                <label><input type="radio" checked="checked" name="radio6" value="1" class="wradio" /> <span>one</span></label>
+                                <label><input type="radio" name="radio6" value="2" class="wradio" /> <span>two</span></label>
+                                <label><input type="radio" name="radio6" value="3" class="wradio" /> <span>three</span></label>
+                            </div>
+                            <div>
+                                <label><input type="checkbox" class="wcheckbox"><span>all</span></label></label>
+                            </div>
+                            <div style="position:relative;padding-left:50px;">
+                                <label class="switch switch-color1"><input type="checkbox" value="1"><span class="box"></span></label>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>

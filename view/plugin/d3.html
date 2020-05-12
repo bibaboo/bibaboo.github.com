@@ -1,0 +1,653 @@
+<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">demo</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">source
+					<a href="javascript:void(0);" class="ui-state-default ui-corner-all">
+						<span class="ui-icon ui-icon-circle-triangle-s"></span>
+					</a>
+				</div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1"></div>
+						<div id="tooltip" class="hidden">
+							<p><b id="value"></b></p>
+						</div>
+						<style id="compiled-css" type="text/css">
+							.linkLine {
+								stroke: #999999;
+								stroke-opacity: 1.0;
+							}
+						
+							.linkLabel {
+								color: #333333;
+								flood-color: #FFFFFF;
+								flood-opacity: 1;
+								font-size: 13px;
+								text-anchor: middle;
+							}
+							
+							.node {
+								stroke-width: 3px;
+								cursor: pointer;
+							}
+						
+							.nodeLabel {
+								font-size: 14px;
+								fill: #FFFFFF;
+								text-anchor: middle;
+								cursor: pointer;
+							}
+						
+							.nodeLabel0 {
+								fill: #FFFFFF;
+							}
+						
+							.nodeLabel1 {
+								fill: #FFFFFF;
+							}
+						
+							.nodeLabel2 {
+								fill: #FFFFFF;
+							}
+						
+							.nodeLabel3 {
+								fill: #FFFFFF;
+							}
+						
+							.nodeLabel4 {
+								fill: #FFFFFF;
+							}
+						
+							.nodeLabel5 {
+								fill: #FFFFFF;
+							}
+							
+							.nodeLabel6 {
+								fill: #FFFFFF;
+							}
+							
+							 #tooltip {
+								position: absolute;
+								height: auto;
+								padding:10px;
+								background-color: white;
+								-webkit-border-radius: 10px;
+								-moz-border-radius: 10px;
+								border-radius: 10px;
+								-webkit-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+								-moz-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+								box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+								pointer-events: none;
+							}
+							
+							#tooltip.hidden {
+								display: none;
+							}
+							
+							#tooltip p {
+								margin: 0;
+								font-size: 16px;
+								line-height: 20px;
+							}
+						</style>
+						<script type="text/javascript">
+							var filColor = ["#a61b38", "#00a885", "#2fb6bc", "#a69375", "#f5904d", "#da5478", "#55555"],
+								inactiveColor = "#dddddd",
+								dSize = 6,
+								radius = 28,
+								dy1 = "-3",
+								dy2 = "13",
+								//_h = $("body").height(),
+								//_w = $("body").width(),
+								_h = 600,
+								_w = 1000,
+								icon = "../../images/ic_per_04.gif";
+						
+							
+							var links = []; //liens du graphe
+							var nodes = []; // noeuds du graphe
+							var color; //gestion des couleurs du graphe
+						
+							//intitialisation de la force
+							var force;
+						
+							//conteneur svg parent
+							var svg;
+						
+							//objet graphique
+							var node;
+							var link;
+							var nodeCircle;
+							var nodeLabel;
+							var linkLine;
+							var linkLabel;
+							
+							//initialisation du graphe
+							function initialisationGraphe() {
+								svg = d3.select("#demo1-id1").append("svg").attr("width", _w).attr("height", _h);
+								node = svg.selectAll(".node");
+								link = svg.selectAll(".link");
+								color = d3.scale.identity();
+								force = d3.layout.force()
+									.nodes(nodes)
+									.links(links)
+									.charge(-1e3)
+									.linkDistance(130)
+									.chargeDistance(-600)
+									.size([_w, _h])
+									.on("tick", tick);
+						
+								//background derriere les link label
+								/*
+								svg.html(
+									'<defs><filter x="0" y="0" width="1" height="1" id="solid"><feFlood flood-color="white"/><feComposite in="SourceGraphic"/></filter></defs>' +
+									'<defs><marker id="arrow" markerUnits="strokeWidth" markerWidth="12" markerHeight="12" viewBox="0 0 12 12" refX="40" refY="6" orient="auto"> <path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: #f00;"></path></marker>'
+								);
+								*/
+								
+								svg.append("defs").append("marker")
+								.attr("id", "arrow1") 
+								.attr("markerUnits", "strokeWidth") 
+								.attr("markerWidth", "12").attr("markerHeight", "12") 
+								.attr("viewBox", "0 0 12 12") 
+								.attr("refX", "38").attr("refY", "6") 
+								.attr("orient", "auto") 
+								var marker1 = d3.select("#arrow1");
+								marker1.append("path").attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2").attr("fill", "#f00");
+							}
+						
+							function chargeNoeud() {
+								 
+									node_120000050202 = {
+										level: "0",
+										id: "120000050202",
+										text: "SH",
+										text2: "Simth Han  TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000050202);
+									
+								 
+									node_120000060038 = {
+										level: "1",
+										id: "120000060038",
+										text: "김사부",
+										text2: "김사부  TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060038);
+									
+								 
+									node_120000070073 = {
+										level: "1",
+										id: "120000070073",
+										text: "김두나",
+										text2: "김두나  신규회사01 길게길게길게길게",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000070073);
+									
+								 
+									node_120000060006 = {
+										level: "2",
+										id: "120000060006",
+										text: "홍길동",
+										text2: "홍길동 과장 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060006);
+									
+								 
+									node_120000050197 = {
+										level: "2",
+										id: "120000050197",
+										text: "스트0",
+										text2: "테스트005  TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000050197);
+									
+								 
+									node_120000060091 = {
+										level: "2",
+										id: "120000060091",
+										text: "박사부",
+										text2: "박사부  ",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060091);
+									
+								 
+									node_120000050126 = {
+										level: "3",
+										id: "120000050126",
+										text: "스트0",
+										text2: "테스트002 직책002 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000050126);
+									
+								 
+									node_120000050122 = {
+										level: "3",
+										id: "120000050122",
+										text: "스트0",
+										text2: "테스트001  TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000050122);
+									
+								 
+									node_120000060158 = {
+										level: "2",
+										id: "120000060158",
+										text: "김부자",
+										text2: "김부자 부장 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060158);
+									
+								 
+									node_120000070047 = {
+										level: "2",
+										id: "120000070047",
+										text: "김하나",
+										text2: "김하나 과장 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000070047);
+									
+								 
+									node_120000060252 = {
+										level: "3",
+										id: "120000060252",
+										text: "김일등",
+										text2: "김일등 부장1 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060252);
+									
+								 
+									node_120000060403 = {
+										level: "3",
+										id: "120000060403",
+										text: "김태풍",
+										text2: "김태풍 대리 TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000060403);
+									
+								 
+									node_120000050214 = {
+										level: "4",
+										id: "120000050214",
+										text: "스트0",
+										text2: "테스트008  TEST 회사",
+										type: "individu"
+									};
+						
+									nodes.push(node_120000050214);
+									
+								
+						
+										 
+									links.push({
+										dy : calDy('120000060403', '120000050214'),
+										type: "단밤",
+										source: node_120000060403,
+										target: node_120000050214
+									});
+										 
+									links.push({
+										dy : calDy('120000060403', '120000060158'),
+										type: "지인",
+										source: node_120000060403,
+										target: node_120000060158
+									});
+										 
+									links.push({
+										dy : calDy('120000060038', '120000060091'),
+										type: "사부",
+										source: node_120000060038,
+										target: node_120000060091
+									});
+										 
+									links.push({
+										dy : calDy('120000060158', '120000060038'),
+										type: "사부",
+										source: node_120000060158,
+										target: node_120000060038
+									});
+										 
+									links.push({
+										dy : calDy('120000050202', '120000060038'),
+										type: "지인",
+										source: node_120000050202,
+										target: node_120000060038
+									});
+										 
+									links.push({
+										dy : calDy('120000060252', '120000060158'),
+										type: "동창",
+										source: node_120000060252,
+										target: node_120000060158
+									});
+										 
+									links.push({
+										dy : calDy('120000060252', '120000060006'),
+										type: "친구",
+										source: node_120000060252,
+										target: node_120000060006
+									});
+										 
+									links.push({
+										dy : calDy('120000050122', '120000060091'),
+										type: "이중 연결",
+										source: node_120000050122,
+										target: node_120000060091
+									});
+										 
+									links.push({
+										dy : calDy('120000070073', '120000050197'),
+										type: "3424",
+										source: node_120000070073,
+										target: node_120000050197
+									});
+										 
+									links.push({
+										dy : calDy('120000070073', '120000050202'),
+										type: "123123",
+										source: node_120000070073,
+										target: node_120000050202
+									});
+										 
+									links.push({
+										dy : calDy('120000070073', '120000060006'),
+										type: "지인",
+										source: node_120000070073,
+										target: node_120000060006
+									});
+										 
+									links.push({
+										dy : calDy('120000060091', '120000050126'),
+										type: "친구",
+										source: node_120000060091,
+										target: node_120000050126
+									});
+										 
+									links.push({
+										dy : calDy('120000060091', '120000050122'),
+										type: "그냥",
+										source: node_120000060091,
+										target: node_120000050122
+									});
+										 
+									links.push({
+										dy : calDy('120000070047', '120000060158'),
+										type: "돈줄",
+										source: node_120000070047,
+										target: node_120000060158
+									});
+										 
+									links.push({
+										dy : calDy('120000070047', '120000060038'),
+										type: "사부",
+										source: node_120000070047,
+										target: node_120000060038
+									});
+								
+						
+								construireGraphe();
+							}
+							
+							function calDy(businesscardId, relationBusinesscardId){
+								var dy = dy1;
+								$.each(links, function(){
+									if(this.source.id == relationBusinesscardId && this.target.id == businesscardId){
+										dy = dy2
+										return false;
+									}
+								});
+								
+								return dy;
+							};
+						
+							//construction du graphe
+							function construireGraphe() {
+								link = link.data(force.links(), function (d) {
+									return d.source.id + "-" + d.target.id;
+								});
+						
+								//ajout du groupe graphique
+								var appendL = link.enter().append("g").attr("class", "link");
+								//ajout de la ligne
+								linkLine = appendL.append("line").attr("class", "linkLine").style("stroke-width", 1).attr("marker-end", "url(#arrow1)");
+								
+								try{
+									if (navigator.userAgent.toLowerCase().indexOf("msie") == -1) {
+										//linkLine.attr("marker-end", "url(#arrow1)");
+									}
+								}catch(e){}
+								
+								//ajout du label
+								linkLabel = appendL.append("text")
+									.attr("class", "linkLabel")
+									.attr("dy", function(d){
+										return d.dy;
+									})
+									//.attr("filter", "url(#solid)")
+									.text(function (d) {
+										return d.dy==dy1?d.type:d.type + "(" + d.source.text + "->" +  d.target.text+ ")";
+									});
+								
+								link.exit().remove();
+						
+								node = node.data(force.nodes(), function (d) {
+									return d.id;
+								});
+								
+								//ajout du groupe graphique
+								var appendedG = node.enter().append("g")
+									.attr("class", "node")
+									.call(force.drag())
+									.on("mousedown", function (d) {
+										d.fixed = true;
+									});
+								//ajout des cercles
+								nodeCircle = appendedG.append("circle")
+								.attr("r", function (d) {
+									return radius;
+								})
+								.attr("fill", function (d) {
+									return filColor[parseInt(getNodeLevel(d.level))];
+									//return "#333333";
+								});
+								//ajout du texte
+								nodeImg = appendedG.append("image")
+								.attr("xlink:href", icon)
+								.attr("x", -8)
+								.attr("y", 8)
+								.attr("width", "16")
+								.attr("height", "15")
+								.style("display", function(d){
+									return d.level=="0"?"none":"visible";
+								})
+								.on("dblclick", function(d){
+									chagneBcard(d.id);
+								})
+								.on('mouseover', function (d) {
+									var add = $("#sidebar").width();
+									d3.select('#tooltip').style({left: (d3.event.pageX-add)+"px", top: (d3.event.pageY-10)+"px"}).select('#value').text(d.text2);
+									d3.select('#tooltip').classed('hidden', false);
+								})
+								  .on('mouseout', function (d) {
+									  d3.select('#tooltip').classed('hidden', true);
+								   })
+								
+								//ajout du texte
+								nodeLabel = appendedG.append("text")
+								.attr("class", function(d){
+									return "nodeLabel nodeLabel" + getNodeLevel(d.level);
+								})
+								.attr("y", function(d){
+									return d.level=="0"?"5":"2";
+								})
+								.on("dblclick", function(d){
+									chagneBcard(d.id);
+								})
+								.on('mouseover', function (d) {
+									   fade(d, true)
+								})
+								  .on('mouseout', function (d) {
+									  fade(d, false)
+								   })
+								.text(function (d) {
+									return d.text||d.id;
+								});
+									
+								node.exit().remove();
+						
+								//application de la force sur les liens et noeuds
+								force.start();
+						
+								//preconfiguration de l'affichage
+								for (var i = 100; i > 0; --i){
+									force.tick();
+								}
+							}
+							
+							function isConnected(did, oid) {
+								var result = false;
+								$.each(links, function(){
+									if((this.target.id == oid && this.source.id == did) || (this.source.id == oid && this.target.id == did)){
+										result = true;
+										return;
+									}
+								});
+								return result;
+							}
+							
+							function fade(d, b1) {
+								node.each(function (o) {
+									var b2 = false,
+									_fill = "";
+									if(d.id == o.id){
+										b2 = true;
+									}else if(isConnected(d.id, o.id)){
+										b2 = true;
+									}
+									
+									if(!b1 || (b1 && b2)){
+										_fill = filColor[parseInt(getNodeLevel(o.level))];
+									}else{
+										_fill = inactiveColor;
+									}
+									
+									if($(this).find("circle").attr('fill').toUpperCase() != _fill.toUpperCase()){
+										$(this).find("circle").attr('fill', _fill);
+									}
+								});
+								
+								link.each(function (o) {
+									var b2 = false;
+									if(d.id == o.target.id){
+										b2 = true;
+									}else if(d.id == o.source.id){
+										b2 = true;
+									}
+									if(!b1 || (b1 && b2)){
+										$(this).find("text").css('display', "block");
+									}else{
+										$(this).find("text").css('display', "none");
+									}
+								});
+							}
+							
+							/* unuse..
+							function fade(opacity) {
+								return function (d) {
+									console.log(d)
+									node.style("stroke-opacity", function (o) {
+										var b = false;
+										if(d.id == o.id){
+											b = true;
+										}else if(isConnected(d.id, o.id)){
+											b = true;
+										}
+										
+										thisOpacity = b ? 1 : opacity;
+										this.setAttribute('fill-opacity', thisOpacity);
+										return thisOpacity;
+									});
+								};
+							}
+							//*/
+							
+							function getNodeLevel(level){
+								return level>dSize?dSize:level;
+							}
+							
+							//gestion de la force
+							function tick() {
+								//configuration des mouvements 
+								linkLine.attr("x1", function (d) {
+										return d.source.x;
+									})
+									.attr("y1", function (d) {
+										return d.source.y;
+									})
+									.attr("x2", function (d) {
+										return d.target.x;
+									})
+									.attr("y2", function (d) {
+										return d.target.y;
+									});
+								 linkLabel.attr("transform", function (d) { //calcul de l'angle du label
+									var angle = Math.atan((d.source.y - d.target.y) / (d.source.x - d.target.x)) * 180 / Math.PI;
+									return 'translate(' + [((d.source.x + d.target.x) / 2), ((d.source.y + d.target.y) / 2)] +
+										')rotate(' + angle + ')';
+								});
+								node.attr("transform", function (d) {
+									var dx = Math.max(radius, Math.min(_w - radius, d.x)),
+										dy = Math.max(radius, Math.min(_h - radius, d.y));
+									return 'translate(' + [dx, dy] + ')';
+								});
+							}
+							
+							function chagneBcard(businesscardId){
+								alert("card : " + businesscardId);
+							}
+						
+							$().ready(function () {
+								initialisationGraphe();
+								chargeNoeud();
+							});
+						
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

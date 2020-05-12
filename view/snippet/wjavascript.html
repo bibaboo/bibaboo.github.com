@@ -64,4 +64,83 @@
             </div>
         </div>
     </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">json sort</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <script type="text/javascript" src="/js/test/demoTmpl.js"></script>
+                        <style type="text/css">
+                            .boardType0  {background-color:#ddd;font-weight: bold;}
+                            .boardType1 {background-color:#fff;}
+                        </style>
+                        <div id="demo3-id1"></div>
+                        <input type="button" onclick="demo1_1();" value="demo1_1" />
+                        <script type="text/javascript"> 
+                            function demo1_1(){
+                                var root = "root",
+                                    data = result.body.BoardList || [];
+                                
+                                $("#demo3-id1").empty();
+                                $.each(getChildrenNode(root, data), function(){
+                                    printNode(this);
+                                    if(this.isBoard == "0" && this.hasChildren != "0"){
+                                        $.each(getChildrenNode(this.boardId, data), function(){
+                                            printNode(this);
+                                            if(this.isBoard == "0" && this.hasChildren != "0"){
+                                                $.each(getChildrenNode(this.boardId, data), function(){
+                                                    printNode(this);
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+
+                            function printNode(node){
+                                var $c = $("#demo3-id1"),
+                                    paddingLeft = 20,
+                                    tmplBorad = "<div class=\"boardType${isBoard}\" style=\"padding-left:${paddingLeft}px\">${boardName}</div>";
+
+                                    node.paddingLeft = (parseInt(node.boardLevel)-1) * paddingLeft;
+                                    $c.append($.tmpl(tmplBorad, node));
+                            }
+
+                            function getChildrenNode(boardParentId, data){
+                                var childrenNode = [];
+                                for(var i in data){
+                                    if(data[i].boardParentId == boardParentId){
+                                        childrenNode.push(data[i]);
+                                    }
+                                }
+
+                                return sortNode(childrenNode, "siblingOrder");
+                            }
+
+                            function sortNode(data, key, type) {
+                                if (!type) type = "asc";
+                                return data.sort(function(a, b) {
+                                    var x = parseInt(a[key]);
+                                    var y = parseInt(b[key]);
+                                    if (type == "desc") {
+                                        return x > y ? -1 : x < y ? 1 : 0;
+                                    } else if (type == "asc") {
+                                        return x < y ? -1 : x > y ? 1 : 0;
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>

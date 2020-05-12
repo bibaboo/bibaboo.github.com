@@ -27,34 +27,38 @@
 									
 									switch (action) {
 										case "rigtAll":
-											$("#demo1-select1 option").remove().appendTo('#demo1-select2');  
+											$select1.find("option").remove().appendTo($select2);  
 											break;
 										case "right":
-											$("#demo1-select1 option:selected").remove().appendTo('#demo1-select2');  
+											$select1.find("option:selected").remove().appendTo($select2);  
 											break
 										case "leftAll":
-											$("#demo1-select2 option").remove().appendTo('#demo1-select1');  
+											$select2.find("option").remove().appendTo($select1);  
 											break;
 										case "left":
-											$("#demo1-select2 option:selected").remove().appendTo('#demo1-select1');  
+											$select2.find("option:selected").remove().appendTo($select1);  
 											break
 										case "up":
-										case "down":
-											let selectedCount =  $("#demo1-select2 option:selected").length;
-											if(selectedCount>0){
-												if(selectedCount>1){
-													$("#demo1-select2 option:selected").not(":first").prop("selected", false);	
+											let $selectedUpOption = $select2.find("option:selected");
+											if($selectedUpOption.length>0){
+												if($selectedUpOption.first().prev().length>0){
+													let $upPos = $selectedUpOption.first().prev(),
+														$upClone = $selectedUpOption.clone(true);
+
+													$select2.find("option:selected").remove();
+													$upPos.before($upClone.prop("selected", true));
 												}
-												
-												let $t = $("#demo1-select2 option:selected").first();
-												if(action=="up"){
-													if($t.prev().length>0){
-														$t.prev().before($t);
-													}
-												}else if(action=="down"){
-													if($t.next().length>0){
-														$t.next().after($t);
-													}
+											}
+											break
+										case "down":
+											let $selectedDownOption = $select2.find("option:selected");
+											if($selectedDownOption.length>0){
+												if($selectedDownOption.last().next().length>0){
+													let $downPos = $selectedDownOption.last().next(),
+														$downClone = $selectedDownOption.clone(true);
+
+													$select2.find("option:selected").remove();
+													$downPos.after($downClone.prop("selected", true));
 												}
 											}
 											break
@@ -106,6 +110,299 @@
                                 <div><button type="button" data-action="down">down</button></div>
 							</div>
 						</form>
+						</div>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">check all</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div class="clearboth">
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            
+						</style>
+						<script type="text/javascript"> 
+                            $(document).ready(function () {
+								$("#checkAll").click(function(){
+									$("input[name='chk']").prop("checked", $(this).prop("checked"));
+								});
+							});
+
+							function demo2_1(){
+								var chk = $("input[name='chk']:checked").map(function(){
+									return $(this).val();
+								});
+
+								alert(chk.get().join(","));
+							}
+						</script>
+						<input type="button" onclick="demo2_1();" value="demo2_1" class="ui-button ui-corner-all ui-widget mtb10" role="button">
+						<div id="demo2-id1">
+							<input type="checkbox" id="checkAll" />
+							<hr>
+							<input type="checkbox" name="chk" value="1" /><br/>
+							<input type="checkbox" name="chk" value="2" /><br/>
+							<input type="checkbox" name="chk" value="3" /><br/>
+							<input type="checkbox" name="chk" value="4" /><br/>
+							<input type="checkbox" name="chk" value="5" />
+						</div>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</li>
+	<li class="entry-api-item">
+        <h2>
+            <span class="title">login form</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div class="clearboth">
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            #demo3-id1 * { box-sizing:border-box; }
+
+							#demo3-id1 {
+								padding:10px 0;
+								background: #eee;
+								-webkit-font-smoothing: antialiased;
+							}
+
+							#demo3-id1 form {
+								width: 380px;
+								margin: 4em auto;
+								padding: 3em 2em 2em 2em;
+								background: #fafafa;
+								border: 1px solid #ebebeb;
+								box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+							}
+
+							.group { 
+								position: relative; 
+								margin-bottom: 45px; 
+							}
+
+							#demo3-id1 input {
+								font-size: 18px;
+								padding: 10px 10px 10px 5px;
+								-webkit-appearance: none;
+								display: block;
+								background: #fafafa;
+								color: #636363;
+								width: 100%;
+								height: 35px;
+								border: none;
+								border-radius: 0;
+								border-bottom: 1px solid #757575;
+								box-shadow: none;
+							}
+
+							#demo3-id1 input:focus { outline: none; }
+
+							/* Label */
+							label {
+								color: #999; 
+								font-size: 18px;
+								font-weight: normal;
+								position: absolute;
+								pointer-events: none;
+								left: 5px;
+								top: 10px;
+								transition: all 0.2s ease;
+							}
+
+							/* active */
+							#demo3-id1 input:focus ~ label, #demo3-id1 input.used ~ label {
+								top: -20px;
+							transform: scale(.75); left: -2px;
+								/* font-size: 14px; */
+								color: #4a89dc;
+							}
+
+							/* Underline */
+							.bar {
+								position: relative;
+								display: block;
+								width: 100%;
+							}
+
+							.bar:before, .bar:after {
+								content: '';
+								height: 2px; 
+								width: 0;
+								bottom: 1px; 
+								position: absolute;
+								background: #4a89dc; 
+								transition: all 0.2s ease;
+							}
+
+							.bar:before { left: 50%; }
+							.bar:after { right: 50%; }
+
+							/* active */
+							#demo3-id1 input:focus ~ .bar:before, #demo3-id1 input:focus ~ .bar:after { width: 50%; }
+
+							/* Highlight */
+							.highlight {
+								position: absolute;
+								height: 60%; 
+								width: 100px; 
+								top: 25%; 
+								left: 0;
+								pointer-events: none;
+								opacity: 0.5;
+							}
+
+							/* active */
+							#demo3-id1 input:focus ~ .highlight {
+								animation: inputHighlighter 0.3s ease;
+							}
+
+							/* Animations */
+							@keyframes inputHighlighter {
+								from { background: #4a89dc; }
+								to 	{ width: 0; background: transparent; }
+							}
+
+							/* Button */
+							.button {
+								position: relative;
+								display: inline-block;
+								padding: 12px 24px;
+								margin: .3em 0 1em 0;
+								width: 100%;
+								vertical-align: middle;
+								color: #fff;
+								font-size: 16px;
+								line-height: 20px;
+								-webkit-font-smoothing: antialiased;
+								text-align: center;
+								letter-spacing: 1px;
+								background: transparent;
+								border: 0;
+								border-bottom: 2px solid #3160B6;
+								cursor: pointer;
+								transition: all 0.15s ease;
+							}
+							.button:focus { outline: 0; }
+
+
+							/* Button modifiers */
+							.buttonBlue {
+							background: #4a89dc;
+							text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+							}
+
+							.buttonBlue:hover { background: #357bd8; }
+
+
+							/* Ripples container */
+							.ripples {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							overflow: hidden;
+							background: transparent;
+							}
+
+
+							/* Ripples circle */
+							.ripplesCircle {
+								position: absolute;
+								top: 50%;
+								left: 50%;
+								transform: translate(-50%, -50%);
+								opacity: 0;
+								width: 0;
+								height: 0;
+								border-radius: 50%;
+								background: rgba(255, 255, 255, 0.25);
+							}
+
+							.ripples.is-active .ripplesCircle {
+								animation: ripples .4s ease-in;
+							}
+
+							/* Ripples animation */
+							@keyframes ripples {
+								0% { opacity: 0; }
+
+								25% { opacity: 1; }
+
+								100% {
+									width: 200%;
+									padding-bottom: 200%;
+									opacity: 0;
+								}
+							}
+						</style>
+						<script type="text/javascript"> 
+                            $(document).ready(function () {
+								$('input').blur(function() {
+									var $this = $(this);
+									if ($this.val())
+									$this.addClass('used');
+									else
+									$this.removeClass('used');
+								});
+
+								var $ripples = $('.ripples');
+
+								$ripples.on('click.Ripples', function(e) {
+
+									var $this = $(this);
+									var $offset = $this.parent().offset();
+									var $circle = $this.find('.ripplesCircle');
+
+									var x = e.pageX - $offset.left;
+									var y = e.pageY - $offset.top;
+
+									$circle.css({
+									top: y + 'px',
+									left: x + 'px'
+									});
+
+									$this.addClass('is-active');
+
+								});
+
+								$ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+									$(this).removeClass('is-active');
+								});
+							});
+						</script>
+						<div id="demo3-id1">
+							<form>
+								<div class="group">
+								  	<input type="text"><span class="highlight"></span><span class="bar"></span>
+								  	<label>Name</label>
+								</div>
+								<div class="group">
+								  	<input type="password"><span class="highlight"></span><span class="bar"></span>
+								  	<label>Password</label>
+								</div>
+								<button type="button" class="button buttonBlue">Subscribe
+								  	<div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+								</button>
+							</form>
 						</div>
                     </div>
                     <div class="entry-source-title"></div>
