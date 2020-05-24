@@ -87,6 +87,7 @@ var pageSetting = {
         }
     },
     //Miscellaneous
+    progressBar: "header-progress-bar",
     isAccordion: false,
     autoData: [],
     resizerLeft: null,
@@ -658,13 +659,6 @@ var moduleData = [
                         }
                     },
                     {
-                        text: "wjavascript",
-                        id: "wjavascript",
-                        a_attr: {
-                            title: "javacript C&P"
-                        }
-                    },
-                    {
                         text: "배열 객체",
                         id: "array",
                         a_attr: {
@@ -999,7 +993,7 @@ var moduleData = [
         });
 
         //맨위로 버튼
-        $content.find("div.content-body").wScrollTop($("#btn-top"));
+        $content.find("div.content-body").wScrollTop($("#btn-top"), {"progressId":pageSetting.progressBar});
 
         //컨텐츠 헤더
         $content.find("div.content-header>ul").on("click", "a", function () {
@@ -1135,7 +1129,7 @@ var moduleData = [
 
                 var node = data.node,
                     $tree = $menuTree.jstree(true);
-
+                    
                 $content.find("div.content-body>.setting").addClass("none");
                 if (!node.data) node.data = {};
                 if ($tree.is_leaf(node) && (node.id == "home" || !node.icon)) {

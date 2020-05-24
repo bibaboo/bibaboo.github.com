@@ -396,6 +396,12 @@
                 } else {
                     target.fadeOut();
                 }
+
+                if(_option.progressId){
+                    var height = $(this).prop('scrollHeight') - $(this).outerHeight(),
+                        scrolled = ($(this).scrollTop() / height) * 100;
+                    $("#" + _option.progressId).width(isNaN(scrolled)?"0%":scrolled + "%");
+                }
             });
 
             target.on("click", $.proxy(function (event) {
