@@ -1,15 +1,22 @@
 /*
- * wjquery.autocomplete 0.1.0
+ * wjquery.autocomplete 0.1.1
  * by composite (wonchu.net@gmail.com)
  * http://www.wonchu.net
  * This project licensed under a MIT License.
 
  0.1.0 : 최초작성
+ 0.1.1 : 소스정리
 */
 
 (function ($) {
-    var _searchName = "",
-        wkey = {
+    "use strict";
+    var WAUTOCOMPLETE_SV = {
+        searchName: "",
+        mode: {
+            enter: "enter",
+            keyup: "keyup"
+        },
+        wkey: {
             enter: 13,
             spance: 32,
             left: 37,
@@ -17,10 +24,11 @@
             right: 39,
             down: 40
         }
+    };
 
     $.fn.wautocompleteEnter = function (callback, settings) {
         this.keypress(function (event) {
-            if ((event.keyCode || event.which) == wkey.enter) {
+            if ((event.keyCode || event.which) == WAUTOCOMPLETE_SV.wkey.enter) {
                 WAUTOCOMPLETE.trigger(event, $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {}), callback);
             }
         });
@@ -28,9 +36,9 @@
 
     $.fn.wautocompleteKeyup = function (callback, settings) {
         this.keyup(function (event) {
-            var _settings = $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {});
+            let _settings = $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {});
             if (!hasValueInArray(_settings.skipKeyCodes, (event.keyCode || event.which))) {
-                _settings.mode = "keyup";
+                _settings.mode = WAUTOCOMPLETE_SV.mode.keyup;
                 WAUTOCOMPLETE.trigger(event, _settings, callback);
             }
         });
@@ -39,7 +47,7 @@
     $.fn.wautocompleteDefaultSettings = {
         prefix: "wautocomplete-",
         minLength: 2,
-        mode: "enter",
+        mode: WAUTOCOMPLETE_SV.mode.enter,
         url: "../../js/test/wautocomplete.js",
         tmplLi: "<li>" +
             "   <a href=\"javascript:void(0);\">" +
@@ -47,12 +55,12 @@
             "       <span>\${teamName}</span>" +
             "   </a>" +
             "</li>",
-        skipKeyCodes: [wkey.spance, wkey.left, wkey.up, wkey.right, wkey.down]
+        skipKeyCodes: [WAUTOCOMPLETE_SV.wkey.spance, WAUTOCOMPLETE_SV.wkey.left, WAUTOCOMPLETE_SV.wkey.up, WAUTOCOMPLETE_SV.wkey.right, WAUTOCOMPLETE_SV.wkey.down]
     };
 
     var WAUTOCOMPLETE = {
         trigger: function (event, settings, callback) {
-            var $el = $(event.target),
+            let $el = $(event.target),
                 id = $el.attr("id") || $el.attr("name"),
                 _id = "#" + settings.prefix + id,
                 name = $.trim($el.val()),
@@ -66,15 +74,15 @@
                 }
             }
 
-            if (name == _searchName) return;
+            if (name == WAUTOCOMPLETE_SV.searchName) return;
 
             if (name.length < settings.minLength) {
-                if (settings.mode == "enter") {
+                if (settings.mode == WAUTOCOMPLETE_SV.mode.enter) {
                     alert(settings.minLength + "이상 입력해주세요.");
                     return false;
                 } else {
                     $(_id).hide();
-                    _searchName = "";
+                    WAUTOCOMPLETE_SV.searchName = "";
                     return false;
                 }
             }
@@ -92,12 +100,12 @@
                     } else if (result.length == 1) {
                         callback(result[0]);
                         $(_id).hide();
-                        _searchName = "";
+                        WAUTOCOMPLETE_SV.searchName = "";
                     } else {
                         if ($(_id).length == 0) {
                             $el.after("<div id=\"" + settings.prefix + id + "\" class=\"wautocomplete\"><ul style=\"position:relative;\"></ul></div>");
 
-                            var _css = {
+                            let _css = {
                                 "top": settings.top || $el.position().top + $el.outerHeight(),
                                 "left": settings.left || $el.position().left,
                                 "min-width": settings.minWidht || $el.outerWidth()
@@ -108,22 +116,22 @@
                                 if (!$c.is(e.target) && $c.has(e.target).length === 0) {
                                     $c.fadeOut();
                                     $c.find("ul").empty();
-                                    _searchName = "";
+                                    WAUTOCOMPLETE_SV.searchName = "";
                                 }
                             });
 
                             $el.keyup(function (event) {
-                                var key = event.keyCode || event.which;
-                                if ($c.is(":visible") && (key == wkey.up || key == wkey.down)) {
-                                    var _index = -1;
-                                    _n = $c.find("a").length;
+                                let key = event.keyCode || event.which;
+                                if ($c.is(":visible") && (key == WAUTOCOMPLETE_SV.wkey.up || key == WAUTOCOMPLETE_SV.wkey.down)) {
+                                    let _index = -1,
+                                        _n = $c.find("a").length;
 
                                     if ($c.find("a.current").length > 0) {
                                         _index = $c.find("a").index($c.find("a.current"));
                                     }
 
                                     $c.find("a.current").removeClass("current");
-                                    if (key == wkey.down) {
+                                    if (key == WAUTOCOMPLETE_SV.wkey.down) {
                                         if (_index == -1) {
                                             _index = 0;
                                         } else if (_index == _n - 1) {
@@ -131,7 +139,7 @@
                                         } else {
                                             _index++;
                                         }
-                                    } else if (key == wkey.up) {
+                                    } else if (key == WAUTOCOMPLETE_SV.wkey.up) {
                                         if (_index == -1) {
                                             _index = 0;
                                         } else if (_index == 0) {
@@ -146,19 +154,19 @@
                             });
                         }
 
-                        var $ul = $c.find("ul").empty();
+                        let $ul = $c.find("ul").empty();
                         $.each(result, function () {
-                            var $li = $.tmpl(settings.tmplLi, this).data("data", this);
-                            $li.appendTo($ul);
+                            $.tmpl(settings.tmplLi, this).data("data", this).appendTo($ul);
                         });
 
                         $c.find("li>a").off("click").on("click", function (event) {
-                            _searchName = "";
+                            WAUTOCOMPLETE_SV.searchName = "";
                             callback($(this).parent().data("data"));
                             $c.fadeOut();
                         });
+
                         $c.show();
-                        _searchName = name;
+                        WAUTOCOMPLETE_SV.searchName = name;
                     }
                 },
                 error: function (event, request, settings) {
@@ -168,15 +176,14 @@
 
         },
         checkLastWord: function (text) {
-            var last = text.substring(text.length - 1);
-            var check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+            let last = text.substring(text.length - 1);
+            const check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
                 "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ",
                 "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"
             ];
 
-            for (var i = check.length - 1; i >= 0; i--) {
-                if (last == check[i])
-                    return false;
+            for (let i = check.length - 1; i >= 0; i--) {
+                if (last == check[i]) return false;
             }
             return true;
         }

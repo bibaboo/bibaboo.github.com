@@ -2,7 +2,7 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">json get전송</span>
+    		<span class="title">json get</span>
 		</h2>
 		<div>
 			<div class="example">
@@ -110,4 +110,98 @@
             </div>
         </div>
     </li>
+    <li class="entry-api-item">
+		<h2>
+    		<span class="title">json array</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+                        var json = [
+                            {"lastName": "aa", "firstName" : "bb"},
+                            {"lastName": "cc", "firstName" : "dd"}
+                        ]
+						
+						$.ajax({
+							contentType : 'application/json; charset=UTF-8',
+							url : url,
+							data : JSON.stringify(json),
+							dataType : 'JSON',
+							method : 'POST',
+							success : function(result) {
+								//success process
+							},
+							error : function(request, status, error) {
+                                // fail process
+							}
+						});
+    	        		
+					</textarea>
+					<div class="entry-source-title">js <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;"></pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						import net.sf.json.JSONArray;
+                        import net.sf.json.JSONObject;
+
+                        JSONArray array = JSONArray.fromObject(bcardParam.getStr());
+
+                        BcardList bcardList = new BcardList();
+                        List<Bcard> bl = new ArrayList<Bcard>();
+
+                        for(int i=0; i<array.size(); i++){
+                            JSONObject obj = (JSONObject)array.get(i);
+
+                            Bcard bc = new Bcard();
+                        
+                            bc.setLastName(obj.getString("lastName"));
+                            ..
+                            
+                            bl.add(bc);
+                        }
+
+                        bcardList.setBcardList(bl);
+					</textarea>
+					<div class="entry-source-title">java<a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: java;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">contanins</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						List<String> testList = new ArrayList<String>();
+						testList.add("aaa@aaa.com");
+						testList.add("bbb@bbb.com");
+						testList.add("ccc@ccc.com");
+						String testMail = "bbb@bbb.com";
+						System.out.println("list result ==>" + testList.contains(testMail));
+	
+						String a = "aaa,bbb,ccc";
+						String b = "bbb";
+						System.out.println("String result ==>" + a.contains(b));	
+						System.out.println("String[] result ==>" + Arrays.asList(a.split(",")).contains(b));
+					</textarea>
+					<div class="entry-source-title">java<a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: java;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
 </ul>

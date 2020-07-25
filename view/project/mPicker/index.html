@@ -13,15 +13,16 @@
 <script type="text/javascript" src="../../../js/lib/wjquery/wjquery.js"></script>
 <script type="text/javascript" src="js/wjquery-mpicker.js"></script>
 <script type="text/javascript">
+(function($){
+	
 	$(document).ready(function () {
     	$("#demo1").mpicker();
     	
-    	$("#demo2").mpicker({
-    		mode : "DateTime"
-    	});
+    	$("#demo2").mpicker("DateTime");
     	
     	$("#demo3").mpicker({
-    		mode : "Time"
+			mode : "Time",
+			minuteInterval: 10
     	});
     	
     	$("#demo4").mpicker({
@@ -53,6 +54,7 @@
     		]
     	});
 	});
+})(jQuery);	
 </script>
 </head>
 <body style="position:relative">

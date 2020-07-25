@@ -3,7 +3,7 @@
 
 .wtree-wrap {
     position: relative;
-    padding:10px;
+    padding: 10px;
 }
 
 .wtree-wrap ul {
@@ -20,17 +20,17 @@
     line-height: 30px;
 }
 
-.wtree-wrap li.root li a.item span{
-    padding:1px 2px;
+.wtree-wrap li.root li a.item span {
+    padding: 1px 2px;
 }
 
-.wtree-wrap li.root li a.item.selected span{
-    background-color:#beebff;
+.wtree-wrap li.root li a.item.selected span {
+    background-color: #beebff;
 }
 
 .wtree-wrap li.root li a.item span:hover,
-.wtree-wrap li.root li a.item span:active{
-    background-color:#e7f4f9;
+.wtree-wrap li.root li a.item span:active {
+    background-color: #e7f4f9;
 }
 
 .wtree-wrap li.root li i {
@@ -42,17 +42,17 @@
 }
 
 .wtree-wrap li.root li i.empty {
-    margin-right:2px;
+    margin-right: 2px;
     background-position: 16px 0px;
 }
 
 .wtree-wrap li.root li i.plus {
-    margin-right:2px;
+    margin-right: 2px;
     background-position: -34px -129px;
 }
 
 .wtree-wrap li.root li i.minus {
-    margin-right:2px;
+    margin-right: 2px;
     background-position: -66px -129px;
 }
 

@@ -1,0 +1,85 @@
+/* wjquery.upload
+---------------------------------------------------------*/
+
+.wupload-wrap {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.wupload-wrap .header-area {
+    position: relative;
+}
+
+.wupload-wrap .header-area .wupload-file {
+    display: none;
+}
+
+.wupload-wrap .header-area button {
+    height: 27px;
+    line-height: 25px;
+    border: 1px solid #c3c3c3;
+    white-space: nowrap;
+    background: #fff;
+    padding: 0 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.wupload-wrap .header-area .file-info {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.wupload-wrap .contents-area {
+    border: 1px solid #d5dee4;
+    margin-top: 5px;
+    overflow: auto;
+}
+
+.wupload-wrap .contents-area table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.wupload-wrap .contents-area table th {
+    text-align: center;
+    height: 16px;
+    background-color: #f4fcff;
+    border-bottom: 1px solid #d5dee4;
+    border-right: 1px solid #d5dee4;
+    font-weight: normal;
+    color: #676767;
+}
+
+.wupload-wrap .contents-area table td {
+    padding: 0 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.wupload-wrap .contents-area table td img {
+    border: 0;
+    width: 15px;
+}
+
+.wupload-wrap .contents-area table td:last-child {
+    text-align: right;
+}
+
+.wupload-wrap .contents-area table tbody tr {
+    cursor: default;
+}
+
+.wupload-wrap .contents-area table tbody tr.selected {
+    background-color: #f1f1f1;
+}

@@ -59,6 +59,18 @@ var pageSetting = {
             js: ["/js/lib/wjquery/wjquery.tree.js"]
 
         },
+        wselect: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.select.css"],
+            js: ["/js/lib/wjquery/wjquery.select.js"]
+
+        },
+        wupload: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.upload.css"],
+            js: ["/js/lib/wjquery/wjquery.upload.js"]
+
+        },
         wautocomplete: {
             loaded: false,
             css: ["/js/lib/wjquery/wjquery.autocomplete.css"],
@@ -607,6 +619,20 @@ var moduleData = [
                 }
             },
             {
+                text: "wselect",
+                a_attr: {
+                    title: "div select",
+                    plugin: "wselect"
+                }
+            },
+            {
+                text: "wupload",
+                a_attr: {
+                    title: "ajax upload",
+                    plugin: "wupload"
+                }
+            },
+            {
                 text: "wautocomplete",
                 a_attr: {
                     title: "autocomplete",
@@ -1007,8 +1033,7 @@ var moduleData = [
             }
         });
 
-        $sidebar.find(".sidebar-head>a").click(
-            function () {
+        $sidebar.find(".sidebar-head>a").click(() => {
                 $sidebar.transition({
                     rotateY: '180deg'
                 }).transition({
@@ -1018,7 +1043,7 @@ var moduleData = [
         );
 
         $spacer.click(
-            function () {
+            () => {
                 $spacer.hide();
                 $sidebar.show();
                 $resizer.show();

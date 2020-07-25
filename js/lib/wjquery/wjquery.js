@@ -703,6 +703,32 @@ function initCap(value) {
 }
 
 /**
+ * 파일사이즈 표시
+ * @param fileSize 파일사이즈
+ * @return String
+ */
+function formatFileSize(fileSize) {
+    if (fileSize < 1024) {
+        return fileSize + "Byte";
+    }else if(fileSize < 1048576){
+        return new Number(fileSize / 1024).toFixed(2) + "KB";
+    }else{
+        return new Number(fileSize / 1048576).toFixed(2) + "MB";
+    }
+}
+
+/**
+ * 파일아이콘
+ * @param fileName 파일명
+ * @return String
+ */
+function getFileIcon(fileName){
+    let exts  = ["bmp", "jpg", "gif", "png", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "txt", "hwp", "zip"];
+    let ext = getLastValue(fileName, ".").toLowerCase();
+    return (hasValueInArray(exts, ext)?ext:"etc") + ".png";
+}
+
+/**
  * setTmpl
  * @param a Array
  */
@@ -795,6 +821,7 @@ function isPattern(patternName, value) {
         url2: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w_\.-]*)*\/?$/,
         phone: /^\d{2,3}-\d{3,4}-\d{3,4}$/,
         ip: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+        date: /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/,
         hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/
     };
 

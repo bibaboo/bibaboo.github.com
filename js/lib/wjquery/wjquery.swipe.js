@@ -48,10 +48,10 @@
 	};
 
 	function WSWIPE($element, options) {
-		var startTime = 0, endTime = 0, pos =0, targetRight = false, targetLeft = false;
+		let startTime = 0, endTime = 0, pos =0, targetRight = false, targetLeft = false;
 
 		//touch properties
-		var distance = 0, direction = null,duration = 0;
+		let distance = 0, direction = null,duration = 0;
 		try {
 			$element.bind(CONST_VAL.start, 	touchStart);
 		}
@@ -62,7 +62,7 @@
 		function touchStart(jqEvent){
 			if( $(jqEvent.target).closest( options.skipElements, $element).length>0) return;
 
-			var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent,
+			let event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent,
 				evt = HAS_TOUCH ? event.touches[0] : event;
 			pos = {start:{x:0,y:0}, end:{x:0,y:0}};
 			pos.start.x = pos.end.x = evt.pageX;
@@ -74,14 +74,14 @@
 		}
 
 		function touchMove(jqEvent) {
-			var event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent,
+			let event = jqEvent.originalEvent ? jqEvent.originalEvent : jqEvent,
 				evt = HAS_TOUCH ? event.touches[0] : event;
 			pos.end.x = evt.pageX;
 			pos.end.y = evt.pageY;
 		}
 
 		function touchEnd(jqEvent) {
-			var event = jqEvent.originalEvent;
+			let event = jqEvent.originalEvent;
 			endTime = getTimeStamp();
 			duration = calculateDuration();
 			direction = calculateDirection(pos.start, pos.end);
@@ -98,7 +98,7 @@
 				switch (direction) {
 					case CONST_VAL.left:
 						if (options.swipeLeft) {
-							var targetLeft = undefined;
+							let targetLeft = undefined;
 							if($(jqEvent.target).closest( options.targetLeftElements, $element).length==1){
 								targetLeft = $(jqEvent.target).closest( options.targetLeftElements, $element);
 							}
@@ -108,7 +108,7 @@
 
 					case CONST_VAL.right:
 						if (options.swipeRight) {
-							var targetRight = undefined;
+							let targetRight = undefined;
 							if($(jqEvent.target).closest( options.targetRightElements, $element).length==1){
 								targetRight = $(jqEvent.target).closest( options.targetRightElements, $element);
 							}
@@ -120,7 +120,7 @@
 		}
 
 		function caluculateAngle(startPoint, endPoint) {
-			var x = startPoint.x - endPoint.x,
+			let x = startPoint.x - endPoint.x,
 			 	y = endPoint.y - startPoint.y
 			 	r = Math.atan2(y, x), //radians
 				angle = Math.round(r * 180 / Math.PI); //degrees
@@ -134,7 +134,7 @@
 		}
 
 		function calculateDirection(startPoint, endPoint ) {
-			var angle = caluculateAngle(startPoint, endPoint);
+			let angle = caluculateAngle(startPoint, endPoint);
 
 			if ((angle <= 45) && (angle >= 0)) {
 				return CONST_VAL.left;
