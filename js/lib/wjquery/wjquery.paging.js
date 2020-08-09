@@ -62,7 +62,7 @@
 					type: "",
 					page: 0
 				};
-				if ($(this).hasClass("current-link-num")) {
+				if ($(this).hasClass("current-link-num") || $(this).hasClass("link-disabled")) {
 					return false;
 				} else if ($(this).hasClass("link-prev")) {
 					_data.type = "prev";
@@ -138,20 +138,20 @@
 			$element.html("<div class=\"wpaging-wrap\"><div class=\"wpaging-area\"><span class=\"wpaging-paging\"></span></div></div>");
 
 			let _html = [];
-			_html.push("<a href=\"javascript:;\" class=\"link-prev link-page" + (options.startPage == 1 ? " wpaging-none" : "") + "\"><</a>");
+			_html.push("<a href=\"javascript:;\" class=\"link-prev link-page" + (options.startPage == 1 ? " link-disabled" : "") + "\"><</a>");
 			for (let i = options.startPage; i <= options.pageCount; i++) {
-				_html.push("<a href=\"javascript:;\" class=\"link-num link-page" + (i <= options.endPage ? "" : " wpaging-none") + "\" data-page=\"" + i + "\">" + i + "</a>");
+				_html.push("<a href=\"javascript:;\" class=\"link-num link-page" + (i <= options.endPage ? "" : " link-none") + "\" data-page=\"" + i + "\">" + i + "</a>");
 			}
-			_html.push("<a href=\"javascript:;\" class=\"link-next link-page" + (options.totalPage == options.endPage ? " wpaging-none" : "") + "\">></a>");
+			_html.push("<a href=\"javascript:;\" class=\"link-next link-page" + (options.totalPage == options.endPage ? " link-disabled" : "") + "\">></a>");
 			$element.find(".wpaging-paging").html(_html.join(""));
 		},
 		redraw: function ($element, options) {
-			$element.find(".link-prev").toggleClass("wpaging-none", options.startPage == 1);
-			$element.find(".link-next").toggleClass("wpaging-none", options.totalPage == options.endPage);
+			$element.find(".link-prev").toggleClass("link-disabled", options.startPage == 1);
+			$element.find(".link-next").toggleClass("link-disabled", options.totalPage == options.endPage);
 
 			let _page = options.startPage;
 			for (let i = 0; i <= options.pageCount - 1; i++) {
-				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("wpaging-none", _page > options.totalPage);
+				$element.find(".link-num:eq(" + i + ")").attr("data-page", _page).html(_page).toggleClass("link-none", _page > options.totalPage);
 				_page++;
 			}
 		},

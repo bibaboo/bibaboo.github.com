@@ -1,10 +1,6 @@
 /* wjquery.paging
 ---------------------------------------------------------*/
 
-.wpaging-none {
-    display: none !important;
-}
-
 .wpaging-wrap {
     position: relative;
     width: 100%;
@@ -23,26 +19,27 @@
 
 .wpaging-paging .link-page {
     float: left;
-    min-width: 8px;
-    height: 28px;
-    padding: 0 10px;
+    min-width: 25px;
+    height: 25px;
     margin: 0 2px;
     border: 1px solid transparent;
     border-radius: 2px;
     font-family: tahoma, sans-serif;
     line-height: 26px;
+    padding:2px;
     text-decoration: none;
 }
 
-.wpaging-paging .link-page:hover {
+.wpaging-paging .link-prev:not(.link-disabled):hover,
+.wpaging-paging .link-next:not(.link-disabled):hover,
+.wpaging-paging .link-num:not(.current-link-num):hover {
     border-color: #dbdbdb;
 }
 
-.wpaging-paging .current-link-num,
-.wpaging-paging .current-link-num:hover {
+.wpaging-paging .current-link-num{
     border-color: #227fe7;
     color: #0294e8;
-    cursor: default;
+    cursor: auto;
 }
 
 .wpaging-paging .link-num {
@@ -55,4 +52,13 @@
 
 .wpaging-paging .link-next {
     font-size: 1.2em;
+}
+
+.wpaging-paging .link-none {
+    display: none !important;
+}
+
+.wpaging-paging .link-disabled {
+    color:#ddd !important;
+    cursor:auto;
 }
