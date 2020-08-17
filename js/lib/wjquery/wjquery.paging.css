@@ -30,8 +30,10 @@
     text-decoration: none;
 }
 
+.wpaging-paging .link-first:not(.link-disabled):hover,
 .wpaging-paging .link-prev:not(.link-disabled):hover,
 .wpaging-paging .link-next:not(.link-disabled):hover,
+.wpaging-paging .link-last:not(.link-disabled):hover,
 .wpaging-paging .link-num:not(.current-link-num):hover {
     border-color: #dbdbdb;
 }
