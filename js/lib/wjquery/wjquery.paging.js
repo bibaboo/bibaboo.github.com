@@ -8,6 +8,15 @@
  0.1.1 : 소스정리
 */
 
+var WPAGING_ACTION = {
+	first : "first",
+	prev : "prev",
+	next : "next",
+	page : "page",
+	last : "last",
+	hash : "hash"
+};
+
 (function ($) {
 	"use strict";
 	const WPAGEING_DATA_NS = "wpaging";
@@ -66,19 +75,19 @@
 				if ($(this).hasClass("current-link-num") || $(this).hasClass("link-disabled")) {
 					return false;
 				} else if ($(this).hasClass("link-first")) {
-					_data.type = "first";
+					_data.type = WPAGING_ACTION.first;
 					_data.page = 1;
 				} else if ($(this).hasClass("link-prev")) {
-					_data.type = "prev";
+					_data.type = WPAGING_ACTION.prev;
 					_data.page = options.startPage - options.pageCount;
 				} else if ($(this).hasClass("link-next")) {
-					_data.type = "next";
+					_data.type = WPAGING_ACTION.next;
 					_data.page = options.endPage + 1;
 				} else if ($(this).hasClass("link-num")) {
-					_data.type = "page";
+					_data.type = WPAGING_ACTION.page;
 					_data.page = $(this).attr("data-page");
 				} else if ($(this).hasClass("link-last")) {
-					_data.type = "last";
+					_data.type = WPAGING_ACTION.last;
 					_data.page = options.totalPage;
 				}
 
