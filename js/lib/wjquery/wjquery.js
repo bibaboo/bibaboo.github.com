@@ -156,7 +156,7 @@
          * @param option gi
          * @return String
          */
-        replace(value, findString, replaceString, flag) {value.replace(new RegExp(findString, (flag || "g")), replaceString);},
+        replace(value, findString, replaceString, flag) {return value.replace(new RegExp(findString, (flag || "g")), replaceString);},
 
         /**
          * 로그 출력
