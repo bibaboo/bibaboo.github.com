@@ -1,0 +1,146 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">layout</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						<?xml version="1.0" encoding="UTF-8" ?>
+                        <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+                        <sqlMap namespace="support.dao.Bcard" >
+                            <typeAlias alias="Bcard" type="net.wonchu.support.model.Bcard" />
+                            
+                            <resultMap id="bcardListResult" class="Bcard">
+                                <result property="businesscardId"		column="BUSINESSCARD_ID" />
+                                <result property="firstName"			nullValue="" column="FIRST_NAME" />
+                            </resultMap>
+                            
+                            <sql id="listCondition">
+                                CASE
+                                    WHEN A.FIRST_NAME IS NULL THEN 
+                                        CASE WHEN REGEXP_LIKE(A.LAST_NAME, '^[가-힝]') AND LENGTH(A.LAST_NAME) = 3 THEN SUBSTR(A.LAST_NAME, 2, 2) 
+                                            WHEN LENGTH(A.LAST_NAME) &gt; 3 THEN SUBSTR(A.LAST_NAME, 1, 2)
+                                            ELSE A.LAST_NAME
+                                        END
+                                    WHEN REGEXP_LIKE(A.FIRST_NAME, '^[가-힝]') THEN 
+                                        CASE WHEN LENGTH(A.FIRST_NAME) &gt; 3 THEN SUBSTR(A.FIRST_NAME, 1, 2) 
+                                            ELSE A.FIRST_NAME 
+                                        END
+                                    ELSE UPPER(SUBSTR(A.LAST_NAME, 1, 1)) || UPPER(SUBSTR(A.FIRST_NAME, 1, 1))
+                                END AS  DISPLAY_NAME,
+                            </sql>
+
+                            <select id="retrieveUserBcardExportList" parameterClass="BcardSearchCondition" resultMap="bcardDetailResult">
+                                /* [Bcard_SqlMap.xml] support.dao.Bcard.retrieveUserBcardExportList */
+                                SELECT	
+                                        <include refid="support.dao.Bcard.listCondition" />
+                                FROM
+                                        IKEP4_ACE_BC_BUSINESSCARD A
+                            
+                            </select>
+                            
+                            <insert id="createUserBcard" parameterClass="Bcard" >
+                                /* [Bcard_SqlMap.xml] support.dao.Bcard.createUserBcard */ 
+                                INSERT INTO IKEP4_ACE_BC_BUSINESSCARD (
+                                    BUSINESSCARD_ID,
+                                    FIRST_NAME)
+                                VALUES(
+                                    #businesscardId#,
+                                    #firstName#
+                                )
+                            </insert>
+                            
+                            <update id="updateUserBcard" parameterClass="Bcard" >
+                            <![CDATA[
+                                /* [Bcard_SqlMap.xml] support.dao.Bcard.updateUserBcard */
+                                UPDATE
+                                        IKEP4_ACE_BC_BUSINESSCARD
+                                SET
+                                        FIRST_NAME = #firstName#
+                                WHERE
+                                        BUSINESSCARD_ID = #businesscardId#
+                            ]]>
+                        </update>
+
+                        <delete id="deleteUserBcard" parameterClass="BcardParam">
+                                /* [BcardFolder_SqlMap.xml] support.dao.Bcard.deleteUserBcard */
+                                DELETE 	FROM 
+                                        IKEP4_ACE_BC_BUSINESSCARD
+                                WHERE	
+                                        BUSINESSCARD_ID = #businesscardId#
+                            </delete>
+                            
+                        </sqlMap>
+					</textarea>
+					<div class="entry-source-title">xml</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: xml;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+    </li>
+    <li class="entry-api-item">
+		<h2>
+    		<span class="title">iterate</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+                    List<String> testList = new ArrayList<String>();
+                    testList.add("B");
+                    testList.add("L");
+                    searchCondition.setTestList(testList);	
+					</textarea>
+					<div class="entry-source-title">java</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: java;"></pre>
+					</div>
+				</div>
+            </div>
+            <div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+                    <iterate property="testList" prepend="AND TEST IN" open="(" close=")" conjunction="," >
+                        #testList[]#
+                    </iterate>	
+					</textarea>
+					<div class="entry-source-title">xml</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: xml;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+    </li>
+    <li class="entry-api-item">
+		<h2>
+    		<span class="title">etc</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+                    /* isNotEmpty, isEqual */
+                    <isNotEmpty property="searchWord">
+                        <isEqual property="searchColumn" compareValue="USER_NAME">
+                            AND	UPPER(A.LAST_NAME||A.FIRST_NAME) LIKE '%' || UPPER(#searchWord#) || '%'
+                        </isEqual>
+                    </isNotEmpty>
+
+                    /*<>*/
+                    AND MH.MEETING_DATE & gt;= replace(#searchStartDate#, '.', '') AND MH.MEETING_DATE & lt;= replace(#searchEndDate#, '.', '')
+					</textarea>
+					<div class="entry-source-title">xml</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: xml;"></pre>
+					</div>
+				</div>
+            </div>
+		</div>
+	</li>
+</ul>

@@ -81,7 +81,7 @@ var COMMON_TMPL = {
         "   <div id=\"content\">" +
         "       <div class=\"content-header\">" +
         "           <ul></ul>" +
-        "           <div class=\"home\"><a href=\"javascript:goHome();\"><span>Home</span></a></div>" +
+        "           <div class=\"home\"><a href=\"javascript:goHome();\"><i class=\"fa fa-home fa-2x\" aria-hidden=\"true\"></i></a></div>" +
         "           <div class=\"progress-container\">" +
         "               <div class=\"progress-bar\" id=\"header-progress-bar\"></div>" +
         "           </div>" +

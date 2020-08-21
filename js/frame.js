@@ -5,7 +5,7 @@
 */
 
 /* 공통 설정 정보 */
-var pageSetting = {
+let pageSetting = {
     //트리노드 액션 타입
     moduleDataType: {
         load: "load",
@@ -107,7 +107,7 @@ var pageSetting = {
 };
 
 /* common object */
-var $sidebar,
+let $sidebar,
     $spacer,
     $content,
     $resizer,
@@ -115,7 +115,7 @@ var $sidebar,
     $menuTree;
 
 /* 모듈 정보 */
-var moduleData = [
+const moduleData = [
     /*
     {
         text: "sample",                              // 트리 노드에 표시 될 텍스트
@@ -783,6 +783,14 @@ var moduleData = [
                     {
                         text: "wjava",
                         id: "wjava"
+                    },
+                    {
+                        text: "ibatis",
+                        id: "ibatis"
+                    },
+                    {
+                        text: "mybatis",
+                        id: "mybatis"
                     }
                 ]
             },
@@ -1033,7 +1041,7 @@ var moduleData = [
             }
         });
 
-        $sidebar.find(".sidebar-head>a").click(() => {
+        $sidebar.find(".sidebar-head>a").click(function() {
                 $sidebar.transition({
                     rotateY: '180deg'
                 }).transition({
@@ -1043,7 +1051,7 @@ var moduleData = [
         );
 
         $spacer.click(
-            () => {
+            function() {
                 $spacer.hide();
                 $sidebar.show();
                 $resizer.show();
@@ -1057,7 +1065,7 @@ var moduleData = [
 
         $sidebar.find(".sidebar-head>ul>li").click(
             function () {
-                var $span = $(this).find("span");
+                const $span = $(this).find("span");
                 if ($span.hasClass("ui-icon-search")) {
                     $(".sidebar-search").slideToggle("fast", function () {
                         if ($(this).is(":visible")) $(this).find("input").trigger("focusin");
@@ -1081,7 +1089,7 @@ var moduleData = [
             $(this).removeClass("ui-state-hover");
         });
 
-        var _setData = function (node, module) {
+        const _setData = function (node, module) {
             if ($.isFalse(node.used)) return false;
             if (!node.nodes) {
                 node.children = false;
@@ -1105,7 +1113,7 @@ var moduleData = [
             return true;
         };
 
-        var _sort = function (node) {
+        const _sort = function (node) {
             delete node.nodes;
             if (!$.isFalse(node.sort)) {
                 node.children.sort(function (a, b) {
@@ -1115,7 +1123,7 @@ var moduleData = [
         };
 
         //트리
-        var data = $.map(moduleData, function (module) {
+        const data = $.map(moduleData, function (module) {
             if (_setData(module)) {
                 if (module.nodes) {
                     module.children = $.map(module.nodes, function (node) {
@@ -1152,14 +1160,14 @@ var moduleData = [
                 if (!data.node) return;
                 LAYOUT_CONFIG.node = "";
 
-                var node = data.node,
+                const node = data.node,
                     $tree = $menuTree.jstree(true);
                     
                 $content.find("div.content-body>.setting").addClass("none");
                 if (!node.data) node.data = {};
                 if ($tree.is_leaf(node) && (node.id == "home" || !node.icon)) {
-                    var loadPage = function () {
-                        var pnode = node.parent == CODE_VALUE.sharp ? {
+                    const loadPage = function () {
+                        let pnode = node.parent == CODE_VALUE.sharp ? {
                                 data: node.data
                             } : $tree.get_node(node.parent),
                             url = node.data.page ? node.data.page : node.id + ".html",
@@ -1206,8 +1214,8 @@ var moduleData = [
                                         $("input[type=button]").button().addClass("mtb10");
 
                                         //make content-header
-                                        var $ul = $content.find("div.content-header>ul").empty();
-                                        var titles = $entry.find(".entry-api span.title").map(function () {
+                                        const $ul = $content.find("div.content-header>ul").empty();
+                                        const titles = $entry.find(".entry-api span.title").map(function () {
                                             return {
                                                 text: $(this).text()
                                             };
@@ -1232,10 +1240,10 @@ var moduleData = [
                                         });
 
                                         $entry.find(".entry-demo-textarea-content").each(function () {
-                                            var _html = $(this).val();
+                                            const _html = $(this).val();
                                             $(this).siblings(".entry-demo-source-content").find("pre").html(replaceString("htmlEscape", _html));
                                             $(this).siblings(".entry-demo-iframe").find("iframe").each(function () {
-                                                var $iframe = $(this)[0].contentWindow.document;
+                                                const $iframe = $(this)[0].contentWindow.document;
                                                 $iframe.open();
                                                 $iframe.write(_html);
                                                 $iframe.close();
@@ -1248,14 +1256,18 @@ var moduleData = [
                                         });
 
                                         if ($entry.find(".entry-source-content[data-plugin]").isObject()) {
-                                            var _pn = $entry.find(".entry-source-content[data-plugin]").length;
+                                            const _pn = $entry.find(".entry-source-content[data-plugin]").length;
                                             $entry.find(".entry-source-content[data-plugin]").each(function (index) {
-                                                var $t = $(this);
-                                                $.get(pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")], function (html) {
-                                                    $t.find("pre").html(replaceString("htmlEscape", html));
-                                                    if (_pn == index + 1) {
-                                                        SyntaxHighlighter.highlight();
-                                                    }
+                                                const $t = $(this);
+                                                $.ajax({
+                                                    url: pageSetting.plugin[$t.attr("data-plugin")][$t.attr("data-plugin-type")],
+                                                    success: function (html) {
+                                                        $t.find("pre").html(replaceString("htmlEscape", html));
+                                                        if (_pn == index + 1) {
+                                                            SyntaxHighlighter.highlight();
+                                                        }
+                                                    },
+                                                    dataType: "text"
                                                 });
                                             });
                                         } else {
@@ -1307,7 +1319,7 @@ var moduleData = [
     });
 
     function loadPlugin(plugin) {
-        var deferred = $.Deferred();
+        const deferred = $.Deferred();
         if (pageSetting.plugin[plugin].css) {
             loadStyles(pageSetting.plugin[plugin].css);
         }
@@ -1324,18 +1336,17 @@ var moduleData = [
     }
 })(jQuery);
 
-function resizeLayout(pos) {
+function resizeLayout(pos=LAYOUT_CONFIG.resizerLeft) {
     if ($sidebar.is(":visible")) {
-        var _pos = pos || LAYOUT_CONFIG.resizerLeft;
-        $sidebar.width(_pos);
-        $resizer.css("left", _pos);
-        $content.width("calc(100% - " + _pos + ")");
+        $sidebar.width(pos);
+        $resizer.css("left", pos);
+        $content.width("calc(100% - " + pos + ")");
     }
 }
 
 function checkHash() {
     if (document.location.hash) {
-        var _hashes = document.location.hash.split(CODE_VALUE.slash);
+        const _hashes = document.location.hash.split(CODE_VALUE.slash);
         if (_hashes.length && _hashes.length == 3) {
             if (_hashes[1] == SERVICE_CONFIG.hash.M.key) {
                 openNode(_hashes[0] + _hashes[2]);
@@ -1349,7 +1360,7 @@ function checkHash() {
 }
 
 function setHash(menu, key, b) {
-    var _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
+    const _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
     if (_hash != document.location.hash) {
         if (!$.isFalse(b)) {
             SERVICE_CONFIG.hash[menu].skip = true;
@@ -1360,10 +1371,10 @@ function setHash(menu, key, b) {
 
 function drawLeafNode(node) {
     $entry.html(COMMON_TMPL.entryApi).prev().html(node.text);
-    var $ul = $content.find("div.content-header>ul").empty(),
-        arr = [];
+    const $ul = $content.find("div.content-header>ul").empty();
+    let arr = [];
     $.each($menuTree.jstree(true).get_children_dom(node), function () {
-        var _node = $menuTree.jstree(true).get_node(this);
+        const _node = $menuTree.jstree(true).get_node(this);
         arr.push({
             id: _node.id,
             text: _node.text,
@@ -1387,7 +1398,7 @@ function goHome() {
 }
 
 function toggleAccordian($t) {
-    var $c = $entry.find("ul.entry-api");
+    const $c = $entry.find("ul.entry-api");
     if ($t.attr("id") == "accordian1") {
         if ($c.accordion("instance")) {
             $c.accordion("destroy");
