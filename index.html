@@ -12,6 +12,14 @@
 <link rel="stylesheet" type="text/css" href="/js/lib/syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- js -->
+<script>
+    try{
+        var _agent = navigator.userAgent.toLowerCase();
+        if (_agent.indexOf('msie') > -1 || _agent.indexOf('trident') > -1) { 
+            alert("구형 IE는 지원하지 않습니다.");
+        }
+    }catch(e){}
+</script>    
 <script type="text/javascript" src="/js/lib/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/lib/wjquery/wjquery.js"></script>

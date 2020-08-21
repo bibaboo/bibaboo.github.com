@@ -435,6 +435,13 @@
         outerHtml() {return $("<div/>").append($(this).clone()).html();},
 
         /**
+         * xssVal
+         * @name $().xssVal()
+         * @return html 문자열
+         */
+        xssVal() {return replaceString("htmlEscape", $(this).val());},
+
+        /**
          * 본문의 링크처리, 클릭처리를 막는다
          * @name $().stripHref([isNew])
          * @param isNew
@@ -899,6 +906,32 @@ function replaceRegExpContentImgUrl(s) {
 
         return b ? match.replace(/\?/g, "_Q_").replace(/\&amp;/g, "_A_").replace(/\&/g, "_A_").replace(re2, '$&' + mobileApi).replace("https", "http") : match;
     });
+}
+
+/**
+ * getBrowser
+ */
+function getBrowser(){
+    let agent = navigator.userAgent.toLowerCase(),
+        browser; 
+    if (agent.indexOf('msie') > -1) { 
+        browser = 'ie' + agent.match(/msie (\d+)/)[1] 
+    }else if(agent.indexOf('trident') > -1) {
+        browser = 'ie11' 
+    }else if(agent.indexOf('edge') > -1) {
+        browser = 'edge' 
+    }else if(agent.indexOf('firefox') > -1) {
+        browser = 'firefox' 
+    }else if(agent.indexOf('opr') > -1) {
+        browser = 'opera' 
+    }else if(agent.indexOf('chrome') > -1) {
+        browser = 'chrome' 
+    }else if(agent.indexOf('safari') > -1) {
+        browser = 'safari' 
+    }else {
+        browser = 'other'
+    }
+    return browser;
 }
 
 //--------------------------------------------------------------------
