@@ -178,7 +178,7 @@
          * @param value 메시지
          * @param delay 지연 밀리세컨드
          */
-        toast(value="", delay=2000) {
+        toast(value="", callback, delay=2000) {
             if ($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
 
             $("body").append(`<div id="wjquery-toast">${value}</div>`);
@@ -195,6 +195,9 @@
                     }, 800, function () {
                         window.clearTimeout(timeout);
                         $(this).remove();
+                        if(callback){
+                            callback();
+                        }
                     });
                 }, this), delay);
             });
