@@ -118,7 +118,13 @@
 				<div>
 					<textarea class="entry-demo-textarea-content none">
 						{
-							//jstl
+							"jstl.url": {
+								"prefix": "jstl.url",
+								"body": [
+									"<c:url value=\"$url\"/>"
+								],
+								"description": "jstl.url"
+							},
 							"jstl.cout": {
 								"prefix": "jstl.cout",
 								"body": [
@@ -181,6 +187,48 @@
 									"</c:if>"
 								],
 								"description": "jstl.fn.split"
+							},
+							"jstl.fn.replace": {
+								"prefix": "jstl.fn.replace",
+								"body": [
+									"<% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %>",
+									"<c:out value=\"${fn:replace(apprLinereply.contents, newLineChar, '<br/>')}\"  escapeXml='false'/>"
+								],
+								"description": "jstl.fn.replace"
+							},
+						
+							//spring
+							"spring.bind": {
+								"prefix": "spring.bind",
+								"body": [
+									"<spring:bind path=\"$key\">",
+									"\t<input name=\"<c:out value='${status.expression}'/>\" type=\"text\" value=\"<c:out value='${status.value}'/>\" />",
+									"</spring:bind>"
+								],
+								"description": "spring.bind"
+							},
+						
+							//wf
+							"wf.paging": {
+								"prefix": "wf.paging",
+								"body": [
+									"<wf:paging currentPage=\"${searchCondition.pageIndex}\" totalCount=\"${searchCondition.recordCount}\" listSize=\"${searchCondition.pagePerRecord}\" pageCount=\"${searchCondition.paginationBlock}\"/>",
+								],
+								"description": "wf.paging"
+							},
+							"wf.pagePerRecord": {
+								"prefix": "wf.pagePerRecord",
+								"body": [
+									"<wf:pagePerRecord current=\"${searchCondition.pagePerRecord}\" callback=\"doSearch\" />"
+								],
+								"description": "wf.pagePerRecord"
+							},
+							"wf.snippet.loading": {
+								"prefix": "wf.snippet.loading",
+								"body": [
+									"<wf:snippet name=\"loading\" />"
+								],
+								"description": "wf.snippet.loading"
 							}
 						}
 					</textarea>

@@ -519,9 +519,14 @@
         }
 
         function trim($f){
-            $f.find("input:text, textara").each(function(){
-                $(this).val($.trim($(this).val()));
-            });
+            const $t = $(this);
+            if ($t.is("input:text, textarea")) {
+                $t.val($.trim($t.val()));
+            }else if($t.is("form")){
+                $t.find("input:text, textara").each(function(){
+                    $(this).val($.trim($(this).val()));
+                });
+            }
         }
 
         function isAllCheckBoxChecked() {
