@@ -518,6 +518,12 @@
             }
         }
 
+        function trim($f){
+            $f.find("input:text, textara").each(function(){
+                $(this).val($.trim($(this).val()));
+            });
+        }
+
         function isAllCheckBoxChecked() {
             const $t = $(this);
             if ($t.is("input:checkbox")) {
@@ -534,6 +540,7 @@
         return {
             get: get,
             set: set,
+            trim: trim,
             isAllCheckBoxChecked: isAllCheckBoxChecked,
             toString: toString
         };

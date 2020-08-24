@@ -117,25 +117,105 @@
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-					"MXPApi.net.connect": {
-						"prefix": "MXPApi.net.connect",
-						"body": [
-							"MXPApi.net.connect({",
-							"\trequestCd : ${cd},",
-							"\tisNotReturnSuccess : true,",
-							"\tfullLoading : true,",
-							"\tcallback : function(result) {",
-							"\t\tvar ${sampleList} = result.response.body.${SampleList}||[];",
-							"\t\t$.each(${sampleList}, function(){",
-							"\t\t\t",
-							"\t\t});",
-							"\t}",
-							"});"
-						],
-						"description": "MXPApi.net.connect"
+						{
+							//jstl
+							"jstl.cout": {
+								"prefix": "jstl.cout",
+								"body": [
+									"<c:out value='${$key}'></c:out>"
+								],
+								"description": "jstl.cout"
+							},
+							"jstl.if": {
+								"prefix": "jstl.if",
+								"body": [
+									"<c:if test=\"${$key == '$val'}\">",
+									"</c:if>"
+								],
+								"description": "jstl.cout"
+							},
+							"jstl.set": {
+								"prefix": "jstl.set",
+								"body": [
+									"<c:set var=\"$key\" value=\"${$val}\" />",
+								],
+								"description": "jstl.set"
+							},
+							"jstl.choose": {
+								"prefix": "jstl.choose",
+								"body": [
+									"<c:choose>",
+									"\t<c:when test=\"${empty $list}\">",
+									"\t\t",
+									"\t</c:when>",
+									"\t<c:otherwise>",
+									"\t\t<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
+									"\t\t\t<div><c:out value='${item.key}'></c:out>",
+									"\t\t</c:forEach>",
+									"\t</c:otherwise>",
+									"</c:choose>"
+								],
+								"description": "jstl.choose"
+							},
+							"jstl.foreach": {
+								"prefix": "jstl.foreach",
+								"body": [
+									"<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
+									"\t<div><c:out value='${item.key}'></c:out>",
+									"</c:forEach>",
+								],
+								"description": "jstl.foreach"
+							},
+							"jstl.fn.substring": {
+								"prefix": "jstl.fn.substring",
+								"body": [
+									"<c:out value='${fn:substring($key, 0, 1)}'/>"
+								],
+								"description": "jstl.fn.substring"
+							},
+							"jstl.fn.split": {
+								"prefix": "jstl.fn.split",
+								"body": [
+									"<c:set var=\"$var\" value=\"${fn:split($key, ',')}\"></c:set>",
+									"<c:if test=\"${$var[0] eq 1}\">",
+									"</c:if>"
+								],
+								"description": "jstl.fn.split"
+							}
+						}
+					</textarea>
+					<div class="entry-source-title">jsp - jstl</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+					{
+						"MXPApi.net.connect": {
+							"prefix": "MXPApi.net.connect",
+							"body": [
+								"MXPApi.net.connect({",
+								"\trequestCd : ${cd},",
+								"\tisNotReturnSuccess : true,",
+								"\tfullLoading : true,",
+								"\tcallback : function(result) {",
+								"\t\tvar ${sampleList} = result.response.body.${SampleList}||[];",
+								"\t\t$.each(${sampleList}, function(){",
+								"\t\t\t",
+								"\t\t});",
+								"\t}",
+								"});"
+							],
+							"description": "MXPApi.net.connect"
+						}
 					}
 					</textarea>
-					<div class="entry-source-title"></div>
+					<div class="entry-source-title">js - mxp</div>
 					<div class="entry-demo-source-content">
 						<pre class="brush: js;"></pre>
 					</div>
