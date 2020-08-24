@@ -523,7 +523,7 @@
             if ($t.is("input:text, textarea")) {
                 $t.val($.trim($t.val()));
             }else if($t.is("form")){
-                $t.find("input:text, textara").each(function(){
+                $t.find("input:text, textarea").each(function(){
                     $(this).val($.trim($(this).val()));
                 });
             }
