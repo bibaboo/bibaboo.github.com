@@ -884,6 +884,8 @@ function replaceString(targetName, value) {
         return $.replace($.replace(value, "\r\n", "<br/>"), "\n", "<br/>");
     } else if (targetName == "br2lf") {
         return $.replace($.replace(value, "<br>", "\n", "gi"), "<br/>", "\n", "gi");
+    } else if (targetName == "script") {
+        return value.replace(/<script[^>]*>((\n|\r|.)*?)<\/script>/img, "");
     } else if (targetName == "telLink") {
         return value.replace(/\d{2,3}[-|\)]\d{3,4}-\d{3,4}/g, '<a tel="$&" class="tel-link">$&</a>');
     } else if (targetName == "underline2camel") {

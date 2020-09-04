@@ -193,7 +193,7 @@
 								"prefix": "jstl.fn.replace",
 								"body": [
 									"<% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %>",
-									"<c:out value=\"\\${fn:replace(apprLinereply.contents, newLineChar, '<br/>')}\"  escapeXml='false'/>"
+									"<c:out value=\"\\${fn:replace(fn:escapeXml(apprLinereply.contents), newLineChar, '<br/>')}\"  escapeXml='false'/>"
 								],
 								"description": "jstl.fn.replace"
 							},
@@ -207,6 +207,14 @@
 									"</spring:bind>"
 								],
 								"description": "spring.bind"
+							},
+
+							"spring.message": {
+								"prefix": "spring.message",
+								"body": [
+									"<spring:message code=\"$key\" />"
+								],
+								"description": "spring.message"
 							},
 
 							//wf.tld
@@ -239,10 +247,17 @@
 									"<span class=\"colorPoint\">*</span>"
 								],
 								"description": "wf.snippet.colorPoint"
+							},
+							"wf.snippet.dot": {
+								"prefix": "wf.snippet.dot",
+								"body": [
+									"<img src=\"<c:out value='${\"/base/images/icon/ico-blank.gif\"}' />\" width=\"3\" height=\"3\" class=\"bg333333\">"
+								],
+								"description": "wf.snippet.dot"
 							}
 						}
 					</textarea>
-					<div class="entry-source-title">jsp - jstl</div>
+					<div class="entry-source-title">jsp</div>
 					<div class="entry-demo-source-content">
 						<pre class="brush: js;"></pre>
 					</div>
