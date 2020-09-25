@@ -178,7 +178,7 @@
          * @param value 메시지
          * @param delay 지연 밀리세컨드
          */
-        toast(value="", callback, delay=2000) {
+        toast(value="", callback, delay=1000) {
             if ($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
 
             $("body").append(`<div id="wjquery-toast">${value}</div>`);
@@ -480,6 +480,26 @@
                     callback(e);
                 }
             });
+        },
+        
+        /**
+         * dataDraw
+         * @name $().wDraw()
+         * @param JSON
+         * @return this
+         **/
+        dataDraw(data) {
+            $(this).find("[data-text-bind],[data-textbr-bind],[data-html-bind]").each(function(){
+                if($(this).attr("data-text-bind")){
+                    $(this).text(data?data[$(this).attr("data-text-bind")]||"":"");
+                }else if($(this).attr("data-textbr-bind")){
+                    $(this).html(replaceString("lf2br", removeHtmlTag(data?data[$(this).attr("data-textbr-bind")]||"":"")));
+                }else if($(this).attr("data-html-bind")){
+                    $(this).html(data?data[$(this).attr("data-html-bind")]||"":"");
+                }
+            });
+
+            return this;
         },
 
         wform(method) {

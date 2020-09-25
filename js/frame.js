@@ -1361,7 +1361,7 @@ function checkHash() {
 
 function setHash(menu, key, b) {
     const _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
-    if (_hash != document.location.hash) {
+    if (_hash != document.location.hash && !hasValueInArray(SERVICE_CONFIG.hash.except, key)) {
         if (!$.isFalse(b)) {
             SERVICE_CONFIG.hash[menu].skip = true;
         }

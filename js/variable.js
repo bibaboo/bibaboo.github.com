@@ -12,6 +12,7 @@ var SERVICE_CONFIG = {
         image: ["gif", "jpg", "jpeg", "png"]
     },
     hash: {
+        except: ["wpaging"],
         M: {
             key: "M",
             skip: false
@@ -20,12 +21,6 @@ var SERVICE_CONFIG = {
         P: {
             key: "P",
             skip: false
-
-        },
-        skip: false,
-        menus: {
-            module: "M",
-            paging: "P"
         }
     }
 };

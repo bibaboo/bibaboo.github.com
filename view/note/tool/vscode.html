@@ -118,7 +118,6 @@
 				<div>
 					<textarea class="entry-demo-textarea-content none">
 						{
-							//jstl
 							"jstl.url": {
 								"prefix": "jstl.url",
 								"body": [
@@ -197,7 +196,7 @@
 								],
 								"description": "jstl.fn.replace"
 							},
-
+						
 							//spring
 							"spring.bind": {
 								"prefix": "spring.bind",
@@ -208,7 +207,7 @@
 								],
 								"description": "spring.bind"
 							},
-
+						
 							"spring.message": {
 								"prefix": "spring.message",
 								"body": [
@@ -216,7 +215,7 @@
 								],
 								"description": "spring.message"
 							},
-
+						
 							//wf.tld
 							"wf.tld.paging": {
 								"prefix": "wf.tld.paging",
@@ -232,6 +231,13 @@
 								],
 								"description": "wf.tld.pagePerRecord"
 							},
+							"wf.tld.selectBox": {
+								"prefix": "wf.tld.selectBox",
+								"body": [
+									"<wf:selectBox id=\"$id\" name=\"$name\" value=\"$value\" title=\"$title\"  msgTitle=\"$msgTitle\"  current=\"$current\"  className=\"$className\"  callback=\"$callback\"  />"
+								],
+								"description": "wf.tld.selectBox"
+							},
 							"wf.tld.snippet.loading": {
 								"prefix": "wf.tld.snippet.loading",
 								"body": [
@@ -239,7 +245,7 @@
 								],
 								"description": "wf.tld.snippet.loading"
 							},
-
+						
 							//wf.snippet
 							"wf.snippet.colorPoint": {
 								"prefix": "wf.snippet.colorPoint",
