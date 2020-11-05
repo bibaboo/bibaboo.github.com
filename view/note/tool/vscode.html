@@ -118,81 +118,96 @@
 				<div>
 					<textarea class="entry-demo-textarea-content none">
 						{
+							// Place your snippets for jsp here. Each snippet is defined under a snippet name and has a prefix, body and 
+							// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+							// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+							// same ids are connected.
+							// Example:
+							// "Print to console": {
+							// 	"prefix": "log",
+							// 	"body": [
+							// 		"console.log('$1');",
+							// 		"$2"
+							// 	],
+							// 	"description": "Log output to console"
+							// }
+						
+							//jstl
 							"jstl.url": {
 								"prefix": "jstl.url",
 								"body": [
-									"<c:url value=\"$url\"/>"
+									"&lt;c:url value=\"$url\"/&gt;"
 								],
 								"description": "jstl.url"
 							},
 							"jstl.cout": {
 								"prefix": "jstl.cout",
 								"body": [
-									"<c:out value='${$key}' />"
+									"&lt;c:out value=\"${$key}\"/&gt;"
 								],
 								"description": "jstl.cout"
 							},
 							"jstl.if": {
 								"prefix": "jstl.if",
 								"body": [
-									"<c:if test=\"${$key == '$val'}\">",
-									"</c:if>"
+									"&lt;c:if test=\"${$key == '$val'}\"&gt;",
+									"&lt;/c:if&gt;"
 								],
 								"description": "jstl.cout"
 							},
 							"jstl.set": {
 								"prefix": "jstl.set",
 								"body": [
-									"<c:set var=\"$key\" value=\"${$val}\" />",
+									"&lt;c:set var=\"$key\" value=\"${$val}\"/&gt;",
 								],
 								"description": "jstl.set"
 							},
 							"jstl.choose": {
 								"prefix": "jstl.choose",
 								"body": [
-									"<c:choose>",
-									"\t<c:when test=\"${empty $list}\">",
+									"&lt;c:choose&gt;",
+									"\t&lt;c:when test=\"${empty $list}\"&gt;",
 									"\t\t",
-									"\t</c:when>",
-									"\t<c:otherwise>",
-									"\t\t<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
-									"\t\t\t<div><c:out value='${item.key}'></c:out>",
-									"\t\t</c:forEach>",
-									"\t</c:otherwise>",
-									"</c:choose>"
+									"\t&lt;/c:when&gt;",
+									"\t&lt;c:otherwise&gt;",
+									"\t\t&lt;c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\"&gt;",
+									"\t\t\t&lt;div&gt;&lt;c:out value='${item.key}'&gt;&lt;/c:out&gt;",
+									"\t\t&lt;/c:forEach&gt;",
+									"\t&lt;/c:otherwise&gt;",
+									"&lt;/c:choose&gt;"
 								],
 								"description": "jstl.choose"
 							},
 							"jstl.foreach": {
 								"prefix": "jstl.foreach",
 								"body": [
-									"<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
-									"\t<div><c:out value='${item.key}'></c:out>",
-									"</c:forEach>",
+									"&lt;c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\"&gt;",
+									"\t&lt;div&gt;&lt;c:out value=\"${item.key}\"/&gt;",
+									"&lt;/c:forEach&gt;",
 								],
 								"description": "jstl.foreach"
 							},
 							"jstl.fn.substring": {
 								"prefix": "jstl.fn.substring",
 								"body": [
-									"<c:out value='\\${fn:substring($key, 0, 1)}'/>"
+									"&lt;c:out value='\\${fn:substring($key, 0, 1)}'/&gt;"
 								],
 								"description": "jstl.fn.substring"
 							},
 							"jstl.fn.split": {
 								"prefix": "jstl.fn.split",
 								"body": [
-									"<c:set var=\"$var\" value=\"\\${fn:split($key, ',')}\"></c:set>",
-									"<c:if test=\"${$var[0] eq 1}\">",
-									"</c:if>"
+									"&lt;c:set var=\"$var\" value=\"\\${fn:split($key, ',')}\"/&gt;",
+									"&lt;c:if test=\"${$var[0] eq 1}\"&gt;",
+									"&lt;/c:if&gt;"
 								],
 								"description": "jstl.fn.split"
 							},
 							"jstl.fn.replace": {
 								"prefix": "jstl.fn.replace",
 								"body": [
-									"<% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %>",
-									"<c:out value=\"\\${fn:replace(fn:escapeXml(apprLinereply.contents), newLineChar, '<br/>')}\"  escapeXml='false'/>"
+									"&lt;% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %&gt;",
+									"&lt;c:out value=\"\\${fn:replace(fn:escapeXml(apprLinereply.contents), newLineChar, '&lt;br/&gt;')}\"  escapeXml='false'/&gt;"
 								],
 								"description": "jstl.fn.replace"
 							},
@@ -201,9 +216,9 @@
 							"spring.bind": {
 								"prefix": "spring.bind",
 								"body": [
-									"<spring:bind path=\"$key\">",
-									"\t<input name=\"<c:out value='${status.expression}'/>\" type=\"text\" value=\"<c:out value='${status.value}'/>\" />",
-									"</spring:bind>"
+									"&lt;spring:bind path=\"$key\"&gt;",
+									"\t&lt;input name=\"&lt;c:out value='${status.expression}'/&gt;\" type=\"text\" value=\"&lt;c:out value='${status.value}'/&gt;\" /&gt;",
+									"&lt;/spring:bind&gt;"
 								],
 								"description": "spring.bind"
 							},
@@ -211,37 +226,52 @@
 							"spring.message": {
 								"prefix": "spring.message",
 								"body": [
-									"<spring:message code=\"$key\" />"
+									"&lt;spring:message code=\"$key\"/&gt;"
 								],
 								"description": "spring.message"
+							},
+						
+							"spring.eval": {
+								"prefix": "spring.eval",
+								"body": [
+									"&lt;spring:eval expression=\"@propCommon['$key']\" var=\"$val\"/&gt;"
+								],
+								"description": "spring.eval"
 							},
 						
 							//wf.tld
 							"wf.tld.paging": {
 								"prefix": "wf.tld.paging",
 								"body": [
-									"<wf:paging currentPage=\"${searchCondition.pageIndex}\" totalCount=\"${searchCondition.recordCount}\" listSize=\"${searchCondition.pagePerRecord}\" pageCount=\"${searchCondition.paginationBlock}\"/>",
+									"&lt;wf:paging currentPage=\"${searchCondition.pageIndex}\" totalCount=\"${searchCondition.recordCount}\" listSize=\"${searchCondition.pagePerRecord}\" pageCount=\"${searchCondition.paginationBlock}\"/&gt;",
 								],
 								"description": "wf.tld.paging"
 							},
 							"wf.tld.pagePerRecord": {
 								"prefix": "wf.tld.pagePerRecord",
 								"body": [
-									"<wf:pagePerRecord current=\"${searchCondition.pagePerRecord}\" callback=\"doSearch\" />"
+									"&lt;wf:pagePerRecord current=\"${searchCondition.pagePerRecord}\" callback=\"doSearch\"/&gt;"
 								],
 								"description": "wf.tld.pagePerRecord"
 							},
 							"wf.tld.selectBox": {
 								"prefix": "wf.tld.selectBox",
 								"body": [
-									"<wf:selectBox id=\"$id\" name=\"$name\" value=\"$value\" title=\"$title\"  msgTitle=\"$msgTitle\"  current=\"$current\"  className=\"$className\"  callback=\"$callback\"  />"
+									"&lt;wf:selectBox id=\"$id\" name=\"$name\" value=\"$value\" title=\"$title\"  msgTitle=\"$msgTitle\"  current=\"$current\"  className=\"$className\"  callback=\"$callback\"/&gt;"
 								],
 								"description": "wf.tld.selectBox"
+							},
+							"wf.tld.classVal": {
+								"prefix": "wf.tld.classVal",
+								"body": [
+									"&lt;wf:classVal className=\"$className\" fieldName=\"$fieldName\"/&gt;"
+								],
+								"description": "wf.tld.classVal"
 							},
 							"wf.tld.snippet.loading": {
 								"prefix": "wf.tld.snippet.loading",
 								"body": [
-									"<wf:snippet name=\"loading\" />"
+									"&lt;wf:snippet name=\"loading\"/&gt;"
 								],
 								"description": "wf.tld.snippet.loading"
 							},
@@ -250,17 +280,19 @@
 							"wf.snippet.colorPoint": {
 								"prefix": "wf.snippet.colorPoint",
 								"body": [
-									"<span class=\"colorPoint\">*</span>"
+									"&lt;span class=\"colorPoint\"&gt;*&lt;/span&gt;"
 								],
 								"description": "wf.snippet.colorPoint"
 							},
 							"wf.snippet.dot": {
 								"prefix": "wf.snippet.dot",
 								"body": [
-									"<img src=\"<c:out value='${\"/base/images/icon/ico-blank.gif\"}' />\" width=\"3\" height=\"3\" class=\"bg333333\">"
+									"&lt;img src=\"&lt;c:url value='${\"/base/images/icon/ico-blank.gif\"}'/&gt;\" width=\"3\" height=\"3\" class=\"bg333333\"&gt;"
 								],
 								"description": "wf.snippet.dot"
 							}
+						
+							
 						}
 					</textarea>
 					<div class="entry-source-title">jsp</div>

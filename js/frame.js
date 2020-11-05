@@ -685,6 +685,10 @@ const moduleData = [
                         }
                     },
                     {
+                        text: "EMCScriptⅠ",
+                        id: "emcScript1"
+                    },
+                    {
                         text: "배열 객체",
                         id: "array",
                         a_attr: {

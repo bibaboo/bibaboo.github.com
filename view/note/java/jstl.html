@@ -8,7 +8,7 @@
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-						<c:out value='${user.name}' escapeXml='false'/>
+						&lt;c:out value='${user.name}' escapeXml='false'/&gt;
 					</textarea>
 					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">
@@ -52,7 +52,7 @@
 				            <wjava:message key="ui.common.inside" />
 				        </c:set>
     
-                        <c:set var="cnt" value="${(weekDay+size-index)%7}" />    
+                        &lt;c:set var="cnt" value="${(weekDay+size-index)%7}" /&gt;    
                     </textarea>
                     <div class="entry-source-title"></div>
                     <div class="entry-demo-source-content">
@@ -102,10 +102,10 @@
                     <textarea class="entry-demo-textarea-content none">
                         <c:choose>
 					        <c:when test="${localeGbn == 'true'}">
-					            <c:set var="displayUserName" value="${personName}"/>                                                                                                                                    
+					            &lt;c:set var="displayUserName" value="${personName}"/&gt;                                                                                                                                  
 					        </c:when>
 					        <c:otherwise>
-					            <c:set var="displayUserName" value="${personEnglishName}"/>
+					            &lt;c:set var="displayUserName" value="${personEnglishName}"/&gt;
 					        </c:otherwise>
 					    </c:choose>
 					    

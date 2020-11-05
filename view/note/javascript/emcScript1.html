@@ -1,0 +1,207 @@
+<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">Default Parameters</span>
+		</h2>
+		<div>
+			<div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            function demo1(height = 50, color = "red", url = "http://wonchu.net") {
+								...	
+							}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+			<div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <input type="button" onclick="demo1(10);" value="01" />
+						<input type="button" onclick="demo1();" value="02" />
+						<input type="button" onclick="demo1(null);" value="03" />
+						<script type="text/javascript">
+							function demo1(height = 50, color = "red", url = "http://wonchu.net") {
+								$.alert(
+									"height : " + height +
+									"<br/>color : " + color +
+									"<br/>url : " + url
+								);
+							}
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">Template Literals</span>
+		</h2>
+		<div>
+			<div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            function demo2(height = 50, color = "red", url = "http://wonchu.net") {
+								...	
+							}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+			<div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <input type="button" onclick="demo2(10);" value="01" />
+						<input type="button" onclick="demo2();" value="02" />
+						<input type="button" onclick="demo2(null);" value="03" />
+						<script type="text/javascript">
+							function demo2(height = 50, color = "red", url = "http://wonchu.net") {
+								$.alert(
+									`height : ${height}
+									<br/>color : ${color} 
+									<br/>url : ${url}`
+								);
+							}
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">Enhanced Object Literals</span>
+		</h2>
+		<div>
+			<div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            function demo3(lastName, firstName, gender) {
+								let info = {lastName: lastName, firstName: firstName},
+									key = "gender"
+
+								let user = {
+									__proto__: info,
+									toString() {
+										return JSON.stringify((super.valueOf()))
+									},
+									[key]: gender
+								};
+
+								$.alert(
+									`lastName : ${user.lastName}
+									<br/>firstName : ${user.firstName}
+									<br/>gender : ${user.gender}`
+								);
+							}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+			<div class="example">
+                <div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+						<input type="button" onclick="demo3('홍', '길동', '남');" value="01" />
+						<input type="button" onclick="demo3('개', '차반', '수컷');" value="02" />
+						<script type="text/javascript">
+							function demo3(lastName, firstName, gender) {
+								let info = {lastName: lastName, firstName: firstName},
+									key = "gender"
+
+								let user = {
+									__proto__: info,
+									toString() {
+										return JSON.stringify((super.valueOf()))
+									},
+									[key]: gender
+								};
+
+								$.alert(
+									`lastName : ${user.lastName}
+									<br/>firstName : ${user.firstName}
+									<br/>gender : ${user.gender}`
+								);
+							}
+                        </script>
+                    </div>
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+			<span class="title">Arrow Functions</span>
+		</h2>
+		<div>
+			<div class="example">
+                <div>
+                    <div class="entry-source-title">Basic</div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: js;">
+                            // 매개변수 지정 방법
+								() => { ... } // 매개변수가 없을 경우
+								x => { ... } // 매개변수가 한 개인 경우, 소괄호를 생략할 수 있다.
+							(x, y) => { ... } // 매개변수가 여러 개인 경우, 소괄호를 생략할 수 없다.
+
+							// 함수 몸체 지정 방법
+							x => { return x * x }  // single line block
+							x => x * x             // 함수 몸체가 한줄의 구문이라면 중괄호를 생략할 수 있으며 암묵적으로 return된다. 위 표현과 동일하다.
+
+							() => { return { a: 1 }; }
+							() => ({ a: 1 })  // 위 표현과 동일하다. 객체 반환시 소괄호를 사용한다.
+
+							() => {           // multi line block.
+								const x = 10;
+								return x * x;
+							};
+
+							
+							// Bad
+							const person = {
+								name: 'Lee',
+								sayHi: () => console.log(`Hi ${this.name}`)
+							};
+
+							// Good
+							const person = {
+								name: 'Lee',
+								sayHi() { // === sayHi: function() {
+									console.log(`Hi ${this.name}`);
+								}
+							};
+
+							// 	화살표 함수를 사용해서는 안되는 경우
+							1.메소드
+							2.prototype
+							3.생성자 함수
+							4.addEventListener 함수의 콜백 함수
+                        </pre>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</li>
+</ul>
