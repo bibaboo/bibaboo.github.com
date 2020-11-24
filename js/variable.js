@@ -27,7 +27,7 @@ var SERVICE_CONFIG = {
 
 /** layout */
 var LAYOUT_CONFIG = {
-    resizerLeft: "140px",
+    resizerLeft: "200px",
     node: "",
     accordian: false
 };

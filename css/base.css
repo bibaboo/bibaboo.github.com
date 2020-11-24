@@ -70,10 +70,14 @@ input[type="search"]::-webkit-search-decoration {
 #spacer span{margin:450px 1px;}
 
 #content {float: left; height:100%; width: calc(100% - 200px); position:relative;}
+/* floast
 .content-header {background: #eee; position: relative; min-height: 31px; border-bottom: 1px solid #ddd; z-index: 2;}
 .content-header ul {position: absolute; height:31px; top:0px; left:0px; margin-left:10px; margin-right:30px;}
 .content-header ul li {float: left; height:100%;}
-/* .content-header ul li:first-child a {border-left: 1px solid #ddd;} */
+*/
+/* flex */
+.content-header {background: #eee; position: relative; border-bottom: 1px solid #ddd; z-index: 2;}
+.content-header ul {display:inline-flex;flex-wrap:wrap; overflow: auto; min-height:31px; margin-left:10px; margin-right:30px;}
 .content-header ul li a, .content-header div a {display: block; height: 100%; border-right: 1px solid #ddd; font-size: 1.1em; color: #333333; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);}
 .content-header ul li a:hover, .content-header div a:hover {background: #ddd; color: #111111;}
 .content-header ul li a span, .content-header div span {display: block; padding: 7px 10px 5px 10px;}
