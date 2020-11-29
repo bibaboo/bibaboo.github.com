@@ -83,6 +83,11 @@ let pageSetting = {
             js: ["/js/lib/jquery-minicolors-master/jquery.minicolors.min.js"]
 
         },
+        cookie: {
+            loaded: false,
+            js: ["/js/lib/jquery.cookie.js"]
+
+        },
         jqplot: {
             loaded: false,
             css: ["/js/lib/jquery.jqplot.1.0.9/jquery.jqplot.min.css"],
@@ -527,11 +532,19 @@ const moduleData = [
                 }
             },
             {
-                text: "jquery-minicolors",
+                text: "jquery.minicolors",
                 id: "minicolors",
                 a_attr: {
-                    title: "jquery-minicolors 정리",
+                    title: "jquery.minicolors 정리",
                     plugin: "minicolors"
+                }
+            },
+            {
+                text: "jquery.cookie",
+                id: "cookie",
+                a_attr: {
+                    title: "jquery.cookie 정리",
+                    plugin: "cookie"
                 }
             },
             {

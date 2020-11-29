@@ -1,0 +1,53 @@
+<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">general</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">
+							<div>
+								set cookie : <input id="cookieValue1" type="text" style="padding:4px;" />	<input type="button" onclick="demo1_1();" value="demo1_1" />
+							</div>
+							<div>
+								get cookie : <input type="button" onclick="demo1_2();" value="demo1_2" />
+							</div>
+							<div>
+								remove cookie : <input type="button" onclick="demo1_3();" value="demo1_3" />
+							</div>
+						</div>
+
+						<script type="text/javascript">
+							/* default
+								expires: 365
+								path: '/'
+							*/
+
+							let cookieName = "name";
+
+							function demo1_1(){
+								$.cookie(cookieName, $("#cookieValue1").val());
+							}
+							
+							function demo1_2(){
+								$.alert($.cookie(cookieName));
+							}
+
+							function demo1_3(){
+								$.removeCookie(cookieName);
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
