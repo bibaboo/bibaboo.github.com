@@ -18,7 +18,7 @@
         showLog: false,
         defaults: {
             locale: "ko",
-            height: "98px",
+            height: "96px",
             maxCount: 0, //0 unlimit
             maxSizeMb: 20 //0 unlimit
         },
@@ -38,26 +38,21 @@
         },
         tmpl: {
             base: "<div class=\"wupload-wrap\">" +
-                "    <div class=\"header-area\">" +
-                "        <input type=\"file\" class=\"wupload-file\" multiple/>" +
-                "        <button typ=\"button\" data-action=\"add\">${add}</button>" +
-                "        <button typ=\"button\" data-action=\"del\">${del}</button>" +
+                "    <div class=\"wupload-header\">" +
+                "    <form method=\"post\" enctype=\"multipart/form-data\" id=\"wuploadForm\">" +
+                "        <input type=\"file\" id=\"wuploadFile\" class=\"wupload-file\" multiple/>" +
+                "        <button type=\"button\" data-action=\"add\">${add}</button>" +
+                "        <button type=\"button\" data-action=\"del\">${del}</button>" +
                 "        <div class=\"file-info\"><span>0</span> ${fileInfo} : <span>0MB</span> / 20MB</div>" +
+                "    </form>" +
                 "    </div>" +
-                "    <div class=\"contents-area\">" +
+                "    <div class=\"wupload-contents\">" +
                 "        <table summary=\"file list table\">" +
-                "            <colgroup>" +
-                "                <col width=\"25px\">" +
-                "                <col width=\"*\">" +
-                "                <col width=\"150px\">" +
-                "                <col width=\"100px\">" +
-                "            </colgroup>" +
                 "            <thead>" +
                 "                <tr>" +
-                "                    <th scope=\"col\"></th>" +
-                "                    <th scope=\"col\">${fileName}</th>" +
-                "                    <th scope=\"col\">${uploadStatus}</th>" +
-                "                    <th scope=\"col\">${fileSize}</th>" +
+                "                    <th><input type=\"checkbox\" class=\"wupload-checkAll\"></th>" +
+                "                    <th>${fileName}</th>" +
+                "                    <th>${fileSize}</th>" +
                 "                </tr>" +
                 "            </thead>" +
                 "            <tbody>" +
@@ -66,10 +61,9 @@
                 "    </div>" +
                 "</div>",
             item: "<tr>" +
-                "   <td><img src=\"../images/file/${icon}\" /></td>" +
-                "   <td>${name}</td>" +
-                "   <td>.....</td>" +
-                "   <td>${size}</td>" +
+                "   <td><input type=\"checkbox\" class=\"wupload-check\"></td>" +
+                "   <td>&nbsp;<img src=\"../images/file/${icon}\" /> ${name}</td>" +
+                "   <td>${size}&nbsp;</td>" +
                 "</tr>"
         },
         files: [],
@@ -81,10 +75,10 @@
         this.el = $target;
         this.options.locale = this.lang[this.options.locale] ? this.options.locale : "ko";
 
-        $.tmpl($.wupload.tmpl.base, this.lang[this.options.locale]).appendTo(this.el);
-        $(".contents-area", $target).css("height", this.options.height);
-        $(".header-area button", $target).click(function () {
-            let $t = $(this);
+        $.tmpl($.wupload.tmpl.base, this.lang[this.options.locale]).appendTo($target);
+        $(".wupload-contents tbody", $target).css("height", this.options.height);
+        $(".wupload-header button", $target).click(function () {
+            const $t = $(this);
             switch ($t.attr("data-action")) {
                 case "add":
                     $(".wupload-file", $target).trigger('click');
@@ -97,9 +91,19 @@
             }
         });
 
+        $(".wupload-contents .wupload-checkAll", $target).click(function () {
+            if($(this).prop("checked")){
+                $(".wupload-contents .wupload-check").prop("checked", true);
+                $(".wupload-contents tbody tr").addClass("selected");
+            }else{
+                $(".wupload-contents .wupload-check").prop("checked", false);
+                $(".wupload-contents tbody tr").removeClass("selected");
+            }
+        });
+
         $(".wupload-file", $target).change(function (e) {
             //$.wupload.files = [];
-            let $c = $(".contents-area table tbody", $target),
+            const $c = $(".wupload-contents table tbody", $target),
                 files = Array.prototype.slice.call(e.target.files);
 
             //base64 e.target.result
@@ -120,16 +124,23 @@
                 }
 
                 $.wupload.files.push(this);
-                let reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = $.proxy((e) => {
-                    let $tr = $.tmpl($.wupload.tmpl.item, {
+                    const $tr = $.tmpl($.wupload.tmpl.item, {
                         icon: getFileIcon(this.name),
                         name: this.name,
                         size: formatFileSize(this.size)
                     });
 
                     $tr.click(function () {
-                        $(this).toggleClass("selected");
+                        if($tr.hasClass("selected")){
+                            $(this).removeClass("selected");
+                            $(this).find(".wupload-check").prop("checked", false);
+                        }else{
+                            $(this).addClass("selected");
+                            $(this).find(".wupload-check").prop("checked", true);
+                        }
+                        $.wupload.checkAll();
                     }).appendTo($c);
                 }, this);
                 reader.readAsDataURL(this);
@@ -140,17 +151,16 @@
     };
 
     $.wupload.calFileInfo = () => {
-        let $c = $(".header-area .file-info", $.wupload.el);
+        const $c = $(".wupload-header .file-info", $.wupload.el);
         $c.find("span:eq(0)").html($.wupload.files.length);
         $c.find("span:eq(1)").html(formatFileSize($.wupload.getTsize()));
     };
 
     $.wupload.deleteFile = () => {
-        let $c = $(".contents-area table tbody tr", $.wupload.el),
-            d = [],
-            f = [];
+        const $c = $(".wupload-contents table tbody tr", $.wupload.el);
+        let d = [], f = [];
         $c.each(function (index) {
-            let $t = $(this);
+            const $t = $(this);
             if ($t.hasClass("selected")) {
                 $t.remove();
                 d.push(index)
@@ -185,18 +195,81 @@
 
     $.wupload.getLang = (code) => $.wupload.lang[$.wupload.options.locale][code];
 
+    $.wupload.checkAll = () => {
+        const isCheckAll = $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked"),
+            trCount = $(".wupload-contents tbody tr").length,
+            checkedCount = $(".wupload-contents tbody tr .wupload-check:checked").length;
+        if(trCount==checkedCount){
+            if(!isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked", true)
+        }else{
+            if(isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked", false)
+        }
+    };
+
+    $.wupload.reset = () => {
+        $(".wupload-contents table tbody", $.wupload.el).empty();
+        $.wupload.files = [];
+        $.wupload.calFileInfo();
+    };
+
+    $.wupload.save = (opt={}) => {
+        if($.wupload.files.length==0){
+            if($.isFunction(opt.success)){
+                opt.success();
+            }
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("file", $.wupload.files);
+        
+        if(opt.formData){
+            $.each(opt.formData, function(key, val){
+                formData.append(key, val);
+            })
+        }
+
+        $.toast("upload...");
+        return;
+
+        $.ajax({
+            type: "post",
+            enctype: "multipart/form-data",
+            url: opt.url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: opt.timeout||600000,
+            success: function (result) {
+                if($.isFunction(opt.success)){
+                    opt.success(result);
+                }else{
+                    alert("upload success");
+                }
+            },
+            error: function () {
+                if($.isFunction(opt.error)){
+                    opt.error();
+                }else{
+                    alert("upload fail");
+                }
+            }
+        });
+    };
+
     $.fn.wupload = function (arg) {
-        let args = Array.prototype.slice.call(arguments, 1),
-            isMethod = (typeof arg === 'string'),
-            result = null;
+        const args = Array.prototype.slice.call(arguments, 1),
+            isMethod = (typeof arg === 'string');
+        let result = null;
 
         if (!(this.length == 1 && this.prop("tagName").toLowerCase() == "div")) {
             return;
         }
 
         if (isMethod) {
-            if ($.wupload.interface[arg]) {
-                result = $.wupload.interface[arg].apply(this, args);
+            if ($.wupload[arg]) {
+                result = $.wupload[arg].apply(this, args);
             } else {
                 $.alert("Method " + arg + " does not exist");
             }

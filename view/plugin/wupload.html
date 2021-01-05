@@ -14,10 +14,30 @@
 				<div>
 					<div class="entry-demo-content">
 						<div id="demo1-id1"></div>
+						<input type="button" onclick="demo1_1();" value="save" />
+						<input type="button" onclick="demo1_2();" value="cancel" />
 						<script type="text/javascript">
 							$(document).ready(function () {
 								$("#demo1-id1").wupload();
 							});
+
+							function demo1_1(){
+								$("#demo1-id1").wupload("save", {
+									success : function(){
+
+									},
+									error : function(){
+
+									},
+									formData : {
+										userId : "test"
+									}
+								});
+							}
+
+							function demo1_2(){
+								$("#demo1-id1").wupload("reset");
+							}
 						</script>
 					</div>
 					<div class="entry-source-title"></div>
