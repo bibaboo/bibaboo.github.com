@@ -2,6 +2,52 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
+    		<span class="title">install</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						1. C:\mysql
+							- 압축풀기
+
+						2. 환경변수에 등록
+							- MYSQL_HOME
+							- path
+
+						3. mysql --install
+							- 설치
+							
+						4. mysqld --initialize
+							- 초기화
+							
+						5. net start mysql
+							- 서비스 시작
+							
+						6. C:\mysql\data\호스트네임.err
+							- 비밀번호 확인
+							
+						7. roo 비밀번호 변경
+							- set PASSWORD for 'root'@'localhost'=PASSWORD('111111');
+					</textarea>
+					<div class="entry-source-title">portable</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: text;"></pre>
+					</div>
+				</div>
+				<div>
+					<div class="entry-source-title">my.ini</div>
+					<div class="entry-demo-content">
+						<button type="button" class="ui-button ui-widget ui-corner-all" onclick="window.open('/images/data/my.ini');">
+							<span class="ui-icon ui-icon-disk"></span> my.ini
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
     		<span class="title">mangement</span>
 		</h2>
 		<div>

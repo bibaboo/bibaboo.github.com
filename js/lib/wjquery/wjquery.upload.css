@@ -64,10 +64,7 @@
     width:calc(100% - 170px);
 }
 
-.wupload-wrap .wupload-contents table thead th:nth-child(3){
-    width:140px;
-}
-
+.wupload-wrap .wupload-contents table thead th:nth-child(3),
 .wupload-wrap .wupload-contents table tbody td:nth-child(3) {
     width:120px;
 }

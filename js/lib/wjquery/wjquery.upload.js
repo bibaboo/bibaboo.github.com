@@ -40,7 +40,7 @@
             base: "<div class=\"wupload-wrap\">" +
                 "    <div class=\"wupload-header\">" +
                 "    <form method=\"post\" enctype=\"multipart/form-data\" id=\"wuploadForm\">" +
-                "        <input type=\"file\" id=\"wuploadFile\" class=\"wupload-file\" multiple/>" +
+                "        <input type=\"file\" name=\"files\" id=\"wuploadFile\" class=\"wupload-file\" multiple/>" +
                 "        <button type=\"button\" data-action=\"add\">${add}</button>" +
                 "        <button type=\"button\" data-action=\"del\">${del}</button>" +
                 "        <div class=\"file-info\"><span>0</span> ${fileInfo} : <span>0MB</span> / 20MB</div>" +
@@ -101,7 +101,7 @@
             }
         });
 
-        $(".wupload-file", $target).change(function (e) {
+        $("#wuploadFile", $target).change(function (e) {
             //$.wupload.files = [];
             const $c = $(".wupload-contents table tbody", $target),
                 files = Array.prototype.slice.call(e.target.files);
@@ -145,7 +145,7 @@
                 }, this);
                 reader.readAsDataURL(this);
             });
-
+            //$(this).val("");
             $.wupload.calFileInfo();
         });
     };
@@ -221,19 +221,20 @@
         }
 
         let formData = new FormData();
-        formData.append("file", $.wupload.files);
-        
+        //formData.append("files", $.wupload.files);
+        //formData.append("files", $("#wuploadFile")[0].files[0]);
+        for(var i=0; i<$.wupload.files.length; i++){
+            formData.append("file" + i, $.wupload.files[i]);
+        }
+
         if(opt.formData){
             $.each(opt.formData, function(key, val){
                 formData.append(key, val);
             })
         }
 
-        $.toast("upload...");
-        return;
-
         $.ajax({
-            type: "post",
+            type: "POST",
             enctype: "multipart/form-data",
             url: opt.url,
             data: formData,
