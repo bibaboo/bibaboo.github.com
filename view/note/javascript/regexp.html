@@ -1,27 +1,97 @@
-﻿<div class="entry-summary"></div>
+﻿<div class="entry-summary"><br/><br/><b>참조 사이트 :</b> <a href="https://regexr.com/5ml92" target="_blank">regexr</a></div>
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">제목</span>
-    		<span class="return">리턴값</span>
+    		<span class="title">Expression</span>
 		</h2>
 		<div>
 			<div class="example">
-				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
 				<div>
-					<div class="entry-demo-content">
-						<div id="demo1-id1">demo1_1</div>
-						<input type="button" onclick="demo1_1();" value="demo1_1" />
-						<script type="text/javascript">
-							function demo1_1(){
-								
-						  	}
-						</script>
-					</div>
-					<div class="entry-source-title"></div>
+					<textarea class="entry-demo-textarea-content none">
+						| 또는
+						() 그룹
+						[] 문자셋, 괄호안의 어떤 문자든
+						[^]	부정 문자셋, 괄호안의 어떤 문가 아닐때
+						(?:) 찾지만 기억하지는 않음
+					</textarea>
+					<div class="entry-source-title">Groups and ranges</div>
 					<div class="entry-demo-source-content">
-						<pre class="brush: js; html-script: true; highlight: [6]"></pre>
+						<pre class="brush: text;"></pre>
 					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						? 없거나 있거나 (zero or one)
+						* 없거나 있거나 많거나 (zero or more)
+						+ 하나 또는 많이 (one or more)
+						{n}	n번 반복
+						{min,} 최소
+						{min,max} 최소, 그리고 최대
+					</textarea>
+					<div class="entry-source-title">Quantifiers</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: text;"></pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						\b 단어 경계
+						\B 단어 경계가 아님
+						^ 문장의 시작
+						$ 문장의 끝
+					</textarea>
+					<div class="entry-source-title">Boundary-type</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: text;"></pre>
+					</div>
+				</div>
+			</div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						\ 특수 문자가 아닌 문자
+						. 어떤 글자 (줄바꿈 문자 제외)
+						\d digit 숫자
+						\D digit 숫자 아님
+						\w word 문자
+						\W word 문자 아님
+						\s space 공백
+						\S space 공백 아님
+					</textarea>
+					<div class="entry-source-title">Character classes</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: text;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">Test</span>
+		</h2>
+		<div class="example">
+			<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+			<div>
+				<div class="entry-demo-content">
+					<div id="demo1-id1">demo1_1</div>
+					<input type="button" onclick="demo1_1();" value="demo1_1" />
+					<script type="text/javascript">
+						function demo1_1(){
+							const regex = /(?:https?:\/\/)?(?:www\.)?youtu.be\/([a-zA-Z0-9-]{11})/;
+							const url = "http://www.youtu.be/-ZClicWm0zM";
+							const result = url.match(regex);
+							alert(result[1]);
+					  	}
+					</script>
+				</div>
+				<div class="entry-source-title"></div>
+				<div class="entry-demo-source-content">
+					<pre class="brush: js; html-script: true; highlight: [5, 6, 7]"></pre>
 				</div>
 			</div>
 		</div>
