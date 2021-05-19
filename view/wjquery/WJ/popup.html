@@ -1,0 +1,225 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">souce</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						WJ.popup = {
+							pool: [],
+							open(url, options = {}, windowName) {
+								const features = $.extend({
+									"channelmode": "no",
+									"directories": "no",
+									"fullscreen": "no",
+									"menubar": "no",
+									"scrollbars": "no",
+									"status": "no",
+									"titlebar": "no",
+									"resizable": "no",
+									"width": 300,
+									"height": 300
+								}, options);
+						
+								if (!features.top) {
+									features.top = (window.innerHeight - features.height) / 2 + screenY;
+									features.left = (window.innerWidth - features.width) / 2 + screenX;
+								}
+						
+								if (options.argument || options.callback) {
+									url += (url.indexOf(WCODE.question) == -1 ? WCODE.question : WCODE.ampersand) + "pcodes=" + randomCode(30).join("") + WCODE.ampersand + "poolIndex=" + WJ.popup.getLastPoolIndex();
+									WJ.popup.setPool({
+										argument: options.argument || {},
+										callback: options.callback || function () {}
+									});
+								}
+						
+								return window.open(url, windowName || "windowName" + getTime(), wJson.toString(features, "=", ","));
+							},
+							close() {
+								window.close() || top.window.close();
+							},
+							getArgument(index) {
+								let result = null;
+								const openerWindow = opener || top.opener;
+								if (!index) {
+									index = getUrlArguments("poolIndex");
+								}
+						
+								if (index != undefined && index > -1 && openerWindow) {
+									return openerWindow.WJ.popup.pool[index].argument
+								}
+						
+								return result;
+							},
+							call(result = {}) {
+								const openerWindow = opener || top.opener,
+									index = getUrlArguments("poolIndex");
+						
+								if (index != undefined && index > -1 && openerWindow) {
+									const o = openerWindow.WJ.popup.pool[index];
+									o.callback && o.callback(result);
+								}
+								setTimeout(function () {
+									WJ.popup.close();
+								}, 100);
+							},
+							getPool(index) {
+								return index ? WJ.popup.pool[index] : WJ.popup.pool;
+							},
+							setPool(item) {
+								WJ.popup.pool.push(item);
+								return WJ.popup.getLastPoolIndex();
+							},
+							getLastPoolIndex() {
+								return WJ.popup.pool.length;
+							}
+						};
+					</textarea>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">open(url [, options] [, windowName])</span>
+    		<span class="return">→ Object(window)</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">url</td>
+			  			<td class="type">String</td>
+			  			<td class="desc">URL 주소</td>
+					</tr>
+					<tr>
+						<td class="name">option</td>
+						<td class="type">PlainObject</td>
+						<td class="desc">window open 옵션</td>
+				  	</tr>
+					<tr>
+						<td class="name">windowName</td>
+						<td class="type">String</td>
+						<td class="desc">생성될 window 이름</td>
+				  </tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="open" />
+						<script type="text/javascript">
+							function demo1_1(){
+								let url = "/view/wjquery/WJ/popup_test.html",
+									options = {
+										argument : {
+											"data" : "parent data..."
+										},
+										callback : function(json){
+											alert(JSON.stringify(json));
+										}
+									},
+									windowName = "popupTest";
+								WJ.popup.open(url, options, windowName);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [15]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">close()</span>
+    		<span class="return"></span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title"> <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content none">
+						WJ.popup.close();
+					</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [1]"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">getArgument([index])</span>
+    		<span class="return">→ PlainObject</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">index</td>
+			  			<td class="type">Integer</td>
+			  			<td class="desc">pool 순서</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<div class="example">
+					<div class="entry-demo-title"> <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+					<div>
+						<div class="entry-demo-content none">
+							WJ.popup.getArgument();
+						</div>
+						<div class="entry-demo-source-content">
+							<pre class="brush: js; html-script: true; highlight: [1]"></pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">call([result])</span>
+    		<span class="return"></span>
+			<span class="desc">부모창 callback 함수 호출</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+			  			<td class="name">result</td>
+			  			<td class="type">PlainObject</td>
+			  			<td class="desc">부모창으로 보낼 값</td>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<div class="example">
+					<div class="entry-demo-title"> <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+					<div>
+						<div class="entry-demo-content none">
+							WJ.popup.call(result);
+						</div>
+						<div class="entry-demo-source-content">
+							<pre class="brush: js; html-script: true; highlight: [1]"></pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

@@ -40,19 +40,7 @@ var LIST_VALUE = {
 
 /** code define */
 var CODE_VALUE = {
-    yes: "Y",
-    no: "N",
-    zero: "0",
-    one: "1",
-    two: "2",
-    three: "3",
-    sharp: "#",
-    pipe: "|",
-    comma: ",",
-    dot: ".",
-    dash: "-",
-    underline: "_",
-    slash: "/"
+
 };
 
 /** common template */

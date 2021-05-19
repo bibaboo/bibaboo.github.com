@@ -1,0 +1,170 @@
+﻿<div class="entry-summary"></div>
+<ul class="entry-api">
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">souce</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						WJ.showDialog = function (options) {
+							if (window != top) {
+								return top.WJ.dialog.show(options);
+							}
+							const offset = {
+								width: -10,
+								height: -10
+							};
+							const viewSize = {
+								width: $(document).width() + offset.width,
+								height: $(document).height() + offset.height
+							};
+							if (options["width"] && options.width > viewSize.width) options.width = viewSize.width;
+							if (options["height"] && options.height > viewSize.height) options.height = viewSize.height;
+							if (options["isDestroy"] != true) options.isDestroy = true;
+							return new WJ.Dialog(options);
+						}
+						
+						WJ.Dialog = function (options) {
+							let dialog = this;
+							this.container = $("<div/>").appendTo(document.body);
+							this.destroy = false;
+							this.fnCallback = null;
+							this._options = $.extend({
+								title: "Dialog Window",
+								maxHeight: 600,
+								maxWidth: 980,
+								width: 300,
+								modal: false,
+								isDestroy: true,
+								params: null,
+								callback: null,
+								scroll: "auto"
+							}, options);
+						
+							if (this._options.url) {
+								this._options.create = function () {
+									setTimeout(function () {
+										dialog.container.ajaxLoadStart();
+									}, 1);
+									let ifrm = $('<iframe style="width:100%; height:98%; border-width:0;" scrolling="' + dialog._options.scroll + '" frameborder="0" src="' + dialog._options.url + '"/>').appendTo(dialog.container);
+									ifrm.bind("load", function () {
+										const frmBody = ifrm[0].contentWindow || ifrm[0].contentDocument;
+										if (frmBody.fnCaller) frmBody.fnCaller(dialog._options.params, dialog);
+										setTimeout(function () {
+											$("body", frmBody.document).css("height", "auto");
+											dialog.container.ajaxLoadComplete();
+										}, 200);
+						
+										if (dialog._options.scroll.toLowerCase() == "no") {
+											setTimeout(function () { // dialog resize
+												var offsetHeight = 40;
+												var frmHeight = $(frmBody.document).height();
+						
+												if (dialog.container.dialog("option", "height") - offsetHeight < frmHeight) {
+													if (dialog.container.dialog("option", "maxHeight") - offsetHeight - 11 > frmHeight) {
+														dialog.container.dialog("option", "height", frmHeight + offsetHeight + 11);
+													} else {
+														ifrm.attr("scroll", "auto");
+													}
+												}
+											}, 100);
+										}
+									});
+								};
+							}
+						
+							if (this._options.isDestroy == true) {
+								this._options.defineClose = this._options.close;
+								this._options.close = function () {
+									if (dialog.destroy == false) {
+										dialog._options.defineClose && dialog._options.defineClose();
+										dialog.close();
+									}
+								};
+							}
+						
+							this.fnCallback = this._options.callback;
+							this.container.dialog(this._options);
+						};
+						
+						WJ.Dialog.prototype.callback = function (res) {
+							if (this.fnCallback) this.fnCallback(res);
+						};
+						WJ.Dialog.prototype.open = function () {
+							this.container.dialog("open");
+						};
+						WJ.Dialog.prototype.close = function () {
+							const dialog = this;
+							if (dialog.container.dialog("isOpen")) {
+								dialog.container.dialog("close");
+							}
+						
+							setTimeout(function () {
+								if (dialog._options.isDestroy == true && dialog.destroy != true) {
+									$.each(dialog.container.find("iframe"), function () {
+										$(this).contents().find("object").remove();
+										$(this).remove();
+									});
+									dialog.destroy = true;
+									dialog.container.dialog("destroy");
+									dialog.container.remove();
+								}
+							}, 10);
+						};						
+					</textarea>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">showDialog(options)</span>
+    		<span class="return">→ Object</span>
+		</h2>
+		<div>
+			<table class="arguments">
+				<tbody>
+					<tr>
+						<td class="name">option</td>
+						<td class="type">PlainObject</td>
+						<td class="desc">window open 옵션</td>
+				  	</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo1-id1">demo1_1</div>
+						<input type="button" onclick="demo1_1();" value="open" />
+						<script type="text/javascript">
+							function demo1_1(){
+								WJ.showDialog({     
+									title 		: "test",
+									url 		: "/view/wjquery/WJ/dialog_test.html",
+									modal 		: true,
+									width 		: 680,
+									height 		: 500,
+									params 		: {"data" : "parent data.."},
+									callback	: function(result) {
+										alert(JSON.stringify(result));
+									}
+								});
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>

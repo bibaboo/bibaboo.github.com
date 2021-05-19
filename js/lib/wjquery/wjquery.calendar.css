@@ -1,0 +1,166 @@
+/* wjquery.calendar
+---------------------------------------------------------*/
+
+.wcalendar-undock {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+}
+
+.wcalendar-wrap {
+    width: 100%;
+    position: relative;
+    color: #333;
+    border: 1px solid #a5a5a5;
+    background-color:#fff;
+    box-shadow: 1px 3px 3px rgb(0 0 0 / 10%);
+}
+
+.wcalendar-wrap ul {
+    list-style: none;
+    display: block;
+    font-size: 12px;
+}
+
+.wcalendar-month {
+    padding: 2px 5px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #a5a5a5;
+    text-align: center;
+}
+
+.wcalendar-month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.wcalendar-month ul li {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.wcalendar-month .prev {
+    float: left;
+    padding-top: 2px;
+}
+
+.wcalendar-month .next {
+    float: right;
+    padding-top: 2px;
+}
+
+.wcalendar-month .prev span,
+.wcalendar-month .next span {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    border:1px solid transparent;
+    border-radius: 40%;
+}
+
+.wcalendar-month .prev span:hover,
+.wcalendar-month .next span:hover {
+    background-color:#ddd;
+}
+
+.wcalendar-month select {
+    margin: 1px 2px;
+    border: none;
+    height: 25px;
+    padding: 3px;
+    background: #f5f5f5;
+}
+
+.wcalendar-weekdays {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.wcalendar-weekdays li {
+    list-style-type: none;
+    display: inline-block;
+    width: 14.28%;
+    color: #666;
+    text-align: center;
+}
+
+.wcalendar-days {
+    padding: 0;
+    margin: 2px;
+}
+
+.wcalendar-days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 14.28%;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #777;
+}
+
+.wcalendar-days li a {
+    margin:1px;
+    display: block;
+    border: 1px transparent solid;
+}
+
+.wcalendar-days li a:hover {
+    border: 1px #d4d4d4 solid;
+    background: transparent;
+}
+
+.wcalendar-days li a.today {
+    border: 1px #d86150 solid;
+    color: #333;
+    background: #fff;
+}
+
+.wcalendar-days li a.active {
+    border: 1px #d86150 solid;
+    color: #fff;
+    background: #d86150;
+}
+
+.wcalendar-days li a.active:hover {
+    border: 1px #d4d4d4 solid;
+    background: transparent;
+    color: #777;
+}
+
+.wcalendar-days li a.prev,
+.wcalendar-days li a.next {
+    opacity: 0.5;
+}
+
+.wcalendar-weekdays li:nth-child(1),
+.wcalendar-days .md-holiday,
+.wcalendar-days .holiday,
+.wcalendar-days li:nth-child(1) a,
+.wcalendar-days li:nth-child(8) a,
+.wcalendar-days li:nth-child(15) a,
+.wcalendar-days li:nth-child(22) a,
+.wcalendar-days li:nth-child(29) a,
+.wcalendar-days li:nth-child(36) a {
+    color:#e9564a;
+}
+/* saturday
+.wcalendar-weekdays li:nth-child(7),
+.wcalendar-days li:nth-child(7) a,
+.wcalendar-days li:nth-child(14) a,
+.wcalendar-days li:nth-child(21) a,
+.wcalendar-days li:nth-child(28) a,
+.wcalendar-days li:nth-child(35) a,
+.wcalendar-days li:nth-child(42) a {
+    color: #2586ee;
+}
+*/
+
+.wcalendar-dateicon {
+    cursor: pointer;
+    margin-left:3px;
+    vertical-align: middle;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background:url('../../../images/ic_cal.gif') no-repeat;
+}

@@ -1,12 +1,12 @@
 /***
 ===============================================================================================
-* 기능 설명 : 레이아웃 관리
+* define : layout management
 ===============================================================================================
 */
 
-/* 공통 설정 정보 */
+/* common configuration */
 let pageSetting = {
-    //트리노드 액션 타입
+    //tree node action
     moduleDataType: {
         load: "load",
         blank: "blank",
@@ -59,6 +59,12 @@ let pageSetting = {
             js: ["/js/lib/wjquery/wjquery.tree.js"]
 
         },
+        wcalendar: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.calendar.css"],
+            js: ["/js/lib/wjquery/wjquery.calendar.js"]
+
+        },
         wselect: {
             loaded: false,
             css: ["/js/lib/wjquery/wjquery.select.css"],
@@ -107,6 +113,8 @@ let pageSetting = {
     progressBar: "header-progress-bar",
     isAccordion: false,
     autoData: [],
+    headerMenus: [], //[] use, null unuse
+    headerMenuFnc: null,
     resizerLeft: null,
     contentWidth: null
 };
@@ -119,13 +127,13 @@ let $sidebar,
     $entry,
     $menuTree;
 
-/* 모듈 정보 */
+/* module define */
 const moduleData = [
     /*
     {
-        text: "sample",                              // 트리 노드에 표시 될 텍스트
-        used: false,                                 // 트리 노드에 표시 여부 default=true
-        icon: "../images/tree-icon.png",             // 트리 노드에 표시 될 아이콘 default=false
+        text: "sample",                              //Text to be desplayed  on the tree node
+        used: false,                                 //Wheter to display on the tree node [default=true]
+        icon: "../images/tree-icon.png",             //Icon to be desplayed on the tree node
         data: {
             folder: "/view/",
             type: pageSetting.moduleDataType.load,
@@ -494,6 +502,29 @@ const moduleData = [
                         }
                     }
                 ]
+            },
+            {
+                text: "WJ",
+                id: "_WJ",
+                a_attr: {
+                    title: "wjqeury Object"
+                },
+                data: {
+                    folder: "/view/wjquery/WJ/"
+                },
+                nodes: [{
+                        text: "popup",
+                        a_attr: {
+                            title: "window open"
+                        }
+                    },
+                    {
+                        text: "dialog",
+                        a_attr: {
+                            title: "WF dialog"
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -629,6 +660,13 @@ const moduleData = [
                 a_attr: {
                     title: "tree view",
                     plugin: "wtree"
+                }
+            },
+            {
+                text: "wcalendar",
+                a_attr: {
+                    title: "calendar view",
+                    plugin: "wcalendar"
                 }
             },
             {
@@ -961,32 +999,32 @@ const moduleData = [
             type: pageSetting.moduleDataType.load
         },
         nodes: [{
-	            text: "type1",
-	            id: "type1"
-	        },
-	        {
-	            text: "api",
-	            id: "apiTmpl"
-	        },
-	        {
-	            text: "iframe",
-	            id: "iframeTmpl"
-	        },
-	        {
-	            text: "demo",
-	            id: "demoTmpl"
-	        },
-	        {
-	            text: "note",
-	            id: "noteTmpl"
-	        }
+                text: "type1",
+                id: "type1"
+            },
+            {
+                text: "api",
+                id: "apiTmpl"
+            },
+            {
+                text: "iframe",
+                id: "iframeTmpl"
+            },
+            {
+                text: "demo",
+                id: "demoTmpl"
+            },
+            {
+                text: "note",
+                id: "noteTmpl"
+            }
         ]
     }
 ];
 
 (function ($) {
     $(document).ready(function () {
-        //템플릿 적용
+        //append template
         $("body").append($.tmpl(COMMON_TMPL.layout));
         //hash change
         $(window).bind('hashchange', function (event) {
@@ -1016,12 +1054,12 @@ const moduleData = [
         }).autocomplete({
             source: pageSetting.autoData,
             select: function (event, ui) {
-                openNode(CODE_VALUE.sharp + ui.item.id);
+                openNode(WCODE.sharp + ui.item.id);
                 $("#searchWord").parent().hide();
             }
         });
 
-        //리사이즈 이벤트
+        //window size change
         $(window).resize(function () {
             resizeLayout();
         });
@@ -1043,32 +1081,59 @@ const moduleData = [
             }
         });
 
-        //맨위로 버튼
-        $content.find("div.content-body").wScrollTop($("#btn-top"), {"progressId":pageSetting.progressBar});
+        //go top button
+        $content.find("div.content-body").wScrollTop(
+            $("#btn-top"), {
+                "progressId": pageSetting.progressBar,
+                "callback": function (scrollTop) {
+                    if (pageSetting.headerMenus && pageSetting.headerMenus != null) {
+                        const _h = $content.find("div.content-body").prop('scrollHeight') - $content.find("div.content-body").outerHeight();
+                        for (let i = pageSetting.headerMenus.length - 1; i >= 0; i--) {
+                            if ((scrollTop + pageSetting.headerMenus[0]) > pageSetting.headerMenus[i]) {
+                                if (scrollTop > _h - 10) {
+                                    headerMenuActive(pageSetting.headerMenus.length - 1);
+                                } else {
+                                    headerMenuActive(i);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        );
 
-        //컨텐츠 헤더
-        $content.find("div.content-header>ul").on("click", "a", function () {
+        //contents header
+        $content.find("div.content-header>ul").on("click", "a", function (event) {
             event.preventDefault();
+            const _index = $content.find("div.content-header>ul>li").index($(this).parent());
             if (pageSetting.isAccordion) {
                 $entry.find("ul.entry-api").accordion({
                     active: $content.find("div.content-header>ul>li").index($(this).parent())
                 });
             } else {
-                $entry.find("ul.entry-api>li").eq($content.find("div.content-header>ul>li").index($(this).parent())).scrollIntoView($content.find("div.content-body"));
+                $entry.find("ul.entry-api>li").eq(_index).scrollIntoView($content.find("div.content-body"));
             }
+
+            if (pageSetting.headerMenuFnc) {
+                clearTimeout(pageSetting.headerMenuFnc);
+            }
+
+            pageSetting.headerMenuFnc = setTimeout(function () {
+                headerMenuActive(_index);
+            }, 1000);
         });
 
-        $sidebar.find(".sidebar-head>a").click(function() {
-                $sidebar.transition({
-                    rotateY: '180deg'
-                }).transition({
-                    rotateY: '360deg'
-                });
-            }
-        );
+        $sidebar.find(".sidebar-head>a").click(function () {
+            $sidebar.transition({
+                rotateY: '180deg'
+            }).transition({
+                rotateY: '360deg'
+            });
+        });
 
         $spacer.click(
-            function() {
+            function () {
                 $spacer.hide();
                 $sidebar.show();
                 $resizer.show();
@@ -1139,7 +1204,7 @@ const moduleData = [
             }
         };
 
-        //트리
+        //tree data
         const data = $.map(moduleData, function (module) {
             if (_setData(module)) {
                 if (module.nodes) {
@@ -1160,8 +1225,6 @@ const moduleData = [
             }
         });
 
-        //console.log(data);
-
         $menuTree
             .jstree({
                 "core": {
@@ -1179,12 +1242,12 @@ const moduleData = [
 
                 const node = data.node,
                     $tree = $menuTree.jstree(true);
-                    
+
                 $content.find("div.content-body>.setting").addClass("none");
                 if (!node.data) node.data = {};
                 if ($tree.is_leaf(node) && (node.id == "home" || !node.icon)) {
                     const loadPage = function () {
-                        let pnode = node.parent == CODE_VALUE.sharp ? {
+                        let pnode = node.parent == WCODE.sharp ? {
                                 data: node.data
                             } : $tree.get_node(node.parent),
                             url = node.data.page ? node.data.page : node.id + ".html",
@@ -1231,12 +1294,12 @@ const moduleData = [
                                         $("input[type=button]").button().addClass("mtb10");
 
                                         //make content-header
-                                        const $ul = $content.find("div.content-header>ul").empty();
-                                        const titles = $entry.find(".entry-api span.title").map(function () {
-                                            return {
-                                                text: $(this).text()
-                                            };
-                                        }).get();
+                                        const $ul = $content.find("div.content-header>ul").empty(),
+                                            titles = $entry.find(".entry-api span.title").map(function () {
+                                                return {
+                                                    text: $(this).text()
+                                                };
+                                            }).get();
                                         $ul.append($.tmpl(COMMON_TMPL.headerLi, titles));
 
                                         if (accordion && titles.length > 1) {
@@ -1297,6 +1360,16 @@ const moduleData = [
                                             $(this).find("span").changeClass("ui-icon-circle-triangle-s", "ui-icon-circle-triangle-n").hasClass("ui-icon-circle-triangle-s");
                                             $(this).parent().next().slideToggle();
                                         });
+
+                                        if (pageSetting.headerMenus != null) {
+                                            pageSetting.headerMenus = [];
+                                            $.each($(".entry-api-item"), function () {
+                                                pageSetting.headerMenus.push($(this).offset().top);
+                                            });
+                                            if (pageSetting.headerMenus.length > 0) {
+                                                headerMenuActive(0);
+                                            }
+                                        }
                                     }, "html")
                                     .fail(function (response, status, xhr) {
                                         try {
@@ -1353,7 +1426,7 @@ const moduleData = [
     }
 })(jQuery);
 
-function resizeLayout(pos=LAYOUT_CONFIG.resizerLeft) {
+function resizeLayout(pos = LAYOUT_CONFIG.resizerLeft) {
     if ($sidebar.is(":visible")) {
         $sidebar.width(pos);
         $resizer.css("left", pos);
@@ -1363,7 +1436,7 @@ function resizeLayout(pos=LAYOUT_CONFIG.resizerLeft) {
 
 function checkHash() {
     if (document.location.hash) {
-        const _hashes = document.location.hash.split(CODE_VALUE.slash);
+        const _hashes = document.location.hash.split(WCODE.slash);
         if (_hashes.length && _hashes.length == 3) {
             if (_hashes[1] == SERVICE_CONFIG.hash.M.key) {
                 openNode(_hashes[0] + _hashes[2]);
@@ -1377,7 +1450,7 @@ function checkHash() {
 }
 
 function setHash(menu, key, b) {
-    const _hash = CODE_VALUE.sharp + CODE_VALUE.slash + menu + CODE_VALUE.slash + key;
+    const _hash = WCODE.sharp + WCODE.slash + menu + WCODE.slash + key;
     if (_hash != document.location.hash && !hasValueInArray(SERVICE_CONFIG.hash.except, key)) {
         if (!$.isFalse(b)) {
             SERVICE_CONFIG.hash[menu].skip = true;
@@ -1426,5 +1499,13 @@ function toggleAccordian($t) {
             heightStyle: "content"
         });
         pageSetting.isAccordion = true;
+    }
+}
+
+function headerMenuActive(index) {
+    const $t = $content.find("div.content-header>ul>li:eq(" + index + ")");
+    if (!$t.hasClass("bold")) {
+        $t.addClass("bold");
+        $t.siblings(".bold").removeClass("bold");
     }
 }

@@ -18,9 +18,15 @@
                         </div>
 						<script type="text/javascript">
 							$(document).ready(function () {
-								$("#userName1").wautocompleteEnter(function(result){
-									alert(JSON.stringify(result));
-								});
+								$("#userName1").wautocompleteEnter(
+									function(result){
+										alert(JSON.stringify(result));
+									},
+									function(event, result){
+
+									},
+									{"type": "get"}
+								);
 							});
 						</script>
 					</div>
@@ -50,9 +56,15 @@
                         </div>
 						<script type="text/javascript">
 							$(document).ready(function () {
-								$("#userName2").wautocompleteKeyup(function(result){
-									alert(JSON.stringify(result));
-								});
+								$("#userName2").wautocompleteKeyup(
+									function(result){
+										alert(JSON.stringify(result));
+									},
+									function(event, result){
+										
+									},
+									{"type": "get"}
+								);
 							});
 						</script>
 					</div>

@@ -10,7 +10,7 @@
 
 (function ($) {
     "use strict";
-    var WAUTOCOMPLETE_SV = {
+    let WAUTOCOMPLETE_SV = {
         searchName: "",
         mode: {
             enter: "enter",
@@ -26,26 +26,37 @@
         }
     };
 
-    $.fn.wautocompleteEnter = function (callback, settings) {
+    $.fn.wautocompleteEnter = function (callback, errorCallback, settings) {
+        if(typeof(errorCallback)!="function" && typeof(settings)=="undefined"){
+            settings = errorCallback;
+            errorCallback = function(){};
+        } 
         this.keypress(function (event) {
             if ((event.keyCode || event.which) == WAUTOCOMPLETE_SV.wkey.enter) {
-                WAUTOCOMPLETE.trigger(event, $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {}), callback);
+                WAUTOCOMPLETE.trigger(event, $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {}), callback, errorCallback);
             }
         });
     };
 
-    $.fn.wautocompleteKeyup = function (callback, settings) {
+    $.fn.wautocompleteKeyup = function (callback, errorCallback, settings) {
+        if(typeof(errorCallback)!="function" && typeof(settings)=="undefined"){
+            settings = errorCallback;
+            errorCallback = function(){};
+        } 
         this.keyup(function (event) {
             let _settings = $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {});
             if (!hasValueInArray(_settings.skipKeyCodes, (event.keyCode || event.which))) {
                 _settings.mode = WAUTOCOMPLETE_SV.mode.keyup;
-                WAUTOCOMPLETE.trigger(event, _settings, callback);
+                WAUTOCOMPLETE.trigger(event, _settings, callback, errorCallback);
             }
         });
     };
 
     $.fn.wautocompleteDefaultSettings = {
+        type: "post",
+        contentType: "application/json; charset=UTF-8",
         prefix: "wautocomplete-",
+        count: 10,
         minLength: 2,
         mode: WAUTOCOMPLETE_SV.mode.enter,
         url: "../../js/test/wautocomplete.js",
@@ -55,11 +66,12 @@
             "       <span>\${teamName}</span>" +
             "   </a>" +
             "</li>",
+        waitMM : 500,
         skipKeyCodes: [WAUTOCOMPLETE_SV.wkey.spance, WAUTOCOMPLETE_SV.wkey.left, WAUTOCOMPLETE_SV.wkey.up, WAUTOCOMPLETE_SV.wkey.right, WAUTOCOMPLETE_SV.wkey.down]
     };
 
     var WAUTOCOMPLETE = {
-        trigger: function (event, settings, callback) {
+        trigger: function (event, settings, callback, errorCallback) {
             let $el = $(event.target),
                 id = $el.attr("id") || $el.attr("name"),
                 _id = "#" + settings.prefix + id,
@@ -76,7 +88,7 @@
 
             if (name == WAUTOCOMPLETE_SV.searchName) return;
 
-            if (name.length < settings.minLength) {
+            if (name.length < settings.minLength || !this.checkLastWord(name)) {
                 if (settings.mode == WAUTOCOMPLETE_SV.mode.enter) {
                     alert(settings.minLength + "이상 입력해주세요.");
                     return false;
@@ -89,10 +101,12 @@
 
             $.ajax({
                 url: settings.url,
-                data: {
-                    searchWord: name
-                },
-                type: "get",
+                data: JSON.stringify({
+                    searchWord: name,
+                    count: settings.count
+                }),
+                contentType: settings.contentType,
+                type: settings.type,
                 dataType: "json",
                 success: function (result) {
                     if (result.length == 0) {
@@ -170,7 +184,7 @@
                     }
                 },
                 error: function (event, request, settings) {
-                    alert("사용자를 조회 할수 없습니다.");
+                    errorCallback(event, request);
                 }
             });
 

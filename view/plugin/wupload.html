@@ -18,7 +18,23 @@
 						<input type="button" onclick="demo1_2();" value="cancel" />
 						<script type="text/javascript">
 							$(document).ready(function () {
-								$("#demo1-id1").wupload();
+								$.wupload.showLog = true;
+								var _options = {
+									files : [
+										{
+											name : "test001.xls",
+											size : 500000,
+											fileId : 1002
+										},
+										{
+											name : "test002.xls",
+											size : 90000,
+											fileId : 1003
+										}
+									]
+								};
+
+								$("#demo1-id1").wupload(_options);
 							});
 
 							function demo1_1(){

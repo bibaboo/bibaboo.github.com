@@ -1,7 +1,6 @@
 /* wjquery.upload
 ---------------------------------------------------------*/
 .wupload-wrap {
-    position: relative;
     width: 100%;
     margin-top: 10px;
     -ms-user-select: none;
@@ -11,15 +10,89 @@
     user-select: none;
 }
 
-.wupload-wrap .wupload-header {
+.wupload-wrap .wupload-none {
+    display: none !important;
+}
+
+.wupload-wrap .wupload-title {
+    position: relative;
+    height: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.wupload-wrap .wupload-title:hover {
+    border-color: #dbdbdb;
+}
+
+.wupload-wrap .wupload-title:active,
+.wupload-wrap .wupload-title:focus,
+.wupload-wrap .wupload-title div:focus,
+.wupload-wrap .wupload-title div:active {
+    border-color: #999;
+}
+
+
+.wupload-wrap .wupload-title div:hover {
+    background-color: #f1f1f1;
+}
+
+.wupload-wrap .wupload-title>div:after {
+    border-bottom: 2px solid #999;
+    border-right: 2px solid #999;
+    content: '';
+    display: block;
+    height: 5px;
+    margin-top: 2px;
+    margin-left: 2px;
+    -webkit-transform-origin: 66% 66%;
+    -ms-transform-origin: 66% 66%;
+    transform-origin: 66% 66%;
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    width: 5px;
+    cursor: pointer;
+}
+
+.wupload-wrap .wupload-title.close>div:after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.wupload-wrap .wupload-title h3 {
+    font-size: 1em;
+    margin-right: 30px;
+}
+
+.wupload-wrap .wupload-title div {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    height: 13px;
+    width: 13px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.wupload-wrap .wupload-area {
+    width: 100%;
+}
+
+.wupload-wrap .wupload-area .wupload-header {
     position: relative;
 }
 
-.wupload-wrap .wupload-header .wupload-file {
+.wupload-wrap .wupload-area .wupload-header .wupload-file {
     display: none;
 }
 
-.wupload-wrap .wupload-header button {
+.wupload-wrap .wupload-area .wupload-header button {
     height: 27px;
     line-height: 25px;
     border: 1px solid #c3c3c3;
@@ -30,51 +103,90 @@
     cursor: pointer;
 }
 
-.wupload-wrap .wupload-header .file-info {
+.wupload-wrap .wupload-area .wupload-header .file-info {
     display: inline-block;
     position: absolute;
     top: 10px;
     right: 5px;
 }
 
-.wupload-wrap .wupload-contents {
+.wupload-wrap .wupload-area .wupload-header .file-info span {
+    color: #cd5b63;
+}
+
+.wupload-wrap .wupload-area .wupload-contents {
+    position: relative;
     border: 1px solid #d5dee4;
     margin-top: 5px;
 }
 
-.wupload-wrap .wupload-contents table {
+.wupload-wrap .wupload-area .wupload-contents .wupload-progressBar{
+    width: 150px;
+    height: 10px;
+    position: absolute;
+    top: calc(50% - 30px/2);left:calc(50% - 200px/2);
+}
+
+.wupload-progressBar progress {
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    color:#e85944;
+    border-radius: 10px;
+}
+  
+.wupload-progressBar progress::-moz-progress-value {
+    background:#e85944;
+}
+
+.wupload-progressBar progress::-moz-progress-bar {
+    background: #f1f1f1;
+}
+
+.wupload-progressBar progress::-webkit-progress-value {
+    background:#e85944;
+    border-radius: 10px;
+}
+
+.wupload-progressBar progress::-webkit-progress-bar {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.wupload-wrap .wupload-area .wupload-contents table {
     width: 100%;
     border-collapse: collapse;
     display: block;
 }
 
-.wupload-wrap .wupload-contents table thead tr,
-.wupload-wrap .wupload-contents table tbody tr {
-    width:100%;
+.wupload-wrap .wupload-area .wupload-contents table thead tr,
+.wupload-wrap .wupload-area .wupload-contents table tbody tr,
+.wupload-wrap .wupload-area .wupload-contents table tfoot tr {
+    width: 100%;
     display: table;
 }
 
-.wupload-wrap .wupload-contents table thead th:nth-child(1),
-.wupload-wrap .wupload-contents table tbody td:nth-child(1) {
-    width:30px;
+.wupload-wrap .wupload-area .wupload-contents table thead th:nth-child(1),
+.wupload-wrap .wupload-area .wupload-contents table tbody td:nth-child(1) {
+    width: 30px;
 }
 
-.wupload-wrap .wupload-contents table thead th:nth-child(2),
-.wupload-wrap .wupload-contents table tbody td:nth-child(2) {
-    width:calc(100% - 170px);
+.wupload-wrap .wupload-area .wupload-contents table thead th:nth-child(2),
+.wupload-wrap .wupload-area .wupload-contents table tbody td:nth-child(2) {
+    width: calc(100% - 170px);
 }
 
-.wupload-wrap .wupload-contents table thead th:nth-child(3),
-.wupload-wrap .wupload-contents table tbody td:nth-child(3) {
-    width:120px;
+.wupload-wrap .wupload-area .wupload-contents table thead th:nth-child(3),
+.wupload-wrap .wupload-area .wupload-contents table tbody td:nth-child(3) {
+    width: 120px;
 }
 
-.wupload-wrap .wupload-contents table thead {
-    display:inline-block;
-    width:100%;
+.wupload-wrap .wupload-area .wupload-contents table thead {
+    display: inline-block;
+    width: 100%;
 }
 
-.wupload-wrap .wupload-contents table thead th {
+.wupload-wrap .wupload-area .wupload-contents table thead th {
     padding: 2px 0;
     text-align: center;
     height: 16px;
@@ -85,42 +197,57 @@
     color: #676767;
 }
 
-.wupload-wrap .wupload-contents table tbody {
-    width:100%;
+.wupload-wrap .wupload-area .wupload-contents table tbody,
+.wupload-wrap .wupload-area .wupload-contents table tfoot {
+    width: 100%;
     height: 100%;
-    display:inline-block;
+    display: inline-block;
     overflow-y: auto;
 }
 
-.wupload-wrap .wupload-contents table tbody tr {
+.wupload-wrap .wupload-area .wupload-contents table tbody tr {
     cursor: default;
     border-bottom: 1px dotted #ddd;
 }
 
-.wupload-wrap .wupload-contents table tbody tr.selected {
-    background-color: #f1f1f1;
+.wupload-wrap .wupload-area .wupload-contents table tbody tr.registed {
+    background-color: #fffef6;
 }
 
-.wupload-wrap .wupload-contents table tbody td {
+.wupload-wrap .wupload-area .wupload-contents table tbody tr.selected {
+    background-color: #f1f1f1 !important;
+}
+
+.wupload-wrap .wupload-area .wupload-contents table tbody td {
     padding: 2px 0;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     font-size: 12px;
 }
-
-.wupload-wrap .wupload-contents table tbody td img {
+/*
+.wupload-wrap .wupload-area .wupload-contents table tbody td:not(:last-child) {
+    border-right:1px dotted #ddd;
+}
+*/
+.wupload-wrap .wupload-area .wupload-contents table tbody td img {
     border: 0;
     width: 15px;
 }
 
-.wupload-wrap .wupload-contents table tbody td:first-child {
+.wupload-wrap .wupload-area .wupload-contents table tbody td:first-child {
     text-align: center;
 }
 
-.wupload-wrap .wupload-contents table tbody td:last-child {
+.wupload-wrap .wupload-area .wupload-contents table tbody td:last-child {
     text-align: right;
 }
 
+.wupload-wrap .wupload-area .wupload-contents table tfoot tr {
+    height:100%;
+}
 
-
+.wupload-wrap .wupload-area .wupload-contents table tfoot td{
+    text-align:center;
+    height:100%;
+}

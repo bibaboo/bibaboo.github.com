@@ -10,13 +10,13 @@
 				<div>
 					<div class="entry-demo-content">
 						<style type="text/css">
-							#demo4-id1 li:first-child { color:blue; }
-							#demo4-id1 li:last-child { color:green; }
+							#demo1-id1 li:first-child { color:blue; }
+							#demo1-id1 li:last-child { color:green; }
 
-							#demo4-id1 li:nth-child(4) { color:hotpink; }
-							#demo4-id1 li:nth-last-child(2) { color:brown; }
+							#demo1-id1 li:nth-child(4) { color:hotpink; }
+							#demo1-id1 li:nth-last-child(2) { color:brown; }
 						</style>
-						<div id="demo4-id1">
+						<div id="demo1-id1">
 							<ul>
 								<li>11111111111111</li>
 								<li>22222222222222</li>
@@ -27,13 +27,7 @@
 								<li>77777777777777</li>
 								<li>88888888888888</li>
 							</ul>
-							<input type="button" onclick="demo4_1();" value="demo4_1" />
 						</div>
-						<script type="text/javascript">	
-							function demo4_1(){
-								$("#demo4-id1 img").toggleClass("blink-img");
-							}
-						</script>
 					</div>
 					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">
@@ -149,7 +143,7 @@
                 <div>
                     <div class="entry-demo-content">
                         <style type="text/css"> 
-                            .bar-tab { display:table; width:auto;  background:#fff; ovarflow:scroll; border-bottom:3px solid #ddd; min-width:100%;}
+                            .bar-tab { display:table; width:auto;  background:#fff; overflow:scroll; border-bottom:3px solid #ddd; min-width:100%;}
                             .bar-tab li { display:table-cell; padding:0 6px;}
                             .bar-tab li a { display:block; height:42px; line-height:42px; font-size:15px; font-weight:bold; color:#000; text-align:center; border-bottom:2px solid #fff; }
                             .bar-tab li.current a { font-weight:bold; color:#00a885; border-color:#00a885; }
@@ -260,11 +254,30 @@
                 <div>
                     <div class="entry-demo-content">
                         <style type="text/css">
-                            #demo5-id1 {position:relative;height:100px;width:100%;}
-                            .div-center {position: absolute; background-color:bisque; width:200px;height:30px;text-align:center;top: calc(50% - 30px/2);left:calc(50% - 200px/2)}
+                            #demo5-id1, #demo5-id2 {position:relative;height:200px;width:100%;border:1px solid #ddd;margin-bottom:5px;}
+                            .div-center {
+                                position: absolute; 
+                                background-color:bisque; 
+                                width:200px;
+                                height:30px;
+                                text-align:center;
+                                top: calc(50% - 30px/2);
+                                left:calc(50% - 200px/2)
+                            }
+                            .vertical-center {
+                                margin: 0;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                -ms-transform: translateY(-50%);
+                                transform: translateY(-50%);
+                            }
                         </style>
-                        <div id="demo5-id1" style="position:relative;">
+                        <div id="demo5-id1">
                             <div class="div-center"></div>
+                        </div>
+                        <div id="demo5-id2">
+                            <div class="vertical-center"><button>Centered Button</button></div>
                         </div>
                     </div>  
                     <div class="entry-source-title"></div>
@@ -275,7 +288,6 @@
             </div>
         </div>
     </li>
-
     <li class="entry-api-item">
         <h2>
             <span class="title">switches</span>
@@ -455,6 +467,137 @@
                                 가나다라마바사 아자차카 타파하
                             </div>
                         </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">overlay</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            .overlay {
+                                position: fixed; /* Sit on top of the page content */
+                                display: none; /* Hidden by default */
+                                width: 100%; /* Full width (cover the whole page) */
+                                height: 100%; /* Full height (cover the whole page) */
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+                                z-index: 1001; /* Specify a stack order in case you're using a different order for other elements */
+                                cursor: pointer; /* Add a pointer on hover */
+                            }
+                        </style>
+                        <script type="text/javascript"> 
+                            function demo1_7(){
+                                $("#demo7-id1").toggle();
+                            }
+                        </script>
+                        <div id="demo7-id1" class="overlay" onclick="demo1_7();"></div>
+                        <input type="button" onclick="demo1_7();" value="demo1_7" />
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">collapsible</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            .collapsible-area .collapsible {
+                                background-color: #777;
+                                color: white;
+                                cursor: pointer;
+                                padding: 18px;
+                                width: 100%;
+                                border: none;
+                                text-align: left;
+                                outline: none;
+                                font-size: 15px;
+                            }
+
+                            .collapsible-area .active, .collapsible-area .collapsible:hover {
+                                background-color: #555;
+                            }
+
+                            .collapsible-area .collapsible:after {
+                                content: '\002B';
+                                color: white;
+                                font-weight: bold;
+                                float: right;
+                                margin-left: 5px;
+                            }
+
+                            .collapsible-area .active:after {
+                                content: "\2212";
+                            }
+
+                            .collapsible-area .content {
+                                padding: 0 18px;
+                                max-height: 0;
+                                overflow: hidden;
+                                transition: max-height 0.2s ease-out;
+                                background-color: #f1f1f1;
+                            }
+                        </style>
+                        <script type="text/javascript">
+                        
+                            $(".collapsible-area .collapsible").click(function(){
+                                const $t = $(this).toggleClass("active"),
+                                    $c = $t.next("div");
+
+                                if($t.hasClass("active")){
+                                    $c.css("maxHeight", $c.prop("scrollHeight") + "px");
+                                }else{
+                                    $c.css("maxHeight", "0px");
+                                }
+
+                                $t.siblings(".active").each(function(){
+                                    $(this).removeClass("active").next("div").css("maxHeight", "0px");
+                                });
+                            });
+
+                            function demo1_8(){
+                                $(".collapsible-area .collapsible:eq(0)").trigger("click");
+                            }
+                        </script>
+                        <div id="demo8-id1" class="collapsible-area">
+                            <button class="collapsible">Open Section 가</button>
+                            <div class="content">
+                            <p>가가가가가가가가가<br/>가가가가가가가가가<br/>가가가가가가가가가<br/>가가가가가가가가가<br/>가가가가가가가가가<br/></p>
+                            </div>
+                            <button class="collapsible">Open Section 나</button>
+                            <div class="content">
+                                <p>나나나나나나나나나<br/>나나나나나나나나나<br/>나나나나나나나나나<br/>나나나나나나나나나<br/>나나나나나나나나나<br/></p>
+                            </div>
+                            <button class="collapsible">Open Section 3</button>
+                            <div class="content">
+                            <p>다다다다다다다다다<br/>다다다다다다다다다<br/>다다다다다다다다다<br/>다다다다다다다다다<br/>다다다다다다다다다<br/></p>
+                            </div>
+                        </div>
+                        <input type="button" onclick="demo1_8();" value="demo1_8" />
                     </div>  
                     <div class="entry-source-title"></div>
                     <div class="entry-demo-source-content">

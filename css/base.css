@@ -26,6 +26,7 @@ input[type="search"]::-webkit-search-decoration {
 .none {display:none !important}
 .hide {display:none}
 .blind { position:absolute; left:-10000px; top:-10000px; width:0; height:0; font-size:0; }
+.bold {font-weight: 600;}
 
 .w100p { width:100% !important; }
 .w49p { width:49% !important; }

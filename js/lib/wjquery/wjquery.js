@@ -8,6 +8,49 @@
  **/
 
 ;
+const WCODE = {
+    //type defined
+    "boolean": "boolean",
+    "string": "stirng",
+    "object": "object",
+    "function": "function",
+    "undefined": "undefined",
+    "null": "null",
+    "empty": "",
+    //value
+    "yes": "Y",
+    "no": "N",
+    "zero": "0",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "px": "px;",
+    "bype": "Byte;",
+    "kb": "KB;",
+    "mb": "MB;",
+    "amp": "&amp;",
+    "lg": "&lt;",
+    "gt": "&gt;",
+    "nbsp": "&nbsp;",
+    "quot": "&quot;",
+    "squot": "&#39;",
+    //tag
+    "br": "<br/>",
+    //mark
+    "sharp": "#",
+    "pipe": "|",
+    "comma": ",",
+    "dot": ".",
+    "dash": "-",
+    "equal": "=",
+    "at": "@",
+    "ampersand": "&",
+    "percent": "%",
+    "question": "?",
+    "underline": "_",
+    "slash": "/"
+};
+
 (function ($) {
     $.extend({
         /**
@@ -38,9 +81,9 @@
          * @return String
          **/
         getString(value) {
-            if (typeof (value) === "string") {
+            if ($.isString()) {
                 return value;
-            } else if (typeof (value) === "object") {
+            } else if ($.isPlainObject(value)) {
                 return JSON.stringify(value);
             } else {
                 return value;
@@ -56,11 +99,11 @@
         hasValue(value) {
             try {
                 switch (typeof (value)) {
-                    case "undefined":
-                    case "null":
+                    case WCODE.undefined:
+                    case WCODE.null:
                         return false;
                 }
-                if ($.trim(value) == "") {
+                if ($.trim(value) == WCODE.empty) {
                     return false;
                 }
                 return true;
@@ -102,7 +145,9 @@
          * @param value 비교값
          * @return Boolean
          **/
-        isTrue(value){return typeof (value) !== "undefined" && value === true;},
+        isTrue(value) {
+            return !$.isUndefined(value) && value === true;
+        },
 
         /**
          * false 여부
@@ -110,7 +155,49 @@
          * @param value 비교값
          * @return Boolean
          **/
-        isFalse(value) {return typeof (value) !== "undefined" && value === false;},
+        isFalse(value) {
+            return !$.isUndefined(value) && value === false;
+        },
+
+        /**
+         * 객체 여부
+         * @name $().isObject(value)
+         * @param value 비교값
+         * @return Boolean
+         **/
+        isObject(value) {
+            return typeof (value) === WCODE.object;
+        },
+
+        /**
+         * 스트링 여부
+         * @name $().isString(value)
+         * @param value 비교값
+         * @return Boolean
+         **/
+        isString(value) {
+            return typeof (value) === WCODE.string;
+        },
+
+        /**
+         * undefined 여부
+         * @name $().isUndefined(value)
+         * @param value 비교값
+         * @return Boolean
+         **/
+        isUndefined(value) {
+            return typeof (value) === WCODE.undefined;
+        },
+
+        /**
+         * boolean 여부
+         * @name $().isUndefined(value)
+         * @param value 비교값
+         * @return Boolean
+         **/
+        isBoolean(value) {
+            return typeof (value) === WCODE.boolean;
+        },
 
         /**
          * value에 값이 없을시 replaceString로 대체
@@ -119,7 +206,9 @@
          * @param replaceString 대체 문자
          * @return String
          **/
-        nvl(value, replaceString="") {return $.hasValue(value) ? value : replaceString;},
+        nvl(value, replaceString = WCODE.empty) {
+            return $.hasValue(value) ? value : replaceString;
+        },
 
         /**
          * 문자열 채우기
@@ -131,17 +220,17 @@
          * @return String
          */
         pad(value, len, addStr, isLeft) {
-            if (typeof addStr === "boolean") {
+            if ($.isBoolean(addStr)) {
                 isLeft = addStr;
-                addStr = "0";
+                addStr = WCODE.zero;
             }
             if ($.isFalse(isLeft)) {
                 while (len > value.length) {
-                    value += (addStr || "0");
+                    value += (addStr || WCODE.zero);
                 }
             } else {
                 while (len > value.length) {
-                    value = (addStr || "0") + value;
+                    value = (addStr || WCODE.zero) + value;
                 }
             }
             return value;
@@ -156,7 +245,9 @@
          * @param option gi
          * @return String
          */
-        replace(value, findString, replaceString, flag) {return value.replace(new RegExp(findString, (flag || "g")), replaceString);},
+        replace(value, findString, replaceString, flag) {
+            return value.replace(new RegExp(findString, (flag || "g")), replaceString);
+        },
 
         /**
          * 로그 출력
@@ -164,7 +255,7 @@
          * @param value 로그
          * @param tag 태그
          **/
-        wLog(value, tag="log") {
+        wLog(value, tag = "log") {
             if (window.console) {
                 console.log(`\n=====${tag}=====\n${($.isPlainObject(value) || $.isArray(value) ? JSON.stringify(value) : value)}\n====================`);
             } else {
@@ -178,7 +269,7 @@
          * @param value 메시지
          * @param delay 지연 밀리세컨드
          */
-        toast(value="", callback, delay=1000) {
+        toast(value = WCODE.empty, callback, delay = 1000) {
             if ($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
 
             $("body").append(`<div id="wjquery-toast">${value}</div>`);
@@ -186,16 +277,16 @@
                 sw = $("body").width(),
                 lp = Math.floor((sw - w) / 2);
 
-            $("#wjquery-toast").css("left", lp + "px").animate({
-                "opacity": 1
+            $("#wjquery-toast").css("left", lp + WCODE.px).animate({
+                "opacity": WCODE.one
             }, 800, function () {
                 const timeout = window.setTimeout($.proxy(function () {
                     $(this).animate({
-                        "opacity": 0
+                        "opacity": WCODE.zero
                     }, 800, function () {
                         window.clearTimeout(timeout);
                         $(this).remove();
-                        if(callback){
+                        if (callback) {
                             callback();
                         }
                     });
@@ -231,7 +322,7 @@
                             if ($("#dialog-message").attr("button-index")) {
                                 _option.callback($("#dialog-message").attr("button-index"));
                             } else {
-                                _option.callback(0);
+                                _option.callback(WCODE.zero);
                             }
 
                         }
@@ -240,7 +331,7 @@
                         text: _option.buttonText,
                         click: function () {
                             if (_option.callback) {
-                                $("#dialog-message").attr("button-index", 1);
+                                $("#dialog-message").attr("button-index", WCODE.one);
                             }
                             $("#dialog-message").dialog("close");
                         }
@@ -273,11 +364,11 @@
                     modal: _option.modal,
                     title: _option.title,
                     close: function (event, ui) {
-                        if (options.callback) {
+                        if (_option.callback) {
                             if ($("#dialog-message").attr("button-index")) {
-                                options.callback($("#dialog-message").attr("button-index"));
+                                _option.callback($("#dialog-message").attr("button-index"));
                             } else {
-                                options.callback(0);
+                                _option.callback(WCODE.zero);
                             }
 
                         }
@@ -286,7 +377,7 @@
                             text: _option.buttonText[0],
                             click: function () {
                                 if (_option.callback) {
-                                    $("#dialog-message").attr("button-index", 1);
+                                    $("#dialog-message").attr("button-index", WCODE.one);
                                 }
                                 $("#dialog-message").dialog("close");
                             }
@@ -295,7 +386,7 @@
                             text: _option.buttonText[1],
                             click: function () {
                                 if (_option.callback) {
-                                    $("#dialog-message").attr("button-index", 2);
+                                    $("#dialog-message").attr("button-index", WCODE.two);
                                 }
                                 $("#dialog-message").dialog("close");
                             }
@@ -313,7 +404,9 @@
          * @param state 개체의 길이지가 한개일 경우 여부
          * @return Boolean
          **/
-        isObject(state) {return $.isFalse(state) ? this.length == 1 : this.length > 0;},
+        isObject(state) {
+            return $.isFalse(state) ? this.length == 1 : this.length > 0;
+        },
 
         /**
          * 클래스 변경
@@ -324,7 +417,7 @@
          * @return this
          **/
         changeClass(className1, className2, state) {
-            if (typeof (state) === "boolean") {
+            if ($.isBoolean(state)) {
                 if (state) {
                     this.removeClass(className1).addClass(className2);
                 } else {
@@ -349,7 +442,7 @@
          **/
         scrollIntoView(container, duration) {
             //this.get(0).scrollIntoView(false);
-            if (typeof container === "object") {
+            if (container.isObject()) {
                 container.animate({
                     scrollTop: container.scrollTop() + this.offset().top - container.offset().top
                 }, duration || 500);
@@ -370,11 +463,12 @@
          **/
         wScrollTop(target, options) {
             const _option = $.extend({
-                  offset: 100,
-                  duration: 500
+                offset: 100,
+                duration: 500
             }, options || {});
             this.scroll(function () {
-                if ($(this).scrollTop() > _option.offset) {
+                const scrollTop = $(this).scrollTop();
+                if (scrollTop > _option.offset) {
                     target.fadeIn();
                 } else {
                     target.fadeOut();
@@ -382,8 +476,12 @@
 
                 if (_option.progressId) {
                     const height = $(this).prop('scrollHeight') - $(this).outerHeight(),
-                          scrolled = ($(this).scrollTop() / height) * 100;
-                    $("#" + _option.progressId).width(isNaN(scrolled) ? "0%" : scrolled + "%");
+                        scrolled = (scrollTop / height) * 100;
+                    $(WCODE.sharp + _option.progressId).width(isNaN(scrolled) ? WCODE.zero + WCODE.percent : scrolled + WCODE.percent);
+                }
+
+                if (_option.callback) {
+                    _option.callback(scrollTop);
                 }
             });
 
@@ -391,11 +489,11 @@
                 event.preventDefault();
                 if ($.isWindow(this[0])) {
                     $("html, body").animate({
-                        scrollTop: 0
+                        scrollTop: WCODE.zero
                     }, _option.duration);
                 } else {
                     this.animate({
-                        scrollTop: 0
+                        scrollTop: WCODE.zero
                     }, _option.duration);
                 }
             }, this));
@@ -421,7 +519,7 @@
                     });
 
                     $t.css("overflow", "hidden").after($m).on("keyup", function () {
-                        $m.html(String($t.val()).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />') + '.<br/>.');
+                        $m.html(String($t.val()).replace(/&/g, WCODE.amp).replace(/"/g, WCODE.quot).replace(/'/g, WCODE.squot).replace(/</g, WCODE.lt).replace(/>/g, WCODE.gt).replace(/\n/g, '<br />') + '.<br/>.');
                         if ($t.height() != $m.height()) {
                             $t.height($m.height());
                         }
@@ -435,14 +533,18 @@
          * @name $().outerhtml()
          * @return html 문자열
          */
-        outerHtml() {return $("<div/>").append($(this).clone()).html();},
+        outerHtml() {
+            return $("<div/>").append($(this).clone()).html();
+        },
 
         /**
          * xssVal
          * @name $().xssVal()
          * @return html 문자열
          */
-        xssVal() {return replaceString("htmlEscape", $(this).val());},
+        xssVal() {
+            return replaceString("htmlEscape", $(this).val());
+        },
 
         /**
          * 본문의 링크처리, 클릭처리를 막는다
@@ -481,7 +583,7 @@
                 }
             });
         },
-        
+
         /**
          * dataDraw
          * @name $().wDraw()
@@ -489,21 +591,73 @@
          * @return this
          **/
         dataDraw(data) {
-            $(this).find("[data-text-bind],[data-textbr-bind],[data-html-bind]").each(function(){
-                if($(this).attr("data-text-bind")){
-                    $(this).text(data?data[$(this).attr("data-text-bind")]||"":"");
-                }else if($(this).attr("data-textbr-bind")){
-                    $(this).html(replaceString("lf2br", removeHtmlTag(data?data[$(this).attr("data-textbr-bind")]||"":"")));
-                }else if($(this).attr("data-html-bind")){
-                    $(this).html(data?data[$(this).attr("data-html-bind")]||"":"");
+            $(this).find("[data-text-bind],[data-textbr-bind],[data-html-bind]").each(function () {
+                if ($(this).attr("data-text-bind")) {
+                    $(this).text(data ? data[$(this).attr("data-text-bind")] || WCODE.empty : WCODE.empty);
+                } else if ($(this).attr("data-textbr-bind")) {
+                    $(this).html(replaceString("lf2br", removeHtmlTag(data ? data[$(this).attr("data-textbr-bind")] || WCODE.empty : WCODE.empty)));
+                } else if ($(this).attr("data-html-bind")) {
+                    $(this).html(data ? data[$(this).attr("data-html-bind")] || WCODE.empty : WCODE.empty);
                 }
             });
 
             return this;
         },
 
+        /**
+         * wform
+         **/
         wform(method) {
             return WFORM[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        },
+
+        /**
+         * ajaxLoadStart
+         **/
+        ajaxLoadStart(type) {
+            const $target = this;
+            let $loading;
+
+            if ($target[0].tagName.toLowerCase() == "body") {
+                $loading = $('<div/>').appendTo($target)
+                    .addClass("ajax-body-loading");
+            } else {
+                $loading = null;
+                switch ($target.css("position")) {
+                    case "relative":
+                    case "absolute":
+                        $loading = $('<div/>').appendTo($target);
+                        break;
+                    default:
+                        switch ($target.parent().css("position")) {
+                            case "relative":
+                            case "absolute":
+                                break;
+                            default:
+                                $target.parent().css("position", "relative");
+
+                        }
+                        const position = $target.position();
+                        $loading = $('<div/>').appendTo($target.parent())
+                            .css({
+                                left: position.left,
+                                top: position.top
+                            });
+                }
+                $loading.css({
+                        width: $target.innerWidth(),
+                        height: $target.innerHeight()
+                    })
+                    .addClass(type == "button" ? "ajax-button-loading" : "ajax-container-loading");
+            }
+        },
+
+        /**
+         * ajaxLoadComplete
+         **/
+        ajaxLoadComplete: function (isComplete) {
+            $("div.ajax-body-loading, div.ajax-container-loading, div.ajax-button-loading", this).remove();
+            if (!isComplete) this.siblings("div.ajax-container-loading, div.ajax-button-loading").remove();
         }
     });
 
@@ -511,7 +665,7 @@
         function get(p1) {
             const $t = $(this);
             if ($t.is("input:radio")) {
-                return $t.filter(":checked").val() || "";
+                return $t.filter(":checked").val() || WCODE.empty;
             } else if ($t.is("input:checkbox")) {
                 return $t.filter(":checked").map(function () {
                     return this.value;
@@ -541,12 +695,12 @@
             }
         }
 
-        function trim($f){
+        function trim() {
             const $t = $(this);
             if ($t.is("input:text, textarea")) {
                 $t.val($.trim($t.val()));
-            }else if($t.is("form")){
-                $t.find("input:text, textarea").each(function(){
+            } else if ($t.is("form")) {
+                $t.find("input:text, textarea").each(function () {
                     $(this).val($.trim($(this).val()));
                 });
             }
@@ -577,6 +731,185 @@
 })(jQuery);
 
 
+var WJ = new(function () {})();
+WJ.popup = {
+    pool: [],
+    open(url, options = {}, windowName) {
+        const features = $.extend({
+            "channelmode": "no",
+            "directories": "no",
+            "fullscreen": "no",
+            "menubar": "no",
+            "scrollbars": "no",
+            "status": "no",
+            "titlebar": "no",
+            "resizable": "no",
+            "width": 300,
+            "height": 300
+        }, options);
+
+        if (!features.top) {
+            features.top = (window.innerHeight - features.height) / 2 + screenY;
+            features.left = (window.innerWidth - features.width) / 2 + screenX;
+        }
+
+        if (options.argument || options.callback) {
+            url += (url.indexOf(WCODE.question) == -1 ? WCODE.question : WCODE.ampersand) + "pcodes=" + randomCode(30).join("") + WCODE.ampersand + "poolIndex=" + WJ.popup.getLastPoolIndex();
+            WJ.popup.setPool({
+                argument: options.argument || {},
+                callback: options.callback || function () {}
+            });
+        }
+
+        return window.open(url, windowName || "windowName" + getTime(), wJson.toString(features, "=", ","));
+    },
+    close() {
+        window.close() || top.window.close();
+    },
+    getArgument(index) {
+        let result = null;
+        const openerWindow = opener || top.opener;
+        if (!index) {
+            index = getUrlArguments("poolIndex");
+        }
+
+        if (index != undefined && index > -1 && openerWindow) {
+            return openerWindow.WJ.popup.pool[index].argument
+        }
+
+        return result;
+    },
+    call(result = {}) {
+        const openerWindow = opener || top.opener,
+            index = getUrlArguments("poolIndex");
+
+        if (index != undefined && index > -1 && openerWindow) {
+            const o = openerWindow.WJ.popup.pool[index];
+            o.callback && o.callback(result);
+        }
+        setTimeout(function () {
+            WJ.popup.close();
+        }, 100);
+    },
+    getPool(index) {
+        return index ? WJ.popup.pool[index] : WJ.popup.pool;
+    },
+    setPool(item) {
+        WJ.popup.pool.push(item);
+        return WJ.popup.getLastPoolIndex();
+    },
+    getLastPoolIndex() {
+        return WJ.popup.pool.length;
+    }
+};
+
+WJ.showDialog = function (options) {
+    if (window != top) {
+        return top.WJ.dialog.show(options);
+    }
+    const offset = {
+        width: -10,
+        height: -10
+    };
+    const viewSize = {
+        width: $(document).width() + offset.width,
+        height: $(document).height() + offset.height
+    };
+    if (options["width"] && options.width > viewSize.width) options.width = viewSize.width;
+    if (options["height"] && options.height > viewSize.height) options.height = viewSize.height;
+    if (options["isDestroy"] != true) options.isDestroy = true;
+    return new WJ.Dialog(options);
+}
+
+WJ.Dialog = function (options) {
+    let dialog = this;
+    this.container = $("<div/>").appendTo(document.body);
+    this.destroy = false;
+    this.fnCallback = null;
+    this._options = $.extend({
+        title: "Dialog Window",
+        maxHeight: 600,
+        maxWidth: 980,
+        width: 300,
+        modal: false,
+        isDestroy: true,
+        params: null,
+        callback: null,
+        scroll: "auto"
+    }, options);
+
+    if (this._options.url) {
+        this._options.create = function () {
+            setTimeout(function () {
+                dialog.container.ajaxLoadStart();
+            }, 1);
+            let ifrm = $('<iframe style="width:100%; height:98%; border-width:0;" scrolling="' + dialog._options.scroll + '" frameborder="0" src="' + dialog._options.url + '"/>').appendTo(dialog.container);
+            ifrm.bind("load", function () {
+                const frmBody = ifrm[0].contentWindow || ifrm[0].contentDocument;
+                if (frmBody.fnCaller) frmBody.fnCaller(dialog._options.params, dialog);
+                setTimeout(function () {
+                    $("body", frmBody.document).css("height", "auto");
+                    dialog.container.ajaxLoadComplete();
+                }, 200);
+
+                if (dialog._options.scroll.toLowerCase() == "no") {
+                    setTimeout(function () { // dialog resize
+                        var offsetHeight = 40;
+                        var frmHeight = $(frmBody.document).height();
+
+                        if (dialog.container.dialog("option", "height") - offsetHeight < frmHeight) {
+                            if (dialog.container.dialog("option", "maxHeight") - offsetHeight - 11 > frmHeight) {
+                                dialog.container.dialog("option", "height", frmHeight + offsetHeight + 11);
+                            } else {
+                                ifrm.attr("scroll", "auto");
+                            }
+                        }
+                    }, 100);
+                }
+            });
+        };
+    }
+
+    if (this._options.isDestroy == true) {
+        this._options.defineClose = this._options.close;
+        this._options.close = function () {
+            if (dialog.destroy == false) {
+                dialog._options.defineClose && dialog._options.defineClose();
+                dialog.close();
+            }
+        };
+    }
+
+    this.fnCallback = this._options.callback;
+    this.container.dialog(this._options);
+};
+
+WJ.Dialog.prototype.callback = function (res) {
+    if (this.fnCallback) this.fnCallback(res);
+};
+WJ.Dialog.prototype.open = function () {
+    this.container.dialog("open");
+};
+WJ.Dialog.prototype.close = function () {
+    const dialog = this;
+    if (dialog.container.dialog("isOpen")) {
+        dialog.container.dialog("close");
+    }
+
+    setTimeout(function () {
+        if (dialog._options.isDestroy == true && dialog.destroy != true) {
+            $.each(dialog.container.find("iframe"), function () {
+                $(this).contents().find("object").remove();
+                $(this).remove();
+            });
+            dialog.destroy = true;
+            dialog.container.dialog("destroy");
+            dialog.container.remove();
+        }
+    }, 10);
+};
+
+
 //--------------------------------------------------------------------
 // lang
 //--------------------------------------------------------------------
@@ -586,8 +919,8 @@
  * @param delim 구분자
  * @return String
  */
-function getFirstValue(value, delim) {
-    return value.indexOf(delim) != -1 ? value.substring(0, value.indexOf(delim)) : "";
+function getFirstValue(value, delim=WCODE.dot) {
+    return value.indexOf(delim) != -1 ? value.substring(0, value.indexOf(delim)) : WCODE.empty;
 }
 
 /**
@@ -596,8 +929,8 @@ function getFirstValue(value, delim) {
  * @param delim 구분값
  * @return String
  */
-function getLastValue(value, delim) {
-    return value.indexOf(delim) != -1 ? value.substring(value.lastIndexOf(delim) + 1) : "";
+function getLastValue(value,  delim=WCODE.dot) {
+    return value.indexOf(delim) != -1 ? value.substring(value.lastIndexOf(delim) + 1) : WCODE.empty;
 }
 
 /**
@@ -607,7 +940,7 @@ function getLastValue(value, delim) {
  * @param delim 구분자
  * @return String
  */
-function cutString(value, len, delim="..") {
+function cutString(value, len, delim = "..") {
     if (value.length > len) {
         return value.substring(0, len) + delim;
     } else {
@@ -621,8 +954,9 @@ function cutString(value, len, delim="..") {
  * @return String
  */
 function addComma(value) {
-    let rst = String(), v = $.trim(value);
-    for (let i = 0, stop = v.length; i < stop; i++) rst = ((i % 3) == 0) && i != 0 ? v.charAt((stop - i) - 1) + "," + rst : v.charAt((stop - i) - 1) + rst;
+    let rst = String(),
+        v = $.trim(value);
+    for (let i = 0, stop = v.length; i < stop; i++) rst = ((i % 3) == 0) && i != 0 ? v.charAt((stop - i) - 1) + WCODE.comma + rst : v.charAt((stop - i) - 1) + rst;
     return rst;
 }
 
@@ -676,9 +1010,9 @@ function mappingValue(value, arr) {
     if (!$.hasValue(arr)) {
         return value;
     }
-    const _arr = typeof (arr) === "string" ? [arr] : arr;
-    while ((i = value.indexOf("@", i)) != -1) {
-        if (_arr[n] == null) _arr[n] = "";
+    const _arr = $.isString(arr) ? [arr] : arr;
+    while ((i = value.indexOf(WCODE.at, i)) != -1) {
+        if (_arr[n] == null) _arr[n] = WCODE.empty;
         value = value.substr(0, i) + String(_arr[n]) + value.substring(i + 1);
         i = i + String(_arr[n++]).length;
     }
@@ -691,8 +1025,7 @@ function mappingValue(value, arr) {
  * @return String
  */
 function removeHtmlTag(value) {
-    const _value = typeof value === "object" ? value.html() : value;
-    return $("<div/>").html(_value).text();
+    return $("<div/>").html($.isObject(object) ? value.html() : value).text();
 }
 
 /**
@@ -704,7 +1037,7 @@ function removeHtmlTag(value) {
  * @return boolean or String or PlainObject
  */
 function hasValueInArray(arr, value, key, isBoolean) {
-    if (typeof (isBoolean) === "undefined") isBoolean = true;
+    if ($.isUndefined(isBoolean)) isBoolean = true;
     for (let i in arr) {
         if ((key ? arr[i][key] : arr[i]) == value) {
             return isBoolean ? true : arr[i];
@@ -729,11 +1062,11 @@ function initCap(value) {
  */
 function formatFileSize(fileSize) {
     if (fileSize < 1024) {
-        return fileSize + "Byte";
+        return fileSize + WCODE.byte;
     } else if (fileSize < 1048576) {
-        return new Number(fileSize / 1024).toFixed(2) + "KB";
+        return new Number(fileSize / 1024).toFixed(2) + WCODE.kb;
     } else {
-        return new Number(fileSize / 1048576).toFixed(2) + "MB";
+        return new Number(fileSize / 1048576).toFixed(2) + WCODE.mb;
     }
 }
 
@@ -764,8 +1097,65 @@ function setTmpl(a) {
  */
 function drawTmplList(c, t, a, f) {
     if (!$.isArray(a)) return;
-    if (typeof (c) === "string") c = $(c);
+    if ($.isString(c)) c = $(c);
     $.tmpl(t, $.map(a, f)).appendTo(c);
+}
+
+/**
+ * getUrlArguments
+ * @param name String
+ */
+function getUrlArguments(name) {
+    let result = undefined,
+        paramSplit,
+        url = location.href;
+
+    if ((paramSplit = url.indexOf(WCODE.question)) > -1) {
+        const bookmarkPosition = url.indexOf(WCODE.sharp),
+            paramString = url.substring(paramSplit + 1, bookmarkPosition > -1 ? bookmarkPosition : url.length),
+            params = paramString.split(WCODE.ampersand);
+
+        result = name ? undefined : {};
+        for (let i = 0; i < params.length; i++) {
+            const param = params[i].split(WCODE.equal);
+            if (name) {
+                if (name == param[0]) {
+                    result = isNaN(param[1]) ? param[1] : parseInt(param[1], 10);
+                    break;
+                }
+            } else {
+                result[param[0]] = isNaN(param[1]) ? param[1] : parseInt(param[1], 10);
+            }
+        }
+    }
+
+    return result;
+}
+
+/**
+ * getBrowser
+ */
+function getBrowser() {
+    let agent = navigator.userAgent.toLowerCase(),
+        browser;
+    if (agent.indexOf('msie') > -1) {
+        browser = 'ie' + agent.match(/msie (\d+)/)[1]
+    } else if (agent.indexOf('trident') > -1) {
+        browser = 'ie11'
+    } else if (agent.indexOf('edge') > -1) {
+        browser = 'edge'
+    } else if (agent.indexOf('firefox') > -1) {
+        browser = 'firefox'
+    } else if (agent.indexOf('opr') > -1) {
+        browser = 'opera'
+    } else if (agent.indexOf('chrome') > -1) {
+        browser = 'chrome'
+    } else if (agent.indexOf('safari') > -1) {
+        browser = 'safari'
+    } else {
+        browser = 'other'
+    }
+    return browser;
 }
 
 //--------------------------------------------------------------------
@@ -776,9 +1166,8 @@ function drawTmplList(c, t, a, f) {
  * @param delim
  * @return String
  */
-function getFormatDate(dt, delim) {
-    if (typeof (delim) === "undefined") delim = "";
-    return dt.getFullYear() + delim + $.pad(String(dt.getMonth() + 1), 2, "0") + delim + $.pad(String(dt.getDate()), 2, "0");
+function getFormatDate(dt, delim = WCODE.empty) {
+    return dt.getFullYear() + delim + $.pad(String(dt.getMonth() + 1), 2, WCODE.zero) + delim + $.pad(String(dt.getDate()), 2, WCODE.zero);
 }
 
 /**
@@ -799,7 +1188,7 @@ function getToday(delim) {
  * @return String
  */
 function getTargetDate(dt, mode, len, delim) {
-    if (typeof (dt) == "string") {
+    if ($.isString(dt)) {
         const s = getPatternString("number", dt);
         dt = new Date(parseInt(s.substring(0, 4), 10), parseInt(s.substring(4, 6), 10) - 1, parseInt(s.substring(6, 8), 10));
     }
@@ -856,7 +1245,7 @@ function isPattern(patternName, value) {
  * @param addPatternString 패턴에 추가될 문자
  * @return String
  */
-function getPatternString(patternName, value, addPatternString="") {
+function getPatternString(patternName, value, addPatternString = WCODE.empty) {
     const pattern = {
         number: "[^0-9" + addPatternString + "]",
         alphabat: "[^a-zA-Z" + addPatternString + "]",
@@ -864,8 +1253,8 @@ function getPatternString(patternName, value, addPatternString="") {
         hangul: "[^가-힣" + addPatternString + "]"
     };
 
-    if (!pattern[patternName]) return "";
-    return value.replace(new RegExp(pattern[patternName], "g"), "");
+    if (!pattern[patternName]) return WCODE.empty;
+    return value.replace(new RegExp(pattern[patternName], "g"), WCODE.empty);
 }
 
 /**
@@ -876,15 +1265,15 @@ function getPatternString(patternName, value, addPatternString="") {
  */
 function getPatternArray(patternName, value) {
     const pattern = {
-            p1: {
-                regexp: /#[0-9a-zA-Z]+#/g,
-                replace: "#"
-            }
-        };
+        p1: {
+            regexp: /#[0-9a-zA-Z]+#/g,
+            replace: WCODE.sharp
+        }
+    };
     let result = [];
 
     while ((match = pattern[patternName].regexp.exec(value)) !== null) {
-        result.push(pattern[patternName].replace ? $.replace(match.toString(), pattern[patternName].replace, "") : match.toString());
+        result.push(pattern[patternName].replace ? $.replace(match.toString(), pattern[patternName].replace, WCODE.empty) : match.toString());
     }
     return result;
 }
@@ -931,7 +1320,7 @@ function replaceRegExpContentImgUrl(s) {
         ];
 
     const re = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/g,
-          re2 = /src="|'/g;
+        re2 = /src="|'/g;
     return s.replace(re, function (match) {
         let b = false;
         for (let i = 0; targets.length > i; i++) {
@@ -943,32 +1332,6 @@ function replaceRegExpContentImgUrl(s) {
 
         return b ? match.replace(/\?/g, "_Q_").replace(/\&amp;/g, "_A_").replace(/\&/g, "_A_").replace(re2, '$&' + mobileApi).replace("https", "http") : match;
     });
-}
-
-/**
- * getBrowser
- */
-function getBrowser(){
-    let agent = navigator.userAgent.toLowerCase(),
-        browser; 
-    if (agent.indexOf('msie') > -1) { 
-        browser = 'ie' + agent.match(/msie (\d+)/)[1] 
-    }else if(agent.indexOf('trident') > -1) {
-        browser = 'ie11' 
-    }else if(agent.indexOf('edge') > -1) {
-        browser = 'edge' 
-    }else if(agent.indexOf('firefox') > -1) {
-        browser = 'firefox' 
-    }else if(agent.indexOf('opr') > -1) {
-        browser = 'opera' 
-    }else if(agent.indexOf('chrome') > -1) {
-        browser = 'chrome' 
-    }else if(agent.indexOf('safari') > -1) {
-        browser = 'safari' 
-    }else {
-        browser = 'other'
-    }
-    return browser;
 }
 
 //--------------------------------------------------------------------
@@ -986,9 +1349,9 @@ function dropDown($1, $2, options) {
             delay: 500
         }, options || {});
 
-        $('#' + $1.attr("id") + ',' + '#' + $2.attr("id")).hover(
+        $(WCODE.sharp + $1.attr("id") + WCODE.comma + WCODE.sharp + $2.attr("id")).hover(
             function () {
-                if (typeof (_timeout) !== "undefined") {
+                if (!$.isUndefined(_timeout)) {
                     window.clearTimeout(_timeout);
                 }
                 $2.show(_options.show);
@@ -1018,7 +1381,7 @@ function dropDown($1, $2, options) {
  * @return Boolean
  */
 function doFunction(s) {
-    if (typeof (window[s]) == "function") {
+    if (typeof (window[s]) == WCODE.function) {
         window[s].apply(null, Array.prototype.slice.call(arguments, 1));
         return true;
     } else {
@@ -1033,7 +1396,7 @@ function doFunction(s) {
  * @param arguments 인자값들
  */
 function delayFunction(functionName, wait) {
-    if (typeof functionName == "function") {
+    if (typeof functionName == WCODE.function) {
         return setTimeout(functionName, wait);
     } else {
         const args = Array.prototype.slice.call(arguments, 2);
@@ -1048,7 +1411,7 @@ function delayFunction(functionName, wait) {
  * @param url 소스 경로
  */
 function loadScripts(url, callback) {
-    const _url = typeof (url) === "string" ? [url] : url;
+    const _url = $.isString(url) ? [url] : url;
     _url.forEach(function (value, index, array) {
         const _script = document.createElement('script');
         _script.charset = "utf-8";
@@ -1070,7 +1433,7 @@ function loadScripts(url, callback) {
  * @param url 소스 경로
  */
 function loadStyles(url) {
-    const _url = typeof (url) === "string" ? [url] : url;
+    const _url = $.isString(url) ? [url] : url;
     _url.forEach(function (value, index, array) {
         const _link = document.createElement("link");
         _link.type = "text/css";
@@ -1099,7 +1462,7 @@ const base62 = new(function () {
     }
 
     function encode(num) {
-        let encodedStr = '';
+        let encodedStr = WCODE.empty;
         while (num > 0) {
             encodedStr = table.charAt(num % 62) + encodedStr;
             num = Math.floor(num / 62);
@@ -1150,12 +1513,12 @@ const wJson = new(function () {
             if ($.hasValue(result[key])) {
                 if ($.isArray(result[key])) {
                     result[key] = [];
-                } else if (typeof (result[key]) === "object") {
+                } else if ($.isObject(result[key])) {
                     result[key] = {};
                 } else if ($.isNumeric(result[key])) {
                     result[key] = 0;
                 } else {
-                    result[key] = "";
+                    result[key] = WCODE.empty;
                 }
             }
         });
@@ -1164,7 +1527,7 @@ const wJson = new(function () {
 
     function keys(json) {
         let result = [];
-        if (typeof (json) === "object") {
+        if ($.isObject(json)) {
             for (let key in json) result.push(key);
         }
         return result;
@@ -1172,7 +1535,7 @@ const wJson = new(function () {
 
     function values(json) {
         let result = [];
-        if (typeof (json) === "object") {
+        if ($.isObject(json)) {
             for (let key in json) result.push(json[key]);
         }
         return result;
@@ -1195,12 +1558,21 @@ const wJson = new(function () {
         });
     }
 
+    function toString(json, delm = WCODE.equal, delm2 = WCODE.empty) {
+        let sb = new stringBuffer();
+        for (let key in json) {
+            sb.append(key + delm + json[key]);
+        }
+        return sb.toString(delm2);
+    }
+
     return {
         init: init,
         keys: keys,
         values: values,
         clone: clone,
-        sort: sort
+        sort: sort,
+        toString: toString
     };
 });
 
@@ -1209,7 +1581,7 @@ const wJson = new(function () {
  */
 const lStorage = {
     surport: function () {
-        return typeof (window.localStorage) === "object";
+        return $.isObject(window.localStorage);
     },
     exist: function (key) {
         const b = window.localStorage && window.localStorage[key] ? true : false;
@@ -1225,7 +1597,7 @@ const lStorage = {
             if (window.localStorage[key]) {
                 result = toJson ? $.parseJSON(window.localStorage.getItem(key)) : window.localStorage.getItem(key);
             } else {
-                result = toJson ? {} : "";
+                result = toJson ? {} : WCODE.empty;
             }
 
             if (isDel) {
@@ -1279,7 +1651,7 @@ const lStorage = {
  */
 const sStorage = {
     surport: function () {
-        return typeof (window.sessionStorage) === "object";
+        return $.isObject(window.sessionStorage);
     },
     exist: function (key) {
         const b = window.sessionStorage && window.sessionStorage[key] ? true : false;
@@ -1295,7 +1667,7 @@ const sStorage = {
             if (window.sessionStorage[key]) {
                 result = toJson ? $.parseJSON(window.sessionStorage.getItem(key)) : window.sessionStorage.getItem(key);
             } else {
-                result = toJson ? {} : "";
+                result = toJson ? {} : WCODE.empty;
             }
 
             if (isDel) {
@@ -1355,7 +1727,7 @@ function stringBuffer() {
     this.size = function () {
         return buffer.length;
     }
-    this.toString = function (delm) {
-        return buffer.join(delm || "");
+    this.toString = function (delm = WCODE.empty) {
+        return buffer.join(delm);
     }
 }

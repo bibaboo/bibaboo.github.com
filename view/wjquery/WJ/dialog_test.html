@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>popup test</title>
+<!-- css -->
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/js/lib/wjquery/wjquery.css">
+<link rel="stylesheet" type="text/css" href="/js/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+<!-- js -->  
+<script type="text/javascript" src="/js/lib/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/lib/wjquery/wjquery.js"></script>
+<script type="text/javascript" src="/js/variable.js"></script>
+<script>
+	(function ($) {
+		let dialogWindow; 
+		$(document).ready(function () {
+			fnCaller = function (params, dialog) {
+				dialogWindow = dialog;
+        		if(params && params.data) {
+					$("#test").html(params.data);
+				}
+			};
+
+			$("#saveButton").click(function(){
+                dialogWindow.callback({"data": "dialog data.."});
+                dialogWindow.close();
+            });
+            
+            //- close button  
+            $("#closeButton").click(function(){
+                dialogWindow.close();
+            });
+		});
+	})(jQuery);
+</script>  
+</head>
+<body style="text-align:center;padding-top:50px;">
+	<h1>dialog test</h1><br/><br/>
+	data in argument : <span id="test"></span></br></br>
+	<button id="saveButton" type="button">ok</button>&nbsp;
+	<button id="closeButton" type="button">close</button>
+</body>
+</html>
