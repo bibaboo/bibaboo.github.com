@@ -519,7 +519,7 @@ const WCODE = {
                     });
 
                     $t.css("overflow", "hidden").after($m).on("keyup", function () {
-                        $m.html(String($t.val()).replace(/&/g, WCODE.amp).replace(/"/g, WCODE.quot).replace(/'/g, WCODE.squot).replace(/</g, WCODE.lt).replace(/>/g, WCODE.gt).replace(/\n/g, '<br />') + '.<br/>.');
+                        $m.html(String($t.val()).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br />') + '.<br/>.');
                         if ($t.height() != $m.height()) {
                             $t.height($m.height());
                         }
@@ -1286,9 +1286,9 @@ function getPatternArray(patternName, value) {
  */
 function replaceString(targetName, value) {
     if (targetName == "htmlEscape") {
-        return value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     } else if (targetName == "htmlUnEscape") {
-        return value.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        return value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     } else if (targetName == "lf2br") {
         return $.replace($.replace(value, "\r\n", "<br/>"), "\n", "<br/>");
     } else if (targetName == "br2lf") {
