@@ -850,6 +850,17 @@ const moduleData = [
                 ]
             },
             {
+                text: "react",
+                data: {
+                    folder: "/view/note/react/"
+                },
+                nodes: [{
+                        text: "setting",
+                        id: "reactSetting"
+                    }
+                ]
+            },
+            {
                 text: "tool",
                 data: {
                     folder: "/view/note/tool/"

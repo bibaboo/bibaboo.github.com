@@ -132,167 +132,201 @@
 							// 	"description": "Log output to console"
 							// }
 						
-							//jstl
-							"jstl.url": {
-								"prefix": "jstl.url",
-								"body": [
-									"&lt;c:url value=\"$url\"/&gt;"
-								],
-								"description": "jstl.url"
-							},
-							"jstl.cout": {
-								"prefix": "jstl.cout",
-								"body": [
-									"&lt;c:out value=\"${$key}\"/&gt;"
-								],
-								"description": "jstl.cout"
-							},
-							"jstl.if": {
-								"prefix": "jstl.if",
-								"body": [
-									"&lt;c:if test=\"${$key == '$val'}\"&gt;",
-									"&lt;/c:if&gt;"
-								],
-								"description": "jstl.cout"
-							},
-							"jstl.set": {
-								"prefix": "jstl.set",
-								"body": [
-									"&lt;c:set var=\"$key\" value=\"${$val}\"/&gt;",
-								],
-								"description": "jstl.set"
-							},
-							"jstl.choose": {
-								"prefix": "jstl.choose",
-								"body": [
-									"&lt;c:choose&gt;",
-									"\t&lt;c:when test=\"${empty $list}\"&gt;",
-									"\t\t",
-									"\t&lt;/c:when&gt;",
-									"\t&lt;c:otherwise&gt;",
-									"\t\t&lt;c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\"&gt;",
-									"\t\t\t&lt;div&gt;&lt;c:out value='${item.key}'&gt;&lt;/c:out&gt;",
-									"\t\t&lt;/c:forEach&gt;",
-									"\t&lt;/c:otherwise&gt;",
-									"&lt;/c:choose&gt;"
-								],
-								"description": "jstl.choose"
-							},
-							"jstl.foreach": {
-								"prefix": "jstl.foreach",
-								"body": [
-									"&lt;c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\"&gt;",
-									"\t&lt;div&gt;&lt;c:out value=\"${item.key}\"/&gt;",
-									"&lt;/c:forEach&gt;",
-								],
-								"description": "jstl.foreach"
-							},
-							"jstl.fn.substring": {
-								"prefix": "jstl.fn.substring",
-								"body": [
-									"&lt;c:out value='\\${fn:substring($key, 0, 1)}'/&gt;"
-								],
-								"description": "jstl.fn.substring"
-							},
-							"jstl.fn.split": {
-								"prefix": "jstl.fn.split",
-								"body": [
-									"&lt;c:set var=\"$var\" value=\"\\${fn:split($key, ',')}\"/&gt;",
-									"&lt;c:if test=\"${$var[0] eq 1}\"&gt;",
-									"&lt;/c:if&gt;"
-								],
-								"description": "jstl.fn.split"
-							},
-							"jstl.fn.replace": {
-								"prefix": "jstl.fn.replace",
-								"body": [
-									"&lt;% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %&gt;",
-									"&lt;c:out value=\"\\${fn:replace(fn:escapeXml(apprLinereply.contents), newLineChar, '&lt;br/&gt;')}\"  escapeXml='false'/&gt;"
-								],
-								"description": "jstl.fn.replace"
-							},
+							 //jstl
+							 "jstl.url": {
+						        "prefix": "jstl.url",
+						        "body": [
+						            "<c:url value=\"$url\"/>"
+						        ],
+						        "description": "jstl.url"
+						    },
+						    "jstl.cout": {
+						        "prefix": "jstl.cout",
+						        "body": [
+						            "<c:out value=\"${$key}\"/>"
+						        ],
+						        "description": "jstl.cout"
+						    },
+						    "jstl.if": {
+						        "prefix": "jstl.if",
+						        "body": [
+						            "<c:if test=\"${$key == '$val'}\">",
+						            "</c:if>"
+						        ],
+						        "description": "jstl.cout"
+						    },
+						    "jstl.set": {
+						        "prefix": "jstl.set",
+						        "body": [
+						            "<c:set var=\"$key\" value=\"${$val}\"/>",
+						        ],
+						        "description": "jstl.set"
+						    },
+						    "jstl.choose": {
+						        "prefix": "jstl.choose",
+						        "body": [
+						            "<c:choose>",
+						            "\t<c:when test=\"${empty $list}\">",
+						            "\t\t",
+						            "\t</c:when>",
+						            "\t<c:otherwise>",
+						            "\t\t<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
+						            "\t\t\t<div><c:out value='${item.key}'></c:out>",
+						            "\t\t</c:forEach>",
+						            "\t</c:otherwise>",
+						            "</c:choose>"
+						        ],
+						        "description": "jstl.choose"
+						    },
+						    "jstl.foreach": {
+						        "prefix": "jstl.foreach",
+						        "body": [
+						            "<c:forEach var=\"item\" items=\"${$list}\" varStatus=\"status\">",
+						            "\t<div><c:out value=\"${item.key}\"/></div>",
+						            "</c:forEach>",
+						        ],
+						        "description": "jstl.foreach"
+						    },
+						    "jstl.fn.substring": {
+						        "prefix": "jstl.fn.substring",
+						        "body": [
+						            "<c:out value='\\${fn:substring($key, 0, 1)}'/>"
+						        ],
+						        "description": "jstl.fn.substring"
+						    },
+						    "jstl.fn.split": {
+						        "prefix": "jstl.fn.split",
+						        "body": [
+						            "<c:set var=\"$var\" value=\"\\${fn:split($key, ',')}\"/>",
+						            "<c:if test=\"${$var[0] eq 1}\">",
+						            "</c:if>"
+						        ],
+						        "description": "jstl.fn.split"
+						    },
+						    "jstl.fn.replace": {
+						        "prefix": "jstl.fn.replace",
+						        "body": [
+						            "<% pageContext.setAttribute(\"newLineChar\", \"\\n\"); %>",
+						            "<c:out value=\"\\${fn:replace(fn:escapeXml(apprLinereply.contents), newLineChar, '<br/>')}\"  escapeXml='false'/>"
+						        ],
+						        "description": "jstl.fn.replace"
+						    },
+						 
+						    //spring
+						    "spring.bind": {
+						        "prefix": "spring.bind",
+						        "body": [
+						            "<spring:bind path=\"$key\">",
+						            "\t<input name=\"<c:out value='${status.expression}'/>\" type=\"text\" value=\"<c:out value='${status.value}'/>\" />",
+						            "</spring:bind>"
+						        ],
+						        "description": "spring.bind"
+						    },
+						 
+						    "spring.message": {
+						        "prefix": "spring.message",
+						        "body": [
+						            "<spring:message code=\"$key\"/>"
+						        ],
+						        "description": "spring.message"
+						    },
 						
-							//spring
-							"spring.bind": {
-								"prefix": "spring.bind",
-								"body": [
-									"&lt;spring:bind path=\"$key\"&gt;",
-									"\t&lt;input name=\"&lt;c:out value='${status.expression}'/&gt;\" type=\"text\" value=\"&lt;c:out value='${status.value}'/&gt;\" /&gt;",
-									"&lt;/spring:bind&gt;"
-								],
-								"description": "spring.bind"
-							},
-						
-							"spring.message": {
-								"prefix": "spring.message",
-								"body": [
-									"&lt;spring:message code=\"$key\"/&gt;"
-								],
-								"description": "spring.message"
-							},
-						
-							"spring.eval": {
-								"prefix": "spring.eval",
-								"body": [
-									"&lt;spring:eval expression=\"@propCommon['$key']\" var=\"$val\"/&gt;"
-								],
-								"description": "spring.eval"
-							},
-						
-							//wf.tld
-							"wf.tld.paging": {
-								"prefix": "wf.tld.paging",
-								"body": [
-									"&lt;wf:paging currentPage=\"${searchCondition.pageIndex}\" totalCount=\"${searchCondition.recordCount}\" listSize=\"${searchCondition.pagePerRecord}\" pageCount=\"${searchCondition.paginationBlock}\"/&gt;",
-								],
-								"description": "wf.tld.paging"
-							},
-							"wf.tld.pagePerRecord": {
-								"prefix": "wf.tld.pagePerRecord",
-								"body": [
-									"&lt;wf:pagePerRecord current=\"${searchCondition.pagePerRecord}\" callback=\"doSearch\"/&gt;"
-								],
-								"description": "wf.tld.pagePerRecord"
-							},
-							"wf.tld.selectBox": {
-								"prefix": "wf.tld.selectBox",
-								"body": [
-									"&lt;wf:selectBox id=\"$id\" name=\"$name\" value=\"$value\" title=\"$title\"  msgTitle=\"$msgTitle\"  current=\"$current\"  className=\"$className\"  callback=\"$callback\"/&gt;"
-								],
-								"description": "wf.tld.selectBox"
-							},
-							"wf.tld.classVal": {
-								"prefix": "wf.tld.classVal",
-								"body": [
-									"&lt;wf:classVal className=\"$className\" fieldName=\"$fieldName\"/&gt;"
-								],
-								"description": "wf.tld.classVal"
-							},
-							"wf.tld.snippet.loading": {
-								"prefix": "wf.tld.snippet.loading",
-								"body": [
-									"&lt;wf:snippet name=\"loading\"/&gt;"
-								],
-								"description": "wf.tld.snippet.loading"
-							},
-						
-							//wf.snippet
-							"wf.snippet.colorPoint": {
-								"prefix": "wf.snippet.colorPoint",
-								"body": [
-									"&lt;span class=\"colorPoint\"&gt;*&lt;/span&gt;"
-								],
-								"description": "wf.snippet.colorPoint"
-							},
-							"wf.snippet.dot": {
-								"prefix": "wf.snippet.dot",
-								"body": [
-									"&lt;img src=\"&lt;c:url value='${\"/base/images/icon/ico-blank.gif\"}'/&gt;\" width=\"3\" height=\"3\" class=\"bg333333\"&gt;"
-								],
-								"description": "wf.snippet.dot"
-							}
-						
-							
+							"spring.message.arguments": {
+							        "prefix": "spring.message.arguments",
+							        "body": [
+							            "<spring:message code=\"$key\" arguments=\"${$arg1}\" />"
+							        ],
+							        "description": "spring.message.arguments"
+							    },
+						 
+						    "spring.eval": {
+						        "prefix": "spring.eval",
+						        "body": [
+						            "<spring:eval expression=\"@propCommon['$key']\" var=\"$val\"/>"
+						        ],
+						        "description": "spring.eval"
+						    },
+						 
+						    //wf.tld
+						    "wf.tld.paging": {
+						        "prefix": "wf.tld.paging",
+						        "body": [
+						            "<wf:paging currentPage=\"${searchCondition.pageIndex}\" totalCount=\"${searchCondition.recordCount}\" listSize=\"${searchCondition.pagePerRecord}\" pageCount=\"${searchCondition.paginationBlock}\"/>",
+						        ],
+						        "description": "wf.tld.paging"
+						    },
+						    "wf.tld.pagePerRecord": {
+						        "prefix": "wf.tld.pagePerRecord",
+						        "body": [
+						            "<wf:pagePerRecord current=\"${searchCondition.pagePerRecord}\" callback=\"doSearch\"/>"
+						        ],
+						        "description": "wf.tld.pagePerRecord"
+						    },
+						    "wf.tld.selectBox": {
+						        "prefix": "wf.tld.selectBox",
+						        "body": [
+						            "<wf:selectBox id=\"$id\" name=\"$name\" value=\"$value\" title=\"$title\"  msgTitle=\"$msgTitle\"  current=\"$current\"  className=\"$className\"  callback=\"$callback\"/>"
+						        ],
+						        "description": "wf.tld.selectBox"
+						    },
+						    "wf.tld.classVal": {
+						        "prefix": "wf.tld.classVal",
+						        "body": [
+						            "<wf:classVal className=\"$className\" fieldName=\"$fieldName\"/>"
+						        ],
+						        "description": "wf.tld.classVal"
+						    },
+							"wf.tld.message": {
+						        "prefix": "wf.tld.message",
+						        "body": [
+						            "<wf:message code=\"$code\" codeArguments=\"$codeArguments\"/>"
+						        ],
+						        "description": "wf.tld.message"
+						    },
+						    "wf.tld.snippet.loading": {
+						        "prefix": "wf.tld.snippet.loading",
+						        "body": [
+						            "<wf:snippet name=\"loading\"/>"
+						        ],
+						        "description": "wf.tld.snippet.loading"
+						    },
+							"wf.tld.snippet.noDataTr": {
+						        "prefix": "wf.tld.snippet.noDataTr",
+						        "body": [
+						            "<wf:snippet name=\"noDataTr\" val1=\"$val1\"/>"
+						        ],
+						        "description": "wf.tld.snippet.noDataTr"
+						    },
+						 
+						    //wf.snippet
+						    "wf.snippet.colorPoint": {
+						        "prefix": "wf.snippet.colorPoint",
+						        "body": [
+						            "<span class=\"colorPoint\">*</span>"
+						        ],
+						        "description": "wf.snippet.colorPoint"
+						    },
+						    "wf.snippet.dot": {
+						        "prefix": "wf.snippet.dot",
+						        "body": [
+						            "<img src=\"<c:url value='${\"/base/images/icon/ico-blank.gif\"}'/>\" width=\"3\" height=\"3\" class=\"bg333333\">"
+						        ],
+						        "description": "wf.snippet.dot"
+						    },
+							"wf.download": {
+						        "prefix": "wf.download",
+						        "body": [
+						            "<wf:download fileDataList=\"${$templateFile.fileDataList}\" />"
+						        ],
+						        "description": "wf.download"
+						    },
+							"wf.wupload": {
+						        "prefix": "wf.wupload",
+						        "body": [
+						            "<wf:wupload fileDataList=\"${$templateFile.fileDataList}\" />"
+						        ],
+						        "description": "wf.wupload"
+						    }
 						}
 					</textarea>
 					<div class="entry-source-title">jsp</div>
