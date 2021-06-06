@@ -846,8 +846,12 @@ WJ.Dialog = function (options) {
             let ifrm = $('<iframe style="width:100%; height:98%; border-width:0;" scrolling="' + dialog._options.scroll + '" frameborder="0" src="' + dialog._options.url + '"/>').appendTo(dialog.container);
             ifrm.bind("load", function () {
                 const frmBody = ifrm[0].contentWindow || ifrm[0].contentDocument;
-                if (frmBody.fnCaller) frmBody.fnCaller(dialog._options.params, dialog);
+                
                 setTimeout(function () {
+                    if (frmBody.fnCaller) {
+                        frmBody.fnCaller(dialog._options.params, dialog);
+                    }
+
                     $("body", frmBody.document).css("height", "auto");
                     dialog.container.ajaxLoadComplete();
                 }, 200);
