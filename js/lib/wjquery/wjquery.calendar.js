@@ -214,6 +214,10 @@
             });
 
             $container.find(".wcalendar-days").on("click", "a", function () {
+                var $t = $(this);
+                $t.parent().siblings().find("a.active").removeClass("active");
+                $t.addClass("active");
+
                 if (options.callback) {
                     options.callback($(this).attr("data-val"));
                 } else if (options.element) {

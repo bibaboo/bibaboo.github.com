@@ -98,40 +98,6 @@
     color: #777;
 }
 
-.wcalendar-days li a {
-    margin:1px;
-    display: block;
-    border: 1px transparent solid;
-}
-
-.wcalendar-days li a:hover {
-    border: 1px #d4d4d4 solid;
-    background: transparent;
-}
-
-.wcalendar-days li a.today {
-    border: 1px #d86150 solid;
-    color: #333;
-    background: #fff;
-}
-
-.wcalendar-days li a.active {
-    border: 1px #d86150 solid;
-    color: #fff;
-    background: #d86150;
-}
-
-.wcalendar-days li a.active:hover {
-    border: 1px #d4d4d4 solid;
-    background: transparent;
-    color: #777;
-}
-
-.wcalendar-days li a.prev,
-.wcalendar-days li a.next {
-    opacity: 0.5;
-}
-
 .wcalendar-weekdays li:nth-child(1),
 .wcalendar-days .md-holiday,
 .wcalendar-days .holiday,
@@ -154,6 +120,39 @@
     color: #2586ee;
 }
 */
+
+.wcalendar-days li a {
+    margin:1px;
+    display: block;
+    border: 1px transparent solid;
+}
+
+.wcalendar-days li a:hover {
+    border: 1px #ddd solid;
+    background: transparent;
+}
+
+.wcalendar-days li a.today {
+    border: 1px #d86150 solid;
+    background: #fff;
+}
+
+.wcalendar-days li a.active {
+    border: 1px #d86150 solid;
+    color: #fff;
+    background: #d86150;
+}
+
+.wcalendar-days li a.active:hover {
+    border: 1px #d4d4d4 solid;
+    background: transparent;
+    color: #777;
+}
+
+.wcalendar-days li a.prev,
+.wcalendar-days li a.next {
+    opacity: 0.5;
+}
 
 .wcalendar-dateicon {
     cursor: pointer;
