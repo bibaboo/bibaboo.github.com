@@ -560,6 +560,106 @@
 					</div>
 				</div>
 			</div>
+			<table class="arguments btd">
+				<tbody>
+					<tr>
+			  			<td class="func">findIndex()</td>
+			  			<td class="return">→ index</td>
+			  			<td class="desc">조건에 일치하는 배열의 인덱스</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo17-id1">demo17_1</div>
+						<input type="button" onclick="demo17_1('ccccc');" value="demo17_1" />
+						<script type="text/javascript">
+							function demo17_1(v){
+								var arr = [
+									{
+										id: 1,
+										text: 'aaaaa',
+										done: true
+									},
+									{
+										id: 2,
+										text: 'bbbbb',
+										done: true
+									},
+									{
+										id: 3,
+										text: 'ccccc',
+										done: true
+									},
+									{
+										id: 4,
+										text: 'ddddd',
+										done: false
+									}
+								];
+								var result = arr.findIndex(o=>o.text===v);
+								$("#demo17-id1").html(result);
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [27]"></pre>
+					</div>
+				</div>
+			</div>
+			<table class="arguments btd">
+				<tbody>
+					<tr>
+			  			<td class="func">find()</td>
+			  			<td class="return">→ plainObject</td>
+			  			<td class="desc">조건에 일치하는 배열의 객체</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="example">
+				<div class="entry-source-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo18-id1">demo18_1</div>
+						<input type="button" onclick="demo18_1('ccccc');" value="demo18_1" />
+						<script type="text/javascript">
+							function demo18_1(v){
+								var arr = [
+									{
+										id: 1,
+										text: 'aaaaa',
+										done: true
+									},
+									{
+										id: 2,
+										text: 'bbbbb',
+										done: true
+									},
+									{
+										id: 3,
+										text: 'ccccc',
+										done: true
+									},
+									{
+										id: 4,
+										text: 'ddddd',
+										done: false
+									}
+								];
+								var result = arr.find(o=>o.text===v);
+								$("#demo18-id1").html(JSON.stringify(result));
+						  	}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true; highlight: [27]"></pre>
+					</div>
+				</div>
+			</div>
 		</div>
 	</li>
 	<li class="entry-api-item">
