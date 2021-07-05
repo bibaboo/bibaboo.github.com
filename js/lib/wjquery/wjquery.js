@@ -1029,7 +1029,7 @@ function mappingValue(value, arr) {
  * @return String
  */
 function removeHtmlTag(value) {
-    return $("<div/>").html($.isObject(object) ? value.html() : value).text();
+    return $("<div/>").html($.isObject(value) ? value.html() : value).text();
 }
 
 /**
