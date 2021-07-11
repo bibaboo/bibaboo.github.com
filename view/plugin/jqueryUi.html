@@ -58,4 +58,150 @@
 			</div>
 		</div>
 	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">Draggable</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">
+							<ul>
+								<li id="draggable" class="ui-state-highlight">Drag me down</li>
+							</ul>
+							<ul id="sortable">
+								<li class="ui-state-default">Item 1</li>
+								<li class="ui-state-default">Item 2</li>
+								<li class="ui-state-default">Item 3</li>
+								<li class="ui-state-default">Item 4</li>
+								<li class="ui-state-default">Item 5</li>
+							</ul>
+						</div>
+						<style>
+							#demo2-id1 ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+							#demo2-id1 li { margin: 5px; padding: 5px; width: 150px; }
+						</style>
+						<script type="text/javascript">
+							$( "#sortable" ).sortable({
+								revert: true,
+								update: function( event, ui ) {
+								
+								}
+							});
+
+							$( "#draggable" ).draggable({
+								connectToSortable: "#sortable",
+								helper: "clone",
+								revert: "invalid"
+							});
+
+							$( "ul, li" ).disableSelection();
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">Sortable</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+				<div>
+					<div class="entry-demo-content">
+						<div id="demo2-id1">
+							<input type="button" onclick="createItem();" value="추가" />
+							<br />
+							<div id="itemBoxWrap"></div>
+						</div>
+						<style>
+							.itemBox {
+								position:relative;
+								border:solid 1px black;
+								width:400px;
+								height:30px;
+								padding:10px;
+								margin-bottom:10px;
+							}
+							.itemBoxHighlight {
+								border:solid 1px black;
+								width:400px;
+								height:30px;
+								padding:10px;
+								margin-bottom:10px;
+								background-color:yellow;
+							}
+							.deleteBox {
+								position:absolute;
+								top:10px;
+								right:20px;
+								display:none;
+								cursor:pointer;
+							}
+						</style>
+						<script type="text/javascript">
+							$("#itemBoxWrap").sortable({
+								placeholder:"itemBoxHighlight",
+								start: function(event, ui) {
+									ui.item.data('start_pos', ui.item.index());
+								},
+								stop: function(event, ui) {
+									var spos = ui.item.data('start_pos');
+									var epos = ui.item.index();
+										reorder();
+								}
+							});
+							
+							function reorder() {
+								$(".itemBox").each(function(i, box) {
+									$(box).find(".itemNum").html(i + 1);
+								});
+							}
+
+							function createItem() {
+								let $t = $(`
+											<div class="itemBox">
+												<span class="itemNum"></span>
+												<input type="text" name="item" style="width:300px;" />
+												<div class='deleteBox'>[삭제]</div>
+											</div>
+									`);
+
+								$t.appendTo("#itemBoxWrap")
+								.hover(
+									function() {
+										$(this).css('backgroundColor', '#f9f9f5');
+										$(this).find('.deleteBox').show();
+									},
+									function() {
+										$(this).css('background', 'none');
+										$(this).find('.deleteBox').hide();
+									}
+								)
+								.find(".deleteBox").click(function() {
+									$(this).parent().remove();
+									reorder();
+									
+								});
+								
+								reorder();
+							}
+						</script>
+					</div>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: js; html-script: true;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
 </ul>
