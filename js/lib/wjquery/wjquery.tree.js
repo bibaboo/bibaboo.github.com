@@ -124,11 +124,11 @@
                     if (options.dataType == WTREE_SV.dataType.all && this.hasChildren) {
                         callNodes.push(this.id);
                     }
-                    sb.append("<li data-type=\"" + WTREE_SV.type.node + "\" data-id=\"" + this.id + "\"><a href=\"javascript:void(0);\" class=\"item\" title=\"" + (this.title||"") +"\"><i class=\"" + (this.hasChildren ? WTREE_SV.icon.plus : WTREE_SV.icon.empty) + "\"></i><i class=\"" + WTREE_SV.icon.closed + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
+                    sb.append("<li data-type=\"" + WTREE_SV.type.node + "\" data-id=\"" + this.id + "\"><a href=\"javascript:void(0);\" class=\"item\" title=\"" + (this.title || "") + "\"><i class=\"" + (this.hasChildren ? WTREE_SV.icon.plus : WTREE_SV.icon.empty) + "\"></i><i class=\"" + WTREE_SV.icon.closed + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
                 });
 
                 $.each(leaves, function () {
-                    sb.append("<li data-type=\"" + WTREE_SV.type.leaf + "\" data-id=\"" + this.id + "\" data-data=\"" + $.replace($.getString($.nvl(this.data, "")), "\"", "_@_") + "\"><a href=\"javascript:void(0);\" class=\"item\" title=\"" + (this.title||"") +"\"><i class=\"" + WTREE_SV.icon.empty + "\"></i><i class=\"" + WTREE_SV.icon.leaf + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
+                    sb.append("<li data-type=\"" + WTREE_SV.type.leaf + "\" data-id=\"" + this.id + "\" data-data=\"" + $.replace($.getString($.nvl(this.data, "")), "\"", "_@_") + "\"><a href=\"javascript:void(0);\" class=\"item\" title=\"" + (this.title || "") + "\"><i class=\"" + WTREE_SV.icon.empty + "\"></i><i class=\"" + WTREE_SV.icon.leaf + "\"></i><span>" + $.nvl(this.name, this.id) + "</span></a></li>");
                 });
 
                 if (sb.size() > 0) {

@@ -2,17 +2,58 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">mangement</span>
+    		<span class="title">조건함수</span>
 		</h2>
 		<div>
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-						sample contents;
+						WITH TEMP AS (
+							SELECT 'M' GENDER FROM DUAL UNION ALL
+							SELECT 'F' GENDER FROM DUAL UNION ALL
+							SELECT 'X' GENDER FROM DUAL
+						)
+
+						SELECT 
+							GENDER
+							, DECODE(GENDER, 'M', 'Man', 'F', 'Woman', 'Unknown') GENDER2
+						FROM
+							TEMP    
 					</textarea>
-					<div class="entry-source-title">sample title</div>
+					<div class="entry-source-title">DECODE</div>
 					<div class="entry-demo-source-content">
-						<pre class="brush: text;"></pre>
+						<pre class="brush: sql;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						WITH TEMP AS (
+							SELECT 'M' GENDER FROM DUAL UNION ALL
+							SELECT 'F' GENDER FROM DUAL UNION ALL
+							SELECT 'X' GENDER FROM DUAL
+						)
+
+						SELECT 
+							CASE WHEN GENDER = 'M' THEN 'Man'
+								WHEN GENDER = 'F' THEN 'Woman'
+								ELSE 'Unknown'
+							END AS GENDER2
+						FROM
+							TEMP
+						WHERE(
+							CASE WHEN GENDER = 'M' THEN 1
+								WHEN GENDER = 'F' THEN 1
+								ELSE 0
+							END
+						) = 1  
+					</textarea>
+					<div class="entry-source-title">CASE WHEN</div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: sql;"></pre>
 					</div>
 				</div>
 			</div>

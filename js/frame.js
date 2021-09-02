@@ -1423,6 +1423,7 @@ const moduleData = [
         const deferred = $.Deferred();
         if (pageSetting.plugin[plugin].css) {
             loadStyles(pageSetting.plugin[plugin].css);
+            deferred.notify();
         }
 
         if (pageSetting.plugin[plugin].js) {

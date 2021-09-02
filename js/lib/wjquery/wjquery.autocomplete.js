@@ -1,5 +1,5 @@
 /*
- * wjquery.autocomplete 0.1.1
+ * wjquery.wautocompleteKeyup 0.1.1
  * by composite (wonchu.net@gmail.com)
  * http://www.wonchu.net
  * This project licensed under a MIT License.
@@ -10,197 +10,253 @@
 
 (function ($) {
     "use strict";
-    let WAUTOCOMPLETE_SV = {
-        searchName: "",
-        mode: {
-            enter: "enter",
-            keyup: "keyup"
-        },
-        wkey: {
+    if ($.wautocompleteKeyup) {
+        return;
+    }
+
+    $.wautocomplete = {
+        keys: {
             enter: 13,
-            spance: 32,
+            space: 32,
             left: 37,
             up: 38,
             right: 39,
             down: 40
-        }
-    };
-
-    $.fn.wautocompleteEnter = function (callback, errorCallback, settings) {
-        if(typeof(errorCallback)!="function" && typeof(settings)=="undefined"){
-            settings = errorCallback;
-            errorCallback = function(){};
-        } 
-        this.keypress(function (event) {
-            if ((event.keyCode || event.which) == WAUTOCOMPLETE_SV.wkey.enter) {
-                WAUTOCOMPLETE.trigger(event, $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {}), callback, errorCallback);
-            }
-        });
-    };
-
-    $.fn.wautocompleteKeyup = function (callback, errorCallback, settings) {
-        if(typeof(errorCallback)!="function" && typeof(settings)=="undefined"){
-            settings = errorCallback;
-            errorCallback = function(){};
-        } 
-        this.keyup(function (event) {
-            let _settings = $.extend({}, $.fn.wautocompleteDefaultSettings, settings || {});
-            if (!hasValueInArray(_settings.skipKeyCodes, (event.keyCode || event.which))) {
-                _settings.mode = WAUTOCOMPLETE_SV.mode.keyup;
-                WAUTOCOMPLETE.trigger(event, _settings, callback, errorCallback);
-            }
-        });
-    };
-
-    $.fn.wautocompleteDefaultSettings = {
-        type: "post",
-        contentType: "application/json; charset=UTF-8",
-        prefix: "wautocomplete-",
-        count: 10,
-        minLength: 2,
-        mode: WAUTOCOMPLETE_SV.mode.enter,
-        url: "../../js/test/wautocomplete.js",
-        tmplLi: "<li>" +
-            "   <a href=\"javascript:void(0);\">" +
-            "       <span>\${userName} \${jobTitleName}</span> " +
-            "       <span>\${teamName}</span>" +
-            "   </a>" +
-            "</li>",
-        waitMM : 500,
-        skipKeyCodes: [WAUTOCOMPLETE_SV.wkey.spance, WAUTOCOMPLETE_SV.wkey.left, WAUTOCOMPLETE_SV.wkey.up, WAUTOCOMPLETE_SV.wkey.right, WAUTOCOMPLETE_SV.wkey.down]
-    };
-
-    var WAUTOCOMPLETE = {
-        trigger: function (event, settings, callback, errorCallback) {
-            let $el = $(event.target),
-                id = $el.attr("id") || $el.attr("name"),
-                _id = "#" + settings.prefix + id,
-                name = $.trim($el.val()),
-                $c;
-
-            if ($(_id).length != 0) {
-                $c = $(_id);
-                if ($c.is(":visible") && $c.find("a.current").length > 0) {
-                    $c.find("a.current").trigger("click");
-                    return false;
-                }
-            }
-
-            if (name == WAUTOCOMPLETE_SV.searchName) return;
-
-            if (name.length < settings.minLength || !this.checkLastWord(name)) {
-                if (settings.mode == WAUTOCOMPLETE_SV.mode.enter) {
-                    alert(settings.minLength + "이상 입력해주세요.");
-                    return false;
-                } else {
-                    $(_id).hide();
-                    WAUTOCOMPLETE_SV.searchName = "";
-                    return false;
-                }
-            }
-
-            $.ajax({
-                url: settings.url,
-                data: JSON.stringify({
-                    searchWord: name,
-                    count: settings.count
-                }),
-                contentType: settings.contentType,
-                type: settings.type,
-                dataType: "json",
-                success: function (result) {
-                    if (result.length == 0) {
-                        return;
-                    } else if (result.length == 1) {
-                        callback(result[0]);
-                        $(_id).hide();
-                        WAUTOCOMPLETE_SV.searchName = "";
-                    } else {
-                        if ($(_id).length == 0) {
-                            $el.after("<div id=\"" + settings.prefix + id + "\" class=\"wautocomplete\"><ul style=\"position:relative;\"></ul></div>");
-
-                            let _css = {
-                                "top": settings.top || $el.position().top + $el.outerHeight(),
-                                "left": settings.left || $el.position().left,
-                                "min-width": settings.minWidht || $el.outerWidth()
-                            };
-
-                            $c = $(_id).css(_css);
-                            $(document).mouseup(function (e) {
-                                if (!$c.is(e.target) && $c.has(e.target).length === 0) {
-                                    $c.fadeOut();
-                                    $c.find("ul").empty();
-                                    WAUTOCOMPLETE_SV.searchName = "";
-                                }
-                            });
-
-                            $el.keyup(function (event) {
-                                let key = event.keyCode || event.which;
-                                if ($c.is(":visible") && (key == WAUTOCOMPLETE_SV.wkey.up || key == WAUTOCOMPLETE_SV.wkey.down)) {
-                                    let _index = -1,
-                                        _n = $c.find("a").length;
-
-                                    if ($c.find("a.current").length > 0) {
-                                        _index = $c.find("a").index($c.find("a.current"));
-                                    }
-
-                                    $c.find("a.current").removeClass("current");
-                                    if (key == WAUTOCOMPLETE_SV.wkey.down) {
-                                        if (_index == -1) {
-                                            _index = 0;
-                                        } else if (_index == _n - 1) {
-                                            _index = 0;
-                                        } else {
-                                            _index++;
-                                        }
-                                    } else if (key == WAUTOCOMPLETE_SV.wkey.up) {
-                                        if (_index == -1) {
-                                            _index = 0;
-                                        } else if (_index == 0) {
-                                            _index = _n - 1;
-                                        } else {
-                                            _index--;
-                                        }
-                                    }
-                                    $c.find("a:eq(" + _index + ")").addClass("current");
-                                    $('#' + settings.prefix + id).scrollTop($c.find("a:eq(" + _index + ")").position().top);
-                                }
-                            });
-                        }
-
-                        let $ul = $c.find("ul").empty();
-                        $.each(result, function () {
-                            $.tmpl(settings.tmplLi, this).data("data", this).appendTo($ul);
-                        });
-
-                        $c.find("li>a").off("click").on("click", function (event) {
-                            WAUTOCOMPLETE_SV.searchName = "";
-                            callback($(this).parent().data("data"));
-                            $c.fadeOut();
-                        });
-
-                        $c.show();
-                        WAUTOCOMPLETE_SV.searchName = name;
-                    }
-                },
-                error: function (event, request, settings) {
-                    errorCallback(event, request);
-                }
-            });
-
         },
-        checkLastWord: function (text) {
-            let last = text.substring(text.length - 1);
-            const check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
-                "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ",
-                "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"
-            ];
-
-            for (let i = check.length - 1; i >= 0; i--) {
-                if (last == check[i]) return false;
-            }
-            return true;
+        defaults: {
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            count: 10,
+            minLength: 2,
+            url: "../../js/test/wautocomplete.js",
+            tmplLi: "<li>" +
+                "       <a href=\"javascript:void(0);\">" +
+                "       <span>\${userName} \${jobTitleName}</span> " +
+                "       <span>\${teamName}</span>" +
+                "   </a>" +
+                "</li>"
         }
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    // wautocompleteKeyup
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    $.wautocompleteKeyup = {
+        defaults: {
+            id: "wautocompleteKeyup",
+            waitMM : 200,
+            skipKeyCodes: [$.wautocomplete.keys.space, $.wautocomplete.keys.left, $.wautocomplete.keys.up, $.wautocomplete.keys.right, $.wautocomplete.keys.down]
+        },
+        searchName: "",
+        names: []
+    };
+
+    $.wautocompleteKeyup.init = function ($target, options) {
+        this.options = $.extend(true, {}, $.wautocomplete.defaults, this.defaults, options);
+        this.$t = $target;
+        $.wautocomplete.draw(this);
+
+        this.$t.keyup(function (event) {
+            const keyCode = event.keyCode || event.which;
+            if (!hasValueInArray($.wautocompleteKeyup.options.skipKeyCodes, keyCode)) {
+                $.wautocompleteKeyup.trigger(keyCode);
+            }
+        });
+    };
+
+    $.wautocompleteKeyup.trigger = function(keyCode){
+        if ($.wautocompleteKeyup.$c.is(":visible") && $.wautocompleteKeyup.$c.find("a.current").length > 0) {
+            $.wautocompleteKeyup.$c.find("a.current").trigger("click");
+            return false;
+        }
+
+        const name = $.wautocompleteKeyup.$t.val();
+        if (name == $.wautocompleteKeyup.searchName) return;
+        if (name.length < $.wautocompleteKeyup.options.minLength || !$.wautocomplete.checkLastWord(name)) {
+            $.wautocomplete.hide( $.wautocompleteKeyup);
+            return false;
+        }
+
+        $.wautocompleteKeyup.names.push(name);
+        (function(len, _name) {
+            setTimeout(function(){
+                if($.wautocompleteKeyup.names.length>len){
+                    return;
+                }
+                $.wautocomplete.get($.wautocompleteKeyup, _name);
+            }, $.wautocompleteKeyup.defaults.waitMM);
+        })($.wautocompleteKeyup.names.length, name);
+    }
+
+    $.fn.wautocompleteKeyup = function (settings) {
+        $.wautocompleteKeyup.init(this, settings || {});
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    // wautocompleteEnter
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    $.wautocompleteEnter = {
+        defaults: {
+            id: "wautocompleteEnter"
+        },
+        searchName: ""
+    };
+
+    $.wautocompleteEnter.init = function ($target, options) {
+        this.options = $.extend(true, {}, $.wautocomplete.defaults, this.defaults, options);
+        this.$t = $target;
+        $.wautocomplete.draw(this);
+
+        this.$t.keypress(function (event) {
+            const keyCode = event.keyCode || event.which;
+            if ($.wautocomplete.keys.enter == keyCode) {
+                $.wautocompleteEnter.trigger();
+            }
+        });
+    };
+
+    $.wautocompleteEnter.trigger = function(){
+        if ($.wautocompleteEnter.$c.is(":visible") && $.wautocompleteEnter.$c.find("a.current").length > 0) {
+            $.wautocompleteEnter.$c.find("a.current").trigger("click");
+            return false;
+        }
+
+        const name = $.wautocompleteEnter.$t.val();
+        if (name == $.wautocompleteEnter.searchName) return;
+        if (name.length < $.wautocompleteEnter.options.minLength || !$.wautocomplete.checkLastWord(name)) {
+            alert($.wautocompleteEnter.options.minLength + "이상 입력해주세요.");
+            $.wautocomplete.hide( $.wautocompleteEnter);
+            return false;
+        }
+
+        $.wautocomplete.get($.wautocompleteEnter, name);    
+    }
+
+    $.fn.wautocompleteEnter = function (settings) {
+        $.wautocompleteEnter.init(this, settings || {});
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    // wautocomplete
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    $.wautocomplete.checkLastWord = function(text){
+        const last = text.substring(text.length - 1),
+            check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+            "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ",
+            "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"
+        ];
+
+        for (let i = check.length - 1; i >= 0; i--) {
+            if (last == check[i]) return false;
+        }
+        return true;
+    };
+
+    $.wautocomplete.hide = function($o){
+        $o.$c.hide().find("ul").empty();
+        $o.searchName = "";
+    };
+
+    $.wautocomplete.draw = function($o){
+        const cid = $o.options.id + "-" + ($o.$t.attr("id") || $o.$t.attr("name"));
+        $o.$t.after("<div id=\"" + cid + "\" class=\"wautocomplete\"><ul style=\"position:relative;\"></ul></div>");
+
+        $o.$c = $("#" + cid).css({
+            "top": $o.options.top || $o.$t.position().top + $o.$t.outerHeight(),
+            "left": ($o.options.left || $o.$t.position().left)-3,
+            "min-width": ($o.options.minWidht || $o.$t.outerWidth())-1
+        });
+        
+        $(document).on("click." + $o.options.id, function (e) {
+            if (!$o.$c.is(e.target) && $o.$c.has(e.target).length === 0) {
+                $.wautocomplete.hide($o);
+            }
+        });
+
+        $o.$t.keyup(function (event) {
+            let key = event.keyCode || event.which;
+            if ($o.$c.is(":visible") && (key == $.wautocomplete.keys.up || key == $.wautocomplete.keys.down)) {
+                let _index = -1,
+                    _n = $o.$c.find("a").length;
+
+                if ($o.$c.find("a.current").length > 0) {
+                    _index = $o.$c.find("a").index($o.$c.find("a.current"));
+                }
+
+                $o.$c.find("a.current").removeClass("current");
+                if (key == $.wautocomplete.keys.down) {
+                    if (_index == -1) {
+                        _index = 0;
+                    } else if (_index == _n - 1) {
+                        _index = 0;
+                    } else {
+                        _index++;
+                    }
+                } else if (key == $.wautocomplete.keys.up) {
+                    if (_index == -1) {
+                        _index = 0;
+                    } else if (_index == 0) {
+                        _index = _n - 1;
+                    } else {
+                        _index--;
+                    }
+                }
+                $o.$c.find("a:eq(" + _index + ")").addClass("current");
+                $o.$c.scrollTop($o.$c.find("a:eq(" + _index + ")").position().top);
+            }
+        });
+
+        $("ul", $o.$c).on("click", "li>a", function (event) {
+            $o.searchName = "";
+            $o.options.callback($(this).parent().data("data"));
+            $.wautocomplete.hide($o);
+        });
+    };
+
+    $.wautocomplete.get = function($o, v){
+        $.ajax({
+            url: $o.options.url,
+            data: JSON.stringify({
+                searchWord: v,
+                count: $o.options.count + 1
+            }),
+            contentType: $o.options.contentType,
+            type: $o.options.type,
+            dataType: "json",
+            success: function (result) {
+                const n = result.length;
+                if (n == 0) {
+                    $.wautocomplete.hide($o);
+                    return;
+                } else if (n == 1) {
+                    $o.options.callback(result[0]);
+                    $.wautocomplete.hide($o);
+                } else {
+                    if(result.length>$o.options.count){
+                        if($o.options.tooManyCallback){
+                            $o.options.tooManyCallback();
+                            $.wautocomplete.hide($o);
+                            return;
+                        }
+                    }
+
+                    let $ul = $o.$c.find("ul").empty();
+                    $.each(result, function (index) {
+                        if($o.options.count<index+1) return false;
+                        $.tmpl($o.options.tmplLi, this).data("data", this).appendTo($ul);
+                    });
+
+                    $o.$c.show();
+                    $.wautocompleteKeyup.searchName = v;
+                }
+            },
+            error: function (request,status,error) {
+                console.error("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+                if($.wautocompleteKeyup.options.errorCallback){
+                    $.wautocompleteKeyup.options.errorCallback(event, request);
+                }
+            }
+        });
     };
 
 })(jQuery);

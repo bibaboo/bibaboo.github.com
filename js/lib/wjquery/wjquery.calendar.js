@@ -77,7 +77,7 @@
         }
     };
 
-    function WCALENDAR(_container, _options) {
+    function WCALENDAR() {
         let $container, options;
 
         function init(_container, _options) {
