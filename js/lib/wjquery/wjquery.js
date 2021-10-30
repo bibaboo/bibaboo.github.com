@@ -24,10 +24,10 @@ const WCODE = {
     "one": "1",
     "two": "2",
     "three": "3",
-    "px": "px;",
-    "bype": "Byte;",
-    "kb": "KB;",
-    "mb": "MB;",
+    "px": "px",
+    "byte": "Byte",
+    "kb": "KB",
+    "mb": "MB",
     "amp": "&amp;",
     "lg": "&lt;",
     "gt": "&gt;",
@@ -257,7 +257,7 @@ const WCODE = {
          **/
         wLog(value, tag = "log") {
             if (window.console) {
-                console.log(`\n=====${tag}=====\n${($.isPlainObject(value) || $.isArray(value) ? JSON.stringify(value) : value)}\n====================`);
+                console.log(`[${tag}]\n${($.isPlainObject(value) || $.isArray(value) ? JSON.stringify(value) : value)}`);
             } else {
                 alert(`=====${tag}=====\n${($.isPlainObject(value) || $.isArray(value) ? JSON.stringify(value) : value)}`);
             }
@@ -270,14 +270,14 @@ const WCODE = {
          * @param delay 지연 밀리세컨드
          */
         toast(value = WCODE.empty, callback, delay = 1000) {
-            if ($("#wjquery-toast").isObject()) $("#wjquery-toast").stop().clearQueue().remove();
+            if ($("#wToast").isObject()) $("#wToast").stop().clearQueue().remove();
 
-            $("body").append(`<div id="wjquery-toast">${value}</div>`);
-            const w = parseInt($("#wjquery-toast").width()) + 60,
+            $("body").append(`<div id="wToast">${value}</div>`);
+            const w = parseInt($("#wToast").width()) + 60,
                 sw = $("body").width(),
                 lp = Math.floor((sw - w) / 2);
 
-            $("#wjquery-toast").css("left", lp + WCODE.px).animate({
+            $("#wToast").css("left", lp + WCODE.px).animate({
                 "opacity": WCODE.one
             }, 800, function () {
                 const timeout = window.setTimeout($.proxy(function () {
@@ -570,14 +570,14 @@ const WCODE = {
         },
 
         /**
-         * 본문의 링크처리, 클릭처리를 막는다
+         * enter 이벤트
          * @name $().keyBind()
          * @param callback
          * @param b 엔터키
          * @return this
          **/
         enterKey(callback) {
-            $(this).keypress(function (e) {
+            this.keypress(function (e) {
                 if ((e.keyCode || e.which) == 13 && callback) {
                     callback(e);
                 }
@@ -846,7 +846,7 @@ WJ.Dialog = function (options) {
             let ifrm = $('<iframe style="width:100%; height:98%; border-width:0;" scrolling="' + dialog._options.scroll + '" frameborder="0" src="' + dialog._options.url + '"/>').appendTo(dialog.container);
             ifrm.bind("load", function () {
                 const frmBody = ifrm[0].contentWindow || ifrm[0].contentDocument;
-                
+
                 setTimeout(function () {
                     if (frmBody.fnCaller) {
                         frmBody.fnCaller(dialog._options.params, dialog);
@@ -923,7 +923,7 @@ WJ.Dialog.prototype.close = function () {
  * @param delim 구분자
  * @return String
  */
-function getFirstValue(value, delim=WCODE.dot) {
+function getFirstValue(value, delim = WCODE.dot) {
     return value.indexOf(delim) != -1 ? value.substring(0, value.indexOf(delim)) : WCODE.empty;
 }
 
@@ -933,7 +933,7 @@ function getFirstValue(value, delim=WCODE.dot) {
  * @param delim 구분값
  * @return String
  */
-function getLastValue(value,  delim=WCODE.dot) {
+function getLastValue(value, delim = WCODE.dot) {
     return value.indexOf(delim) != -1 ? value.substring(value.lastIndexOf(delim) + 1) : WCODE.empty;
 }
 
@@ -1064,13 +1064,13 @@ function initCap(value) {
  * @param fileSize 파일사이즈
  * @return String
  */
-function formatFileSize(fileSize) {
+function formatFileSize(fileSize, n) {
     if (fileSize < 1024) {
         return fileSize + WCODE.byte;
     } else if (fileSize < 1048576) {
-        return new Number(fileSize / 1024).toFixed(2) + WCODE.kb;
+        return new Number(fileSize / 1024).toFixed(n || 1) + WCODE.kb;
     } else {
-        return new Number(fileSize / 1048576).toFixed(2) + WCODE.mb;
+        return new Number(fileSize / 1048576).toFixed(n || 1) + WCODE.mb;
     }
 }
 
@@ -1457,6 +1457,7 @@ function loadStyles(url) {
  */
 const base62 = new(function () {
     const table = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     function decode(str) {
         let decodedNum, i, len;
         for (decodedNum = 0, i = len = str.length; i--;) {
@@ -1562,6 +1563,20 @@ const wJson = new(function () {
         });
     }
 
+    function choose(arr, keys) {
+        let result = [];
+        for (const n in arr) {
+            let o = {};
+            for(const key in arr[n]) { 
+                if(keys.includes(key)){
+                    o[key] = arr[n][key];
+                }
+            }
+            result.push(o);
+        }
+        return result;
+    }
+
     function toString(json, delm = WCODE.equal, delm2 = WCODE.empty) {
         let sb = new stringBuffer();
         for (let key in json) {
@@ -1576,6 +1591,7 @@ const wJson = new(function () {
         values: values,
         clone: clone,
         sort: sort,
+        choose: choose,
         toString: toString
     };
 });

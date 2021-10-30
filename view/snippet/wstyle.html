@@ -563,8 +563,7 @@
                             }
                         </style>
                         <script type="text/javascript">
-                        
-                            $(".collapsible-area .collapsible").click(function(){
+                                $(".collapsible-area .collapsible").click(function(){
                                 const $t = $(this).toggleClass("active"),
                                     $c = $t.next("div");
 
@@ -609,7 +608,7 @@
     </li>
     <li class="entry-api-item">
         <h2>
-            <span class="title">opacity</span>
+            <span class="title">opMore</span>
         </h2>
         <div>
             <div class="example">
@@ -617,21 +616,55 @@
                 <div>
                     <div class="entry-demo-content">
                         <style type="text/css">
-                           #demo9-id1 {
+                           .opMore {
                                position: relative;
+                               height:200px;
+                               overflow:hidden;
+                               transition: height .4s ease-out;
+                               padding-bottom:50px;
                            }
 
-                           #demo9-id1::after {
-                            content: "";
-                            position: absolute;
-                            bottom:0;
-                            left:0;
-                            right:0;
-                            height:140px;
-                            background:linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1) 60%);
+                           .opMore::after {
+                                content: "";
+                                position: absolute;
+                                bottom:0;
+                                left:0;
+                                right:0;
+                                height:140px;
+                                background:linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1) 60%);
+                            }
+
+                            .opMore.off::after{
+                                display: none;
+                            }
+
+                            .opMoreBtn {
+                                z-index:100;
+                                position:absolute;
+                                bottom:0;
+                                left: 200px;
+                                /*left:calc(50% -32px/2);*/
                             }
                         </style>
-                        <div id="demo9-id1" class="collapsible-area">
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                const moreShowHeight = 200;
+
+                                $(".opMoreBtn").click(function(){
+                                    const $c = $(".opMore"),
+                                        $btn = $(".opMoreBtn");
+
+                                    if($c.hasClass("off")){
+                                        $c.removeClass("off").height(moreShowHeight);
+                                        $btn.val("더보기");
+                                    }else{
+                                        $c.addClass("off").height("auto");
+                                        $btn.val("닫기");
+                                    }
+                                });
+                            });
+                        </script>
+                        <div class="opMore">
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
@@ -641,7 +674,263 @@
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
                             가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
-                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                            가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가.
+                            <input type="button" class="opMoreBtn" value="더보기" />
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">arrow</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            #demo10-id2 {
+                                width:100%;
+                                background-color:#f1f1f1;
+                                border-left:1px solid #ccc;
+                                border-right:1px solid #ccc;
+                                border-bottom:1px solid #ccc;
+                                border-radius: 2px;
+                                transition: max-height 0.2s ease-out;
+                                overflow: hidden;
+                            }
+                        </style>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $(".wCollapsible-arrow-line>div").click(function () {
+                                    const $p = $(this).parent();
+                                    if ($p.hasClass("close")) {
+                                        $p.removeClass("close");
+                                        $p.next().removeClass("wupload-none");
+                                        $("#demo10-id2").css("maxHeight", $("#demo10-id2").prop("scrollHeight") + "px");
+                                    } else {
+                                        $p.addClass("close");
+                                        $p.next().addClass("wupload-none");
+                                        $("#demo10-id2").css("maxHeight", "0px");
+                                    }
+                                });
+                            });
+                        </script>
+                        <div id="demo10-id1" >
+                            <div class="wCollapsible-arrow-line"><div></div></div>
+                            <div id="demo10-id2">
+                                <div style="padding:10px;">
+                                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가<br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
+						<style type="text/css">
+                            .wCollapsible-arrow-line {
+                                position: relative;
+                                height: 20px;
+                                border-bottom: 1px solid #ccc;
+                            }
+
+                           .wCollapsible-arrow-line:hover {
+                                border-color: #dbdbdb;
+                            }
+
+                           .wCollapsible-arrow-line:active,
+                           .wCollapsible-arrow-line:focus,
+                           .wCollapsible-arrow-line div:focus,
+                           .wCollapsible-arrow-line div:active {
+                                border-color: #999;
+                            }
+
+
+                           .wCollapsible-arrow-line div:hover {
+                                background-color: #f1f1f1;
+                            }
+
+                           .wCollapsible-arrow-line>div:after {
+                                border-bottom: 2px solid #999;
+                                border-right: 2px solid #999;
+                                content: '';
+                                display: block;
+                                height: 5px;
+                                margin-top: 2px;
+                                margin-left: 2px;
+                                -webkit-transform-origin: 66% 66%;
+                                -ms-transform-origin: 66% 66%;
+                                transform-origin: 66% 66%;
+                                -webkit-transform: rotate(-135deg);
+                                -ms-transform: rotate(-135deg);
+                                transform: rotate(-135deg);
+                                -webkit-transition: all 0.15s ease-in-out;
+                                transition: all 0.15s ease-in-out;
+                                width: 5px;
+                                cursor: pointer;
+                            }
+
+                           .wCollapsible-arrow-line.close>div:after {
+                                -webkit-transform: rotate(45deg);
+                                -ms-transform: rotate(45deg);
+                                transform: rotate(45deg);
+                            }
+
+                           .wCollapsible-arrow-line h3 {
+                                font-size: 1em;
+                                margin-right: 30px;
+                            }
+
+                           .wCollapsible-arrow-line div {
+                                position: absolute;
+                                top: 6px;
+                                right: 0;
+                                height: 13px;
+                                width: 13px;
+                                border-top: 1px solid #ccc;
+                                border-left: 1px solid #ccc;
+                                border-right: 1px solid #ccc;
+                                border-radius: 3px;
+                            }
+                        </style>
+					</textarea>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: css;"></pre>
+					</div>
+				</div>
+			</div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">avatar</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                          .avatar {
+                               height:100px;
+                               border-radius: 50%;
+                               border: 1px solid #f1f1f1;
+                           }
+
+                        </style>
+                        <div>
+                            <img src="../../images/wonchu.gif" class="avatar" />
+                        </div>
+                    </div>  
+                    <div class="entry-source-title"></div>
+                    <div class="entry-demo-source-content">
+                        <pre class="brush: css; html-script: true;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="entry-api-item">
+        <h2>
+            <span class="title">tip</span>
+        </h2>
+        <div>
+            <div class="example">
+                <div class="entry-demo-title">demo <a href="javascript:void(0);" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-triangle-s"></span></a></div>
+                <div>
+                    <div class="entry-demo-content">
+                        <style type="text/css">
+                            .wTipWrap{
+                                position:absolute;
+                                top:10px;
+                                left:10px;
+                                z-index:2;
+                            }
+
+                            .wTipWrap .wTipA{
+                                display:inline-block;
+                                padding:2px;
+                                background-color:#aaa;
+                                border-radius: 20%;
+                                color:#fff;
+                            }
+
+                            .wTipWrap .wTipEmpty{
+                                width:30px;
+                                height:30px;
+                                position:absolute;
+                                top:6px;
+                                left:-4px;
+                                display:none;
+                            }
+
+                            .wTipWrap .wTipDesc{
+                                position: absolute;
+                                top: 34px;
+                                left: -10px;
+                                width: 400px;
+                                padding: 16px;
+                                background-color: #f8f5e2;
+                                border-radius: 6px;
+                                box-shadow: 3px 5px 5px rgb(0 0 0 / 15%);
+                                font-size: 12px;
+                                display:none;
+                            }
+
+                            .wTipWrap .wTipDesc :before{
+                                transform: rotate(45deg);
+                                position:absolute;
+                                top: -7px;
+                                left: 16px;
+                                width: 15px;
+                                height: 15px;
+                                background-color: #f8f5e2;
+                                display: inline-block;
+                                content: '';
+                            }
+                        </style>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                               $(".wTipA, .wTipEmpty, .wTipDesc", ".wTipWrap").hover(
+                                    function(){
+                                        $(".wTipEmpty, .wTipDesc", ".wTipWrap").show();
+                                    },
+                                    function(){
+                                        $(".wTipEmpty, .wTipDesc", ".wTipWrap").hide();
+                                    }
+                               )
+                            });
+                        </script>
+                        <div style="position:relative;height:20px;">
+                            <div class="wTipWrap">
+                                <a href="javascript:;" class="wTipA">TIP</a>
+                                <div class="wTipEmpty"></div>
+                                <div class="wTipDesc">
+                                    <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                </div>
+                            </div>
                         </div>
                     </div>  
                     <div class="entry-source-title"></div>

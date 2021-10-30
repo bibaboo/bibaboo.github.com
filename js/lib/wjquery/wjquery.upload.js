@@ -1,11 +1,11 @@
 /*
- * wjquery.upload 0.1.0
+ * wjquery.upload 0.2.0
  * by composite (wonchu.net@gmail.com)
  * http://www.wonchu.net
  * This project licensed under a MIT License.
 
- 0.1.0 : 최초작성 작업중...
  0.2.0 : 기본기능 완성
+ 0.1.0 : 최초작성 작업중...
 */
 
 (function ($) {
@@ -14,27 +14,25 @@
         return;
     }
 
-    const allowedMethod = {
-        save: "save",
-        reset: "reset"
-    };
-
     $.wupload = {
-        version: "0.2.0",
-        showLog: false,
-        action: allowedMethod,
-        defaults: {
-            imagePath: "../images/file/",
+        $t: null,
+        tmp: {
+            removeFiles: [],
+            files: []
+        },
+        defaultOptions: {
             excludeExts: "*.ext;*.bat;*.jsp;*.js;*.com;*.php;*.jspx;*.phps;*.bin;*.sh;*.class;*.java;*.war;*.cgi;*.jspx;",
             icons: "bmp,jpg,gif,png,doc,docx,ppt,pptx,xls,xlsx,txt,hwp,zip",
+            keys: ["contentsType" ,"extension" ,"name" ,"path" ,"realName" ,"size"],
             locale: "ko",
             height: "96px",
             showProgress: true,
             showDblArea: true,
             showTitle: true,
             showUpload: true,
+            showLog: true,
             files: [],
-            maxCount: 0, //0 unlimit
+            maxCount: 10, //0 unlimit
             maxSizeMb: 20 //0 unlimit
         },
         lang: {
@@ -81,45 +79,47 @@
                 "                   <tr><td colspan=\"3\">${dblclickArea}</td></tr>" +
                 "               </tfoot>" +
                 "           </table>" +
-                "           <div class=\"wupload-progressBar none\"><progress id=\"wuploadProgressBar\" value=\"0\" max=\"100\" /></div>" +
                 "       </div>" +
                 "   </div>" +
+                "   <div class=\"wupload-progressBar\"><progress id=\"wuploadProgressBar\" value=\"0\" max=\"100\" /></div>" +
+                "   <div class=\"wupload-overlay\"></div>" +
                 "</div>",
             item: "<tr{{if className!=''}} class=\"${className}\"{{/if}}>" +
                 "   <td><input type=\"checkbox\" class=\"wupload-check\"></td>" +
-                "   <td>&nbsp;<img src=\"${path}${icon}\" /> ${name}</td>" +
-                "   <td>${size}&nbsp;</td>" +
+                "   <td><span class=\"wicon ${icon}\"></span> ${name}</td>" +
+                "   <td>${size} </td>" +
                 "</tr>"
         },
-        removeFiles: [],
-        files: [],
-        el: null
-    }
 
-    $.wupload.init = function ($target, options) {
-        this.options = $.extend(true, {}, this.defaults, options);
-        this.el = $target;
-        this.options.locale = this.lang[this.options.locale] ? this.options.locale : "ko";
+        core: {},
+        api: {},
+        util: {}
+    };
+
+    $.wupload.core.init = function ($target, options) {
+        $.wupload.options = $.extend(true, {}, $.wupload.defaultOptions, options);
+        $.wupload.$t = $target;
+        $.wupload.options.locale = $.wupload.lang[$.wupload.options.locale] ? $.wupload.options.locale : "ko";
 
         $.tmpl($.wupload.tmpl.base,
             $.extend({
-                maxSize: this.options.maxSizeMb,
-                showTitle: this.options.showTitle ? "" : " wupload-none",
-                showUpload1: this.options.showUpload ? "" : " close",
-                showUpload2: this.options.showUpload ? "" : " wupload-none"
-            }, this.lang[this.options.locale])
+                maxSize: $.wupload.options.maxSizeMb,
+                showTitle: $.wupload.options.showTitle ? "" : " wupload-none",
+                showUpload1: $.wupload.options.showUpload ? "" : " close",
+                showUpload2: $.wupload.options.showUpload ? "" : " wupload-none"
+            }, $.wupload.lang[$.wupload.options.locale])
         ).appendTo($target);
 
-        $.wupload.reset();
+        $.wupload.core.reset(false);
 
-        if($.wupload.options.showDblArea){
-            $(".wupload-contents tfoot", $target).on("dblclick", function(e){
-                $(".wupload-header button[data-action='add']", $.wupload.el).click();
+        if ($.wupload.options.showDblArea) {
+            $(".wupload-contents tfoot", $target).on("dblclick", function (e) {
+                $(".wupload-header button[data-action='add']", $.wupload.$t).click();
             });
-        }else{
-            $.wupload.shoWhideDblArea(false);
+        } else {
+            $.wupload.core.shoWhideDblArea(false);
         }
- 
+
         $(".wupload-title>div", $target).click(function () {
             const $p = $(this).parent();
             if ($p.hasClass("close")) {
@@ -131,15 +131,15 @@
             }
         });
 
-        $(".wupload-contents tbody, .wupload-contents tfoot", $target).css("height", this.options.height);
+        $(".wupload-contents tbody, .wupload-contents tfoot", $target).css("height", $.wupload.options.height);
         $(".wupload-header button", $target).click(function () {
             const $t = $(this);
             switch ($t.attr("data-action")) {
                 case "add":
-                    $(".wupload-file", $.wupload.el).trigger('click');
+                    $(".wupload-file", $.wupload.$t).trigger('click');
                     break;
                 case "del":
-                    $.wupload.deleteFile();
+                    $.wupload.core.remove();
                     break;
                 default:
                     break;
@@ -157,48 +157,44 @@
         });
 
         $("#wuploadFile", $target).change(function (e) {
-            const files = Array.prototype.slice.call(e.target.files);
-            $.each(files, function () {
-                $.wupload.drawFile(this);
-                /* 
-                const reader = new FileReader();
-                reader.readAsDataURL(this);
-                reader.onload = $.proxy((e) => {
-                    $.wupload.drawFile(this);
-                }, this);
-                */
-            });
+            $.wupload.core.add(Array.prototype.slice.call(e.target.files));
         });
     };
 
-    $.wupload.drawFile = item => {
+    $.wupload.core.add = files => {
+        $.each(files, function () {
+            $.wupload.core.render(this);
+        });
+    };
+
+    $.wupload.core.render = item => {
         const ext = getLastValue(item.name, ".").toLowerCase();
-        if(!$.hasValue(ext) || $.hasString($.wupload.options.excludeExts, ext)){
-            alert($.wupload.getLang("excludeExt"));
+        if (!$.hasValue(ext) || $.hasString($.wupload.options.excludeExts, ext)) {
+            alert($.wupload.util.getLang("excludeExt"));
             return false;
         }
 
-        if ($.wupload.isDuplicate(item.name, item.size)) {
-            alert(item.name + $.wupload.getLang("registedFile"));
+        if ($.wupload.core.exist(item.name, item.size)) {
+            alert(item.name + $.wupload.util.getLang("registedFile"));
             return false;
         }
 
-        if ($.wupload.options.maxCount != 0 && $.wupload.options.maxCount <= $.wupload.files.length) {
-            alert($.wupload.options.maxCount + $.wupload.getLang("maxCount"));
+        if ($.wupload.options.maxCount != 0 && $.wupload.options.maxCount <= $.wupload.tmp.files.length) {
+            alert($.wupload.options.maxCount + $.wupload.util.getLang("maxCount"));
             return false;
         }
 
-        if ($.wupload.options.maxSizeMb != 0 && ($.wupload.options.maxSizeMb * 1024 * 1024) <= ($.wupload.getTsize() + item.size)) {
-            alert($.wupload.options.maxSizeMb + $.wupload.getLang("maxSizeMb"));
+        if ($.wupload.options.maxSizeMb != 0 && ($.wupload.options.maxSizeMb * 1024 * 1024) <= ($.wupload.util.getTsize() + item.size)) {
+            alert($.wupload.options.maxSizeMb + $.wupload.util.getLang("maxSizeMb"));
             return false;
         }
 
-        $.wupload.files.push(item);
-        const $c = $(".wupload-contents table tbody", $.wupload.el),
+        $.wupload.tmp.files.push(item);
+
+        const $c = $(".wupload-contents table tbody", $.wupload.$t),
             $tr = $.tmpl($.wupload.tmpl.item, {
-                className: item.fileId?"registed":"",
-                path: $.wupload.options.imagePath,
-                icon: $.wupload.getExt(item.name),
+                className: item.fileId ? "registed" : "",
+                icon: $.wupload.util.getExt(item.name),
                 name: item.name,
                 size: formatFileSize(item.size)
             });
@@ -211,22 +207,16 @@
                 $(this).addClass("selected");
                 $(this).find(".wupload-check").prop("checked", true);
             }
-            $.wupload.checkAll();
+            $.wupload.core.checkAll();
         }).appendTo($c);
 
-        $.wupload.calFileInfo();
-        $.wupload.toggleDblArea();
+        $.wupload.core.calculate();
+        $.wupload.core.toggleDblArea();
         return true;
     };
 
-    $.wupload.calFileInfo = () => {
-        const $c = $(".wupload-header .file-info", $.wupload.el);
-        $c.find("span:eq(0)").html($.wupload.files.length);
-        $c.find("span:eq(1)").html(formatFileSize($.wupload.getTsize()));
-    };
-
-    $.wupload.deleteFile = () => {
-        const $c = $(".wupload-contents table tbody tr", $.wupload.el);
+    $.wupload.core.remove = () => {
+        const $c = $(".wupload-contents table tbody tr", $.wupload.$t);
         let d = [],
             f = [];
         $c.each(function (index) {
@@ -234,141 +224,100 @@
             if ($t.hasClass("selected")) {
                 $t.remove();
                 d.push(index);
-                if ($.wupload.files[index].fileId) {
-                    $.wupload.removeFiles.push($.wupload.files[index]);
+                if ($.wupload.tmp.files[index].fileId) {
+                    $.wupload.tmp.removeFiles.push($.wupload.tmp.files[index]);
                 }
             } else {
-                f.push($.wupload.files[index]);
+                f.push($.wupload.tmp.files[index]);
             }
         });
 
         if (d.length == 0) {
-            alert($.wupload.getLang("deleteFile"));
+            alert($.wupload.util.getLang("deleteFile"));
         } else {
-            $.wupload.files = null;
-            $.wupload.files = f;
-            $.wupload.calFileInfo();
+            $.wupload.tmp.files = null;
+            $.wupload.tmp.files = f;
+            $.wupload.core.calculate();
         }
 
-        $.wupload.toggleDblArea();
+        $.wupload.core.toggleDblArea();
     };
 
-    $.wupload.isDuplicate = (name, size) => {
-        for (let i in $.wupload.files) {
-            if ($.wupload.files[i].name == name && $.wupload.files[i].size == size) {
+    $.wupload.core.exist = (name, size) => {
+        for (let i in $.wupload.tmp.files) {
+            if ($.wupload.tmp.files[i].name == name && $.wupload.tmp.files[i].size == size) {
                 return true;
             }
         }
         return false;
     };
 
-    $.wupload.getTsize = () => {
-        let tSize = 0;
-        $.wupload.files.forEach((f) => tSize += f.size);
-        return tSize;
+    $.wupload.core.calculate = () => {
+        const $c = $(".wupload-header .file-info", $.wupload.$t);
+        $c.find("span:eq(0)").html($.wupload.tmp.files.length);
+        $c.find("span:eq(1)").html(formatFileSize($.wupload.util.getTsize()));
     };
 
-    $.wupload.getExt = fileName => {
-        const ext = getLastValue(fileName, ".").toLowerCase();
-        return ($.hasString($.wupload.options.icons, ext) ? ext : "etc") + ".png";
-    };
+    $.wupload.core.reset = (all = true) => {
+        $(".wupload-contents table tbody", $.wupload.$t).empty();
+        $.wupload.tmp.files = [];
+        $.wupload.tmp.removeFiles = [];
 
-    $.wupload.getLang = (code) => $.wupload.lang[$.wupload.options.locale][code];
-
-    $.wupload.checkAll = () => {
-        const isCheckAll = $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked"),
-            trCount = $(".wupload-contents tbody tr").length,
-            checkedCount = $(".wupload-contents tbody tr .wupload-check:checked").length;
-        if (trCount == checkedCount) {
-            if (!isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked", true)
+        if (all == false && $.wupload.options.files.length > 0) {
+            $.wupload.core.add($.wupload.options.files);
         } else {
-            if (isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.el).prop("checked", false)
+            $.wupload.core.calculate();
         }
     };
 
-    $.wupload.reset = () => {
-        $(".wupload-contents table tbody", $.wupload.el).empty();
-        $.wupload.files = [];
-
-        if ($.wupload.options.files.length > 0) {
-            $.each($.wupload.options.files, function () {
-                $.wupload.drawFile(this);
-            });
-        } else {
-            $.wupload.calFileInfo();
-        }
-    };
-
-    $.wupload.toggleProgress = b => {
-        if($.wupload.options.showProgress){
-            if(b){
-                $(".wupload-progressBar", $.wupload.el).removeClass("none");
-            }else{
-                $(".wupload-progressBar", $.wupload.el).addClass("none");
-            }
-        } 
-    };
-
-    $.wupload.toggleDblArea = () => {
-        if($.wupload.options.showDblArea){
-            $.wupload.shoWhideDblArea($(".wupload-contents table tbody", $.wupload.el).find("tr").length==0);
-        } 
-    };
-
-    $.wupload.shoWhideDblArea = b => {
-        const $t = $(".wupload-contents table tbody", $.wupload.el),
-            $f = $(".wupload-contents table tfoot", $.wupload.el);
-        if(b){
-            if(!$t.hasClass("none")) $t.addClass("none");
-            if($f.hasClass("none")) $f.removeClass("none");
-        }else{
-            if($t.hasClass("none")) $t.removeClass("none");
-            if(!$f.hasClass("none")) $f.addClass("none");
-        }
-    };
-
-    $.wupload.save = (opt = {}) => {
-        let removeFileCount = $.wupload.removeFiles.length,
-            ignoreFileCount = 0,
+    $.wupload.core.save = (opt = {}) => {
+        let removeFileCount = $.wupload.tmp.removeFiles.length,
             saveFileCount = 0,
-            formData = new FormData();
+            formData = new FormData(),
+            returnData = {
+                existFileIds : [],
+                removeFileIds : [],
+                savedFiles : null
+            }
 
-        if ($.wupload.files.length > 0) {
-            for (let i = 0; i < $.wupload.files.length; i++) {
-                if (!$.hasValue($.wupload.files[i].fileId)) {
-                    formData.append("file" + (saveFileCount++), $.wupload.files[i]);
+        if ($.wupload.tmp.files.length > 0) {
+            for (let i = 0; i < $.wupload.tmp.files.length; i++) {
+                if (!$.hasValue($.wupload.tmp.files[i].fileId)) {
+                    $.wupload.util.log($.wupload.tmp.files[i].name, "save : new");
+                    formData.append("file" + (saveFileCount++), $.wupload.tmp.files[i]);
                 } else {
-                    ignoreFileCount++;
+                    $.wupload.util.log($.wupload.tmp.files[i].name, "save : exist");
+                    returnData.existFileIds.push($.wupload.tmp.files[i].fileId);
                 }
             }
         }
 
-        if ($.wupload.showLog) {
-            console.log("removeFileCount==>" + removeFileCount);
-            console.log("ignoreFileCount==>" + ignoreFileCount);
-            console.log("saveFileCount==>" + saveFileCount);
-        }
+        $.wupload.util.log(removeFileCount, "save : removeFileCount");
+        $.wupload.util.log(saveFileCount, "save : saveFileCount");
 
         if (removeFileCount == 0 && saveFileCount == 0) {
+            $.wupload.util.log("", "save : nothing");
             if ($.isFunction(opt.success)) {
-                opt.success({});
+                returnData.savedFiles = [];
+                opt.success(returnData);
             }
             return;
         }
 
-        let removeFileIds = [];
-        for (let i = 0; i < $.wupload.removeFiles.length; i++) {
-            removeFileIds.push($.wupload.removeFiles[i].fileId);
+        for (let i = 0; i < $.wupload.tmp.removeFiles.length; i++) {
+            $.wupload.util.log($.wupload.tmp.removeFiles[i], "save : remove");
+            returnData.removeFileIds.push($.wupload.tmp.removeFiles[i].fileId);
         }
-        formData.append("removeFileIds", removeFileIds.join(","));
-
+        
         if (opt.formData) {
             $.each(opt.formData, function (key, val) {
+                $.wupload.util.log(key + " : " + val, "save : formData");
                 formData.append(key, val);
             })
         }
 
-        $.wupload.toggleProgress(true);
+        $.wupload.core.toggleProgress(true);
+        
         $.ajax({
             type: "POST",
             enctype: "multipart/form-data",
@@ -379,36 +328,102 @@
             cache: false,
             timeout: opt.timeout || 600000,
             success: function (result) {
+                $.wupload.util.log(result, "save : success");
                 if ($.isFunction(opt.success)) {
-                    opt.success(result);
+                    returnData.savedFiles = wJson.choose(result, $.wupload.options.keys);
+                    opt.success(returnData);
                 } else {
                     alert("upload success");
                 }
             },
-            xhr: function() { //XMLHttpRequest 재정의 가능
-                try{
-                    if(!$.wupload.options.showProgress) return false;
+            xhr: function () {
+                try {
+                    if (!$.wupload.options.showProgress) return false;
                     const xhr = $.ajaxSettings.xhr();
-                    xhr.upload.onprogress = function(e) { //progress 이벤트 리스너 추가
-                        var percent = e.loaded * 100 / e.total;
-                        //console.log("percent : " + percent + "%");
+                    xhr.upload.onprogress = function (e) {
+                        const percent = e.loaded * 100 / e.total;
+                        $.wupload.util.log(percent + "%", "upload percent");
                         $("#wuploadProgressBar").val(percent);
                     };
                     return xhr;
-                }catch(e){}
+                } catch (e) {}
             },
-            error: function () {
+            error: function (request) {
+                var result = {code:request.status, message:request.responseText};
+                $.wupload.util.log(result, "save : error");
                 if ($.isFunction(opt.error)) {
-                    opt.error();
+                    opt.error(result);
                 } else {
                     alert("upload fail");
                 }
             },
-            complete : function () {
-                $.wupload.toggleProgress(false);
+            complete: function () {
+                $.wupload.core.toggleProgress(false);
             }
         });
     };
+
+    $.wupload.core.checkAll = () => {
+        const isCheckAll = $(".wupload-contents .wupload-checkAll", $.wupload.$t).prop("checked"),
+            trCount = $(".wupload-contents tbody tr").length,
+            checkedCount = $(".wupload-contents tbody tr .wupload-check:checked").length;
+        if (trCount == checkedCount) {
+            if (!isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.$t).prop("checked", true)
+        } else {
+            if (isCheckAll) $(".wupload-contents .wupload-checkAll", $.wupload.$t).prop("checked", false)
+        }
+    };
+
+    $.wupload.core.toggleProgress = b => {
+        if ($.wupload.options.showProgress) {
+            if (b) {
+                $(".wupload-progressBar", $.wupload.$t).show();
+                $(".wupload-overlay", $.wupload.$t).show();
+                
+            } else {
+                $(".wupload-progressBar", $.wupload.$t).hide();
+                $(".wupload-overlay", $.wupload.$t).hide();
+            }
+        }
+    };
+
+    $.wupload.core.toggleDblArea = () => {
+        if ($.wupload.options.showDblArea) {
+            $.wupload.core.shoWhideDblArea($(".wupload-contents table tbody", $.wupload.$t).find("tr").length == 0);
+        }
+    };
+
+    $.wupload.core.shoWhideDblArea = b => {
+        const $t = $(".wupload-contents table tbody", $.wupload.$t),
+            $f = $(".wupload-contents table tfoot", $.wupload.$t);
+        if (b) {
+            if (!$t.hasClass("none")) $t.addClass("none");
+            if ($f.hasClass("none")) $f.removeClass("none");
+        } else {
+            if ($t.hasClass("none")) $t.removeClass("none");
+            if (!$f.hasClass("none")) $f.addClass("none");
+        }
+    };
+
+    $.wupload.util.log = (value, tag) => {
+        if ($.wupload.options.showLog) $.wLog(value, tag);
+    };
+
+    $.wupload.util.getLang = (code) => $.wupload.lang[$.wupload.options.locale][code];
+
+    $.wupload.util.getTsize = () => {
+        let tSize = 0;
+        $.wupload.tmp.files.forEach((f) => tSize += f.size);
+        return tSize;
+    };
+
+    $.wupload.util.getExt = fileName => {
+        const ext = getLastValue(fileName, ".").toLowerCase();
+        return $.hasString($.wupload.options.icons, ext) ? ext : "etc";
+    };
+
+    $.wupload.api.save = opt => $.wupload.core.save(opt);
+    $.wupload.api.reset = all => $.wupload.core.reset(all);
 
     $.fn.wupload = function (arg) {
         const args = Array.prototype.slice.call(arguments, 1),
@@ -420,14 +435,15 @@
         }
 
         if (isMethod) {
-            if (allowedMethod[arg]) {
-                result = $.wupload[arg].apply(this, args);
+            if ($.wupload.api[arg]) {
+                result = $.wupload.api[arg].apply(this, args);
             } else {
                 $.alert("Method " + arg + " does not exist");
             }
         } else {
-            $.wupload.init(this, arg || {});
+            $.wupload.core.init(this, arg || {});
         }
         return result !== null && result !== undefined ? result : this;
     };
+
 })(jQuery);

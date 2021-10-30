@@ -1,9 +1,8 @@
-/* wjquery
+/* wToast
 ---------------------------------------------------------*/
-
-#wjquery-toast {
+#wToast {
     position: fixed;
-    top: 30%;
+    top: calc(50% - 30px/2);
     text-align: center;
     border-radius: 10px;
     padding: 12px 20px 12px 20px;
@@ -17,7 +16,8 @@
     color: #fff;
 }
 
-/* ajax common style */
+/* ajax common style
+---------------------------------------------------------*/
 div.ajax-body-loading {
     position: absolute;
     top: 0;
@@ -54,4 +54,79 @@ div.ajax-button-loading {
 
 .break-word {
     word-wrap: break-word;
+}
+
+/* wCollapsible
+---------------------------------------------------------*/
+.wCollapsible-arrow-line {
+    position: relative;
+    height: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.wCollapsible-arrow-line.no-line {
+    border-bottom: none;
+}
+
+.wCollapsible-arrow-line:hover {
+    border-color: #dbdbdb;
+}
+
+.wCollapsible-arrow-line:active,
+.wCollapsible-arrow-line:focus,
+.wCollapsible-arrow-line div:focus,
+.wCollapsible-arrow-line div:active {
+    border-color: #999;
+}
+
+
+.wCollapsible-arrow-line div:hover {
+    background-color: #f1f1f1;
+}
+
+.wCollapsible-arrow-line>div:after {
+    border-bottom: 2px solid #999;
+    border-right: 2px solid #999;
+    content: '';
+    display: block;
+    height: 5px;
+    margin-top: 2px;
+    margin-left: 2px;
+    -webkit-transform-origin: 66% 66%;
+    -ms-transform-origin: 66% 66%;
+    transform-origin: 66% 66%;
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    width: 5px;
+    cursor: pointer;
+}
+
+.wCollapsible-arrow-line.close>div:after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.wCollapsible-arrow-line h3 {
+    font-size: 1em;
+    margin-right: 30px;
+}
+
+.wCollapsible-arrow-line div {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    height: 13px;
+    width: 13px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.wCollapsible-arrow-line.no-line div{
+    border-bottom: 1px solid #ccc;
 }

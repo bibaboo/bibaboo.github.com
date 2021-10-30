@@ -2,13 +2,58 @@
 <ul class="entry-api">
 	<li class="entry-api-item">
 		<h2>
-    		<span class="title">cout</span>
+    		<span class="title">dao</span>
 		</h2>
 		<div>
 			<div class="example">
 				<div>
 					<textarea class="entry-demo-textarea-content none">
-						<c:out value='${user.name}' escapeXml='false'/>
+						/**
+						* sql namespace
+						*/
+						private static final String NAMESPACE = "net.wonchu.wf.main.admin.template.dao.template.";
+						
+						
+						public List<Template> listBySearchCondition(TemplateSearchCondition searchCondition) {
+							return selectList(NAMESPACE + "listBySearchCondition", searchCondition);
+						}
+						
+						public Integer countBySearchCondition(TemplateSearchCondition searchCondition) {
+							return selectIntegerOne(NAMESPACE + "countBySearchCondition", searchCondition);
+						}
+						
+						public Template retrieveTemplateDetail(TemplateParam param)  {
+							return selectOne(NAMESPACE + "retrieveTemplateDetail", param);
+						}
+
+						public boolean insertTemplate(Template template)  {
+							return insert(NAMESPACE + "insertTemplate", template)>0;
+						}
+						
+						public boolean updateTemplate(Template template)  {
+							return update(NAMESPACE + "updateTemplate", template)>0;
+						}
+
+						public boolean deleteTemplate(TemplateParam param)  {
+							return delete(NAMESPACE + "deleteTemplate", param)>0;
+						}
+					</textarea>
+					<div class="entry-source-title"></div>
+					<div class="entry-demo-source-content">
+						<pre class="brush: java;"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="entry-api-item">
+		<h2>
+    		<span class="title">basic</span>
+		</h2>
+		<div>
+			<div class="example">
+				<div>
+					<textarea class="entry-demo-textarea-content none">
 					</textarea>
 					<div class="entry-source-title"></div>
 					<div class="entry-demo-source-content">

@@ -1,6 +1,7 @@
 /* wjquery.upload
 ---------------------------------------------------------*/
 .wupload-wrap {
+    position:relative;
     width: 100%;
     margin-top: 10px;
     -ms-user-select: none;
@@ -8,6 +9,55 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+.wupload-wrap .wupload-overlay {
+    position: absolute; 
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 101; 
+}
+
+.wupload-wrap .wupload-progressBar{
+    width: 300px;
+    height: 16px;
+    position: absolute;
+    top: calc(50% - 16px/2);
+    left:calc(50% - 300px/2);
+    display:none;
+    z-index: 102;
+}
+
+.wupload-progressBar progress {
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    color:#e85944;
+    border-radius: 10px;
+}
+  
+.wupload-progressBar progress::-moz-progress-value {
+    background:#e85944;
+}
+
+.wupload-progressBar progress::-moz-progress-bar {
+    background: #f1f1f1;
+}
+
+.wupload-progressBar progress::-webkit-progress-value {
+    background:#e85944;
+    border-radius: 10px;
+}
+
+.wupload-progressBar progress::-webkit-progress-bar {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
 .wupload-wrap .wupload-none {
@@ -120,39 +170,6 @@
     margin-top: 5px;
 }
 
-.wupload-wrap .wupload-area .wupload-contents .wupload-progressBar{
-    width: 150px;
-    height: 10px;
-    position: absolute;
-    top: calc(50% - 30px/2);left:calc(50% - 200px/2);
-}
-
-.wupload-progressBar progress {
-    width: 100%;
-    height: 100%;
-    background: #f1f1f1;
-    color:#e85944;
-    border-radius: 10px;
-}
-  
-.wupload-progressBar progress::-moz-progress-value {
-    background:#e85944;
-}
-
-.wupload-progressBar progress::-moz-progress-bar {
-    background: #f1f1f1;
-}
-
-.wupload-progressBar progress::-webkit-progress-value {
-    background:#e85944;
-    border-radius: 10px;
-}
-
-.wupload-progressBar progress::-webkit-progress-bar {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
 .wupload-wrap .wupload-area .wupload-contents table {
     width: 100%;
     border-collapse: collapse;
@@ -186,10 +203,13 @@
     width: 100%;
 }
 
+.wupload-wrap .wupload-area .wupload-contents table thead tr {
+    height: 26px;
+}
+
 .wupload-wrap .wupload-area .wupload-contents table thead th {
     padding: 2px 0;
     text-align: center;
-    height: 16px;
     background-color: #f4fcff;
     border-bottom: 1px solid #d5dee4;
     border-right: 1px solid #d5dee4;
@@ -207,6 +227,7 @@
 
 .wupload-wrap .wupload-area .wupload-contents table tbody tr {
     cursor: default;
+    height: 24px;
     border-bottom: 1px dotted #ddd;
 }
 
@@ -239,7 +260,13 @@
     text-align: center;
 }
 
+.wupload-wrap .wupload-area .wupload-contents table tbody td:nth-child(2) {
+    padding-left:7px;
+}
+
+
 .wupload-wrap .wupload-area .wupload-contents table tbody td:last-child {
+    padding-right:5px;
     text-align: right;
 }
 
@@ -250,4 +277,116 @@
 .wupload-wrap .wupload-area .wupload-contents table tfoot td{
     text-align:center;
     height:100%;
+}
+
+.wicon {
+    display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	text-indent: -99999px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+    background-size:15px auto;
+    width: 15px;
+    height: 15px;
+}
+
+.wicon.ai{
+	background-image:url(../../../images/file/ai.png);
+}
+.wicon.avi{
+	background-image:url(../../../images/file/avi.png);
+}
+.wicon.bmp{
+	background-image:url(../../../images/file/bmp.png);
+}
+.wicon.css{
+	background-image:url(../../../images/file/css.png);
+}
+.wicon.doc{
+	background-image:url(../../../images/file/doc.png);
+}
+.wicon.docx{
+	background-image:url(../../../images/file/docx.png);
+}
+.wicon.eml{
+	background-image:url(../../../images/file/eml.png);
+}
+.wicon.etc{
+	background-image:url(../../../images/file/etc.png);
+}
+.wicon.exe{
+	background-image:url(../../../images/file/exe.png);
+}
+.wicon.fla{
+	background-image:url(../../../images/file/fla.png);
+}
+.wicon.flv{
+	background-image:url(../../../images/file/flv.png);
+}
+.wicon.gif{
+	background-image:url(../../../images/file/gif.png);
+}
+.wicon.gul{
+	background-image:url(../../../images/file/gul.png);
+}
+.wicon.html{
+	background-image:url(../../../images/file/html.png);
+}
+.wicon.hwp{
+	background-image:url(../../../images/file/hwp.png);
+}
+.wicon.jpg{
+	background-image:url(../../../images/file/jpg.png);
+}
+.wicon.log{
+	background-image:url(../../../images/file/log.png);
+}
+.wicon.mp3{
+	background-image:url(../../../images/file/mp3.png);
+}
+.wicon.mp4{
+	background-image:url(../../../images/file/mp4.png);
+}
+.wicon.mpg{
+	background-image:url(../../../images/file/mpg.png);
+}
+.wicon.msg{
+	background-image:url(../../../images/file/msg.png);
+}
+.wicon.pdf{
+	background-image:url(../../../images/file/pdf.png);
+}
+.wicon.png{
+	background-image:url(../../../images/file/png.png);
+}
+.wicon.ppt{
+	background-image:url(../../../images/file/ppt.png);
+}
+.wicon.pptx{
+	background-image:url(../../../images/file/pptx.png);
+}
+.wicon.psd{
+	background-image:url(../../../images/file/psd.png);
+}
+.wicon.swf{
+	background-image:url(../../../images/file/swf.png);
+}
+.wicon.tif{
+	background-image:url(../../../images/file/tif.png);
+}
+.wicon.txt{
+	background-image:url(../../../images/file/txt.png);
+}
+.wicon.wmv{
+	background-image:url(../../../images/file/wmv.png);
+}
+.wicon.xls{
+	background-image:url(../../../images/file/xls.png);
+}
+.wicon.xlsx{
+	background-image:url(../../../images/file/xlsx.png);
+}
+.wicon.zip{
+	background-image:url(../../../images/file/zip.png);
 }
