@@ -49,7 +49,7 @@
                 maxSizeMb: "MB 까지 등록 할 수 있습니다.",
                 deleteFile: "삭제할 파일을 선택해 주세요!",
                 excludeExt: "업로드 할 수 없는 파일입니다!",
-                dblclickArea: "이곳을 더블클릭 해주세요!"
+                dblclickArea: "이곳을 더블클릭 또는 파일을 드래그&드랍 해주세요!"
             }
         },
         tmpl: {
@@ -119,6 +119,23 @@
         } else {
             $.wupload.core.shoWhideDblArea(false);
         }
+
+        $target.on("dragenter", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }).on("dragover", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }).on("dragleave", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        }).on("drop", function(e){
+            e.preventDefault();
+            var files = e.originalEvent.dataTransfer.files;
+            if(files != null && files != undefined){
+                $.wupload.core.add(Array.prototype.slice.call(files));
+            }
+        });
 
         $(".wupload-title>div", $target).click(function () {
             const $p = $(this).parent();
