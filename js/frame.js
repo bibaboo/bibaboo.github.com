@@ -77,6 +77,12 @@ let pageSetting = {
             js: ["/js/lib/wjquery/wjquery.upload.js"]
 
         },
+        wlayout: {
+            loaded: false,
+            css: ["/js/lib/wjquery/wjquery.layout.css"],
+            js: ["/js/lib/wjquery/wjquery.layout.js"]
+
+        },
         wautocomplete: {
             loaded: false,
             css: ["/js/lib/wjquery/wjquery.autocomplete.css"],
@@ -681,6 +687,13 @@ const moduleData = [
                 a_attr: {
                     title: "ajax upload",
                     plugin: "wupload"
+                }
+            },
+            {
+                text: "wlayout",
+                a_attr: {
+                    title: "wjquery layout",
+                    plugin: "wlayout"
                 }
             },
             {

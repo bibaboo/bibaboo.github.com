@@ -6,7 +6,6 @@
 
  0.2.0 : 기본기능 완성
  0.1.0 : 최초작성 작업중...
- 0.2.0 : 소스 정리
 */
 
 (function ($) {
@@ -21,9 +20,10 @@
             removeFiles: [],
             files: []
         },
+        icons: "bmp,jpg,gif,png,doc,docx,ppt,pptx,xls,xlsx,txt,hwp,zip",
         defaultOptions: {
-            excludeExts: "*.ext;*.bat;*.jsp;*.js;*.com;*.php;*.jspx;*.phps;*.bin;*.sh;*.class;*.java;*.war;*.cgi;*.jspx;",
-            icons: "bmp,jpg,gif,png,doc,docx,ppt,pptx,xls,xlsx,txt,hwp,zip",
+            allowExts: "",
+            excludeExts: "ext,bat,jsp,js,com,php,jspx,phps,bin,sh,class,java,war,cgi,jspx;",
             keys: ["contentsType" ,"extension" ,"name" ,"path" ,"realName" ,"size"],
             locale: "ko",
             height: "96px",
@@ -59,7 +59,7 @@
                 "    <div class=\"wupload-area${showUpload2}\">" +
                 "       <div class=\"wupload-header\">" +
                 "       <form method=\"post\" enctype=\"multipart/form-data\" id=\"wuploadForm\">" +
-                "           <input type=\"file\" name=\"files\" id=\"wuploadFile\" class=\"wupload-file\" multiple/>" +
+                "           <input type=\"file\" name=\"files\" id=\"wuploadFile\" class=\"wupload-file\"{{if accept!=''}} accept=\"${accept}\"{{/if}} multiple/>" +
                 "           <button type=\"button\" data-action=\"add\">${add}</button>" +
                 "           <button type=\"button\" data-action=\"del\">${del}</button>" +
                 "           <div class=\"file-info\"><span>0</span> ${fileInfo} : <span>0MB</span> / <span>${maxSize}MB</span></div>" +
@@ -102,8 +102,14 @@
         $.wupload.$t = $target;
         $.wupload.options.locale = $.wupload.lang[$.wupload.options.locale] ? $.wupload.options.locale : "ko";
 
+        let accept = "";
+        if($.hasValue($.wupload.options.allowExts)){
+            accept = "." + $.wupload.options.allowExts.split(",").join(",.");
+        }
+
         $.tmpl($.wupload.tmpl.base,
             $.extend({
+                accept: accept,
                 maxSize: $.wupload.options.maxSizeMb,
                 showTitle: $.wupload.options.showTitle ? "" : " wupload-none",
                 showUpload1: $.wupload.options.showUpload ? "" : " close",
@@ -186,8 +192,20 @@
     };
 
     $.wupload.core.render = item => {
+        $.wupload.util.log(item.name, "render");
         const ext = getLastValue(item.name, ".").toLowerCase();
-        if (!$.hasValue(ext) || $.hasString($.wupload.options.excludeExts, ext)) {
+
+        if(!$.hasValue(ext)){
+            alert($.wupload.util.getLang("excludeExt"));
+            return false;
+        }
+
+        if($.hasValue($.wupload.options.allowExts)){
+            if(!hasValueInArray($.wupload.options.allowExts.split(","), ext)){
+                alert($.wupload.util.getLang("excludeExt"));
+                return false;
+            }
+        }if (hasValueInArray($.wupload.options.excludeExts.split(","), ext)) {
             alert($.wupload.util.getLang("excludeExt"));
             return false;
         }
@@ -423,7 +441,7 @@
         }
     };
 
-    $.wupload.util.log = (value, tag) => {
+    $.wupload.util.log = (value, tag = "wUpload") => {
         if ($.wupload.options.showLog) $.wLog(value, tag);
     };
 
@@ -437,7 +455,7 @@
 
     $.wupload.util.getExt = fileName => {
         const ext = getLastValue(fileName, ".").toLowerCase();
-        return $.hasString($.wupload.options.icons, ext) ? ext : "etc";
+        return hasValueInArray($.wupload.icons.split(","), ext) ? ext : "etc";
     };
 
     $.wupload.api.save = opt => $.wupload.core.save(opt);

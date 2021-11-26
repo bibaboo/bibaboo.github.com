@@ -1,0 +1,85 @@
+/* wjquery.layout
+---------------------------------------------------------*/
+.wlayout-wrap {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border: 1px #aaa solid;
+}
+
+.wlayout-wrap .wlayout-left {
+    float: left;
+    height: 100%;
+    width: 50%;
+    position: relative;
+    overflow: auto;
+    background-color: yellow;
+}
+
+.wlayout-wrap .wlayout-right {
+    display:block;
+    float: right;
+    height: 100%;
+    width: calc(50% - 10px);
+    position: relative;
+    overflow: auto;
+    background-color: blue;
+}
+
+.wlayout-wrap .wlayout-resizer {
+    display:block;
+    position: absolute;
+    background-color: #eee;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    top: 0;
+    width: 6px;
+    left: 50%;
+    height: 100%;
+    cursor: w-resize;
+    z-index: 3;
+}
+
+.wlayout-wrap .wlayout-resizer:hover {
+    background-color: #ddd;
+}
+
+.wlayout-wrap .wlayout-resizer .wlayout-resize-toggler {
+    position: absolute;
+    top: calc(50% - 11px);
+    left: 0;
+}
+
+.wlayout-wrap .wlayout-resizer .wlayout-resize-toggler>a {
+    width: 7px;
+    height: 22px;
+    background-position: -101px -14px;
+    background-color: #ddd;
+}
+
+.wlayout-wrap .wlayout-resizer .wlayout-resize-toggler.fold>a {
+    background-position: -36px -14px;
+}
+
+.wlayout-wrap .wlayout-resizer .wlayout-resize-toggler>a:hover {
+    background-color: #eee;
+}
+
+.wlayout-nowrap {
+    position: relative;
+    width: 100%;
+}
+
+.wlayout-nowrap .wlayout-left {
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+}
+
+.wlayout-nowrap .wlayout-right {
+    display:none;
+}
+
+.wlayout-nowrap .wlayout-resizer {
+    display:none;
+}

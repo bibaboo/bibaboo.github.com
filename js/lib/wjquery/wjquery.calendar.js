@@ -135,8 +135,10 @@
             } else {
                 if (options.element && options.element.val() != "") {
                     options.selectDate = moment(options.element.val(), options.dateFormat);
+                    options.hasVal = "Y";
                 } else {
                     options.selectDate = moment();
+                    options.hasVal = "N";
                 }
                 options.targetDate = options.selectDate.clone();
                 _WCALENDAR.draw($container, options);
@@ -285,16 +287,24 @@
                 dtf3 = dt3.format(WCALENDAR_SV.dateFormat);
 
             classNames.push(mode);
+
             if (dtf2 == dtf) {
                 classNames.push("today");
             }
-            if (dtf3 == dtf) {
-                classNames.push("active");
+            
+            if (dtf3 == dtf ) {
+                if(options.hasVal && options.hasVal=="N"){
+                    //nothing
+                }else{
+                    classNames.push("active");
+                }
             }
+
             if (options.mdHoliday && options.mdHoliday[dtfmd]) {
                 classNames.push("md-holiday");
                 titles.push(options.mdHoliday[dtfmd][options.locale]);
             }
+            
             if (options.holiday && options.holiday[dtf]) {
                 classNames.push("holiday");
                 titles.push(options.holiday[dtf][options.locale]);
